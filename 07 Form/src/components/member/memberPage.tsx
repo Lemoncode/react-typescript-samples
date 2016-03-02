@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as toastr from 'toastr';
 import MemberEntity from './../../api/memberEntity'
 import MemberForm from './memberForm';
+import MemberAPI from '../../api/memberAPI';
 //import * as ObjectAssign from 'object-assign';
 import objectAssign = require('object-assign');
 
@@ -27,26 +28,71 @@ export default class memberPage extends React.Component<Props, State> {
                      };
   }
 
+  // on any update on the form this function will be called
   setMemberState(event) {
     // https://www.npmjs.com/package/object-assign
-    var newState : State = objectAssign({}, this.state, {dirty: true});
-    this.setState(newState);
+    //var newState : State = objectAssign({}, this.state, {dirty: true});
+    //this.setState(newState);
 
 		var field = event.target.name;
 		var value = event.target.value;
 		this.state.member[field] = value;
 
-    newState = objectAssign({}, this.state, {member: this.state.member});
+    var newState : State = objectAssign({}, this.state, {dirty: true, member: this.state.member});
     return this.setState(newState);
 	}
 
+ // We could extract all this logic to a separate class and add
+ // unit test cases, on the other hand we could implement some
+ // method to just check the current field that is being changed
+ // validity
+ memberFormIsValid() {
+   var formIsValid = true;
+   this.state.errors = {}; //clear any previous errors.
 
-  public render() {
+   // TODO: Pending extract this to class and add unit testing
+
+   if (this.state.member.login.length < 3) {
+     this.state.errors.firstName = 'Login must be at least 3 characters.';
+     formIsValid = false;
+   }
+
+   // TODO: Pending adding url validation on avatar, use this simple lib
+   // https://github.com/chriso/validator.js
+
+   var newState : State = objectAssign({}, this.state, {errors: this.state.errors});
+   this.setState(newState);
+
+  return formIsValid;
+ }
+
+public saveMember(event) {
+  event.preventDefault();
+
+  if(!this.memberFormIsValid()) {
+    return;
+  }
+
+  var memberAPI : MemberAPI = new MemberAPI();
+  memberAPI.saveAuthor(this.state.member);
+
+  var newState : State = objectAssign({}, this.state, {dirty: true});
+  this.setState(newState);
+
+  toastr.success('Author saved.');
+
+  // TODO: Pending transition
+
+}
+
+ public render() {
        return (
          <MemberForm
             member={this.state.member}
             errors={this.state.errors}
-            onChange={this.setMemberState.bind(this)}/>
+            onChange={this.setMemberState.bind(this)}
+            onSave={this.saveMember.bind(this)}
+            />
        );
-  }
+ }
 }

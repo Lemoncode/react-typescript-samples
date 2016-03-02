@@ -6,6 +6,7 @@ import Input from './../common/textInput'
 interface Props extends React.Props<memberForm> {
   member : MemberEntity
   onChange : (event:any) => any;
+  onSave : (event:any) => any;
   errors: any;
 }
 
@@ -38,6 +39,7 @@ export default class memberForm extends React.Component<Props, State> {
       					onChange={this.props.onChange}
       					error={this.props.errors.avatar_rul} />
 
+             <input type="submit" value="Save" className="btn btn-default" onClick={this.props.onSave} />
           </form>
        );
   }
