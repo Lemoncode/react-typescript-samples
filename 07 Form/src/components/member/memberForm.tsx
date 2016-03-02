@@ -1,0 +1,44 @@
+import * as React from 'react';
+import MemberEntity from './../../api/memberEntity'
+
+import Input from './../common/textInput'
+
+interface Props extends React.Props<memberForm> {
+  member : MemberEntity
+  onChange : (event:any) => any;
+  errors: any;
+}
+
+interface State {
+}
+
+// Nice tsx guide: https://github.com/Microsoft/TypeScript/wiki/JSX
+export default class memberForm extends React.Component<Props, State> {
+  constructor(props : Props){
+        super(props);
+  }
+
+
+   public render() {
+       return (
+			    <form>
+            <h1> Manage member </h1>
+
+            <Input
+    					name="login"
+    					label="Login"
+    					value={this.props.member.login}
+    					onChange={this.props.onChange}
+    					error={this.props.errors.login} />
+
+              <Input
+      					name="avatar_url"
+      					label="Avatar Url"
+      					value={this.props.member.avatar_url}
+      					onChange={this.props.onChange}
+      					error={this.props.errors.avatar_rul} />
+
+          </form>
+       );
+  }
+}
