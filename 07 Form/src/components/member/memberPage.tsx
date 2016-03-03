@@ -59,7 +59,6 @@ export default class memberPage extends React.Component<Props, State> {
 
    // TODO: Pending adding url validation on avatar, use this simple lib
    // https://github.com/chriso/validator.js
-
    var newState : State = objectAssign({}, this.state, {errors: this.state.errors});
    this.setState(newState);
 
