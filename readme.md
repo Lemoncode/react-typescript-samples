@@ -53,14 +53,19 @@ members of a given team.
 
 ## 07 Forms + Validations
 
-**In Progress **
-
 In this sample we will add a link in the members page that will navigate to a
 "new member page". This new page will display a form where you have to enter
 the avatar url, login and id of a new member (just supossing we can edit that info).
 
-Validations to be performed:
+Validation performed so far:
 
+* Login: required, must be a string (at least length 3).
+
+TODO, add this validations:
 * Id: required, must be a number.
-* Login: required, must be a string (at least length 2).
 * Avatar URL: optional, must be a valid url.
+
+## 08 Edit member
+
+Edit a given member, here we learn how to add params to a navigation link and
+how to obtain them from a component.
