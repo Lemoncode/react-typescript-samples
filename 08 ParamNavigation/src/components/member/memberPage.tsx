@@ -4,10 +4,9 @@ import * as toastr from 'toastr';
 import MemberEntity from './../../api/memberEntity'
 import MemberForm from './memberForm';
 import MemberAPI from '../../api/memberAPI';
-//import * as ObjectAssign from 'object-assign';
 import objectAssign = require('object-assign');
 
-interface Props extends React.Props<memberPage> {
+interface Props extends React.Props<MemberPage> {
   params : any
 }
 
@@ -17,8 +16,8 @@ interface State {
   ,dirty  : boolean
 }
 
-// Nice tsx guide: https://github.com/Microsoft/TypeScript/wiki/JSX
-export default class memberPage extends React.Component<Props, State> {
+
+export default class MemberPage extends React.Component<Props, State> {
 
   constructor(props : Props){
         super(props);
@@ -44,10 +43,6 @@ export default class memberPage extends React.Component<Props, State> {
 
   // on any update on the form this function will be called
   setMemberState(event) {
-    // https://www.npmjs.com/package/object-assign
-    //var newState : State = objectAssign({}, this.state, {dirty: true});
-    //this.setState(newState);
-
 		var field = event.target.name;
 		var value = event.target.value;
 		this.state.member[field] = value;
