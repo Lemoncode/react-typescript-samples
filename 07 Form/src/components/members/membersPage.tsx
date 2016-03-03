@@ -34,7 +34,7 @@ export default class MembersPage extends React.Component<Props, State> {
 
        return (
         <div className="row">
-          <h2> Members Page</h2>          
+          <h2> Members Page</h2>
           <Link to="/member">New Member</Link>
           <table className="table">
             <thead>

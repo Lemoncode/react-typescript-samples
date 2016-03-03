@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { hashHistory } from 'react-router'
 import * as toastr from 'toastr';
 import MemberEntity from './../../api/memberEntity'
 import MemberForm from './memberForm';
@@ -80,7 +81,8 @@ public saveMember(event) {
 
   toastr.success('Author saved.');
 
-  // TODO: Pending transition
+  // using hashHistory, TODO: proper configure browserHistory on app and here
+  hashHistory.push('/members')
 
 }
 

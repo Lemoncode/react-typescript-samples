@@ -13,7 +13,6 @@ interface Props extends React.Props<memberForm> {
 interface State {
 }
 
-// Nice tsx guide: https://github.com/Microsoft/TypeScript/wiki/JSX
 export default class memberForm extends React.Component<Props, State> {
   constructor(props : Props){
         super(props);
