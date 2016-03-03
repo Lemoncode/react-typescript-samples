@@ -53,7 +53,7 @@ export default class memberPage extends React.Component<Props, State> {
    // TODO: Pending extract this to class and add unit testing
 
    if (this.state.member.login.length < 3) {
-     this.state.errors.firstName = 'Login must be at least 3 characters.';
+     this.state.errors.login = 'Login must be at least 3 characters.';
      formIsValid = false;
    }
 
