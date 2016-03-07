@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import Header from './common/header'
 import reducers  from '../reducers';
 
@@ -12,11 +13,12 @@ let store = createStore(reducers);
 export default class App extends React.Component<Props, {}> {
    public render() {
        return (
-        <div className="container-fluid">
-          <Header/>
-          {this.props.children}
-        </div>
-
+         <Provider store={store}>
+            <div className="container-fluid">
+              <Header/>
+                {this.props.children}
+              </div>
+         </Provider>
        );
   }
 }
