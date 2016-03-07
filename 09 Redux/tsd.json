@@ -28,6 +28,9 @@
     },
     "object-assign/object-assign.d.ts": {
       "commit": "4ba57e605bd71bf7248de65aac0b4f50e3eb1c9e"
+    },
+    "redux/redux.d.ts": {
+      "commit": "9f0f926a12026287b5a4a229e5672c01e7549313"
     }
   }
 }
