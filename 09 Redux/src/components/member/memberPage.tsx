@@ -16,6 +16,7 @@ interface Props extends React.Props<MemberPage> {
   ,errors?: any
   ,dirty?  : boolean
   ,onLoad? : (id : number) => void
+  ,onSetDirty? : (dirty: boolean) => void
 }
 
 class MemberPage extends React.Component<Props, {}> {
@@ -38,6 +39,7 @@ class MemberPage extends React.Component<Props, {}> {
 
   // on any update on the form this function will be called
   setMemberState(event) {
+    this.props.onSetDirty(true);
     /*
     var field = event.target.name;
 		var value = event.target.value;
@@ -75,6 +77,8 @@ class MemberPage extends React.Component<Props, {}> {
 
 public saveMember(event) {
   event.preventDefault();
+  // Add this at the end
+  this.props.onSetDirty(false);
   /*
   if(!this.memberFormIsValid()) {
     return;
@@ -122,6 +126,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onLoad: (id : number) => {return dispatch(loadMember(id))}
+    ,onSetDirty: (dirty : boolean) => {return dispatch(markMemberAsDirty(dirty))}
   }
 }
 

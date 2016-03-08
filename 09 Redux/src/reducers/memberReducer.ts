@@ -25,14 +25,21 @@ class MemberState  {
 // Just to show how combine reducers work, we have
 // divided into two reducers member load + member load/update/delete
 export default (state : MemberState = { member: emptyMemberEntity, memberId: -1, errors: new MemberErrors()}, action) => {
+  let newState : MemberState = null;
+
   switch (action.type) {
     case 'MEMBER_LOAD':
       let member : MemberEntity;
       let memberId : number = action["id"];
 
       member = MemberAPI.getMemberById(memberId);
-      var newState : MemberState = objectAssign({}, state, {dirty: false, member: member, errors: new MemberErrors()});
+      newState = objectAssign({}, state, {dirty: false, member: member, errors: new MemberErrors()});
 
+      return newState;
+
+    case 'MEMBER_DIRTY':
+      newState = objectAssign({}, state, {dirty: action["dirty"]});
+      
       return newState;
 
     default:
