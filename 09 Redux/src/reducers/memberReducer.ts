@@ -1,5 +1,6 @@
 import MemberEntity from "../api/memberEntity";
 import MemberAPI from "../api/memberAPI";
+import objectAssign = require('object-assign');
 
 let emptyMemberEntity = new MemberEntity();
 
@@ -30,8 +31,9 @@ export default (state : MemberState = { member: emptyMemberEntity, memberId: -1,
       let memberId : number = action["id"];
 
       member = MemberAPI.getMemberById(memberId);
+      var newState : MemberState = objectAssign({}, state, {dirty: false, member: member, errors: new MemberErrors()});
 
-      return {member : member};
+      return newState;
 
     default:
       return state;
