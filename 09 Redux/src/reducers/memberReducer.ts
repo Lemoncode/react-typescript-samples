@@ -38,19 +38,19 @@ export default (state : MemberState = new MemberState(), action) => {
 
       return newState;
 
-    /*case 'MEMBER_DIRTY':
-
-      newState = objectAssign({}, state, {dirty: action["dirty"]});
-      return newState;
-    */
     case 'MEMBER_UI_INPUT':
     //Temporary hack, to force creating a new object (just temporary)
     // TODO: enhance this
     // We should just treat single UI input (validate on field, check if )
     // it has to be included here, ideally not
-      let memberUIUpdated : MemberEntity = JSON.parse(JSON.stringify(action["member"]));
+      //let memberUIUpdated : MemberEntity = JSON.parse(JSON.stringify(action["member"]));
+      let fieldName = action['fieldName'];
+      let value = action['value']
 
-      newState = objectAssign({}, state, {member: memberUIUpdated});
+      let newMember : MemberEntity = objectAssign({}, state.member, {});
+      newMember[fieldName] = value;
+
+      newState = objectAssign({}, state, {member: newMember});
       return newState;
 
     case 'MEMBER_VALIDATE':
@@ -71,7 +71,6 @@ export default (state : MemberState = new MemberState(), action) => {
       } else {
         newState = objectAssign({}, state, {isValid: errors.isEntityValid, errors: errors});
       }
-
 
       return newState;
 

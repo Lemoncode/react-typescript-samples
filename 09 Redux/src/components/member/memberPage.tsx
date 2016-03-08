@@ -21,7 +21,7 @@ interface Props extends React.Props<MemberPage> {
   ,onLoad? : (id : number) => void
   ,onSetDirty? : (dirty: boolean) => void
   ,onValidateMember: (member : MemberEntity) => void
-  ,onUiInputMember : (member:MemberEntity) => void
+  ,onUiInputMember : (fieldName : string, value : any) => void
   ,onSaveMember: () => void
 }
 
@@ -45,9 +45,8 @@ class MemberPage extends React.Component<Props, {}> {
   updateMemberFromUI(event) {
     var field = event.target.name;
 		var value = event.target.value;
-		this.props.member[field] = value;
 
-    this.props.onUiInputMember(this.props.member);
+    this.props.onUiInputMember(field, value);
 
     //this.props.onSetDirty(true);
 	}
@@ -131,7 +130,7 @@ const mapDispatchToProps = (dispatch) => {
     onLoad: (id : number) => {return dispatch(loadMember(id))}
     ,onSetDirty: (dirty : boolean) => {return dispatch(markMemberAsDirty(dirty))}
     ,onValidateMember: (member: MemberEntity) => {return dispatch(validateMember(member))}
-    ,onUiInputMember: (member: MemberEntity) => {return dispatch(uiInputMember(member))}
+    ,onUiInputMember: (fieldName : string, value : any) => {return dispatch(uiInputMember(fieldName, value))}
     ,onSaveMember: () =>  {return dispatch(saveMember())}
   }
 }
