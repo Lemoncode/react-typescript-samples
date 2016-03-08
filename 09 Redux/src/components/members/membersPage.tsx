@@ -1,35 +1,50 @@
 import * as React from 'react';
+import { connect } from 'react-redux'
 import {Link} from 'react-router';
 import memberEntity from '../../api/memberEntity';
 import MemberAPI from '../../api/memberAPI';
 import MemberRow from './memberRow'
+import loadMembers from '../../actions/loadMembers'
 
-interface Props extends React.Props<MembersPage> {
+// Presentational
+
+// extends React.Props<MembersPage>
+interface Props extends React.Props<MembersPage>{
+  members? : Array<any>;
+  onLoad? : () => void;
 }
 
-// We define members as a state (the compoment holding this will be a container
-// component)
-interface State {
-  members : Array<memberEntity>
-}
+// StateLessComponent complaining
+// TODO: Check if it's a problem of type definition
+class MembersPage extends React.Component<Props, {}> {
+   context: any;
 
-// Nice tsx guide: https://github.com/Microsoft/TypeScript/wiki/JSX
-export default class MembersPage extends React.Component<Props, State> {
+   constructor(props, context) {
+     super(props, context);
+   }
 
-  constructor(props : Props){
-        super(props);
-        // set initial state
-        this.state = {members: []};
-  }
+   static contextTypes = {
+        store: React.PropTypes.object
+   }
+   private unsubscribe: Function;
 
 
    // Standard react lifecycle function:
    // https://facebook.github.io/react/docs/component-specs.html
-   public componentWillMount() {
-     this.state.members = MemberAPI.getAllMembers();
+   public componentDidMount() {
+     this.unsubscribe = this.context.store.subscribe(() => this.forceUpdate());
+     this.props.onLoad();
    }
 
+   componentWillUnmount() {
+     this.unsubscribe();
+   }
+
+
    public render() {
+     if(!this.props.members)
+        return (<div>No data</div>)
+
 
        return (
         <div className="row">
@@ -48,7 +63,7 @@ export default class MembersPage extends React.Component<Props, State> {
               </th>
             </thead>
             <tbody> {
-              this.state.members.map((member : memberEntity) =>
+              this.props.members.map((member : memberEntity) =>
                   <MemberRow key={member.id} member = {member}/>
                 )
               }
@@ -58,3 +73,30 @@ export default class MembersPage extends React.Component<Props, State> {
        );
   }
 }
+
+// Container
+
+const mapStateToProps = (state) => {
+    return {
+      members: state.members
+    }
+}
+
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onLoad: () => {return dispatch(loadMembers())}
+  }
+}
+
+// TODO: Hack to bypass the issue when declaring StateLessComponent
+// Pending research here
+var nonTypedMembersPage : any = MembersPage;
+
+const ContainerMembersPage = connect(
+                                   mapStateToProps
+                                  ,mapDispatchToProps
+                                )(nonTypedMembersPage)
+
+
+export default ContainerMembersPage;
