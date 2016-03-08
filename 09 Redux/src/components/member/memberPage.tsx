@@ -40,6 +40,7 @@ class MemberPage extends React.Component<Props, {}> {
     }
   }
 
+
   // on any update on the form this function will be called
   updateMemberFromUI(event) {
     var field = event.target.name;
@@ -47,7 +48,8 @@ class MemberPage extends React.Component<Props, {}> {
 		this.props.member[field] = value;
 
     this.props.onUiInputMember(this.props.member);
-    this.props.onSetDirty(true);
+
+    //this.props.onSetDirty(true);
 	}
 
  // We could extract all this logic to a separate class and add

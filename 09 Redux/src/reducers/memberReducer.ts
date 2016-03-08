@@ -22,6 +22,7 @@ class MemberState  {
   }
 }
 
+
 // Just to show how combine reducers work, we have
 // divided into two reducers member load + member load/update/delete
 export default (state : MemberState = new MemberState(), action) => {
@@ -37,13 +38,17 @@ export default (state : MemberState = new MemberState(), action) => {
 
       return newState;
 
-    case 'MEMBER_DIRTY':
+    /*case 'MEMBER_DIRTY':
 
       newState = objectAssign({}, state, {dirty: action["dirty"]});
       return newState;
-
+    */
     case 'MEMBER_UI_INPUT':
-      let memberUIUpdated : MemberEntity = action["member"];
+    //Temporary hack, to force creating a new object (just temporary)
+    // TODO: enhance this
+    // We should just treat single UI input (validate on field, check if )
+    // it has to be included here, ideally not
+      let memberUIUpdated : MemberEntity = JSON.parse(JSON.stringify(action["member"]));
 
       newState = objectAssign({}, state, {member: memberUIUpdated});
       return newState;
