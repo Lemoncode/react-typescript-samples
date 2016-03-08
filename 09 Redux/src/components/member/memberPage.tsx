@@ -9,14 +9,20 @@ import objectAssign = require('object-assign');
 import loadMember from '../../actions/loadMember'
 import saveMember from '../../actions/saveMember'
 import markMemberAsDirty from '../../actions/markMemberAsDirty'
+import validateMember from '../../actions/validateMember'
+import MemberErrors from  '../../validations/MemberFormErrors'
+import uiInputMember from '../../actions/uiInputMember'
 
 interface Props extends React.Props<MemberPage> {
   params : any
   member? : MemberEntity
-  ,errors?: any
+  ,errors?: MemberErrors
   ,dirty?  : boolean
   ,onLoad? : (id : number) => void
   ,onSetDirty? : (dirty: boolean) => void
+  ,onValidateMember: (member : MemberEntity) => void
+  ,onUiInputMember : (member:MemberEntity) => void
+  ,onSaveMember: () => void
 }
 
 class MemberPage extends React.Component<Props, {}> {
@@ -31,23 +37,17 @@ class MemberPage extends React.Component<Props, {}> {
     if(memberId) {
       var memberIdNumber : number = parseInt(memberId);
       this.props.onLoad(memberIdNumber);
-      //var newState : State = objectAssign({}, this.state, {dirty: false, member: MemberAPI.getMemberById(memberIdNumber)});
-      //return this.setState(newState);
-
     }
   }
 
   // on any update on the form this function will be called
-  setMemberState(event) {
-    this.props.onSetDirty(true);
-    /*
+  updateMemberFromUI(event) {
     var field = event.target.name;
 		var value = event.target.value;
-		this.state.member[field] = value;
+		this.props.member[field] = value;
 
-    var newState : State = objectAssign({}, this.state, {dirty: true, member: this.state.member});
-    return this.setState(newState);
-    */
+    this.props.onUiInputMember(this.props.member);
+    this.props.onSetDirty(true);
 	}
 
  // We could extract all this logic to a separate class and add
@@ -55,6 +55,9 @@ class MemberPage extends React.Component<Props, {}> {
  // method to just check the current field that is being changed
  // validity
  memberFormIsValid() {
+   this.props.onValidateMember(this.props.member);
+
+
    /*
    var formIsValid = true;
    this.state.errors = {}; //clear any previous errors.
@@ -78,13 +81,11 @@ class MemberPage extends React.Component<Props, {}> {
 public saveMember(event) {
   event.preventDefault();
   // Add this at the end
-  this.props.onSetDirty(false);
-  /*
-  if(!this.memberFormIsValid()) {
-    return;
-  }
 
+  this.props.onSaveMember();
 
+  //this.props.onSetDirty(false);
+/*
   MemberAPI.saveAuthor(this.state.member);
 
   var newState : State = objectAssign({}, this.state, {dirty: true});
@@ -105,7 +106,7 @@ public saveMember(event) {
          <MemberForm
             member={this.props.member}
             errors={this.props.errors}
-            onChange={this.setMemberState.bind(this)}
+            onChange={this.updateMemberFromUI.bind(this)}
             onSave={this.saveMember.bind(this)}
             />
        );
@@ -127,6 +128,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onLoad: (id : number) => {return dispatch(loadMember(id))}
     ,onSetDirty: (dirty : boolean) => {return dispatch(markMemberAsDirty(dirty))}
+    ,onValidateMember: (member: MemberEntity) => {return dispatch(validateMember(member))}
+    ,onUiInputMember: (member: MemberEntity) => {return dispatch(uiInputMember(member))}
+    ,onSaveMember: () =>  {return dispatch(saveMember())}
   }
 }
 

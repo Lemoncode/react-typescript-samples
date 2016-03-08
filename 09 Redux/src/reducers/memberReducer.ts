@@ -1,30 +1,30 @@
 import MemberEntity from "../api/memberEntity";
 import MemberAPI from "../api/memberAPI";
 import objectAssign = require('object-assign');
+import MemberFormErrors from "../validations/memberFormErrors"
+import MemberFormValidator from "../validations/memberFormValidator"
+
 
 let emptyMemberEntity = new MemberEntity();
-
-class MemberErrors {
-  id: string;
-  login: string;
-  avatar_url: string;
-
-  public constructor() {
-    this.id = "";
-    this.login = "";
-    this.avatar_url = "";
-  }
-}
 
 class MemberState  {
   member : MemberEntity;
   memberId : number;
-  errors : MemberErrors;
+  errors : MemberFormErrors;
+  isValid : boolean;
+
+  public constructor()
+  {
+    this.member = new MemberEntity();
+    this.memberId = -1;
+    this.errors = new MemberFormErrors();
+    this.isValid = false;
+  }
 }
 
 // Just to show how combine reducers work, we have
 // divided into two reducers member load + member load/update/delete
-export default (state : MemberState = { member: emptyMemberEntity, memberId: -1, errors: new MemberErrors()}, action) => {
+export default (state : MemberState = new MemberState(), action) => {
   let newState : MemberState = null;
 
   switch (action.type) {
@@ -33,13 +33,41 @@ export default (state : MemberState = { member: emptyMemberEntity, memberId: -1,
       let memberId : number = action["id"];
 
       member = MemberAPI.getMemberById(memberId);
-      newState = objectAssign({}, state, {dirty: false, member: member, errors: new MemberErrors()});
+      newState = objectAssign({}, state, {dirty: false, member: member, errors: new MemberFormErrors(), isValid: true});
 
       return newState;
 
     case 'MEMBER_DIRTY':
+
       newState = objectAssign({}, state, {dirty: action["dirty"]});
-      
+      return newState;
+
+    case 'MEMBER_UI_INPUT':
+      let memberUIUpdated : MemberEntity = action["member"];
+
+      newState = objectAssign({}, state, {member: memberUIUpdated});
+      return newState;
+
+    case 'MEMBER_VALIDATE':
+        let memberToValidate : MemberEntity = action["member"];
+
+        let errors : MemberFormErrors = MemberFormValidator.validateMember(member);
+
+        newState = objectAssign({}, state, {member: member, isValid: errors.isEntityValid, errors: errors});
+        return newState;
+
+    case 'MEMBER_SAVE':
+      let errorsSave : MemberFormErrors = MemberFormValidator.validateMember(state.member);
+
+      if(errorsSave.isEntityValid == true) {
+        MemberAPI.saveAuthor(state.member);
+        // TODO: pending clone member object !! (keep state inmmutable)
+        newState = objectAssign({}, state, {isValid: true, errors: new MemberFormErrors()});
+      } else {
+        newState = objectAssign({}, state, {isValid: errors.isEntityValid, errors: errors});
+      }
+
+
       return newState;
 
     default:

@@ -1,9 +1,8 @@
 import MemberEntity from "../api/MemberEntity"
 
-const saveMember = (member : MemberEntity) => {
+const saveMember = () => {
    return {
      type: 'MEMBER_SAVE'
-     ,member: member
    }
 }
 
