@@ -12,6 +12,7 @@ class MemberState  {
   memberId : number;
   errors : MemberFormErrors;
   isValid : boolean;
+  saveCompleted : boolean;
 
   public constructor()
   {
@@ -19,6 +20,7 @@ class MemberState  {
     this.memberId = -1;
     this.errors = new MemberFormErrors();
     this.isValid = false;
+    this.saveCompleted = false;
   }
 }
 
@@ -67,11 +69,15 @@ export default (state : MemberState = new MemberState(), action) => {
       if(errorsSave.isEntityValid == true) {
         MemberAPI.saveAuthor(state.member);
         // TODO: pending clone member object !! (keep state inmmutable)
-        newState = objectAssign({}, state, {isValid: true, errors: new MemberFormErrors()});
+        newState = objectAssign({}, state, {isValid: true, saveCompleted: true, errors: new MemberFormErrors()});
       } else {
-        newState = objectAssign({}, state, {isValid: errors.isEntityValid, errors: errors});
+        newState = objectAssign({}, state, {isValid: errorsSave.isEntityValid, errors: errors});
       }
 
+      return newState;
+
+    case 'MEMBER_RESET_SAVE_COMPLETED':
+      newState = objectAssign({}, state, {saveCompleted: false});
       return newState;
 
     default:

@@ -12,17 +12,20 @@ import markMemberAsDirty from '../../actions/markMemberAsDirty'
 import validateMember from '../../actions/validateMember'
 import MemberErrors from  '../../validations/MemberFormErrors'
 import uiInputMember from '../../actions/uiInputMember'
+import resetSaveCompleted from '../../actions/resetSaveCompleted'
 
 interface Props extends React.Props<MemberPage> {
   params : any
   member? : MemberEntity
   ,errors?: MemberErrors
   ,dirty?  : boolean
+  ,saveCompleted? : boolean
   ,onLoad? : (id : number) => void
   ,onSetDirty? : (dirty: boolean) => void
   ,onValidateMember: (member : MemberEntity) => void
   ,onUiInputMember : (fieldName : string, value : any) => void
   ,onSaveMember: () => void
+  ,resetSaveCompleted: () => void
 }
 
 class MemberPage extends React.Component<Props, {}> {
@@ -32,6 +35,7 @@ class MemberPage extends React.Component<Props, {}> {
   }
 
   componentWillMount() {
+    // Coming from navigation 
     var memberId = this.props.params.id;
 
     if(memberId) {
@@ -40,6 +44,22 @@ class MemberPage extends React.Component<Props, {}> {
     }
   }
 
+ // https://github.com/reactjs/redux/issues/580
+ componentWillReceiveProps(nextProps) {
+   if(this.props.saveCompleted != nextProps.saveCompleted
+      && nextProps.saveCompleted == true) {
+
+      // Show toast
+     toastr.success('Author saved.');
+
+     // using hashHistory, TODO: proper configure browserHistory on app and here
+     hashHistory.push('/members')
+
+     // Reset saveCompleted flag
+     this.props.resetSaveCompleted();
+
+   }
+ }
 
   // on any update on the form this function will be called
   updateMemberFromUI(event) {
@@ -47,56 +67,12 @@ class MemberPage extends React.Component<Props, {}> {
 		var value = event.target.value;
 
     this.props.onUiInputMember(field, value);
-
-    //this.props.onSetDirty(true);
 	}
-
- // We could extract all this logic to a separate class and add
- // unit test cases, on the other hand we could implement some
- // method to just check the current field that is being changed
- // validity
- memberFormIsValid() {
-   this.props.onValidateMember(this.props.member);
-
-
-   /*
-   var formIsValid = true;
-   this.state.errors = {}; //clear any previous errors.
-
-   // TODO: Pending extract this to class and add unit testing
-
-   if (this.state.member.login.length < 3) {
-     this.state.errors.login = 'Login must be at least 3 characters.';
-     formIsValid = false;
-   }
-
-   // TODO: Pending adding url validation on avatar, use this simple lib
-   // https://github.com/chriso/validator.js
-   var newState : State = objectAssign({}, this.state, {errors: this.state.errors});
-   this.setState(newState);
-
-  return formIsValid;
-  */
- }
 
 public saveMember(event) {
   event.preventDefault();
-  // Add this at the end
 
   this.props.onSaveMember();
-
-  //this.props.onSetDirty(false);
-/*
-  MemberAPI.saveAuthor(this.state.member);
-
-  var newState : State = objectAssign({}, this.state, {dirty: true});
-  this.setState(newState);
-
-  toastr.success('Author saved.');
-
-  // using hashHistory, TODO: proper configure browserHistory on app and here
-  hashHistory.push('/members')
-  */
 }
 
  public render() {
@@ -121,6 +97,7 @@ const mapStateToProps = (state) => {
       member: state.member.member
       ,dirty : state.member.dirty
       ,errors : state.member.errors
+      ,saveCompleted : state.member.saveCompleted
     }
 }
 
@@ -132,6 +109,7 @@ const mapDispatchToProps = (dispatch) => {
     ,onValidateMember: (member: MemberEntity) => {return dispatch(validateMember(member))}
     ,onUiInputMember: (fieldName : string, value : any) => {return dispatch(uiInputMember(fieldName, value))}
     ,onSaveMember: () =>  {return dispatch(saveMember())}
+    ,resetSaveCompleted: () => {return dispatch(resetSaveCompleted())}
   }
 }
 
