@@ -55,14 +55,6 @@ export default (state : MemberState = new MemberState(), action) => {
       newState = objectAssign({}, state, {member: newMember});
       return newState;
 
-    case 'MEMBER_VALIDATE':
-        let memberToValidate : MemberEntity = action["member"];
-
-        let errors : MemberFormErrors = MemberFormValidator.validateMember(member);
-
-        newState = objectAssign({}, state, {member: member, isValid: errors.isEntityValid, errors: errors});
-        return newState;
-
     case 'MEMBER_SAVE':
       let errorsSave : MemberFormErrors = MemberFormValidator.validateMember(state.member);
 
@@ -71,7 +63,7 @@ export default (state : MemberState = new MemberState(), action) => {
         // TODO: pending clone member object !! (keep state inmmutable)
         newState = objectAssign({}, state, {isValid: true, saveCompleted: true, errors: new MemberFormErrors()});
       } else {
-        newState = objectAssign({}, state, {isValid: errorsSave.isEntityValid, errors: errors});
+        newState = objectAssign({}, state, {isValid: errorsSave.isEntityValid, errors: errorsSave});
       }
 
       return newState;
