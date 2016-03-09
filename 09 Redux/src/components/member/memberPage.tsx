@@ -8,7 +8,6 @@ import MemberAPI from '../../api/memberAPI';
 import objectAssign = require('object-assign');
 import loadMember from '../../actions/loadMember'
 import saveMember from '../../actions/saveMember'
-import markMemberAsDirty from '../../actions/markMemberAsDirty'
 import MemberErrors from  '../../validations/MemberFormErrors'
 import uiInputMember from '../../actions/uiInputMember'
 import resetSaveCompleted from '../../actions/resetSaveCompleted'
@@ -20,7 +19,6 @@ interface Props extends React.Props<MemberPage> {
   ,dirty?  : boolean
   ,saveCompleted? : boolean
   ,onLoad? : (id : number) => void
-  ,onSetDirty? : (dirty: boolean) => void
   ,onUiInputMember : (fieldName : string, value : any) => void
   ,onSaveMember: () => void
   ,resetSaveCompleted: () => void
@@ -102,8 +100,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLoad: (id : number) => {return dispatch(loadMember(id))}
-    ,onSetDirty: (dirty : boolean) => {return dispatch(markMemberAsDirty(dirty))}    
+    onLoad: (id : number) => {return dispatch(loadMember(id))}    
     ,onUiInputMember: (fieldName : string, value : any) => {return dispatch(uiInputMember(fieldName, value))}
     ,onSaveMember: () =>  {return dispatch(saveMember())}
     ,resetSaveCompleted: () => {return dispatch(resetSaveCompleted())}

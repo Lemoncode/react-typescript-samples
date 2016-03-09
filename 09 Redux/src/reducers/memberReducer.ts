@@ -52,7 +52,7 @@ export default (state : MemberState = new MemberState(), action) => {
       let newMember : MemberEntity = objectAssign({}, state.member, {});
       newMember[fieldName] = value;
 
-      newState = objectAssign({}, state, {member: newMember});
+      newState = objectAssign({}, state, {member: newMember, dirty: true});
       return newState;
 
     case 'MEMBER_SAVE':
