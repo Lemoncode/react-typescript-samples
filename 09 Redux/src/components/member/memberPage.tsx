@@ -11,6 +11,7 @@ import saveMember from '../../actions/saveMember'
 import MemberErrors from  '../../validations/MemberFormErrors'
 import uiInputMember from '../../actions/uiInputMember'
 import resetSaveCompleted from '../../actions/resetSaveCompleted'
+import newMember from  '../../actions/newMember'
 
 interface Props extends React.Props<MemberPage> {
   params : any
@@ -21,6 +22,7 @@ interface Props extends React.Props<MemberPage> {
   ,onLoad? : (id : number) => void
   ,onUiInputMember : (fieldName : string, value : any) => void
   ,onSaveMember: () => void
+  ,onNewMember: () => void
   ,resetSaveCompleted: () => void
 }
 
@@ -28,6 +30,7 @@ class MemberPage extends React.Component<Props, {}> {
 
   constructor(props : Props){
         super(props);
+
   }
 
   componentWillMount() {
@@ -37,6 +40,8 @@ class MemberPage extends React.Component<Props, {}> {
     if(memberId) {
       var memberIdNumber : number = parseInt(memberId);
       this.props.onLoad(memberIdNumber);
+    } else {
+      this.props.onNewMember();
     }
   }
 
@@ -100,10 +105,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLoad: (id : number) => {return dispatch(loadMember(id))}    
+    onLoad: (id : number) => {return dispatch(loadMember(id))}
     ,onUiInputMember: (fieldName : string, value : any) => {return dispatch(uiInputMember(fieldName, value))}
     ,onSaveMember: () =>  {return dispatch(saveMember())}
     ,resetSaveCompleted: () => {return dispatch(resetSaveCompleted())}
+    ,onNewMember: () => {return dispatch(newMember())
+    }
   }
 }
 

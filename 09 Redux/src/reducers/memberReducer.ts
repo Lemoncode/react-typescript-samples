@@ -31,6 +31,10 @@ export default (state : MemberState = new MemberState(), action) => {
   let newState : MemberState = null;
 
   switch (action.type) {
+    case 'MEMBER_NEW':
+      newState = objectAssign({}, state, {member: new MemberEntity(), errors: new MemberFormErrors(), isValid: false});
+      return newState;
+
     case 'MEMBER_LOAD':
       let member : MemberEntity;
       let memberId : number = action["id"];
