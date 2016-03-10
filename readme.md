@@ -70,6 +70,13 @@ TODO, add this validations:
 Edit a given member, here we learn how to add params to a navigation link and
 how to obtain them from a component.
 
+## 09 Redux
+
+Added Redux support, isolated state into Redux reducers, implement load, save,
+basic validation cycle. This sample uses the fake api, in following samples
+we will call async operations and fitting them into Redux architecture.
+
+
 ## 10 Redux Thunk - Handling Asyhcronous calls
 
 Members fake api replaced with async call to api github to retrieve list of
