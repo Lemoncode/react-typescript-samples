@@ -17,13 +17,12 @@ interface Props extends React.Props<MemberPage> {
   params : any
   member? : MemberEntity
   ,errors?: MemberErrors
-  ,dirty?  : boolean
   ,saveCompleted? : boolean
-  ,onLoad? : (id : number) => void
-  ,onUiInputMember : (fieldName : string, value : any) => void
-  ,onSaveMember: () => void
-  ,onNewMember: () => void
-  ,resetSaveCompleted: () => void
+  ,loadMember? : (id : number) => void
+  ,fireValidationFieldValueChanged  : (fieldName : string, value : any) => void
+  ,saveMember: () => void
+  ,newMember: () => void
+  ,resetSaveCompletedFlag: () => void
 }
 
 class MemberPage extends React.Component<Props, {}> {
@@ -39,9 +38,9 @@ class MemberPage extends React.Component<Props, {}> {
 
     if(memberId) {
       var memberIdNumber : number = parseInt(memberId);
-      this.props.onLoad(memberIdNumber);
+      this.props.loadMember(memberIdNumber);
     } else {
-      this.props.onNewMember();
+      this.props.newMember();
     }
   }
 
@@ -57,7 +56,7 @@ class MemberPage extends React.Component<Props, {}> {
      hashHistory.push('/members')
 
      // Reset saveCompleted flag
-     this.props.resetSaveCompleted();
+     this.props.resetSaveCompletedFlag();
 
    }
  }
@@ -67,13 +66,13 @@ class MemberPage extends React.Component<Props, {}> {
     var field = event.target.name;
 		var value = event.target.value;
 
-    this.props.onUiInputMember(field, value);
+    this.props.fireValidationFieldValueChanged(field, value);
 	}
 
 public saveMember(event) {
   event.preventDefault();
 
-  this.props.onSaveMember();
+  this.props.saveMember();
 }
 
  public render() {
@@ -95,8 +94,7 @@ public saveMember(event) {
 
 const mapStateToProps = (state) => {
     return {
-      member: state.member.member
-      ,dirty : state.member.dirty
+      member: state.member.member      
       ,errors : state.member.errors
       ,saveCompleted : state.member.saveCompleted
     }
@@ -105,11 +103,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLoad: (id : number) => {return dispatch(loadMember(id))}
-    ,onUiInputMember: (fieldName : string, value : any) => {return dispatch(uiInputMember(fieldName, value))}
-    ,onSaveMember: () =>  {return dispatch(saveMember())}
-    ,resetSaveCompleted: () => {return dispatch(resetSaveCompleted())}
-    ,onNewMember: () => {return dispatch(newMember())
+    loadMember: (id : number) => {return dispatch(loadMember(id))}
+    ,fireValidationFieldValueChanged: (fieldName : string, value : any) => {return dispatch(uiInputMember(fieldName, value))}
+    ,saveMember: () =>  {return dispatch(saveMember())}
+    ,resetSaveCompletedFlag: () => {return dispatch(resetSaveCompleted())}
+    ,newMember: () => {return dispatch(newMember())
     }
   }
 }

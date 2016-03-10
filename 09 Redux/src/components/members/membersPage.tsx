@@ -11,7 +11,7 @@ import loadMembers from '../../actions/loadMembers'
 // extends React.Props<MembersPage>
 interface Props extends React.Props<MembersPage>{
   members? : Array<any>;
-  onLoad? : () => void;
+  loadMembers? : () => void;
 }
 
 // StateLessComponent complaining
@@ -33,7 +33,7 @@ class MembersPage extends React.Component<Props, {}> {
    // https://facebook.github.io/react/docs/component-specs.html
    public componentDidMount() {
      this.unsubscribe = this.context.store.subscribe(() => this.forceUpdate());
-     this.props.onLoad();
+     this.props.loadMembers();
    }
 
    componentWillUnmount() {
@@ -85,7 +85,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLoad: () => {return dispatch(loadMembers())}
+    loadMembers: () => {return dispatch(loadMembers())}
   }
 }
 
