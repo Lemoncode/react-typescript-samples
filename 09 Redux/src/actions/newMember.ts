@@ -1,7 +1,7 @@
-const newMember = () => {
+const initializeNewMember = () => {
    return {
-     type: 'MEMBER_NEW'
+     type: 'INITIALIZE_NEW_MEMBER'
    }
 }
 
-export default newMember;
+export default initializeNewMember;

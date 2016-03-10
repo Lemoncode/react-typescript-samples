@@ -31,7 +31,7 @@ export default (state : MemberState = new MemberState(), action) => {
   let newState : MemberState = null;
 
   switch (action.type) {
-    case 'MEMBER_NEW':
+    case 'INITIALIZE_NEW_MEMBER':
       newState = objectAssign({}, state, {member: new MemberEntity(), errors: new MemberFormErrors(), isValid: false});
       return newState;
 
@@ -44,12 +44,7 @@ export default (state : MemberState = new MemberState(), action) => {
 
       return newState;
 
-    case 'MEMBER_UI_INPUT':
-    //Temporary hack, to force creating a new object (just temporary)
-    // TODO: enhance this
-    // We should just treat single UI input (validate on field, check if )
-    // it has to be included here, ideally not
-      //let memberUIUpdated : MemberEntity = JSON.parse(JSON.stringify(action["member"]));
+    case 'MEMBER_UI_INPUT':    
       let fieldName = action['fieldName'];
       let value = action['value']
 
