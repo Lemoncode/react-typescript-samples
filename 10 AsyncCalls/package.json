@@ -13,6 +13,7 @@
     "jquery": "^2.1.4",
     "lodash": "^4.5.1",
     "object-assign": "^4.0.1",
+    "q": "^1.4.1",
     "react": "~0.14.7",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",

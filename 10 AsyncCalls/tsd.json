@@ -37,6 +37,9 @@
     },
     "redux-thunk/redux-thunk.d.ts": {
       "commit": "02b4b5c8e0f56cc576a3480dea362173ba7e277b"
+    },
+    "q/Q.d.ts": {
+      "commit": "7ff377f4bf59f6f3a6379bca83c4082895e61110"
     }
   }
 }

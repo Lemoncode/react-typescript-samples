@@ -19,10 +19,6 @@ interface Props extends React.Props<MembersPage>{
 class MembersPage extends React.Component<Props, {}> {
    context: any;
 
-   constructor(props, context) {
-     super(props, context);
-   }
-
    static contextTypes = {
         store: React.PropTypes.object
    }
@@ -32,14 +28,8 @@ class MembersPage extends React.Component<Props, {}> {
    // Standard react lifecycle function:
    // https://facebook.github.io/react/docs/component-specs.html
    public componentDidMount() {
-     this.unsubscribe = this.context.store.subscribe(() => this.forceUpdate());
      this.props.loadMembers();
    }
-
-   componentWillUnmount() {
-     this.unsubscribe();
-   }
-
 
    public render() {
      if(!this.props.members)
