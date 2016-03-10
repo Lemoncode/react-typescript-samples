@@ -9,7 +9,8 @@ export default (state : Array<MemberEntity> = [], action) => {
       let members : Array<MemberEntity>;
       members = MemberAPI.getAllMembers();
 
-      return members;
+      // Using fake API let's return a fresh array
+      return [...members];
 
     default:
       return state;
