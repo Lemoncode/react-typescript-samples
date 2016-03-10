@@ -59,8 +59,8 @@ export default (state : MemberState = new MemberState(), action) => {
 
       if(errorsSave.isEntityValid == true) {
         MemberAPI.saveAuthor(state.member);
-        // TODO: pending clone member object !! (keep state inmmutable)
-        newState = objectAssign({}, state, {isValid: true, saveCompleted: true, errors: new MemberFormErrors()});
+
+        newState = objectAssign({}, state, {saveCompleted: true});
       } else {
         newState = objectAssign({}, state, {isValid: errorsSave.isEntityValid, errors: errorsSave});
       }
