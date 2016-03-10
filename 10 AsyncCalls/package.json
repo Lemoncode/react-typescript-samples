@@ -18,6 +18,7 @@
     "react-redux": "^4.4.0",
     "react-router": "^2.0.0",
     "redux": "^3.3.1",
+    "redux-thunk": "^2.0.1",
     "toastr": "^2.1.2",
     "typescript": "^1.9.0-dev.20160308"
   },

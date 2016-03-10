@@ -34,6 +34,9 @@
     },
     "react-redux/react-redux.d.ts": {
       "commit": "9f0f926a12026287b5a4a229e5672c01e7549313"
+    },
+    "redux-thunk/redux-thunk.d.ts": {
+      "commit": "02b4b5c8e0f56cc576a3480dea362173ba7e277b"
     }
   }
 }
