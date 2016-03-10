@@ -69,3 +69,11 @@ TODO, add this validations:
 
 Edit a given member, here we learn how to add params to a navigation link and
 how to obtain them from a component.
+
+## 10 Redux Thunk - Handling Asyhcronous calls
+
+Members fake api replaced with async call to api github to retrieve list of
+members of a given team.
+
+Similar to sample 06, but this time we implement this functionallity fitting it
+in Redux, Redux-Thunk middleware.
