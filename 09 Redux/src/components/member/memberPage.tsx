@@ -47,7 +47,7 @@ class MemberPage extends React.Component<Props, {}> {
  // https://github.com/reactjs/redux/issues/580
  componentWillReceiveProps(nextProps) {
    if(this.props.saveCompleted != nextProps.saveCompleted
-      && nextProps.saveCompleted == true) {
+      && nextProps.saveCompleted) {
 
       // Show toast
      toastr.success('Author saved.');
@@ -64,7 +64,7 @@ class MemberPage extends React.Component<Props, {}> {
   // on any update on the form this function will be called
   updateMemberFromUI(event) {
     var field = event.target.name;
-		var value = event.target.value;
+    var value = event.target.value;
 
     this.props.fireValidationFieldValueChanged(field, value);
 	}
@@ -94,7 +94,7 @@ public saveMember(event) {
 
 const mapStateToProps = (state) => {
     return {
-      member: state.member.member      
+      member: state.member.member
       ,errors : state.member.errors
       ,saveCompleted : state.member.saveCompleted
     }
@@ -112,14 +112,11 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-// TODO: Hack to bypass the issue when declaring StateLessComponent
-// Pending research here
-var nonTypedMemberPage : any = MemberPage;
 
 const ContainerMemberPage = connect(
                                    mapStateToProps
                                   ,mapDispatchToProps
-                                )(nonTypedMemberPage)
+                                )(MemberPage)
 
 
 export default ContainerMemberPage;

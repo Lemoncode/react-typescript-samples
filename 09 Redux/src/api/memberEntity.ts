@@ -1,4 +1,3 @@
-
 export default class MemberEntity {
   id: number;
   login: string;

@@ -17,29 +17,12 @@ interface Props extends React.Props<MembersPage>{
 // StateLessComponent complaining
 // TODO: Check if it's a problem of type definition
 class MembersPage extends React.Component<Props, {}> {
-   context: any;
-
-   constructor(props, context) {
-     super(props, context);
-   }
-
-   static contextTypes = {
-        store: React.PropTypes.object
-   }
-   private unsubscribe: Function;
-
 
    // Standard react lifecycle function:
    // https://facebook.github.io/react/docs/component-specs.html
-   public componentDidMount() {
-     this.unsubscribe = this.context.store.subscribe(() => this.forceUpdate());
+   public componentWillMount() {
      this.props.loadMembers();
    }
-
-   componentWillUnmount() {
-     this.unsubscribe();
-   }
-
 
    public render() {
      if(!this.props.members)
@@ -52,17 +35,20 @@ class MembersPage extends React.Component<Props, {}> {
           <Link to="/member">New Member</Link>
           <table className="table">
             <thead>
-              <th>
-                Avatar
-              </th>
-              <th>
-                Id
-              </th>
-              <th>
-                Name
-              </th>
+              <tr>
+                <th>
+                  Avatar
+                </th>
+                <th>
+                  Id
+                </th>
+                <th>
+                  Name
+                </th>
+              </tr>
             </thead>
-            <tbody> {
+            <tbody>
+            {
               this.props.members.map((member : memberEntity) =>
                   <MemberRow key={member.id} member = {member}/>
                 )
@@ -89,14 +75,10 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-// TODO: Hack to bypass the issue when declaring StateLessComponent
-// Pending research here
-var nonTypedMembersPage : any = MembersPage;
-
 const ContainerMembersPage = connect(
                                    mapStateToProps
                                   ,mapDispatchToProps
-                                )(nonTypedMembersPage)
+                                )(MembersPage)
 
 
 export default ContainerMembersPage;
