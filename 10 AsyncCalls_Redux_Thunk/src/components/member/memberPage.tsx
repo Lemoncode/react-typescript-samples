@@ -11,7 +11,7 @@ import saveMember from '../../actions/saveMember'
 import MemberErrors from  '../../validations/MemberFormErrors'
 import uiInputMember from '../../actions/uiInputMember'
 import resetSaveCompleted from '../../actions/resetSaveCompleted'
-import newMember from  '../../actions/newMember'
+import initializeNewMember from  '../../actions/initializeNewMember'
 
 interface Props extends React.Props<MemberPage> {
   params : any
@@ -21,7 +21,7 @@ interface Props extends React.Props<MemberPage> {
   ,loadMember? : (id : number) => void
   ,fireValidationFieldValueChanged  : (fieldName : string, value : any) => void
   ,saveMember: () => void
-  ,newMember: () => void
+  ,initializeNewMember: () => void
   ,resetSaveCompletedFlag: () => void
 }
 
@@ -40,14 +40,14 @@ class MemberPage extends React.Component<Props, {}> {
       var memberIdNumber : number = parseInt(memberId);
       this.props.loadMember(memberIdNumber);
     } else {
-      this.props.newMember();
+      this.props.initializeNewMember();
     }
   }
 
  // https://github.com/reactjs/redux/issues/580
  componentWillReceiveProps(nextProps) {
    if(this.props.saveCompleted != nextProps.saveCompleted
-      && nextProps.saveCompleted == true) {
+      && nextProps.saveCompleted) {
 
       // Show toast
      toastr.success('Author saved.');
@@ -94,7 +94,7 @@ public saveMember(event) {
 
 const mapStateToProps = (state) => {
     return {
-      member: state.member.member      
+      member: state.member.member
       ,errors : state.member.errors
       ,saveCompleted : state.member.saveCompleted
     }
@@ -107,19 +107,15 @@ const mapDispatchToProps = (dispatch) => {
     ,fireValidationFieldValueChanged: (fieldName : string, value : any) => {return dispatch(uiInputMember(fieldName, value))}
     ,saveMember: () =>  {return dispatch(saveMember())}
     ,resetSaveCompletedFlag: () => {return dispatch(resetSaveCompleted())}
-    ,newMember: () => {return dispatch(newMember())
+    ,initializeNewMember: () => {return dispatch(initializeNewMember())
     }
   }
 }
 
-// TODO: Hack to bypass the issue when declaring StateLessComponent
-// Pending research here
-var nonTypedMemberPage : any = MemberPage;
-
 const ContainerMemberPage = connect(
                                    mapStateToProps
                                   ,mapDispatchToProps
-                                )(nonTypedMemberPage)
+                                )(MemberPage)
 
 
 export default ContainerMemberPage;
