@@ -14,8 +14,6 @@ interface Props extends React.Props<MembersPage>{
   loadMembers? : () => void;
 }
 
-// StateLessComponent complaining
-// TODO: Check if it's a problem of type definition
 class MembersPage extends React.Component<Props, {}> {
 
    // Standard react lifecycle function:
