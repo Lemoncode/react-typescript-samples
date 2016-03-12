@@ -23,8 +23,6 @@ let store = createStore(reducers
                         ,applyMiddleware(myReduxThunk.default)
             );
 
-
-// Nice tsx guide: https://github.com/Microsoft/TypeScript/wiki/JSX
 export default class App extends React.Component<Props, {}> {
    public render() {
        return (
