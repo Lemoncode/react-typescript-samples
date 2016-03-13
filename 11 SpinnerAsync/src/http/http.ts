@@ -1,5 +1,7 @@
 import * as Q from 'q'
 import * as $ from 'jquery'
+import httpCallStarted from "../actions/httpCallStarted"
+import httpCallCompleted from "../actions/httpCallCompleted"
 
 class Http {
 
@@ -12,15 +14,15 @@ class Http {
   public Get(dispatcher, url : string)
   {
     var deferred = Q.defer<any>();
-    dispatcher.dispatch("HTTP_GET_CALL_STARTED");
+    dispatcher(httpCallStarted);
 
     // TODO: enhance this, better error handling
     $.getJSON(url, function(data) {
-        dispatcher.dispatch("HTTP_GET_CALL_COMPLETED");
+        dispatcher(httpCallCompleted);
         deferred.resolve(data);
     },function (err) {
-       dispatcher.dispatch("HTTP_GET_CALL_COMPLETED");
-       deferred.resolve(err);
+       dispatcher(httpCallCompleted);
+       deferred.reject(err);
     }
   );
 

@@ -8,9 +8,9 @@ function loadMembers() {
   // Return a function that accepts `dispatch` so we can dispatch later.
   // Thunk middleware knows how to turn thunk async actions into actions.
 
-  return function (dispatch) {
-    return MemberAPI.getAllMembersAsync().then(
-      data => dispatch(assignMembers(data))
+  return function (dispatcher) {
+    return MemberAPI.getAllMembersAsync(dispatcher).then(
+      data => dispatcher(assignMembers(data))
     );
   };
 }

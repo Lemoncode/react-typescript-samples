@@ -3,6 +3,8 @@ import MembersMockData from './memberMockData'
 import * as _ from 'lodash'
 import * as $ from 'jquery'
 import * as Q from 'q'
+import http from '../http/http';
+
 // Sync mock data API, inspired from:
 // https://gist.github.com/coryhouse/fd6232f95f9d601158e4
 class MemberAPI {
@@ -28,10 +30,34 @@ class MemberAPI {
 		return this._clone(MembersMockData);
 	}
 
-  getAllMembersAsync() : Q.Promise<MemberEntity[]> {
+  // Not 100% clean we have to pass the dispatcher here
+  // TODO: Enhance proposal, if this is a singleton we can
+  // just initialize http with the dispatcher in a entry
+  // point (app init or something like that)
+  getAllMembersAsync(dispatcher) : Q.Promise<MemberEntity[]> {
     // Going more modern: check 'fetch' and ES6 Promise
     var deferred = Q.defer<Array<MemberEntity>>();
 
+    // TODO: Only handling success, pending handling error
+    http.Get(dispatcher, 'https://api.github.com/orgs/lemoncode/members').then(
+        function(data) {
+          var members : Array<MemberEntity>;
+
+          members = data.map((gitHubMember) => {
+            var member : MemberEntity = new MemberEntity();
+
+            member.id = gitHubMember.id;
+            member.login = gitHubMember.login;
+            member.avatar_url = gitHubMember.avatar_url;
+
+            return member;
+          });
+
+          deferred.resolve(members);
+        }
+    );
+
+    /*
     $.getJSON('https://api.github.com/orgs/lemoncode/members', function(data) {
         // do something with data
         var members : Array<MemberEntity>;
@@ -47,7 +73,7 @@ class MemberAPI {
         });
 
         deferred.resolve(members);
-    });
+    });*/
 
     return deferred.promise;
   }
