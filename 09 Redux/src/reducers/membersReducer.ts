@@ -6,11 +6,8 @@ import MemberAPI from "../api/memberAPI";
 export default (state : Array<MemberEntity> = [], action) => {
   switch (action.type) {
     case 'MEMBERS_LOAD':
-      let members : Array<MemberEntity>;
-      members = MemberAPI.getAllMembers();
-
       // Using fake API let's return a fresh array
-      return [...members];
+      return [...action.members];
 
     default:
       return state;
