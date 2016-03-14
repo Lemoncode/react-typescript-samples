@@ -20,8 +20,13 @@ class spinner extends React.Component<Props, {}> {
         }
 
         return (
-          <div className="row">
-            <span>Loading ... (add a better indicator later on)</span>
+          <div className="spinnerWrap">
+            <div className="spinnerOverlay"></div>
+            <div className="vertical-offset">
+              <div id="spinner">
+                Loading...
+              </div>
+            </div>
           </div>
         );
   }
