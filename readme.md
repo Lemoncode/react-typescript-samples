@@ -16,6 +16,21 @@ start working with React and Typescript. Characteristics:
 
 Contributors and reviewers are more than welcome.
 
+##To get started:  
+1. Install [NodeJS](http://www.nodejs.org)  
+2. `npm install webpack -g` - Installs webpack
+3. Download this repo
+4. Open the command line of your choice and cd to the root directory of this repo on your machine  
+5. `npm install` - Installs packages
+6. `npm start` - Builds the project and opens your browser.
+7. Navigate to [http://localhost:8080/](http://localhost:8080/) if your browser doesn't open automatically.
+
+##IDE:
+We are using [Atom](https://atom.io/) as editor rigth now.
+
+Future enahncements:
+    + Intellisense and all the goodies in VS Code. ([Check that project behaves well on visual studio code](https://github.com/Lemoncode/react-typescript-samples/issues/6))
+
 # samples
 
 ## 00 Boiler plate
