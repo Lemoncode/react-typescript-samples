@@ -25,6 +25,7 @@ class MembersPage extends React.Component<Props, {}> {
    // https://facebook.github.io/react/docs/component-specs.html
    public componentDidMount() {
      this.props.loadMembers();
+     this.props.loadRepos();
    }
 
    public render() {
