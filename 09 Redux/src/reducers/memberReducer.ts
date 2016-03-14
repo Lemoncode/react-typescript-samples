@@ -36,11 +36,7 @@ export default (state : MemberState = new MemberState(), action) => {
       return newState;
 
     case 'MEMBER_LOAD':
-      let member : MemberEntity;
-      let memberId : number = action["id"];
-
-      member = MemberAPI.getMemberById(memberId);
-      newState = objectAssign({}, state, {dirty: false, member: member, errors: new MemberFormErrors(), isValid: true});
+      newState = objectAssign({}, state, {dirty: false, member: action.member, errors: new MemberFormErrors(), isValid: true});
 
       return newState;
 
@@ -55,6 +51,7 @@ export default (state : MemberState = new MemberState(), action) => {
       return newState;
 
     case 'MEMBER_SAVE':
+      // TODO convert this to pure function
       let errorsSave : MemberFormErrors = MemberFormValidator.validateMember(state.member);
 
       if(errorsSave.isEntityValid == true) {
