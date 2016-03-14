@@ -3,7 +3,14 @@ import * as $ from 'jquery'
 import httpCallStarted from "../actions/httpCallStarted"
 import httpCallCompleted from "../actions/httpCallCompleted"
 
+
+
 class Http {
+  _dispatcher : any;
+
+  public Initialize(dispatcher) {
+    this._dispatcher = dispatcher;
+  }
 
   // =========================
   // Send dispatch command to increment in one the async calls counter
@@ -11,19 +18,20 @@ class Http {
   // On Success, On Error --> Send dispatch comment to decrement
   // Return promise
   // =========================
-  public Get(dispatcher, url : string)
+  public Get(url : string)
   {
     var deferred = Q.defer<any>();
-    dispatcher(httpCallStarted);
+    this._dispatcher(httpCallStarted());
 
     // TODO: enhance this, better error handling
     $.getJSON(url, function(data) {
-        dispatcher(httpCallCompleted);
+        this._dispatcher(httpCallCompleted());
         deferred.resolve(data);
-    },function (err) {
-       dispatcher(httpCallCompleted);
+    }.bind(this)
+    ,function (err) {
+       this._dispatcher(httpCallCompleted());
        deferred.reject(err);
-    }
+    }.bind(this)
   );
 
     return deferred.promise;

@@ -34,12 +34,12 @@ class MemberAPI {
   // TODO: Enhance proposal, if this is a singleton we can
   // just initialize http with the dispatcher in a entry
   // point (app init or something like that)
-  getAllMembersAsync(dispatcher) : Q.Promise<MemberEntity[]> {
+  getAllMembersAsync() : Q.Promise<MemberEntity[]> {
     // Going more modern: check 'fetch' and ES6 Promise
     var deferred = Q.defer<Array<MemberEntity>>();
 
     // TODO: Only handling success, pending handling error
-    http.Get(dispatcher, 'https://api.github.com/orgs/lemoncode/members').then(
+    http.Get('https://api.github.com/orgs/lemoncode/members').then(
         function(data) {
           var members : Array<MemberEntity>;
 

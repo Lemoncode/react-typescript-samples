@@ -1,4 +1,5 @@
 import objectAssign = require('object-assign');
+import http from '../http/http';
 
 // Later on add more flags, like error or something like that?
 class httpState {
@@ -13,6 +14,10 @@ export default (state : httpState = {httpCallsInProgress : false, numberOfCalls:
   let callsInProgress : boolean = null;
 
   switch (action.type) {
+    case 'HTTP_INITIALIZE_DISPATCHER':
+      http.Initialize(action.dispatcher);
+      newState = objectAssign({}, state, {});
+      return newState;
     case 'HTTP_GET_CALL_STARTED':
       numberOfCalls = state.numberOfCalls + 1;
       callsInProgress = true;

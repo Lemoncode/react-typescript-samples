@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import Header from './common/header'
 import reducers  from '../reducers';
 import * as reduxThunk from 'redux-thunk';
+import Spinner from './common/spinner'
 
 interface Props extends React.Props<App> {
 }
@@ -28,6 +29,7 @@ export default class App extends React.Component<Props, {}> {
        return (
          <Provider store={store}>
             <div className="container-fluid">
+              <Spinner/>
               <Header/>
                 {this.props.children}
               </div>
