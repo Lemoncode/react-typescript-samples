@@ -20,8 +20,9 @@
         "./typings/tsd.d.ts",
         "!./node_modules/**/*"
     ],
-    "files": [
-        "./typings/tsd.d.ts"
+    //https://github.com/Microsoft/TypeScript/wiki/tsconfig.json
+    "exclude": [
+        "node_modules"
     ],
     "atom": {
         "rewriteTsconfig": false
