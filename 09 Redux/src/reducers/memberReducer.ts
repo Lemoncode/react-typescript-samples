@@ -51,15 +51,11 @@ export default (state : MemberState = new MemberState(), action) => {
       return newState;
 
     case 'MEMBER_SAVE':
-      // TODO convert this to pure function
-      let errorsSave : MemberFormErrors = MemberFormValidator.validateMember(state.member);
-
-      if(errorsSave.isEntityValid == true) {
-        MemberAPI.saveAuthor(state.member);
-
+      // Pending action casting?
+      if(action.errors.isEntityValid) {
         newState = objectAssign({}, state, {saveCompleted: true});
       } else {
-        newState = objectAssign({}, state, {isValid: errorsSave.isEntityValid, errors: errorsSave});
+        newState = objectAssign({}, state, {isValid: action.errors.isEntityValid, errors: action.errors});
       }
 
       return newState;
