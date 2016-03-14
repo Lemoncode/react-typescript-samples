@@ -16,11 +16,10 @@
     "compileOnSave": false,
     "filesGlob": [
         "./src/**/*.tsx",
-        "./src/**/*.ts",        
+        "./src/**/*.ts",
         "./typings/tsd.d.ts",
         "!./node_modules/**/*"
     ],
-    //https://github.com/Microsoft/TypeScript/wiki/tsconfig.json
     "exclude": [
         "node_modules"
     ],
