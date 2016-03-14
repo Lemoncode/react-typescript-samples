@@ -1,17 +1,22 @@
 import * as React from 'react';
 import { connect } from 'react-redux'
 import {Link} from 'react-router';
-import memberEntity from '../../api/memberEntity';
+import MemberEntity from '../../api/memberEntity';
 import MemberAPI from '../../api/memberAPI';
-import MemberRow from './memberRow'
-import loadMembers from '../../actions/loadMembers'
+import MemberRow from './memberRow';
+import loadMembers from '../../actions/loadMembers';
+import RepoEntity from '../../api/repoEntity';
+import RepoRow from './repoRow';
+import loadRepos from '../../actions/loadRepos';
 
 // Presentational
 
 // extends React.Props<MembersPage>
 interface Props extends React.Props<MembersPage>{
-  members? : Array<any>;
+  members? : Array<MemberEntity>;
   loadMembers? : () => void;
+  repos? : Array<RepoEntity>;
+  loadRepos? : () => void;
 }
 
 class MembersPage extends React.Component<Props, {}> {
@@ -47,10 +52,31 @@ class MembersPage extends React.Component<Props, {}> {
             </thead>
             <tbody>
             {
-              this.props.members.map((member : memberEntity) =>
+              this.props.members.map((member : MemberEntity) =>
                   <MemberRow key={member.id} member = {member}/>
                 )
               }
+            </tbody>
+          </table>
+
+          <h2>Repos</h2>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>
+                  Id
+                </th>
+                <th>
+                  Name
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+            {
+              this.props.repos.map((repo: RepoEntity) =>
+                <RepoRow key={repo.id} repo={repo}/>
+              )
+            }
             </tbody>
           </table>
         </div>
@@ -62,14 +88,16 @@ class MembersPage extends React.Component<Props, {}> {
 
 const mapStateToProps = (state) => {
     return {
-      members: state.members
+      members: state.members,
+      repos: state.repos
     }
 }
 
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadMembers: () => {return dispatch(loadMembers())}
+    loadMembers: () => {return dispatch(loadMembers())},
+    loadRepos: () => { return dispatch(loadRepos()) }
   }
 }
 
