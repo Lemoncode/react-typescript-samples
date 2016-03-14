@@ -28,7 +28,7 @@ export default (state : httpState = {httpCallsInProgress : false, numberOfCalls:
 
     case 'HTTP_GET_CALL_COMPLETED':
       numberOfCalls = state.numberOfCalls - 1;
-      callsInProgress = (state.numberOfCalls > 0);
+      callsInProgress = (numberOfCalls > 0);
 
       newState = objectAssign({}, state, {httpCallsInProgress: callsInProgress, numberOfCalls: numberOfCalls});
       return newState;

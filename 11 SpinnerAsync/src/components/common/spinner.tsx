@@ -31,7 +31,7 @@ class spinner extends React.Component<Props, {}> {
 
 const mapStateToProps = (state) => {
     return {
-      showSpinner: state.httpCallsInProgress
+      showSpinner: state.http.httpCallsInProgress
     }
 }
 
