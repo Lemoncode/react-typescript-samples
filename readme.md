@@ -28,7 +28,7 @@ Contributors and reviewers are more than welcome.
 ##IDE:
 We are using [Atom](https://atom.io/) as editor rigth now.
 
-Future enahncements:
+Future enhancements:
  + Intellisense and all the goodies in VS Code. ([Check that project behaves well on visual studio code](https://github.com/Lemoncode/react-typescript-samples/issues/6))
 
 # samples
