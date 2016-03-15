@@ -16,6 +16,20 @@ start working with React and Typescript. Characteristics:
 
 Contributors and reviewers are more than welcome.
 
+##To get started:  
+1. Install [NodeJS](http://www.nodejs.org)  
+2. `npm install webpack -g` - Installs webpack
+3. Download this repo
+4. Open the command line of your choice and cd to the root directory of this repo on your machine  
+5. `npm install` - Installs packages
+6. `npm start` - Builds the project and launch a lite web server (webpack-devserver).
+7. Navigate to [http://localhost:8080/](http://localhost:8080/) if your browser doesn't open automatically.
+
+##IDE:
+We have tested in:
+ + [Atom](https://atom.io/).
+ + [VS Code](https://code.visualstudio.com/).
+
 # samples
 
 ## 00 Boiler plate
