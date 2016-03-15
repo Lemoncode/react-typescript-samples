@@ -1,12 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux'
-import {Link} from 'react-router';
 import MemberEntity from '../../api/memberEntity';
-import MemberAPI from '../../api/memberAPI';
-import MemberRow from './memberRow';
+import MemberList from './memberList';
 import loadMembers from '../../actions/loadMembers';
 import RepoEntity from '../../api/repoEntity';
-import RepoRow from './repoRow';
+import RepoList from '../repos/repoList';
 import loadRepos from '../../actions/loadRepos';
 
 // Presentational
@@ -34,52 +32,9 @@ class MembersPage extends React.Component<Props, {}> {
 
 
        return (
-        <div className="row">
-          <h2> Members Page</h2>
-          <Link to="/member">New Member</Link>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>
-                  Avatar
-                </th>
-                <th>
-                  Id
-                </th>
-                <th>
-                  Name
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-            {
-              this.props.members.map((member : MemberEntity) =>
-                  <MemberRow key={member.id} member = {member}/>
-                )
-              }
-            </tbody>
-          </table>
-
-          <h2>Repos</h2>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>
-                  Id
-                </th>
-                <th>
-                  Name
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-            {
-              this.props.repos.map((repo: RepoEntity) =>
-                <RepoRow key={repo.id} repo={repo}/>
-              )
-            }
-            </tbody>
-          </table>
+        <div className="row">          
+          <MemberList members={this.props.members}/>
+          <RepoList repos={this.props.repos}/>
         </div>
        );
   }
