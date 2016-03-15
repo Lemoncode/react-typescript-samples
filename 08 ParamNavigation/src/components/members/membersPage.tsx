@@ -38,15 +38,17 @@ export default class MembersPage extends React.Component<Props, State> {
           <Link to="/member">New Member</Link>
           <table className="table">
             <thead>
-              <th>
-                Avatar
-              </th>
-              <th>
-                Id
-              </th>
-              <th>
-                Name
-              </th>
+              <tr>
+                <th>
+                  Avatar
+                </th>
+                <th>
+                  Id
+                </th>
+                <th>
+                  Name
+                </th>
+              </tr>
             </thead>
             <tbody> {
               this.state.members.map((member : memberEntity) =>
