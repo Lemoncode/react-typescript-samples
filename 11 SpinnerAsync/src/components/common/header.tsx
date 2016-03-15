@@ -4,7 +4,6 @@ import {Link} from 'react-router';
 interface Props {
 }
 
-// Nice tsx guide: https://github.com/Microsoft/TypeScript/wiki/JSX
 export default class Header extends React.Component<Props, {}> {
    public render() {
        return (

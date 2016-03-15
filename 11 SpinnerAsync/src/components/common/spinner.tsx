@@ -7,7 +7,6 @@ interface Props {
   initializeHttp? : () => void;
 }
 
-// Nice tsx guide: https://github.com/Microsoft/TypeScript/wiki/JSX
 class spinner extends React.Component<Props, {}> {
   constructor(props : Props){
     super(props);

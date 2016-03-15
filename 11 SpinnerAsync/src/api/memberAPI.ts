@@ -57,24 +57,6 @@ class MemberAPI {
         }
     );
 
-    /*
-    $.getJSON('https://api.github.com/orgs/lemoncode/members', function(data) {
-        // do something with data
-        var members : Array<MemberEntity>;
-
-        members = data.map((gitHubMember) => {
-          var member : MemberEntity = new MemberEntity();
-
-          member.id = gitHubMember.id;
-          member.login = gitHubMember.login;
-          member.avatar_url = gitHubMember.avatar_url;
-
-          return member;
-        });
-
-        deferred.resolve(members);
-    });*/
-
     return deferred.promise;
   }
 
