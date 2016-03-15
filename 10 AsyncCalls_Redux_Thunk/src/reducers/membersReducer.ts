@@ -5,9 +5,9 @@ import MemberAPI from "../api/memberAPI";
 // divided into two reducers member load + member load/update/delete
 export default (state : Array<MemberEntity> = [], action) => {
   switch (action.type) {
-    case 'MEMBERS_LOAD':
-      // Using fake API let's return a fresh array
-      return [...action.members];
+    case 'MEMBERS_ASSIGN':
+
+      return action.members;
 
     default:
       return state;

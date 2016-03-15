@@ -11,7 +11,7 @@ import saveMember from '../../actions/saveMember'
 import MemberErrors from  '../../validations/MemberFormErrors'
 import uiInputMember from '../../actions/uiInputMember'
 import resetSaveCompleted from '../../actions/resetSaveCompleted'
-import newMember from  '../../actions/newMember'
+import initializeNewMember from  '../../actions/initializeNewMember'
 
 interface Props extends React.Props<MemberPage> {
   params : any
@@ -20,7 +20,7 @@ interface Props extends React.Props<MemberPage> {
   ,saveCompleted? : boolean
   ,loadMember? : (id : number) => void
   ,fireValidationFieldValueChanged  : (fieldName : string, value : any) => void
-  ,saveMember: (member: MemberEntity) => void
+  ,saveMember: () => void
   ,initializeNewMember: () => void
   ,resetSaveCompletedFlag: () => void
 }
@@ -64,7 +64,7 @@ class MemberPage extends React.Component<Props, {}> {
   // on any update on the form this function will be called
   updateMemberFromUI(event) {
     var field = event.target.name;
-    var value = event.target.value;
+		var value = event.target.value;
 
     this.props.fireValidationFieldValueChanged(field, value);
 	}
@@ -72,7 +72,7 @@ class MemberPage extends React.Component<Props, {}> {
 public saveMember(event) {
   event.preventDefault();
 
-  this.props.saveMember(this.props.member);
+  this.props.saveMember();
 }
 
  public render() {
@@ -105,13 +105,12 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loadMember: (id : number) => {return dispatch(loadMember(id))}
     ,fireValidationFieldValueChanged: (fieldName : string, value : any) => {return dispatch(uiInputMember(fieldName, value))}
-    ,saveMember: (member:MemberEntity) =>  {return dispatch(saveMember(member))}
+    ,saveMember: () =>  {return dispatch(saveMember())}
     ,resetSaveCompletedFlag: () => {return dispatch(resetSaveCompleted())}
-    ,initializeNewMember: () => {return dispatch(newMember())
+    ,initializeNewMember: () => {return dispatch(initializeNewMember())
     }
   }
 }
-
 
 const ContainerMemberPage = connect(
                                    mapStateToProps

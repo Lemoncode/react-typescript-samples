@@ -90,3 +90,12 @@ how to obtain them from a component.
 Added Redux support, isolated state into Redux reducers, implement load, save,
 basic validation cycle. This sample uses the fake api, in following samples
 we will call async operations and fitting them into Redux architecture.
+
+
+## 10 Redux Thunk - Handling Asyhcronous calls
+
+Members fake api replaced with async call to api github to retrieve list of
+members of a given team.
+
+Similar to sample 06, but this time we implement this functionallity fitting it
+in Redux, Redux-Thunk middleware.

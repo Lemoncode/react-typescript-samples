@@ -17,7 +17,6 @@
     "filesGlob": [
         "./src/**/*.tsx",
         "./src/**/*.ts",
-        "./typings/**/*.ts",
         "./typings/tsd.d.ts",
         "!./node_modules/**/*"
     ],

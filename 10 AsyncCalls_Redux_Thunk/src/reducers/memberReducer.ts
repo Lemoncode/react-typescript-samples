@@ -31,12 +31,16 @@ export default (state : MemberState = new MemberState(), action) => {
   let newState : MemberState = null;
 
   switch (action.type) {
-    case 'INITIALIZE_NEW_MEMBER':
+    case 'MEMBER_INITIALIZE_NEW':
       newState = objectAssign({}, state, {member: new MemberEntity(), errors: new MemberFormErrors(), isValid: false});
       return newState;
 
     case 'MEMBER_LOAD':
-      newState = objectAssign({}, state, {dirty: false, member: action.member, errors: new MemberFormErrors(), isValid: true});
+      let member : MemberEntity;
+      let memberId : number = action["id"];
+
+      member = MemberAPI.getMemberById(memberId);
+      newState = objectAssign({}, state, {dirty: false, member: member, errors: new MemberFormErrors(), isValid: true});
 
       return newState;
 
@@ -51,11 +55,14 @@ export default (state : MemberState = new MemberState(), action) => {
       return newState;
 
     case 'MEMBER_SAVE':
-      // Pending action casting?
-      if(action.errors.isEntityValid) {
+      let errorsSave : MemberFormErrors = MemberFormValidator.validateMember(state.member);
+
+      if(errorsSave.isEntityValid == true) {
+        MemberAPI.saveAuthor(state.member);
+
         newState = objectAssign({}, state, {saveCompleted: true});
       } else {
-        newState = objectAssign({}, state, {isValid: action.errors.isEntityValid, errors: action.errors});
+        newState = objectAssign({}, state, {isValid: errorsSave.isEntityValid, errors: errorsSave});
       }
 
       return newState;
