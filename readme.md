@@ -98,3 +98,17 @@ members of a given team.
 
 Similar to sample 06, but this time we implement this functionallity fitting it
 in Redux, Redux-Thunk middleware.
+
+
+## 11 Spinner
+
+Display a busy indicator when an ajax request is in progress.
+
+We have created here:
+
+* A component that will take care of showing / displaying the busy indicator (spinner).
+* A reducer that will take care of dispatching http requests in progress / completed.
+* A http helper that will wrap the request to trigger the proper messages (new request, request completed...), just to
+have a single entry point for this.
+
+We have updated MemberAPI to use the http helper / wrapper.

@@ -12,5 +12,4 @@ export default (state : Array<MemberEntity> = [], action) => {
     default:
       return state;
   }
-
 };
