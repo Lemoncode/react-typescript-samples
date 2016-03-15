@@ -21,9 +21,8 @@
         "./typings/tsd.d.ts",
         "!./node_modules/**/*"
     ],
-    "files": [
-        "./typings/react/react.d.ts",
-        "./typings/tsd.d.ts"
+    "exclude": [
+        "node_modules"
     ],
     "atom": {
         "rewriteTsconfig": false
