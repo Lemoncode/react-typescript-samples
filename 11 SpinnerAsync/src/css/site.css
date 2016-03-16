@@ -46,3 +46,7 @@ div#spinner {
     margin-top: -50px;
 }
 /* <#Spinner AJAX request loading> */
+
+.top-buffer{
+  margin-top: 20px;
+}
