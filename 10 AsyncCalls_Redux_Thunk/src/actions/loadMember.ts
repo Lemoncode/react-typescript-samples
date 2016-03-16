@@ -1,7 +1,9 @@
+import memberAPI from '../api/memberAPI';
+
 const loadMember = (id : number) => {
    return {
      type: 'MEMBER_LOAD'
-     ,id: id
+     ,member: memberAPI.getMemberById(id)
    }
 }
 

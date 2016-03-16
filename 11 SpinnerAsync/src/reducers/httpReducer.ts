@@ -14,17 +14,12 @@ export default (state : httpState = {httpCallsInProgress : false, numberOfCalls:
   let callsInProgress : boolean = null;
 
   switch (action.type) {
-    case 'HTTP_INITIALIZE_DISPATCHER':
-      http.Initialize(action.dispatcher);
-      newState = objectAssign({}, state, {});
-      return newState;
     case 'HTTP_GET_CALL_STARTED':
       numberOfCalls = state.numberOfCalls + 1;
       callsInProgress = true;
 
       newState = objectAssign({}, state, {httpCallsInProgress: callsInProgress, numberOfCalls: numberOfCalls});
       return newState;
-
 
     case 'HTTP_GET_CALL_COMPLETED':
       numberOfCalls = state.numberOfCalls - 1;
@@ -36,5 +31,4 @@ export default (state : httpState = {httpCallsInProgress : false, numberOfCalls:
     default:
       return state;
   }
-
 };
