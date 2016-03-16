@@ -52,8 +52,9 @@ export default class MembersPage extends React.Component<Props, State> {
                 </th>
               </tr>
             </thead>
-            <tbody> {
-              this.state.members.map((member : MemberEntity) =>
+            <tbody>
+              {
+                this.state.members.map((member : MemberEntity) =>
                   <MemberRow key={member.id} member = {member}/>
                 )
               }
