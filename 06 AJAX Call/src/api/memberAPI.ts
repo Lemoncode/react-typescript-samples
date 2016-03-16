@@ -8,17 +8,17 @@ import * as Q from 'q'
 // https://gist.github.com/coryhouse/fd6232f95f9d601158e4
 export default class MemberAPI {
   //This would be performed on the server in a real app. Just stubbing in.
-  private _clone (item) {
+  private static _clone (item) {
   	return JSON.parse(JSON.stringify(item)); //return cloned copy so that the item is passed by value instead of by reference
   };
 
   // Just return a copy of the mock data
-  getAllMembers() : Array<MemberEntity> {
+  static getAllMembers() : Array<MemberEntity> {
 		return this._clone(MembersMockData);
 	}
 
   //Q.Promise<Array<MemberEntity>
-  getAllMembersAsync() : Q.Promise<MemberEntity[]> {
+  static getAllMembersAsync() : Q.Promise<MemberEntity[]> {
     // Going more modern: check 'fetch' and ES6 Promise
     var deferred = Q.defer<Array<MemberEntity>>();
 
