@@ -36,13 +36,9 @@ export default (state : MemberState = new MemberState(), action) => {
       return newState;
 
     case 'MEMBER_LOAD':
-      let member : MemberEntity;
-      let memberId : number = action["id"];
+    newState = objectAssign({}, state, {dirty: false, member: action.member, errors: new MemberFormErrors(), isValid: true});
 
-      member = MemberAPI.getMemberById(memberId);
-      newState = objectAssign({}, state, {dirty: false, member: member, errors: new MemberFormErrors(), isValid: true});
-
-      return newState;
+    return newState;
 
     case 'MEMBER_UI_INPUT':
       let fieldName = action['fieldName'];
@@ -55,17 +51,13 @@ export default (state : MemberState = new MemberState(), action) => {
       return newState;
 
     case 'MEMBER_SAVE':
-      let errorsSave : MemberFormErrors = MemberFormValidator.validateMember(state.member);
-
-      if(errorsSave.isEntityValid == true) {
-        MemberAPI.saveAuthor(state.member);
-
+      if(action.errors.isEntityValid) {
         newState = objectAssign({}, state, {saveCompleted: true});
       } else {
-        newState = objectAssign({}, state, {isValid: errorsSave.isEntityValid, errors: errorsSave});
+        newState = objectAssign({}, state, {isValid: action.errors.isEntityValid, errors: action.errors});
       }
 
-      return newState;
+  return newState;
 
     case 'MEMBER_RESET_SAVE_COMPLETED':
       newState = objectAssign({}, state, {saveCompleted: false});
