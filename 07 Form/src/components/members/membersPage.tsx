@@ -26,8 +26,7 @@ export default class MembersPage extends React.Component<Props, State> {
    // Standard react lifecycle function:
    // https://facebook.github.io/react/docs/component-specs.html
    public componentWillMount() {
-     var memberAPI : MemberAPI = new MemberAPI();
-     this.state.members = memberAPI.getAllMembers();
+     this.state.members = MemberAPI.getAllMembers();
    }
 
    public render() {
