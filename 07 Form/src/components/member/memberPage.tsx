@@ -73,8 +73,7 @@ public saveMember(event) {
     return;
   }
 
-  var memberAPI : MemberAPI = new MemberAPI();
-  memberAPI.saveAuthor(this.state.member);
+  MemberAPI.saveAuthor(this.state.member);
 
   var newState : State = objectAssign({}, this.state, {dirty: true});
   this.setState(newState);
