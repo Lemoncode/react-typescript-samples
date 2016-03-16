@@ -35,7 +35,7 @@ module.exports = {
   },
 
   // http://webpack.github.io/docs/configuration.html#devtool
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
 
   module: {
 		loaders: [

@@ -10,7 +10,7 @@ module.exports = function (config) {
     exclude: [
     ],
     preprocessors: {
-      './src/**/spec/**/*.spec.ts' : ['webpack']
+      './src/**/spec/**/*.spec.ts' : ['webpack', 'sourcemap']
     },
     webpack: {
       module: webpackConfig.module,
