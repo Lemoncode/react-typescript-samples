@@ -43,6 +43,12 @@
     },
     "mocha/mocha.d.ts": {
       "commit": "2f47c75835b837777a85287611703d683b0aaa83"
+    },
+    "assertion-error/assertion-error.d.ts": {
+      "commit": "2f47c75835b837777a85287611703d683b0aaa83"
+    },
+    "chai/chai.d.ts": {
+      "commit": "2f47c75835b837777a85287611703d683b0aaa83"
     }
   }
 }
