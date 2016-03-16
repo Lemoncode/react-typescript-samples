@@ -40,6 +40,9 @@
     },
     "q/Q.d.ts": {
       "commit": "7ff377f4bf59f6f3a6379bca83c4082895e61110"
+    },
+    "mocha/mocha.d.ts": {
+      "commit": "2f47c75835b837777a85287611703d683b0aaa83"
     }
   }
 }
