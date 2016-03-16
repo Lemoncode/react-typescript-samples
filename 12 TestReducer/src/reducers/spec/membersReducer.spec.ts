@@ -1,6 +1,6 @@
-import { expect } from 'chai'
-import * as deepFreeze from 'deep-freeze'
-import membersReducer from '../membersReducer'
+import { expect } from 'chai';
+import * as deepFreeze from 'deep-freeze';
+import membersReducer from '../membersReducer';
 import MemberEntity from '../../api/memberEntity';
 
 describe('membersReducer', () => {
