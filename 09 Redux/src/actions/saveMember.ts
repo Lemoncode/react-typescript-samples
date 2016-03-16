@@ -1,4 +1,4 @@
-import MemberEntity from "../api/MemberEntity"
+import MemberEntity from "../api/MemberEntity";
 import memberAPI from '../api/memberAPI';
 import MemberFormErrors from '../validations/memberFormErrors';
 import MemberFormValidator from '../validations/memberFormValidator';
