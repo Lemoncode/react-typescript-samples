@@ -8,7 +8,7 @@ export default (state : Array<MemberEntity> = [], action) => {
     case 'MEMBERS_ASSIGN':
       return [...action.members];
 
-    default:      
+    default:
       return state;
   }
 };
