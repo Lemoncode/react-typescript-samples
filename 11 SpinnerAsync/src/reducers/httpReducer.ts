@@ -15,9 +15,8 @@ export default (state : httpState = {httpCallsInProgress : false, numberOfCalls:
 
   switch (action.type) {
     case 'HTTP_INITIALIZE_DISPATCHER':
-      http.Initialize(action.dispatcher);
-      newState = objectAssign({}, state, {});
-      return newState;
+      return state;
+
     case 'HTTP_GET_CALL_STARTED':
       numberOfCalls = state.numberOfCalls + 1;
       callsInProgress = true;
