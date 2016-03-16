@@ -24,7 +24,6 @@ export default class MembersPage extends React.Component<Props, State> {
 
    // Changing to componentDidMount to handle initial ajax request response
    public componentDidMount() {
-     //this.state.members = memberAPI.getAllMembers();
      var promise  : Q.Promise<MemberEntity[]> = MemberAPI.getAllMembersAsync();
 
      promise.done(function (members) {
