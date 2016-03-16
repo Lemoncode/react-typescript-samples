@@ -8,10 +8,10 @@ interface Props {
 export default class About extends React.Component<Props, {}> {
    public render() {
        return (
-          <div className="row">
+          <div className="row about-page">
+            <h1 className="jumbotron">11 Spinner Async</h1>
+            
             <div className="col-xs-12">
-              <h1>11 Spinner Async</h1>
-              <hr/>
               <h1>
                 <small>
                   In this sample we are going to show a spinner (busy indicator)

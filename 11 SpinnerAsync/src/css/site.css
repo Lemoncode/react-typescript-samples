@@ -50,3 +50,15 @@ div#spinner {
 .top-buffer{
   margin-top: 20px;
 }
+
+.about-page{
+  position: relative;
+  top: -20px;
+}
+
+.about-page .jumbotron{
+  margin: 0;
+  background:rgba(9,69,95,0.8);
+  color: white;
+  border-radius: 0 !important;
+}
