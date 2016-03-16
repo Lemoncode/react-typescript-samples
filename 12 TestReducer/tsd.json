@@ -49,6 +49,9 @@
     },
     "chai/chai.d.ts": {
       "commit": "2f47c75835b837777a85287611703d683b0aaa83"
+    },
+    "deep-freeze/deep-freeze.d.ts": {
+      "commit": "2f47c75835b837777a85287611703d683b0aaa83"
     }
   }
 }

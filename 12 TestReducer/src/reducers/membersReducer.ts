@@ -6,10 +6,9 @@ import MemberAPI from "../api/memberAPI";
 export default (state : Array<MemberEntity> = [], action) => {
   switch (action.type) {
     case 'MEMBERS_ASSIGN':
-
       return [...action.members];
 
-    default:
+    default:      
       return state;
   }
 };
