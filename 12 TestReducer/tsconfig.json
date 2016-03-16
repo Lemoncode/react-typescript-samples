@@ -16,7 +16,8 @@
     "compileOnSave": false,
     "filesGlob": [
         "./src/**/*.tsx",
-        "./src/**/*.ts",        
+        "./src/**/*.ts",
+        "./test/**/*.ts",
         "./typings/tsd.d.ts",
         "!./node_modules/**/*"
     ],

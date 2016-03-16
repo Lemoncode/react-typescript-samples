@@ -5,14 +5,15 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['mocha'],
     files: [
-      './src/**/spec/**/*.spec.ts'
+      './test/test_index.js'
     ],
     exclude: [
     ],
     preprocessors: {
-      './src/**/spec/**/*.spec.ts' : ['webpack', 'sourcemap']
+      './test/test_index.js': ['webpack', 'sourcemap']
     },
     webpack: {
+      devtool: 'inline-source-map',
       module: webpackConfig.module,
       resolve: webpackConfig.resolve
     },
