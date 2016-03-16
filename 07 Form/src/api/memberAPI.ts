@@ -3,11 +3,11 @@ import MembersMockData from './memberMockData'
 import * as _ from 'lodash'
 // Sync mock data API, inspired from:
 // https://gist.github.com/coryhouse/fd6232f95f9d601158e4
-export default class MemberAPI {
+class MemberAPI {
   private _idSeed : number;
 
   public constructor() {
-    this._idSeed = 20;
+      this._idSeed = 20;
   }
 
   //This would be performed on the server in a real app. Just stubbing in.
@@ -45,3 +45,5 @@ export default class MemberAPI {
 	}
 
 }
+
+export default new MemberAPI();

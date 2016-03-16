@@ -26,8 +26,7 @@ export default class MembersPage extends React.Component<Props, State> {
    // Standard react lifecycle function:
    // https://facebook.github.io/react/docs/component-specs.html
    public componentWillMount() {
-     var memberAPI : MemberAPI = new MemberAPI();
-     this.state.members = memberAPI.getAllMembers();
+     this.state.members = MemberAPI.getAllMembers();
    }
 
    public render() {
@@ -50,8 +49,9 @@ export default class MembersPage extends React.Component<Props, State> {
                 </th>
               </tr>
             </thead>
-            <tbody> {
-              this.state.members.map((member : memberEntity) =>
+            <tbody>
+              {
+                this.state.members.map((member : memberEntity) =>
                   <MemberRow key={member.id} member = {member}/>
                 )
               }

@@ -24,9 +24,7 @@ export default class MembersPage extends React.Component<Props, State> {
 
    // Changing to componentDidMount to handle initial ajax request response
    public componentDidMount() {
-     var memberAPI : MemberAPI = new MemberAPI();
-     //this.state.members = memberAPI.getAllMembers();
-     var promise  : Q.Promise<MemberEntity[]> = memberAPI.getAllMembersAsync();
+     var promise  : Q.Promise<MemberEntity[]> = MemberAPI.getAllMembersAsync();
 
      promise.done(function (members) {
         // React only triggers a re-render if you use setState to update the state.
@@ -54,8 +52,9 @@ export default class MembersPage extends React.Component<Props, State> {
                 </th>
               </tr>
             </thead>
-            <tbody> {
-              this.state.members.map((member : MemberEntity) =>
+            <tbody>
+              {
+                this.state.members.map((member : MemberEntity) =>
                   <MemberRow key={member.id} member = {member}/>
                 )
               }

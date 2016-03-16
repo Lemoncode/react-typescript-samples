@@ -33,9 +33,8 @@ export default class MemberPage extends React.Component<Props, State> {
     var memberId = this.props.params.id;
 
     if(memberId) {
-      var memberAPI : MemberAPI = new MemberAPI();
       var memberIdNumber : number = parseInt(memberId);
-      var newState : State = objectAssign({}, this.state, {dirty: false, member: memberAPI.getMemberById(memberIdNumber)});
+      var newState : State = objectAssign({}, this.state, {dirty: false, member: MemberAPI.getMemberById(memberIdNumber)});
       return this.setState(newState);
 
     }
@@ -81,8 +80,7 @@ public saveMember(event) {
     return;
   }
 
-  var memberAPI : MemberAPI = new MemberAPI();
-  memberAPI.saveAuthor(this.state.member);
+  MemberAPI.saveAuthor(this.state.member);
 
   var newState : State = objectAssign({}, this.state, {dirty: true});
   this.setState(newState);

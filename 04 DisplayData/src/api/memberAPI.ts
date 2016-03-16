@@ -3,7 +3,7 @@ import MembersMockData from './memberMockData'
 import * as _ from 'lodash'
 // Sync mock data API, inspired from:
 // https://gist.github.com/coryhouse/fd6232f95f9d601158e4
-export default class MemberAPI {
+class MemberAPI {
   //This would be performed on the server in a real app. Just stubbing in.
   private _clone (item) {
   	return JSON.parse(JSON.stringify(item)); //return cloned copy so that the item is passed by value instead of by reference
@@ -14,3 +14,5 @@ export default class MemberAPI {
 		return this._clone(MembersMockData);
 	}
 }
+
+export default new MemberAPI();
