@@ -3,31 +3,35 @@ import MembersMockData from './memberMockData'
 import * as _ from 'lodash'
 // Sync mock data API, inspired from:
 // https://gist.github.com/coryhouse/fd6232f95f9d601158e4
-export default class MemberAPI {
-  private static _idSeed : number = 20;
+class MemberAPI {
+  private _idSeed : number;
+
+  public constructor() {
+      this._idSeed = 20;
+  }
 
   //This would be performed on the server in a real app. Just stubbing in.
-  private static _clone (item) {
+  private _clone (item) {
   	return JSON.parse(JSON.stringify(item)); //return cloned copy so that the item is passed by value instead of by reference
   };
 
   //This would be performed on the server in a real app. Just stubbing in.
-  static _generateId() : number {
+  _generateId() : number {
   	return this._idSeed++;
   };
 
 
   // Just return a copy of the mock data
-  static getAllMembers() : Array<MemberEntity> {
+  getAllMembers() : Array<MemberEntity> {
 		return this._clone(MembersMockData);
 	}
 
-  static getMemberById(id : number) : MemberEntity {
+  getMemberById(id : number) : MemberEntity {
 		var member = _.find(MembersMockData, {id: id});
 		return this._clone(member);
 	}
 
-  static saveAuthor(member: MemberEntity) {
+  saveAuthor(member: MemberEntity) {
 		//pretend an ajax call to web api is made here
 		console.log('Pretend this just saved the author to the DB via AJAX call...');
 
@@ -46,3 +50,5 @@ export default class MemberAPI {
 	}
 
 }
+
+export default new MemberAPI();
