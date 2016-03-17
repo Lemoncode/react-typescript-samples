@@ -5,10 +5,15 @@ import http from '../http/http';
 class HttpState {
     httpCallsInProgress : boolean;
     numberOfCalls : number;
+
+    constructor(){
+        this.httpCallsInProgress = false;
+        this.numberOfCalls = 0;
+    }
 }
 // Just to show how combine reducers work, we have
 // divided into two reducers member load + member load/update/delete
-let HttpReducer = (state : HttpState = {httpCallsInProgress : false, numberOfCalls: 0}, action) => {
+let HttpReducer = (state = new HttpState(), action) => {
   let newState : HttpState = null;
   let numberOfCalls : number = null;
   let callsInProgress : boolean = null;
@@ -22,7 +27,10 @@ let HttpReducer = (state : HttpState = {httpCallsInProgress : false, numberOfCal
       return newState;
 
     case 'HTTP_GET_CALL_COMPLETED':
-      numberOfCalls = state.numberOfCalls - 1;
+      numberOfCalls = state.numberOfCalls > 0 ?
+        state.numberOfCalls - 1 :
+        0;
+
       callsInProgress = (numberOfCalls > 0);
 
       newState = objectAssign({}, state, {httpCallsInProgress: callsInProgress, numberOfCalls: numberOfCalls});

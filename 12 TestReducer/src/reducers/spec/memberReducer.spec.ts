@@ -5,7 +5,7 @@ import MemberEntity from '../../api/memberEntity';
 import MemberFormErrors from "../../validations/memberFormErrors";
 
 describe('memberReducer', () => {
-    it('should return MemberState with default values when passing initialState equals undefined and action equals {}', () => {
+    it('should return new MemberState with default values when passing initialState equals undefined and action equals {}', () => {
         let initialState = undefined;
         let action = {};
 
