@@ -8,6 +8,9 @@ const saveMember = (member : MemberEntity) => {
   let errorsSave : MemberFormErrors = MemberFormValidator.validateMember(member);
 
   if(errorsSave.isEntityValid) {
+    // Since this is using fake api this method is synchronous
+    // if you are looking for a sample that handles and async request
+    // take look to the action file LoadMember.ts
     memberAPI.saveAuthor(member);
   }
 

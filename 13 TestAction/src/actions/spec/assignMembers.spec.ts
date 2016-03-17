@@ -1,9 +1,20 @@
 import { expect } from 'chai';
-import * as deepFreeze from 'deep-freeze';
 import assignMembers from '../assignMembers';
 import MemberEntity from '../../api/memberEntity';
 
 describe('assignMembers', () => {
+  it('should return members action type: MEMBERS_ASSIGN and members: []', () => {
+      // Arrange
+      const membersInput = new Array<MemberEntity>();
+      // Act
+      let result = assignMembers(membersInput);
+      // Assert
+
+      expect(result.type).to.be.equal('MEMBERS_ASSIGN');
+      expect(result.members.length).to.be.equal(0);
+  });
+
+
   it('should return members action type: MEMBERS_ASSIGN and members: member Array', () => {
       // Arrange
       const membersInput = new Array<MemberEntity>();
