@@ -17,13 +17,13 @@
 * If you write {contributorsReducer} you have to use state.contributorsReducer
 */
 import { combineReducers } from 'redux';
-import member from './memberReducer';
+import { MemberReducer } from './memberReducer';
 import members from './membersReducer';
 import http from './httpReducer';
 import repos from './reposReducer';
 
 export default combineReducers({
-  member
+  member: MemberReducer
   ,members
   ,http
   ,repos
