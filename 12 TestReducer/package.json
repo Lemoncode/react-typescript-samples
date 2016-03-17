@@ -1,0 +1,47 @@
+{
+  "name": "reactboiler",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "postinstall": "tsd reinstall --overwrite --save",
+    "start": "webpack-dev-server",
+    "test": "karma start"
+  },
+  "author": "Braulio Diez",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.5",
+    "jquery": "^2.1.4",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^0.2.2",
+    "lodash": "^4.5.1",
+    "mocha": "^2.4.5",
+    "object-assign": "^4.0.1",
+    "q": "^1.4.1",
+    "react": "~0.14.7",
+    "react-dom": "^0.14.7",
+    "react-redux": "^4.4.0",
+    "react-router": "^2.0.0",
+    "redux": "^3.3.1",
+    "redux-thunk": "^2.0.1",
+    "toastr": "^2.1.2",
+    "typescript": "^1.9.0-dev.20160308"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "css-loader": "^0.23.1",
+    "deep-freeze": "0.0.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.8.5",
+    "html-webpack-plugin": "^2.9.0",
+    "karma-chai": "^0.1.0",
+    "karma-mocha": "^0.2.2",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^1.7.0",
+    "style-loader": "^0.13.0",
+    "ts-loader": "^0.8.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.12.13",
+    "webpack-dev-server": "~1.10.1"
+  }
+}
