@@ -10,7 +10,7 @@ export default class About extends React.Component<Props, {}> {
        return (
           <div className="row about-page">
             <h1 className="jumbotron">11 Spinner Async</h1>
-            
+
             <div className="col-xs-12">
               <h1>
                 <small>
@@ -97,7 +97,7 @@ export default class About extends React.Component<Props, {}> {
                     </li>
                     <li>
                       <h4>
-                        http.ts: <small>Wrpas an $ajax.getjson request and takes care of notifying (dispatching an action)
+                        http.ts: <small>Wraps an $ajax.getjson request and takes care of notifying (dispatching an action)
                         whenever an ajax call has been fired or completed.</small>
                       </h4>
                     </li>
