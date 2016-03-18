@@ -1,6 +1,7 @@
 import MemberEntity from '../api/memberEntity';
 import MemberAPI from '../api/memberAPI';
 import assignMembers from './assignMembers'
+import * as Q from 'q'
 
 function loadMembers() {
 
@@ -9,9 +10,15 @@ function loadMembers() {
   // Thunk middleware knows how to turn thunk async actions into actions.
 
   return function (dispatcher) {
-    return MemberAPI.getAllMembersAsync().then(
+    var promise : Q.Promise<MemberEntity[]>;
+
+    promise = MemberAPI.getAllMembersAsync();
+
+    promise.then(
       data => dispatcher(assignMembers(data))
     );
+
+    return promise;
   };
 }
 

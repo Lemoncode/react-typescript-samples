@@ -5,21 +5,8 @@ import memberAPI from '../../api/memberAPI';
 import MemberErrors from '../../validations/MemberFormErrors'
 import MemberFormValidator from '../../validations/memberFormValidator';
 
-describe('saveMember', () => {
-  let sandbox = null;
 
-  // TODO: Daniel this is not working, check if it I have something missing
-  // right now moved to manually reseting spies
-  // More info: http://stackoverflow.com/questions/8825870/sinon-js-attempted-to-wrap-ajax-which-is-already-wrapped/8826063
-  /*
-  beforeEach(() => {
-      sandbox = sinon.sandbox.create();
-  });
-
-  afterEach(() => {
-      sandbox.restore()
-  });
-  */
+describe('saveMember', () => {  
 
   it('should return MEMBER_SAVE and errors.isEntityValid == true', () => {
       // Arrange

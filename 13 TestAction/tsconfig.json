@@ -19,6 +19,7 @@
         "./src/**/*.ts",
         "./test/**/*.ts",
         "./typings/tsd.d.ts",
+        "./typings-manual/tsd.d.ts",
         "!./node_modules/**/*"
     ],
     "exclude": [

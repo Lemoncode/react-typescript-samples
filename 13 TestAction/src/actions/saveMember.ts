@@ -10,7 +10,7 @@ const saveMember = (member : MemberEntity) => {
   if(errorsSave.isEntityValid) {
     // Since this is using fake api this method is synchronous
     // if you are looking for a sample that handles and async request
-    // take look to the action file LoadMember.ts
+    // take look to the action file LoadMembers.ts
     memberAPI.saveAuthor(member);
   }
 
