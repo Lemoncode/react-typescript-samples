@@ -8,7 +8,7 @@ import MemberAPI from '../../api/memberAPI';
 import objectAssign = require('object-assign');
 import loadMember from '../../actions/loadMember'
 import saveMember from '../../actions/saveMember'
-import MemberErrors from  '../../validations/MemberFormErrors'
+import MemberErrors from  '../../validations/memberFormErrors'
 import uiInputMember from '../../actions/uiInputMember'
 import resetSaveCompleted from '../../actions/resetSaveCompleted'
 import initializeNewMember from  '../../actions/initializeNewMember'

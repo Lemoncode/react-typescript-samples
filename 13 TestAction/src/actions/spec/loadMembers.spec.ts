@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-//import configureStore from 'redux-mock-store';
 import configureStore = require('redux-mock-store');
 import loadMembers from '../loadMembers';
 import MemberEntity from '../../api/memberEntity';
@@ -21,8 +20,8 @@ describe('loadMembers', () => {
 
     // Arrange
     sinon.stub(memberAPI, 'getAllMembersAsync').returns({
-      then: (cb) => {
-        cb(expectedMembers);        
+      then: callback => {
+        callback(expectedMembers);        
       }
     });
 

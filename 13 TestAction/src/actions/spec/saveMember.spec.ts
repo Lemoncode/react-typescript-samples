@@ -2,11 +2,11 @@ import { expect } from 'chai';
 import saveMember from '../saveMember';
 import MemberEntity from '../../api/memberEntity';
 import memberAPI from '../../api/memberAPI';
-import MemberErrors from '../../validations/MemberFormErrors'
+import MemberErrors from '../../validations/memberFormErrors'
 import MemberFormValidator from '../../validations/memberFormValidator';
 
 
-describe('saveMember', () => {  
+describe('saveMember', () => {
 
   it('should return MEMBER_SAVE and errors.isEntityValid == true', () => {
       // Arrange
