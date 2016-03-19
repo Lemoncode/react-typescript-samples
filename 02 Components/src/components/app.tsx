@@ -1,7 +1,6 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import Header from './common/header'
-import AboutPage from './about/aboutPage'
+import Header from './common/header';
+import AboutPage from './about/aboutPage';
 
 interface Props {
 }

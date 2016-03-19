@@ -1,4 +1,3 @@
-import RepoEntity from '../api/repoEntity';
 import RepoAPI from '../api/repoAPI';
 import assignRepos from './assignRepos';
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import memberEntity from '../../api/memberEntity';
 import MemberAPI from '../../api/memberAPI';
-import MemberRow from './memberRow'
+import MemberRow from './memberRow';
 
 interface Props extends React.Props<MembersPage> {
 }

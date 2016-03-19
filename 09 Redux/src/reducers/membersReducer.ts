@@ -1,5 +1,4 @@
 import MemberEntity from "../api/memberEntity";
-import MemberAPI from "../api/memberAPI";
 
 // Just to show how combine reducers work, we have
 // divided into two reducers member load + member load/update/delete

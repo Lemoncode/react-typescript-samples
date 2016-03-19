@@ -1,5 +1,5 @@
 import * as React from 'react';
-import MemberEntity from './../../api/memberEntity'
+import MemberEntity from './../../api/memberEntity';
 
 import Input from './../common/textInput'
 

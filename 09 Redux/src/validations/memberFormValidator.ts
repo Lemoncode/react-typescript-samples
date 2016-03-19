@@ -1,5 +1,5 @@
-import MemberEntity from '../api/MemberEntity'
-import MemberFormErrors from './memberFormErrors'
+import MemberEntity from '../api/MemberEntity';
+import MemberFormErrors from './memberFormErrors';
 
 class memberFormValidator {
     public validateMember(member : MemberEntity) : MemberFormErrors

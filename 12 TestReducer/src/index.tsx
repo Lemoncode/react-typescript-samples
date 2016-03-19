@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import App from './components/app.tsx'
+import App from './components/app.tsx';
 import aboutPage from './components/about/aboutPage';
 import membersPage from './components/members/membersPage';
 import memberPage from './components/member/memberPage';

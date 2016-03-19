@@ -1,6 +1,5 @@
-import MemberEntity from '../api/memberEntity';
 import MemberAPI from '../api/memberAPI';
-import assignMembers from './assignMembers'
+import assignMembers from './assignMembers';
 
 function loadMembers() {
 

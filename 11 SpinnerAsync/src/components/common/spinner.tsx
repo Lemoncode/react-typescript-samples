@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { connect } from 'react-redux'
-import httpInitializeDispatcher from '../../actions/httpInitializeDispatcher'
+import { connect } from 'react-redux';
+import httpInitializeDispatcher from '../../actions/httpInitializeDispatcher';
 
 interface Props {
   showSpinner? : boolean;
