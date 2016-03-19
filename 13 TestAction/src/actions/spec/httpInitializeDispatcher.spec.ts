@@ -3,7 +3,7 @@ import httpInitializeDispatcher from '../httpInitializeDispatcher';
 import http from '../../http/http';
 
 describe('httpInitializeDispatcher', () => {
-    it('should return repos action type: HTTP_INITIALIZE_DISPATCHER and calls to http.Initialize(dispatcher) method ' +
+    it('should return http action type: HTTP_INITIALIZE_DISPATCHER and calls to http.Initialize(dispatcher) method ' +
         'when passing dispatcher equals empty object', () => {
         // Arrange
         let dispatcher = {};
@@ -21,7 +21,7 @@ describe('httpInitializeDispatcher', () => {
         httpInitializeMethodStub.restore();
     });
 
-    it('should return repos action type: HTTP_INITIALIZE_DISPATCHER and calls to http.Initialize(dispatcher) method ' +
+    it('should return http action type: HTTP_INITIALIZE_DISPATCHER and calls to http.Initialize(dispatcher) method ' +
         'when passing dispatcher equals { testField: "test" }', () => {
         // Arrange
         let dispatcher = {
@@ -37,7 +37,7 @@ describe('httpInitializeDispatcher', () => {
         expect(httpInitializeMethodStub.called).to.be.true;
         expect(httpInitializeMethodStub.calledWith(dispatcher)).to.be.true;
 
-        //Restore original method 
+        //Restore original method
         httpInitializeMethodStub.restore();
     });
 })

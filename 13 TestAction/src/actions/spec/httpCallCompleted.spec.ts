@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import httpCallCompleted from '../httpCallCompleted';
 
 describe('httpCallCompleted', () => {
-    it('should return repos action type: HTTP_GET_CALL_COMPLETED when calling httpCallCompleted', () => {
+    it('should return http action type: HTTP_GET_CALL_COMPLETED when calling httpCallCompleted', () => {
         // Arrange
 
         // Act

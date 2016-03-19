@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import httpCallStarted from '../httpCallStarted';
 
 describe('httpCallStarted', () => {
-    it('should return repos action type: HTTP_GET_CALL_STARTED when calling httpCallStarted', () => {
+    it('should return http action type: HTTP_GET_CALL_STARTED when calling httpCallStarted', () => {
         // Arrange
 
         // Act
