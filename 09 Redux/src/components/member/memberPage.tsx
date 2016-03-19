@@ -1,17 +1,16 @@
 import * as React from 'react';
-import { connect } from 'react-redux'
-import { hashHistory } from 'react-router'
+import { connect } from 'react-redux';
+import { hashHistory } from 'react-router';
 import * as toastr from 'toastr';
-import MemberEntity from './../../api/memberEntity'
-import MemberForm from './memberForm';
-import MemberAPI from '../../api/memberAPI';
 import objectAssign = require('object-assign');
-import loadMember from '../../actions/loadMember'
-import saveMember from '../../actions/saveMember'
-import MemberErrors from  '../../validations/MemberFormErrors'
-import uiInputMember from '../../actions/uiInputMember'
-import resetSaveCompleted from '../../actions/resetSaveCompleted'
-import newMember from  '../../actions/newMember'
+import MemberEntity from './../../api/memberEntity';
+import MemberForm from './memberForm';
+import loadMember from '../../actions/loadMember';
+import saveMember from '../../actions/saveMember';
+import MemberErrors from  '../../validations/MemberFormErrors';
+import uiInputMember from '../../actions/uiInputMember';
+import resetSaveCompleted from '../../actions/resetSaveCompleted';
+import newMember from  '../../actions/newMember';
 
 interface Props extends React.Props<MemberPage> {
   params : any

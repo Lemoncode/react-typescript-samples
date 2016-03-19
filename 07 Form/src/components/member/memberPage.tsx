@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { hashHistory } from 'react-router'
+import { hashHistory } from 'react-router';
 import * as toastr from 'toastr';
-import MemberEntity from './../../api/memberEntity'
+import objectAssign = require('object-assign');
+import MemberEntity from './../../api/memberEntity';
 import MemberForm from './memberForm';
 import MemberAPI from '../../api/memberAPI';
-//import * as ObjectAssign from 'object-assign';
-import objectAssign = require('object-assign');
 
 interface Props {
 }

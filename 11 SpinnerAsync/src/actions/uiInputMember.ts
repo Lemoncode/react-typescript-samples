@@ -1,4 +1,3 @@
-import MemberEntity from "../api/MemberEntity"
 
 const uiInputMember = (fieldName : string, value: any) => {
    return {

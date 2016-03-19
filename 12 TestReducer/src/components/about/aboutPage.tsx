@@ -1,5 +1,4 @@
 import * as React from 'react';
-import header from '../common/header'
 import {Link} from 'react-router';
 
 interface Props {

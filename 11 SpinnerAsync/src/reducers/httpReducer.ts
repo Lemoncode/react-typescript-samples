@@ -1,5 +1,4 @@
 import objectAssign = require('object-assign');
-import http from '../http/http';
 
 // Later on add more flags, like error or something like that?
 class httpState {

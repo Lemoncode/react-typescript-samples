@@ -1,10 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import App from './components/app.tsx'
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import App from './components/app.tsx';
 import aboutPage from './components/about/aboutPage';
 import membersPage from './components/members/membersPage';
-
-import { Router, Route, IndexRoute, Link, IndexLink, browserHistory, hashHistory  } from 'react-router'
 
 ReactDOM.render(
   <Router history={hashHistory}>
