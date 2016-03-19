@@ -17,6 +17,7 @@ describe('httpInitializeDispatcher', () => {
         expect(httpInitializeMethodStub.called).to.be.true;
         expect(httpInitializeMethodStub.calledWith(dispatcher)).to.be.true;
 
+        //Restore original method
         httpInitializeMethodStub.restore();
     });
 
@@ -36,6 +37,7 @@ describe('httpInitializeDispatcher', () => {
         expect(httpInitializeMethodStub.called).to.be.true;
         expect(httpInitializeMethodStub.calledWith(dispatcher)).to.be.true;
 
+        //Restore original method 
         httpInitializeMethodStub.restore();
     });
 })
