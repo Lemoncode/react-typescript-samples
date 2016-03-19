@@ -39,7 +39,7 @@ var MemberPage = (function (_super) {
     MemberPage.prototype.updateMemberFromUI = function (event) {
         var field = event.target.name;
         var value = event.target.value;
-        this.props.fireValidationFieldValueChanged(field, value);
+        this.props.fireFieldValueChanged(field, value);
     };
     MemberPage.prototype.saveMember = function (event) {
         event.preventDefault();
@@ -62,7 +62,7 @@ var mapStateToProps = function (state) {
 var mapDispatchToProps = function (dispatch) {
     return {
         loadMember: function (id) { return dispatch(loadMember_1.default(id)); },
-        fireValidationFieldValueChanged: function (fieldName, value) { return dispatch(uiInputMember_1.default(fieldName, value)); },
+        fireFieldValueChanged: function (fieldName, value) { return dispatch(uiInputMember_1.default(fieldName, value)); },
         saveMember: function (member) { return dispatch(saveMember_1.default(member)); },
         resetSaveCompletedFlag: function () { return dispatch(resetSaveCompleted_1.default()); },
         initializeNewMember: function () {

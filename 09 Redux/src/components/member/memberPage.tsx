@@ -19,7 +19,7 @@ interface Props extends React.Props<MemberPage> {
   ,errors?: MemberErrors
   ,saveCompleted? : boolean
   ,loadMember? : (id : number) => void
-  ,fireValidationFieldValueChanged  : (fieldName : string, value : any) => void
+  ,fireFieldValueChanged  : (fieldName : string, value : any) => void
   ,saveMember: (member: MemberEntity) => void
   ,initializeNewMember: () => void
   ,resetSaveCompletedFlag: () => void
@@ -66,7 +66,7 @@ class MemberPage extends React.Component<Props, {}> {
     var field = event.target.name;
     var value = event.target.value;
 
-    this.props.fireValidationFieldValueChanged(field, value);
+    this.props.fireFieldValueChanged(field, value);
 	}
 
 public saveMember(event) {
@@ -104,7 +104,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     loadMember: (id : number) => {return dispatch(loadMember(id))}
-    ,fireValidationFieldValueChanged: (fieldName : string, value : any) => {return dispatch(uiInputMember(fieldName, value))}
+    ,fireFieldValueChanged: (fieldName : string, value : any) => {return dispatch(uiInputMember(fieldName, value))}
     ,saveMember: (member:MemberEntity) =>  {return dispatch(saveMember(member))}
     ,resetSaveCompletedFlag: () => {return dispatch(resetSaveCompleted())}
     ,initializeNewMember: () => {return dispatch(newMember())
