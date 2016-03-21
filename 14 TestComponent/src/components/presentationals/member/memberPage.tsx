@@ -1,17 +1,9 @@
 import * as React from 'react';
-import { connect } from 'react-redux'
-import { hashHistory } from 'react-router'
+import { hashHistory } from 'react-router';
 import * as toastr from 'toastr';
-import MemberEntity from './../../api/memberEntity'
+import MemberEntity from '../../../api/memberEntity';
+import MemberErrors from '../../../validations/memberFormErrors';
 import MemberForm from './memberForm';
-import MemberAPI from '../../api/memberAPI';
-import objectAssign = require('object-assign');
-import loadMember from '../../actions/loadMember'
-import saveMember from '../../actions/saveMember'
-import MemberErrors from  '../../validations/memberFormErrors'
-import uiInputMember from '../../actions/uiInputMember'
-import resetSaveCompleted from '../../actions/resetSaveCompleted'
-import initializeNewMember from  '../../actions/initializeNewMember'
 
 interface Props extends React.Props<MemberPage> {
   params : any
@@ -25,11 +17,10 @@ interface Props extends React.Props<MemberPage> {
   ,resetSaveCompletedFlag: () => void
 }
 
-class MemberPage extends React.Component<Props, {}> {
+export default class MemberPage extends React.Component<Props, {}> {
 
   constructor(props : Props){
         super(props);
-
   }
 
   componentWillMount() {
@@ -64,16 +55,16 @@ class MemberPage extends React.Component<Props, {}> {
   // on any update on the form this function will be called
   updateMemberFromUI(event) {
     var field = event.target.name;
-		var value = event.target.value;
+  	var value = event.target.value;
 
     this.props.fireValidationFieldValueChanged(field, value);
-	}
+  }
 
-public saveMember(event) {
-  event.preventDefault();
+  public saveMember(event) {
+    event.preventDefault();
 
-  this.props.saveMember(this.props.member);
-}
+    this.props.saveMember(this.props.member);
+  }
 
  public render() {
    if(!this.props.member)
@@ -89,33 +80,3 @@ public saveMember(event) {
        );
  }
 }
-
-// Container
-
-const mapStateToProps = (state) => {
-    return {
-      member: state.member.member
-      ,errors : state.member.errors
-      ,saveCompleted : state.member.saveCompleted
-    }
-}
-
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    loadMember: (id : number) => {return dispatch(loadMember(id))}
-    ,fireValidationFieldValueChanged: (fieldName : string, value : any) => {return dispatch(uiInputMember(fieldName, value))}
-    ,saveMember: (member: MemberEntity) =>  {return dispatch(saveMember(member))}
-    ,resetSaveCompletedFlag: () => {return dispatch(resetSaveCompleted())}
-    ,initializeNewMember: () => {return dispatch(initializeNewMember())
-    }
-  }
-}
-
-const ContainerMemberPage = connect(
-                                   mapStateToProps
-                                  ,mapDispatchToProps
-                                )(MemberPage)
-
-
-export default ContainerMemberPage;

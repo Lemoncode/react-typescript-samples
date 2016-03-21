@@ -1,5 +1,5 @@
 import * as React from 'react';
-import MemberEntity from '../../api/memberEntity';
+import MemberEntity from '../../../api/memberEntity';
 import MemberRow from './memberRow';
 import {Link} from 'react-router';
 
@@ -11,7 +11,7 @@ export default class MemberList extends React.Component<Props, {}>{
     constructor(props: Props){
         super(props);
     }
-    
+
     render() {
         return (
             <div>
@@ -35,7 +35,7 @@ export default class MemberList extends React.Component<Props, {}>{
                         {
                             this.props.members.map((member : MemberEntity) =>
                                 <MemberRow key={member.id} member = {member}/>
-                                )
+                            )
                         }
                     </tbody>
                 </table>

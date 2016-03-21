@@ -1,7 +1,7 @@
 import * as React from 'react';
-import MemberEntity from './../../api/memberEntity'
+import MemberEntity from '../../../api/memberEntity';
 
-import Input from './../common/textInput'
+import Input from '../common/textInput';
 
 interface Props extends React.Props<MemberForm> {
   member : MemberEntity
@@ -17,7 +17,6 @@ export default class MemberForm extends React.Component<Props, State> {
   constructor(props : Props){
       super(props);
   }
-
 
   public render() {
      return (

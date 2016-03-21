@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {Link} from 'react-router';
-import MemberEntity from '../../api/memberEntity';
-
+import MemberEntity from '../../../api/memberEntity';
 
 interface Props extends React.Props<MemberRow> {
   member : MemberEntity;

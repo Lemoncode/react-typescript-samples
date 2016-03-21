@@ -1,5 +1,5 @@
 import * as React from 'react';
-import RepoEntity from '../../api/repoEntity';
+import RepoEntity from '../../../api/repoEntity';
 import RepoRow from './repoRow';
 
 interface Props extends React.Props<RepoList>{
@@ -9,8 +9,8 @@ interface Props extends React.Props<RepoList>{
 export default class RepoList extends React.Component<Props, {}>{
     constructor(props: Props) {
         super(props);
-    }    
-    
+    }
+
     render(){
         return (
             <div>
