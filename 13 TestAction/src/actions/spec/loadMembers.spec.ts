@@ -35,7 +35,8 @@ describe('loadMembers', () => {
     // Act
     const store = mockStore([]);
 
-    store.dispatch(loadMembers()).then(() => {
+    store.dispatch(loadMembers())
+      .then(() => {
         expect(store.getActions()[0].type).to.be.equal((expectedAction.type));
         expect(store.getActions()[0].members.length).to.be.equal(2);
         done();
