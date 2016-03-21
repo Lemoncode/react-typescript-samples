@@ -9,7 +9,8 @@ const middlewares = [ ReduxThunk ];
 const mockStore = configureStore(middlewares);
 
 describe('loadMembers', () => {
-  it('should chain action MEMBERS_ASSIGN', (done) => {
+  it('should return a promise, and this promise dispatch assignMembers action that returns ' +
+    'an action equals { type: MEMBERS_ASSIGN, members: expectedMembers }', (done) => {
     let member1 = new MemberEntity();
     let member2 = new MemberEntity();
 
@@ -19,24 +20,28 @@ describe('loadMembers', () => {
     let expectedMembers : Array<MemberEntity> = [member1, member2];
 
     // Arrange
-    sinon.stub(memberAPI, 'getAllMembersAsync').returns({
+    let getAllMembersAsyncMethodStub = sinon.stub(memberAPI, 'getAllMembersAsync');
+    getAllMembersAsyncMethodStub.returns({
       then: callback => {
-        callback(expectedMembers);        
+        callback(expectedMembers);
       }
     });
 
-    const expectedActions = [
-          { type: 'MEMBERS_ASSIGN', members: expectedMembers }
-        ]
+    const expectedAction = {
+      type: 'MEMBERS_ASSIGN',
+      members: expectedMembers
+    }
 
     // Act
     const store = mockStore([]);
 
-
     store.dispatch(loadMembers()).then(() => {
-        expect(store.getActions()[0].type).to.be.equal((expectedActions[0].type));
+        expect(store.getActions()[0].type).to.be.equal((expectedAction.type));
         expect(store.getActions()[0].members.length).to.be.equal(2);
         done();
       });
+
+    //Restore original method
+    getAllMembersAsyncMethodStub.restore();
   });
 });
