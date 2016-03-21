@@ -55,6 +55,9 @@
     },
     "sinon/sinon.d.ts": {
       "commit": "926711691d213f76a483b36dd728e80be1257717"
+    },
+    "enzyme/enzyme.d.ts": {
+      "commit": "6766ed1d0faf02ede9e2edf2e66bbb2388c825ec"
     }
   }
 }
