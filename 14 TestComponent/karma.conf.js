@@ -14,14 +14,30 @@ module.exports = function (config) {
     },
     webpack: {
       devtool: 'inline-source-map',
-      module: webpackConfig.module,
-      resolve: webpackConfig.resolve
+      module: {
+          loaders: [
+              ...webpackConfig.module.loaders,
+              //Configuration required by enzyme
+              {
+                  test: /\.json$/,
+                  loader: 'json'
+              }
+          ]
+      },
+      resolve: {
+          //Added .json extension required by cheerio (enzyme dependency)
+          extensions: ['', '.js', '.ts', '.tsx', '.json']
+      },
+      //Configuration required by enzyme
+      externals: {
+        'react/lib/ExecutionEnvironment': true,
+        'react/lib/ReactContext': 'window',
+      }
     },
-
     webpackMiddleware: {
-                // webpack-dev-middleware configuration
-                // i. e.
-                noInfo: true
+        // webpack-dev-middleware configuration
+        // i. e.
+        noInfo: true
     },
 
     reporters: ['progress'],
