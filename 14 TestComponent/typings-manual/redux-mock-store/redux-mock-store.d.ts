@@ -3,8 +3,10 @@
 // Definitions by: Braulio Díez <https://github.com/brauliodiez/>>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
+/// <reference path="../../typings/redux/redux.d.ts"/>
+
 declare module "redux-mock-store" {
-    interface MockStore {
+    interface MockStore extends Redux.Store {
         getState(): any;
         getActions(): Array<any>;
         dispatch(action: any): any;
