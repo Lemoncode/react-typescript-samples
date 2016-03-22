@@ -1,4 +1,4 @@
-import MemberAPI from '../api/memberAPI';
+import memberAPI from '../api/memberAPI';
 import assignMembers from './assignMembers'
 
 function loadMembers() {
@@ -8,7 +8,7 @@ function loadMembers() {
   // Thunk middleware knows how to turn thunk async actions into actions.
 
   return function (dispatcher) {
-    return MemberAPI.getAllMembersAsync().then(
+    return memberAPI.getAllMembersAsync().then(
       data => dispatcher(assignMembers(data))
     );
   };

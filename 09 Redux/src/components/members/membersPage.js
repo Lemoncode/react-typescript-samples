@@ -38,4 +38,4 @@ var mapDispatchToProps = function (dispatch) {
 var ContainerMembersPage = react_redux_1.connect(mapStateToProps, mapDispatchToProps)(MembersPage);
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = ContainerMembersPage;
-//# sourceMappingURL=membersPage.js.map
+//# sourceMappingURL=Members.js.map

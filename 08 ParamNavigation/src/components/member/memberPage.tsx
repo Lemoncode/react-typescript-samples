@@ -4,7 +4,7 @@ import * as toastr from 'toastr';
 import objectAssign = require('object-assign');
 import MemberEntity from './../../api/memberEntity';
 import MemberForm from './memberForm';
-import MemberAPI from '../../api/memberAPI';
+import memberAPI from '../../api/memberAPI';
 
 interface Props extends React.Props<MemberPage> {
   params : any
@@ -34,7 +34,7 @@ export default class MemberPage extends React.Component<Props, State> {
 
     if(memberId) {
       var memberIdNumber : number = parseInt(memberId);
-      var newState : State = objectAssign({}, this.state, {dirty: false, member: MemberAPI.getMemberById(memberIdNumber)});
+      var newState : State = objectAssign({}, this.state, {dirty: false, member: memberAPI.getMemberById(memberIdNumber)});
       return this.setState(newState);
 
     }
@@ -80,7 +80,7 @@ public saveMember(event) {
     return;
   }
 
-  MemberAPI.saveAuthor(this.state.member);
+  memberAPI.saveAuthor(this.state.member);
 
   var newState : State = objectAssign({}, this.state, {dirty: true});
   this.setState(newState);

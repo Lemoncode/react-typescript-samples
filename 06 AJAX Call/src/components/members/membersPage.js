@@ -27,4 +27,4 @@ var MembersPage = (function (_super) {
 })(React.Component);
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = MembersPage;
-//# sourceMappingURL=membersPage.js.map
+//# sourceMappingURL=Members.js.map
