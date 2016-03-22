@@ -7,7 +7,7 @@ interface Props {
   initializeHttp? : () => void;
 }
 
-class spinner extends React.Component<Props, {}> {
+class Spinner extends React.Component<Props, {}> {
   constructor(props : Props){
     super(props);
     this.props.initializeHttp();
@@ -49,7 +49,7 @@ const mapDispatchToProps = (dispatch) => {
 const ContainerSpinnerComponent = connect(
                                    mapStateToProps
                                   ,mapDispatchToProps
-                                )(spinner)
+                                )(Spinner)
 
 
 export default ContainerSpinnerComponent;

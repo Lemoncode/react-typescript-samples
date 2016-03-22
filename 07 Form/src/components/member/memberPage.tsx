@@ -4,7 +4,7 @@ import * as toastr from 'toastr';
 import objectAssign = require('object-assign');
 import MemberEntity from './../../api/memberEntity';
 import MemberForm from './memberForm';
-import MemberAPI from '../../api/memberAPI';
+import memberAPI from '../../api/memberAPI';
 
 interface Props {
 }
@@ -72,7 +72,7 @@ public saveMember(event) {
     return;
   }
 
-  MemberAPI.saveAuthor(this.state.member);
+  memberAPI.saveAuthor(this.state.member);
 
   var newState : State = objectAssign({}, this.state, {dirty: true});
   this.setState(newState);

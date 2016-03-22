@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Link} from 'react-router';
 import memberEntity from '../../api/memberEntity';
-import MemberAPI from '../../api/memberAPI';
+import memberAPI from '../../api/memberAPI';
 import MemberRow from './memberRow';
 
 interface Props extends React.Props<MembersPage> {
@@ -26,7 +26,7 @@ export default class MembersPage extends React.Component<Props, State> {
    // Standard react lifecycle function:
    // https://facebook.github.io/react/docs/component-specs.html
    public componentWillMount() {
-     this.state.members = MemberAPI.getAllMembers();
+     this.state.members = memberAPI.getAllMembers();
    }
 
    public render() {
