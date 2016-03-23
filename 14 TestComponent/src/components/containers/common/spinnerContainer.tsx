@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import httpInitializeDispatcher from '../../../actions/httpInitializeDispatcher';
+import { httpInitializeDispatcher } from '../../../actions/httpInitializeDispatcher';
 import Spinner from '../../presentationals/common/spinner';
 
 let mapStateToProps = (state) => {

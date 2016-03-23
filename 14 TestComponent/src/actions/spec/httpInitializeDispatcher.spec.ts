@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import httpInitializeDispatcher from '../httpInitializeDispatcher';
+import { httpInitializeDispatcher } from '../httpInitializeDispatcher';
 import http from '../../http/http';
 
 describe('httpInitializeDispatcher', () => {

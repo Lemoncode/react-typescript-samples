@@ -1,11 +1,13 @@
 import http from '../http/http';
 
 const httpInitializeDispatcher = (dispatcher) => {
-  http.Initialize(dispatcher);
+    http.Initialize(dispatcher);
 
-  return {
-    type: 'HTTP_INITIALIZE_DISPATCHER'
-  }
+    return {
+        type: 'HTTP_INITIALIZE_DISPATCHER'
+    }
 }
 
-export default httpInitializeDispatcher;
+export {
+    httpInitializeDispatcher
+}
