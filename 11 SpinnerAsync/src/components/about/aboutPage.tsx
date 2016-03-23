@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-interface Props {
+interface Props extends React.Props<About> {
 }
 
 export default class About extends React.Component<Props, {}> {

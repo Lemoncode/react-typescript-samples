@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import httpInitializeDispatcher from '../../actions/httpInitializeDispatcher';
 
-interface Props {
+interface Props extends React.Props<Spinner> {
   showSpinner? : boolean;
   initializeHttp? : () => void;
 }
