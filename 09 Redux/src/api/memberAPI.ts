@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import MemberEntity from './memberEntity'
+import MemberEntity from './memberEntity';
 import MembersMockData from './memberMockData';
 
 // Sync mock data API, inspired from:

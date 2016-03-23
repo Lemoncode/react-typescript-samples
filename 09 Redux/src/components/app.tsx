@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import Header from './common/header'
+import Header from './common/header';
 import reducers from '../reducers';
 
 interface Props extends React.Props<App> {
