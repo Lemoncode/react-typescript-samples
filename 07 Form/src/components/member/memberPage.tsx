@@ -6,7 +6,7 @@ import MemberEntity from './../../api/memberEntity';
 import MemberForm from './memberForm';
 import memberAPI from '../../api/memberAPI';
 
-interface Props {
+interface Props extends React.Props<MemberPage> {
 }
 
 interface State {
@@ -16,7 +16,7 @@ interface State {
 }
 
 // Nice tsx guide: https://github.com/Microsoft/TypeScript/wiki/JSX
-export default class memberPage extends React.Component<Props, State> {
+export default class MemberPage extends React.Component<Props, State> {
 
   constructor(props : Props){
         super(props);

@@ -2,7 +2,7 @@ import * as React from 'react';
 import Header from './common/header';
 
 
-interface Props {
+interface Props extends React.Props<App> {
   children : any;
 }
 

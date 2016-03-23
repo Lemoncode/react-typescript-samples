@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-interface Props {
+interface Props extends React.Props<Input> {
   name : string;
   label : string;
   onChange : any;

@@ -2,7 +2,7 @@ import * as React from 'react';
 import Header from './common/header';
 import AboutPage from './about/aboutPage';
 
-interface Props {
+interface Props extends React.Props<App> {
 }
 
 // Nice tsx guide: https://github.com/Microsoft/TypeScript/wiki/JSX
