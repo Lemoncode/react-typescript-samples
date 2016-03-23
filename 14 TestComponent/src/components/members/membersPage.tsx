@@ -1,7 +1,7 @@
 import * as React from 'react';
-import MemberEntity from '../../../api/memberEntity';
+import MemberEntity from '../../api/memberEntity';
 import MemberList from './memberList';
-import RepoEntity from '../../../api/repoEntity';
+import RepoEntity from '../../api/repoEntity';
 import RepoList from '../repos/repoList';
 
 interface Props extends React.Props<MembersPage>{

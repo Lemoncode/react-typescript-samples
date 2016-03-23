@@ -1,5 +1,5 @@
 import * as React from 'react';
-import RepoEntity from '../../../api/repoEntity';
+import RepoEntity from '../../api/repoEntity';
 
 interface Props extends React.Props<RepoRow>{
   repo : RepoEntity;

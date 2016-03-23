@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { hashHistory } from 'react-router';
 import * as toastr from 'toastr';
-import MemberEntity from '../../../api/memberEntity';
-import MemberErrors from '../../../validations/memberFormErrors';
+import MemberEntity from '../../api/memberEntity';
+import MemberErrors from '../../validations/memberFormErrors';
 import MemberForm from './memberForm';
 
 interface Props extends React.Props<MemberPage> {

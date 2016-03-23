@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import Header from './presentationals/common/header';
+import Header from './common/header';
 import reducers  from '../reducers';
 import ReduxThunk from 'redux-thunk';
-import SpinnerContainer from './containers/common/spinnerContainer';
+import SpinnerContainer from './common/spinner.container';
 
 interface Props extends React.Props<App> {
 }

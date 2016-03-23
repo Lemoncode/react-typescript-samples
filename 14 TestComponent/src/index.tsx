@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import App from './components/app.tsx'
-import AboutPage from './components/presentationals/about/aboutPage';
-import MembersPageContainer from './components/containers/members/membersPageContainer';
-import MemberPageContainer from './components/containers/member/memberPageContainer';
+import AboutPage from './components/about/aboutPage';
+import MembersPageContainer from './components/members/membersPage.container';
+import MemberPageContainer from './components/member/memberPage.container';
 
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory, hashHistory  } from 'react-router'
 

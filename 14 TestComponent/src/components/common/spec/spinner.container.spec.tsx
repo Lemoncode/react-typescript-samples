@@ -1,10 +1,10 @@
 import { expect } from 'chai';
 import * as React from 'react';
 import { shallow, mount } from 'enzyme';
-import SpinnerContainer from '../spinnerContainer';
+import SpinnerContainer from '../spinner.container';
 import { Provider } from 'react-redux';
 import configureStore = require('redux-mock-store');
-import * as HttpActions from '../../../../actions/httpInitializeDispatcher';
+import * as HttpActions from '../../../actions/httpInitializeDispatcher';
 
 const createStore = configureStore();
 describe('Spinner container component', () =>{
