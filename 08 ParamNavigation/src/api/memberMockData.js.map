@@ -1,1 +1,0 @@
-{"version":3,"file":"memberMockData.js","sourceRoot":"","sources":["memberMockData.ts"],"names":[],"mappings":"AAEA,IAAI,eAAe,GAClB;IACC;QACI,EAAE,EAAE,OAAO;QACX,KAAK,EAAE,aAAa;QACpB,UAAU,EAAE,qDAAqD;KACpE;IACC;QACE,EAAE,EAAE,OAAO;QACX,KAAK,EAAE,QAAQ;QACf,UAAU,EAAE,qDAAqD;KAClE;CACH,CAAC;AAED;kBAAe,eAAe,CAAC"}
