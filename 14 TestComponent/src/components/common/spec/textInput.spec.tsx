@@ -238,11 +238,7 @@ describe('Input presentational component', () =>{
         );
 
         let inputElementWrapper = textInputWrapper.children().at(1).children().at(0);
-        inputElementWrapper.simulate('change', {
-            target: {
-                value: 'test'
-            }
-        });
+        inputElementWrapper.simulate('change');
 
         expect(inputElementWrapper.type()).to.be.equals('input');
         expect(inputElementWrapper.prop('onChange')).to.be.a('function');

@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import AboutPage from '../aboutPage';
 
 describe('AboutPage presentational component', () =>{
-    it('should renders a div element with class equals row and this div has 2 childrens', () => {
+    it('should renders a div element with class equals row and this div has 2 children', () => {
         let aboutPageWrapper = shallow(<AboutPage />);
 
         expect(aboutPageWrapper.find('div')).to.have.length(1);
