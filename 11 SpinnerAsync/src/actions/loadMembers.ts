@@ -1,5 +1,5 @@
 import memberAPI from '../api/memberAPI';
-import assignMembers from './assignMembers'
+import assignMembers from './assignMembers';
 
 function loadMembers() {
 

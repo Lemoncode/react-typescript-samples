@@ -2,8 +2,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router';
 import MemberEntity from '../../api/memberEntity';
-import MemberRow from './memberRow'
-import loadMembers from '../../actions/loadMembers'
+import MemberRow from './memberRow';
+import loadMembers from '../../actions/loadMembers';
 
 // Presentational
 
