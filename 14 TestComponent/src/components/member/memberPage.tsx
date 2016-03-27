@@ -18,65 +18,68 @@ interface Props extends React.Props<MemberPage> {
 }
 
 export default class MemberPage extends React.Component<Props, {}> {
-
-  constructor(props : Props){
+    constructor(props : Props){
         super(props);
-  }
-
-  componentWillMount() {
-    // Coming from navigation
-    var memberId = this.props.params.id;
-
-    if(memberId) {
-      var memberIdNumber : number = parseInt(memberId);
-      this.props.loadMember(memberIdNumber);
-    } else {
-      this.props.initializeNewMember();
     }
-  }
 
- // https://github.com/reactjs/redux/issues/580
- componentWillReceiveProps(nextProps) {
-   if(this.props.saveCompleted != nextProps.saveCompleted
-      && nextProps.saveCompleted) {
+    componentWillMount() {
+        let memberId = this.getMemberId();
 
-      // Show toast
-     toastr.success('Author saved.');
+        if(memberId) {
+          this.props.loadMember(memberId);
+        } else {
+          this.props.initializeNewMember();
+        }
+    }
 
-     // using hashHistory, TODO: proper configure browserHistory on app and here
-     hashHistory.push('/members')
+    // https://github.com/reactjs/redux/issues/580
+    componentWillReceiveProps(nextProps) {
+        if(this.props.saveCompleted != nextProps.saveCompleted
+          && nextProps.saveCompleted) {
 
-     // Reset saveCompleted flag
-     this.props.resetSaveCompletedFlag();
+          // Show toast
+         toastr.success('Author saved.');
 
-   }
- }
+         // using hashHistory, TODO: proper configure browserHistory on app and here
+         hashHistory.push('/members')
 
-  // on any update on the form this function will be called
-  updateMemberFromUI(event) {
-    var field = event.target.name;
-  	var value = event.target.value;
+         // Reset saveCompleted flag
+         this.props.resetSaveCompletedFlag();
+        }
+    }
 
-    this.props.fireValidationFieldValueChanged(field, value);
-  }
+    private getMemberId() : number {
+        // Coming from navigation
+        return this.props.params && this.props.params.id ?
+            parseInt(this.props.params.id) :
+            null;
+    }
 
-  public saveMember(event) {
-    event.preventDefault();
+    // on any update on the form this function will be called
+    private updateMemberFromUI(event) {
+        var field = event.target.name;
+    	var value = event.target.value;
 
-    this.props.saveMember(this.props.member);
-  }
+        this.props.fireValidationFieldValueChanged(field, value);
+    }
 
- public render() {
-   if(!this.props.member)
-      return (<div>No data</div>)
+    private saveMember(event) {
+        event.preventDefault();
 
-       return (
-         <MemberForm
-            member={this.props.member}
-            errors={this.props.errors}
-            onChange={this.updateMemberFromUI.bind(this)}
-            onSave={this.saveMember.bind(this)}
+        this.props.saveMember(this.props.member);
+    }
+
+    public render() {
+        if(!this.props.member)
+            return (<div>No data</div>)
+
+        return (
+            <MemberForm
+                member={this.props.member}
+                errors={this.props.errors}
+                onChange={this.updateMemberFromUI.bind(this)}
+                onSave={this.saveMember.bind(this)}
             />
        );
- }
+     }
 }
