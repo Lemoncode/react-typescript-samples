@@ -3,7 +3,6 @@ import Header from './common/header';
 
 
 interface Props extends React.Props<App> {
-  children : any;
 }
 
 // Nice tsx guide: https://github.com/Microsoft/TypeScript/wiki/JSX
