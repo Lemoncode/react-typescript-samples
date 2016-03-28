@@ -15,7 +15,7 @@ export default class MemberList extends React.Component<Props, {}>{
     render() {
         return (
             <div>
-                <h2> Members Page</h2>
+                <h2>Members Page</h2>
                 <Link to="/member">New Member</Link>
                 <table className="table">
                     <thead>
