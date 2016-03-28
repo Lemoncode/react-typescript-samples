@@ -4,7 +4,7 @@ import { shallow, mount } from 'enzyme';
 import SpinnerContainer from '../spinner.container';
 import { Provider } from 'react-redux';
 import configureStore = require('redux-mock-store');
-import * as HttpActions from '../../../actions/httpInitializeDispatcher';
+import * as httpActions from '../../../actions/httpInitializeDispatcher';
 
 const createStore = configureStore();
 describe('Spinner container component', () =>{
@@ -18,7 +18,7 @@ describe('Spinner container component', () =>{
             }
         });
 
-        let httpInitializeDispatcherActionStub = sinon.stub(HttpActions, 'httpInitializeDispatcher');
+        let httpInitializeDispatcherActionStub = sinon.stub(httpActions, 'httpInitializeDispatcher');
 
         let spinnerWrapper = mount(
             <Provider store={mockStore}>
@@ -41,7 +41,7 @@ describe('Spinner container component', () =>{
             }
         });
 
-        let httpInitializeDispatcherActionStub = sinon.stub(HttpActions, 'httpInitializeDispatcher');
+        let httpInitializeDispatcherActionStub = sinon.stub(httpActions, 'httpInitializeDispatcher');
 
         let spinnerWrapper = mount(
             <Provider store={mockStore}>
@@ -64,7 +64,7 @@ describe('Spinner container component', () =>{
             }
         });
 
-        let httpInitializeDispatcherActionStub = sinon.stub(HttpActions, 'httpInitializeDispatcher');
+        let httpInitializeDispatcherActionStub = sinon.stub(httpActions, 'httpInitializeDispatcher');
 
         let spinnerWrapper = mount(
             <Provider store={mockStore}>
