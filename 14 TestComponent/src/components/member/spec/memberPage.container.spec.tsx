@@ -10,6 +10,7 @@ import * as initializeMemberActions from '../../../actions/initializeNewMember';
 import * as loadMemberActions from '../../../actions/loadMember';
 import * as uiInputMemberActions from '../../../actions/uiInputMember';
 import * as saveMemberActions from '../../../actions/saveMember';
+import * as resetSaveCompletedActions from '../../../actions/resetSaveCompleted';
 
 const createStore = configureStore();
 
@@ -278,5 +279,33 @@ describe('MemberPage container component', () => {
         expect(memberPagePresentationalWrapper.prop('saveMember')).not.to.be.undefined;
         expect(saveMemberActionsMock.called).to.be.true;
         expect(saveMemberActionsMock.calledWith(member)).to.be.true;
+    });
+
+    it('should renders MemberPage presentational component and calls to resetSaveCompleted(member)' +
+        'passing state equals { member: { } } and calling to resetSaveCompletedFlag', () => {
+        let mockStore = createStore({
+            member: {
+
+            }
+        });
+
+        let resetSaveCompletedActionsMock = sinon.stub(resetSaveCompletedActions, 'resetSaveCompleted');
+
+        let memberPageContainerWrapper = mount(
+            <Provider store={mockStore}>
+                <MemberPageContainer />
+            </Provider>
+        );
+
+        let memberPagePresentationalWrapper = memberPageContainerWrapper.find('MemberPage');
+        let resetSaveCompletedFlag = memberPagePresentationalWrapper.prop('resetSaveCompletedFlag');
+        resetSaveCompletedFlag();
+
+        resetSaveCompletedActionsMock.restore();
+
+        expect(memberPagePresentationalWrapper).not.to.be.undefined;
+        expect(memberPagePresentationalWrapper.prop('resetSaveCompletedFlag')).not.to.be.undefined;
+        expect(resetSaveCompletedActionsMock.called).to.be.true;
+        expect(resetSaveCompletedActionsMock.calledWith()).to.be.true;
     });
 });

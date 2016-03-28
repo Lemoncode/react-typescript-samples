@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import resetSaveCompleted from '../resetSaveCompleted';
+import { resetSaveCompleted } from '../resetSaveCompleted';
 
 describe('resetSaveCompleted', () => {
     it('should return an action equals { type: MEMBER_RESET_SAVE_COMPLETED } when calling resetSaveCompleted', () => {

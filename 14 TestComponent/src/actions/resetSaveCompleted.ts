@@ -5,4 +5,6 @@ const resetSaveCompleted = () => {
    }
 }
 
-export default resetSaveCompleted;
+export {
+    resetSaveCompleted
+};
