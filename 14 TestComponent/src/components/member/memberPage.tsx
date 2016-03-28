@@ -6,15 +6,15 @@ import MemberErrors from '../../validations/memberFormErrors';
 import MemberForm from './memberForm';
 
 interface Props extends React.Props<MemberPage> {
-  params : any
+  params? : any
   member? : MemberEntity
   ,errors?: MemberErrors
   ,saveCompleted? : boolean
   ,loadMember? : (id : number) => void
-  ,fireValidationFieldValueChanged  : (fieldName : string, value : any) => void
-  ,saveMember: (member: MemberEntity) => void
-  ,initializeNewMember: () => void
-  ,resetSaveCompletedFlag: () => void
+  ,fireValidationFieldValueChanged?  : (fieldName : string, value : any) => void
+  ,saveMember?: (member: MemberEntity) => void
+  ,initializeNewMember?: () => void
+  ,resetSaveCompletedFlag?: () => void
 }
 
 export default class MemberPage extends React.Component<Props, {}> {

@@ -14,11 +14,7 @@ describe('MemberPage presentational component', () => {
         let initializeNewMemberMock = sinon.spy();
 
         let properties = {
-            params: undefined,
-            fireValidationFieldValueChanged: undefined,
-            saveMember: undefined,
-            initializeNewMember: initializeNewMemberMock,
-            resetSaveCompletedFlag: undefined
+            initializeNewMember: initializeNewMemberMock
         };
 
         let memberPageWrapper = shallow(
@@ -36,11 +32,7 @@ describe('MemberPage presentational component', () => {
         let componentWillMountMock = sinon.stub(MemberPage.prototype, 'componentWillMount');
 
         let properties = {
-            params: undefined,
-            fireValidationFieldValueChanged: undefined,
-            saveMember: undefined,
-            initializeNewMember: initializeNewMemberMock,
-            resetSaveCompletedFlag: undefined
+            initializeNewMember: initializeNewMemberMock
         };
 
         let memberPageWrapper = shallow(
@@ -59,10 +51,7 @@ describe('MemberPage presentational component', () => {
         let properties = {
             params: 1,
             initializeNewMember: initializeNewMemberMock,
-            loadMember: loadMemberMock,
-            fireValidationFieldValueChanged: undefined,
-            saveMember: undefined,
-            resetSaveCompletedFlag: undefined,
+            loadMember: loadMemberMock
         };
 
         let memberPageWrapper = shallow(
@@ -84,10 +73,7 @@ describe('MemberPage presentational component', () => {
         let properties = {
             params: "test",
             initializeNewMember: initializeNewMemberMock,
-            loadMember: loadMemberMock,
-            fireValidationFieldValueChanged: undefined,
-            saveMember: undefined,
-            resetSaveCompletedFlag: undefined,
+            loadMember: loadMemberMock
         };
 
         let memberPageWrapper = shallow(
@@ -111,10 +97,7 @@ describe('MemberPage presentational component', () => {
                 id: "test"
             },
             initializeNewMember: initializeNewMemberMock,
-            loadMember: loadMemberMock,
-            fireValidationFieldValueChanged: undefined,
-            saveMember: undefined,
-            resetSaveCompletedFlag: undefined,
+            loadMember: loadMemberMock
         };
 
         let memberPageWrapper = shallow(
@@ -138,10 +121,7 @@ describe('MemberPage presentational component', () => {
                 id: 1
             },
             initializeNewMember: initializeNewMemberMock,
-            loadMember: loadMemberMock,
-            fireValidationFieldValueChanged: undefined,
-            saveMember: undefined,
-            resetSaveCompletedFlag: undefined,
+            loadMember: loadMemberMock
         };
 
         let memberPageWrapper = shallow(
@@ -164,10 +144,7 @@ describe('MemberPage presentational component', () => {
         let properties = {
             initializeNewMember: initializeNewMemberMock,
             member: member,
-            params: undefined,
-            fireValidationFieldValueChanged: undefined,
-            saveMember: undefined,
-            resetSaveCompletedFlag: undefined
+            params: undefined
         };
 
         let memberPageWrapper = shallow(
@@ -189,11 +166,7 @@ describe('MemberPage presentational component', () => {
         let properties = {
             initializeNewMember: initializeNewMemberMock,
             member: member,
-            errors: undefined,
-            params: undefined,
-            fireValidationFieldValueChanged: undefined,
-            saveMember: undefined,
-            resetSaveCompletedFlag: undefined
+            errors: undefined
         };
 
         let memberPageWrapper = shallow(
@@ -216,11 +189,7 @@ describe('MemberPage presentational component', () => {
         let properties = {
             initializeNewMember: initializeNewMemberMock,
             member: member,
-            errors: errors,
-            params: undefined,
-            fireValidationFieldValueChanged: undefined,
-            saveMember: undefined,
-            resetSaveCompletedFlag: undefined
+            errors: errors
         };
 
         let memberPageWrapper = shallow(
@@ -245,10 +214,7 @@ describe('MemberPage presentational component', () => {
         let properties = {
             initializeNewMember: initializeNewMemberMock,
             member: member,
-            params: undefined,
-            fireValidationFieldValueChanged: fireValidationMock,
-            saveMember: undefined,
-            resetSaveCompletedFlag: undefined
+            fireValidationFieldValueChanged: fireValidationMock
         };
 
         let memberPageWrapper = shallow(
@@ -279,10 +245,7 @@ describe('MemberPage presentational component', () => {
         let properties = {
             initializeNewMember: initializeNewMemberMock,
             member: member,
-            params: undefined,
-            fireValidationFieldValueChanged: undefined,
-            saveMember: saveMemberMock,
-            resetSaveCompletedFlag: undefined
+            saveMember: saveMemberMock
         };
 
         let memberPageWrapper = shallow(
@@ -304,11 +267,7 @@ describe('MemberPage presentational component', () => {
         let componentWillReceivePropsMock = sinon.stub(MemberPage.prototype, 'componentWillReceiveProps');
 
         let properties = {
-            params: undefined,
-            fireValidationFieldValueChanged: undefined,
-            saveMember: undefined,
-            initializeNewMember: initializeNewMemberMock,
-            resetSaveCompletedFlag: undefined
+            initializeNewMember: initializeNewMemberMock
         };
 
         let memberPageWrapper = shallow(
@@ -326,11 +285,7 @@ describe('MemberPage presentational component', () => {
 
         let properties = {
             saveCompleted: false,
-            resetSaveCompletedFlag: undefined,
-            initializeNewMember: initializeNewMemberMock,
-            params: undefined,
-            fireValidationFieldValueChanged: undefined,
-            saveMember: undefined
+            initializeNewMember: initializeNewMemberMock
         };
 
         let memberPageWrapper = shallow(
@@ -350,11 +305,7 @@ describe('MemberPage presentational component', () => {
 
         let properties = {
             saveCompleted: false,
-            resetSaveCompletedFlag: undefined,
-            initializeNewMember: initializeNewMemberMock,
-            params: undefined,
-            fireValidationFieldValueChanged: undefined,
-            saveMember: undefined
+            initializeNewMember: initializeNewMemberMock
         };
 
         let memberPageWrapper = shallow(
@@ -379,11 +330,7 @@ describe('MemberPage presentational component', () => {
 
         let properties = {
             saveCompleted: true,
-            resetSaveCompletedFlag: undefined,
-            initializeNewMember: initializeNewMemberMock,
-            params: undefined,
-            fireValidationFieldValueChanged: undefined,
-            saveMember: undefined
+            initializeNewMember: initializeNewMemberMock
         };
 
         let memberPageWrapper = shallow(
@@ -406,11 +353,7 @@ describe('MemberPage presentational component', () => {
 
         let properties = {
             saveCompleted: true,
-            resetSaveCompletedFlag: undefined,
-            initializeNewMember: initializeNewMemberMock,
-            params: undefined,
-            fireValidationFieldValueChanged: undefined,
-            saveMember: undefined
+            initializeNewMember: initializeNewMemberMock
         };
 
         let memberPageWrapper = shallow(
@@ -435,10 +378,7 @@ describe('MemberPage presentational component', () => {
         let properties = {
             saveCompleted: false,
             resetSaveCompletedFlag: resetSaveCompletedFlagMock,
-            initializeNewMember: initializeNewMemberMock,
-            params: undefined,
-            fireValidationFieldValueChanged: undefined,
-            saveMember: undefined
+            initializeNewMember: initializeNewMemberMock
         };
 
         let memberPageWrapper = shallow(
@@ -464,10 +404,7 @@ describe('MemberPage presentational component', () => {
         let properties = {
             saveCompleted: false,
             resetSaveCompletedFlag: resetSaveCompletedFlagMock,
-            initializeNewMember: initializeNewMemberMock,
-            params: undefined,
-            fireValidationFieldValueChanged: undefined,
-            saveMember: undefined
+            initializeNewMember: initializeNewMemberMock
         };
 
         let memberPageWrapper = shallow(
@@ -492,10 +429,7 @@ describe('MemberPage presentational component', () => {
         let properties = {
             saveCompleted: false,
             resetSaveCompletedFlag: resetSaveCompletedFlagMock,
-            initializeNewMember: initializeNewMemberMock,
-            params: undefined,
-            fireValidationFieldValueChanged: undefined,
-            saveMember: undefined
+            initializeNewMember: initializeNewMemberMock
         };
 
         let memberPageWrapper = shallow(

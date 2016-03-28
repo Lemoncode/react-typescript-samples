@@ -16,12 +16,16 @@ module.exports = function (config) {
       devtool: 'inline-source-map',
       module: {
           loaders: [
-              ...webpackConfig.module.loaders,
-              //Configuration required by enzyme
               {
-                  test: /\.json$/,
-                  loader: 'json'
-              }
+                  test: /\.(ts|tsx)$/,
+                  exclude: /node_modules/,
+                  loader: 'ts-loader'
+            },
+            //Configuration required by enzyme
+            {
+                test: /\.json$/,
+                loader: 'json'
+            }
           ]
       },
       resolve: {

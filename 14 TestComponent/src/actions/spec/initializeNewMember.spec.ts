@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import initializeNewMember from '../initializeNewMember';
+import { initializeNewMember } from '../initializeNewMember';
 
 describe('initializeNewMember', () => {
     it('should return http action type: MEMBER_INITIALIZE_NEW when calling initializeNewMember', () => {

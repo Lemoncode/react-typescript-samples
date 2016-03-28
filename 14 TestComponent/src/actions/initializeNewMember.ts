@@ -4,4 +4,6 @@ const initializeNewMember = () => {
    }
 }
 
-export default initializeNewMember;
+export {
+    initializeNewMember
+};
