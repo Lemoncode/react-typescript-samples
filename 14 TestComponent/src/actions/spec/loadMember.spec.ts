@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import loadMember from '../loadMember';
+import { loadMember } from '../loadMember';
 import memberAPI from '../../api/memberAPI';
 import MemberEntity from '../../api/memberEntity';
 

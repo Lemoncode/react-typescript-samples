@@ -7,4 +7,6 @@ const loadMember = (id : number) => {
    }
 }
 
-export default loadMember;
+export {
+    loadMember
+};

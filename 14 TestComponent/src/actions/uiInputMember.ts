@@ -6,4 +6,6 @@ const uiInputMember = (fieldName : string, value: any) => {
    }
 }
 
-export default uiInputMember;
+export {
+    uiInputMember
+};

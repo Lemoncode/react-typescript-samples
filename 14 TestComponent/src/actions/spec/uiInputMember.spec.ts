@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import uiInputMember from '../uiInputMember';
+import { uiInputMember } from '../uiInputMember';
 
 describe('uiInputMember', () => {
   it('should returns an action equals { type: "MEMBER_UI_INPUT", fieldName: undefined, value: undefined } ' +

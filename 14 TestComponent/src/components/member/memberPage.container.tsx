@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import loadMember from '../../actions/loadMember';
-import uiInputMember from '../../actions/uiInputMember';
+import { loadMember } from '../../actions/loadMember';
+import { uiInputMember } from '../../actions/uiInputMember';
 import MemberEntity from '../../api/memberEntity';
 import saveMember from '../../actions/saveMember';
 import resetSaveCompleted from '../../actions/resetSaveCompleted';
