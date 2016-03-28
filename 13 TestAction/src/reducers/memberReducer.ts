@@ -4,9 +4,6 @@ import objectAssign = require('object-assign');
 import MemberFormErrors from "../validations/memberFormErrors"
 import MemberFormValidator from "../validations/memberFormValidator"
 
-
-let emptyMemberEntity = new MemberEntity();
-
 class MemberState  {
   member : MemberEntity;
   memberId : number;
@@ -24,10 +21,9 @@ class MemberState  {
   }
 }
 
-
 // Just to show how combine reducers work, we have
 // divided into two reducers member load + member load/update/delete
-export default (state : MemberState = new MemberState(), action) => {
+let memberReducer = (state : MemberState = new MemberState(), action) => {
   let newState : MemberState = null;
 
   switch (action.type) {
@@ -66,5 +62,9 @@ export default (state : MemberState = new MemberState(), action) => {
     default:
       return state;
   }
-
 };
+
+export {
+    MemberState,
+    memberReducer
+}

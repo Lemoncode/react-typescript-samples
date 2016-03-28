@@ -1,13 +1,13 @@
 import { expect } from 'chai';
 import * as deepFreeze from 'deep-freeze';
-import { HttpReducer, HttpState } from '../httpReducer';
+import { httpReducer, HttpState } from '../httpReducer';
 
 describe('httpReducer', () => {
     it('should return new HttpState with default values when passing initialState equals undefined and action equals {}', () => {
         let initialState = undefined;
         let action = {};
 
-        let finalState = HttpReducer(initialState, action);
+        let finalState = httpReducer(initialState, action);
 
         expect(finalState).not.to.be.undefined;
         expect(finalState.httpCallsInProgress).to.be.false;
@@ -18,7 +18,7 @@ describe('httpReducer', () => {
         let initialState = new HttpState();
         let action = {};
 
-        let finalState = HttpReducer(initialState, action);
+        let finalState = httpReducer(initialState, action);
 
         expect(finalState).not.to.be.undefined;
         expect(finalState.httpCallsInProgress).to.be.false;
@@ -32,7 +32,7 @@ describe('httpReducer', () => {
         let action = {};
 
         deepFreeze(initialState);
-        let finalState = HttpReducer(initialState, action);
+        let finalState = httpReducer(initialState, action);
 
         expect(finalState.httpCallsInProgress).to.be.false;
     });
@@ -44,7 +44,7 @@ describe('httpReducer', () => {
         let action = {};
 
         deepFreeze(initialState);
-        let finalState = HttpReducer(initialState, action);
+        let finalState = httpReducer(initialState, action);
 
         expect(finalState.numberOfCalls).to.be.equal(2);
     });
@@ -57,7 +57,7 @@ describe('httpReducer', () => {
         };
 
         deepFreeze(initialState);
-        let finalState = HttpReducer(initialState, action);
+        let finalState = httpReducer(initialState, action);
 
         expect(finalState.numberOfCalls).to.be.equal(1);
         expect(finalState.httpCallsInProgress).to.be.true;
@@ -73,7 +73,7 @@ describe('httpReducer', () => {
         };
 
         deepFreeze(initialState);
-        let finalState = HttpReducer(initialState, action);
+        let finalState = httpReducer(initialState, action);
 
         expect(finalState.numberOfCalls).to.be.equal(3);
         expect(finalState.httpCallsInProgress).to.be.true;
@@ -87,7 +87,7 @@ describe('httpReducer', () => {
         };
 
         deepFreeze(initialState);
-        let finalState = HttpReducer(initialState, action);
+        let finalState = httpReducer(initialState, action);
 
         expect(finalState.numberOfCalls).to.be.equal(0);
         expect(finalState.httpCallsInProgress).to.be.false;
@@ -104,7 +104,7 @@ describe('httpReducer', () => {
         };
 
         deepFreeze(initialState);
-        let finalState = HttpReducer(initialState, action);
+        let finalState = httpReducer(initialState, action);
 
         expect(finalState.numberOfCalls).to.be.equal(0);
         expect(finalState.httpCallsInProgress).to.be.false;
@@ -121,7 +121,7 @@ describe('httpReducer', () => {
         };
 
         deepFreeze(initialState);
-        let finalState = HttpReducer(initialState, action);
+        let finalState = httpReducer(initialState, action);
 
         expect(finalState.numberOfCalls).to.be.equal(1);
         expect(finalState.httpCallsInProgress).to.be.true;

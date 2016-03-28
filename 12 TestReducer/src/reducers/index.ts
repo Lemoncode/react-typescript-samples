@@ -17,9 +17,9 @@
 * If you write {contributorsReducer} you have to use state.contributorsReducer
 */
 import { combineReducers } from 'redux';
-import { MemberReducer as member } from './memberReducer';
+import { memberReducer as member } from './memberReducer';
 import members from './membersReducer';
-import { HttpReducer as http } from './httpReducer';
+import { httpReducer as http } from './httpReducer';
 import repos from './reposReducer';
 
 export default combineReducers({
