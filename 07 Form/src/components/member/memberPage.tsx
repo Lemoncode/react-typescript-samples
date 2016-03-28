@@ -30,10 +30,6 @@ export default class MemberPage extends React.Component<Props, State> {
 
   // on any update on the form this function will be called
   setMemberState(event) {
-    // https://www.npmjs.com/package/object-assign
-    //var newState : State = objectAssign({}, this.state, {dirty: true});
-    //this.setState(newState);
-
 		var field = event.target.name;
 		var value = event.target.value;
 		this.state.member[field] = value;
