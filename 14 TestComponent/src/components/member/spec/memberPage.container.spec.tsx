@@ -9,6 +9,7 @@ import MemberErrors from '../../../validations/memberFormErrors';
 import * as initializeMemberActions from '../../../actions/initializeNewMember';
 import * as loadMemberActions from '../../../actions/loadMember';
 import * as uiInputMemberActions from '../../../actions/uiInputMember';
+import * as saveMemberActions from '../../../actions/saveMember';
 
 const createStore = configureStore();
 
@@ -220,7 +221,8 @@ describe('MemberPage container component', () => {
     });
 
     it('should renders MemberPage presentational component and calls to uiInputMember("testField", "testValue")' +
-        'passing state equals { member: { } } and calling to fireValidationFieldValueChanged("testField", "testValue")', () => {
+        'passing state equals { member: { } } and calling to fireValidationFieldValueChanged property with ' +
+        'parameters "testField" and "testValue"', () => {
         let mockStore = createStore({
             member: {
 
@@ -245,5 +247,36 @@ describe('MemberPage container component', () => {
         expect(memberPagePresentationalWrapper.prop('fireValidationFieldValueChanged')).not.to.be.undefined;
         expect(uiInputMemberActionsMock.called).to.be.true;
         expect(uiInputMemberActionsMock.calledWith("testField", "testValue")).to.be.true;
+    });
+
+    it('should renders MemberPage presentational component and calls to saveMember(member)' +
+        'passing state equals { member: { } } and calling to saveMember property with parameter member', () => {
+        let mockStore = createStore({
+            member: {
+
+            }
+        });
+
+        let saveMemberActionsMock = sinon.stub(saveMemberActions, 'saveMember');
+
+        let memberPageContainerWrapper = mount(
+            <Provider store={mockStore}>
+                <MemberPageContainer />
+            </Provider>
+        );
+
+        let memberPagePresentationalWrapper = memberPageContainerWrapper.find('MemberPage');
+        let saveMember = memberPagePresentationalWrapper.prop('saveMember');
+        let member = new MemberEntity();
+        member.id = 1;
+
+        saveMember(member);
+
+        saveMemberActionsMock.restore();
+
+        expect(memberPagePresentationalWrapper).not.to.be.undefined;
+        expect(memberPagePresentationalWrapper.prop('saveMember')).not.to.be.undefined;
+        expect(saveMemberActionsMock.called).to.be.true;
+        expect(saveMemberActionsMock.calledWith(member)).to.be.true;
     });
 });

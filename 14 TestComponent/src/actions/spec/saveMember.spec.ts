@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import saveMember from '../saveMember';
+import { saveMember } from '../saveMember';
 import MemberEntity from '../../api/memberEntity';
 import memberAPI from '../../api/memberAPI';
 import MemberErrors from '../../validations/memberFormErrors'

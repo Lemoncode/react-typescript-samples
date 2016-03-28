@@ -20,4 +20,6 @@ const saveMember = (member : MemberEntity) => {
    }
 }
 
-export default saveMember;
+export {
+    saveMember
+};
