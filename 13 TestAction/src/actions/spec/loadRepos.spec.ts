@@ -1,11 +1,11 @@
 import { expect } from 'chai';
 import configureStore = require('redux-mock-store');
+import reduxThunk from 'redux-thunk';
 import loadRepos from '../loadRepos';
 import RepoEntity from '../../api/repoEntity';
 import repoAPI from '../../api/repoAPI';
-import ReduxThunk from 'redux-thunk';
 
-const middlewares = [ ReduxThunk ];
+const middlewares = [ reduxThunk ];
 const mockStore = configureStore(middlewares);
 
 describe('loadRepos', () => {

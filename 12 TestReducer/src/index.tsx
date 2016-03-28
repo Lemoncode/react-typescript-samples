@@ -1,11 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import App from './components/app.tsx';
 import AboutPage from './components/about/aboutPage';
 import MembersPage from './components/members/membersPage';
 import MemberPage from './components/member/memberPage';
-
-import { Router, Route, IndexRoute, Link, IndexLink, browserHistory, hashHistory  } from 'react-router'
 
 ReactDOM.render(
   <Router history={hashHistory}>
