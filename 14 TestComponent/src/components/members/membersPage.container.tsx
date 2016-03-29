@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import loadMembers from '../../actions/loadMembers';
-import loadRepos from '../../actions/loadRepos';
+import { loadMembers } from '../../actions/loadMembers';
+import { loadRepos } from '../../actions/loadRepos';
 import MembersPage from './membersPage';
 
 const mapStateToProps = (state) => {

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import configureStore = require('redux-mock-store');
-import loadMembers from '../loadMembers';
+import { loadMembers } from '../loadMembers';
 import MemberEntity from '../../api/memberEntity';
 import memberAPI from '../../api/memberAPI';
 import ReduxThunk from 'redux-thunk';

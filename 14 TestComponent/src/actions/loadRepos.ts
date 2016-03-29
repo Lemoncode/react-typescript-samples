@@ -15,4 +15,6 @@ function loadRepos() {
   }
 }
 
-export default loadRepos;
+export {
+    loadRepos
+};

@@ -22,4 +22,6 @@ function loadMembers() {
   };
 }
 
-export default loadMembers;
+export {
+    loadMembers
+};
