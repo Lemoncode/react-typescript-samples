@@ -21,9 +21,8 @@ export default class MembersPage extends React.Component<Props, {}> {
    }
 
    public render() {
-     if(!this.props.members)
+     if(!this.props.members || !this.props.repos)
         return (<div>No data</div>)
-
 
        return (
         <div className="row">
