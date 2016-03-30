@@ -21,7 +21,7 @@ class MemberState  {
 
 // Just to show how combine reducers work, we have
 // divided into two reducers member load + member load/update/delete
-let MemberReducer = (state : MemberState = new MemberState(), action) => {
+let memberReducer = (state : MemberState = new MemberState(), action) => {
   let newState : MemberState = null;
 
   switch (action.type) {
@@ -64,5 +64,5 @@ let MemberReducer = (state : MemberState = new MemberState(), action) => {
 
 export {
     MemberState,
-    MemberReducer
+    memberReducer
 }

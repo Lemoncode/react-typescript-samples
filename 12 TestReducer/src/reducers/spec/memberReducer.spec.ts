@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import * as deepFreeze from 'deep-freeze';
-import { MemberReducer, MemberState } from '../memberReducer';
+import { memberReducer, MemberState } from '../memberReducer';
 import MemberEntity from '../../api/memberEntity';
 
 describe('memberReducer', () => {
@@ -8,7 +8,7 @@ describe('memberReducer', () => {
         let initialState = undefined;
         let action = {};
 
-        let finalState = MemberReducer(initialState, action);
+        let finalState = memberReducer(initialState, action);
 
         expect(finalState).not.to.be.undefined;
         expect(finalState.member).not.to.be.undefined;
@@ -31,7 +31,7 @@ describe('memberReducer', () => {
         let action = {};
 
         deepFreeze(initialState);
-        let finalState = MemberReducer(initialState, action);
+        let finalState = memberReducer(initialState, action);
 
         expect(finalState.member.id).to.be.equal(2);
     });
@@ -46,7 +46,7 @@ describe('memberReducer', () => {
         };
 
         deepFreeze(initialState);
-        let finalState = MemberReducer(initialState, action);
+        let finalState = memberReducer(initialState, action);
 
         expect(finalState.member.id).to.be.equal(-1);
     });
@@ -61,7 +61,7 @@ describe('memberReducer', () => {
         };
 
         deepFreeze(initialState);
-        let finalState = MemberReducer(initialState, action);
+        let finalState = memberReducer(initialState, action);
 
         expect(finalState.isValid).to.be.false;
     });
@@ -80,7 +80,7 @@ describe('memberReducer', () => {
         };
 
         deepFreeze(initialState);
-        let finalState = MemberReducer(initialState, action);
+        let finalState = memberReducer(initialState, action);
 
         expect(finalState.member.id).to.be.equal(3);
         expect(finalState.member.login).to.be.equal("test");
@@ -100,7 +100,7 @@ describe('memberReducer', () => {
         };
 
         deepFreeze(initialState);
-        let finalState = MemberReducer(initialState, action);
+        let finalState = memberReducer(initialState, action);
 
         expect(finalState.isValid).to.be.true;
     });
@@ -115,7 +115,7 @@ describe('memberReducer', () => {
         };
 
         deepFreeze(initialState);
-        let finalState = MemberReducer(initialState, action);
+        let finalState = memberReducer(initialState, action);
 
         expect(finalState.member.id).to.be.equal(2);
     });
@@ -132,7 +132,7 @@ describe('memberReducer', () => {
         };
 
         deepFreeze(initialState);
-        let finalState = MemberReducer(initialState, action);
+        let finalState = memberReducer(initialState, action);
 
         expect(finalState.member.id).to.be.equal(2);
     });
@@ -147,7 +147,7 @@ describe('memberReducer', () => {
         };
 
         deepFreeze(initialState);
-        let finalState = MemberReducer(initialState, action);
+        let finalState = memberReducer(initialState, action);
 
         expect(finalState.member.login).to.be.equal("test");
     });
@@ -164,7 +164,7 @@ describe('memberReducer', () => {
         };
 
         deepFreeze(initialState);
-        let finalState = MemberReducer(initialState, action);
+        let finalState = memberReducer(initialState, action);
 
         expect(finalState.member.login).to.be.equal("test");
     });
@@ -179,7 +179,7 @@ describe('memberReducer', () => {
         };
 
         deepFreeze(initialState);
-        let finalState = MemberReducer(initialState, action);
+        let finalState = memberReducer(initialState, action);
 
         expect(finalState.member.avatar_url).to.be.equal("test");
     });
@@ -196,7 +196,7 @@ describe('memberReducer', () => {
         };
 
         deepFreeze(initialState);
-        let finalState = MemberReducer(initialState, action);
+        let finalState = memberReducer(initialState, action);
 
         expect(finalState.member.avatar_url).to.be.equal("test");
     });
@@ -213,7 +213,7 @@ describe('memberReducer', () => {
         };
 
         deepFreeze(initialState);
-        let finalState = MemberReducer(initialState, action);
+        let finalState = memberReducer(initialState, action);
 
         expect(finalState.saveCompleted).to.be.true;
     });
@@ -230,7 +230,7 @@ describe('memberReducer', () => {
         };
 
         deepFreeze(initialState);
-        let finalState = MemberReducer(initialState, action);
+        let finalState = memberReducer(initialState, action);
 
         expect(finalState.isValid).to.be.false;
     });
@@ -248,7 +248,7 @@ describe('memberReducer', () => {
         };
 
         deepFreeze(initialState);
-        let finalState = MemberReducer(initialState, action);
+        let finalState = memberReducer(initialState, action);
 
         expect(finalState.isValid).to.be.false;
         expect(finalState.errors.login).to.be.equal("testError");
@@ -265,7 +265,7 @@ describe('memberReducer', () => {
         };
 
         deepFreeze(initialState);
-        let finalState = MemberReducer(initialState, action);
+        let finalState = memberReducer(initialState, action);
 
         expect(finalState.saveCompleted).to.be.false;
     });
@@ -280,7 +280,7 @@ describe('memberReducer', () => {
         };
 
         deepFreeze(initialState);
-        let finalState = MemberReducer(initialState, action);
+        let finalState = memberReducer(initialState, action);
 
         expect(finalState.saveCompleted).to.be.false;
     });

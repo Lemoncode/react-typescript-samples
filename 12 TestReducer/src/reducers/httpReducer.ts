@@ -12,7 +12,7 @@ class HttpState {
 }
 // Just to show how combine reducers work, we have
 // divided into two reducers member load + member load/update/delete
-let HttpReducer = (state = new HttpState(), action) => {
+let httpReducer = (state = new HttpState(), action) => {
   let newState : HttpState = null;
   let numberOfCalls : number = null;
   let callsInProgress : boolean = null;
@@ -42,5 +42,5 @@ let HttpReducer = (state = new HttpState(), action) => {
 
 export {
     HttpState,
-    HttpReducer
+    httpReducer
 }
