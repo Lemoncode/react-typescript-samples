@@ -10,7 +10,8 @@ const mockStore = configureStore(middlewares);
 
 describe('loadMembers', () => {
   it('should return a promise, and this promise dispatch assignMembers action that returns ' +
-    'an action equals { type: MEMBERS_ASSIGN, members: expectedMembers }', (done) => {
+    'an action equals { type: MEMBERS_ASSIGN, members: expectedMembers }', sinon.test((done) => {
+    let sinon: Sinon.SinonStatic = this;
     let member1 = new MemberEntity();
     let member2 = new MemberEntity();
 
@@ -41,8 +42,5 @@ describe('loadMembers', () => {
         expect(store.getActions()[0].members.length).to.be.equal(2);
         done();
       });
-
-    //Restore original method
-    getAllMembersAsyncMethodStub.restore();
-  });
+  }).bind(this));
 });

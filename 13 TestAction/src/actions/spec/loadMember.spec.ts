@@ -5,8 +5,9 @@ import MemberEntity from '../../api/memberEntity';
 
 describe('loadMember', () => {
   it('should return action equals {type: MEMBER_LOAD, member: member } and calls to memberAPI.getMemberById(id) method ' +
-      'when passing id equals 1', () => {
+      'when passing id equals 1', sinon.test(() => {
       // Arrange
+      let sinon: Sinon.SinonStatic = this;
       let member = new MemberEntity();
       member.id = 1;
 
@@ -23,8 +24,5 @@ describe('loadMember', () => {
       expect(result.member.id).to.be.equal(id);
       expect(getMemberByIdMethodStub.called).to.be.true;
       expect(getMemberByIdMethodStub.calledWith(id)).to.be.true;
-
-      //Restore original method
-      getMemberByIdMethodStub.restore();
-  });
+  }).bind(this));
 })
