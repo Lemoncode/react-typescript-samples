@@ -40,24 +40,16 @@ describe('Spinner presentational component', () =>{
         expect(initializeHttp.calledOnce).to.be.true;
     });
 
-    it('should renders spinner and calls to initializeHttp method when passing showSpinner ' +
-        'equals true and initializeHttp method like props', () => {
+    it('should renders div element with class equals "spinnerWrap" and calls to initializeHttp method ' +
+        'when passing showSpinner equals true and initializeHttp method like props', () => {
         let showSpinner = true;
         let initializeHttp = sinon.spy();
         let spinnerWrapper = shallow(
             <Spinner showSpinner={showSpinner} initializeHttp={initializeHttp}/>
         );
 
-        expect(spinnerWrapper.contains(
-            <div className="spinnerWrap">
-              <div className="spinnerOverlay"></div>
-              <div className="vertical-offset">
-                <div id="spinner">
-                  Loading...
-                </div>
-              </div>
-            </div>
-        )).to.be.true;
+        expect(spinnerWrapper.type()).to.be.equals('div');
+        expect(spinnerWrapper.hasClass('spinnerWrap')).to.be.true;
         expect(initializeHttp.calledOnce).to.be.true;
     });
 })
