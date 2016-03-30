@@ -5,14 +5,10 @@ import { Link } from 'react-router';
 import AboutPage from '../aboutPage';
 
 describe('AboutPage presentational component', () =>{
-    it('should renders a div element with class equals row and this div has 2 children h2 and Link', () => {
+    it('should renders an h2 element with text "About Page"', () => {
         let aboutPageWrapper = shallow(<AboutPage />);
 
-        expect(aboutPageWrapper.contains(
-            <div className="row">
-              <h2>About Page</h2>
-              <Link to="/members">Members</Link>
-            </div>
-        )).to.be.true;
+        expect(aboutPageWrapper.find('h2')).to.be.exist;
+        expect(aboutPageWrapper.find('h2').text()).to.be.equals('About Page');
     });
 })
