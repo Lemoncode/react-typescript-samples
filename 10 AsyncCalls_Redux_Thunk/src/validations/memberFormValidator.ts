@@ -1,7 +1,7 @@
-import MemberEntity from '../api/MemberEntity'
-import MemberFormErrors from './memberFormErrors'
+import MemberEntity from '../api/MemberEntity';
+import MemberFormErrors from './memberFormErrors';
 
-class memberFormValidator {
+class MemberFormValidator {
     public validateMember(member : MemberEntity) : MemberFormErrors
     {
       let memberFormErrors : MemberFormErrors = new MemberFormErrors();
@@ -16,4 +16,4 @@ class memberFormValidator {
     }
 }
 
-export default new memberFormValidator();
+export default new MemberFormValidator();

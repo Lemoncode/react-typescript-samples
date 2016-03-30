@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import MemberEntity from '../../api/memberEntity';
 import MemberList from './memberList';
-import loadMembers from '../../actions/loadMembers';
 import RepoEntity from '../../api/repoEntity';
 import RepoList from '../repos/repoList';
+import loadMembers from '../../actions/loadMembers';
 import loadRepos from '../../actions/loadRepos';
 
 // Presentational

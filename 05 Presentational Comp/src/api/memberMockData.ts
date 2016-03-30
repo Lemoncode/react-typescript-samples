@@ -1,4 +1,4 @@
-import MemberEntity from './memberEntity'
+import MemberEntity from './memberEntity';
 
 var	MembersMockData : Array<MemberEntity> =
 	[

@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { connect } from 'react-redux'
-import httpInitializeDispatcher from '../../actions/httpInitializeDispatcher'
+import { connect } from 'react-redux';
+import httpInitializeDispatcher from '../../actions/httpInitializeDispatcher';
 
-interface Props {
+interface Props extends React.Props<Spinner> {
   showSpinner? : boolean;
   initializeHttp? : () => void;
 }
 
-class spinner extends React.Component<Props, {}> {
+class Spinner extends React.Component<Props, {}> {
   constructor(props : Props){
     super(props);
     this.props.initializeHttp();
@@ -49,7 +49,7 @@ const mapDispatchToProps = (dispatch) => {
 const ContainerSpinnerComponent = connect(
                                    mapStateToProps
                                   ,mapDispatchToProps
-                                )(spinner)
+                                )(Spinner)
 
 
 export default ContainerSpinnerComponent;

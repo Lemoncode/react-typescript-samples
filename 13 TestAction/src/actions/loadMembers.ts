@@ -1,7 +1,7 @@
-import MemberEntity from '../api/memberEntity';
-import MemberAPI from '../api/memberAPI';
-import assignMembers from './assignMembers';
 import * as Q from 'q';
+import MemberEntity from '../api/memberEntity';
+import memberAPI from '../api/memberAPI';
+import assignMembers from './assignMembers';
 
 function loadMembers() {
 
@@ -12,7 +12,7 @@ function loadMembers() {
   return dispatcher => {
     var promise : Q.Promise<MemberEntity[]>;
 
-    promise = MemberAPI.getAllMembersAsync();
+    promise = memberAPI.getAllMembersAsync();
 
     promise.then(
       data => dispatcher(assignMembers(data))

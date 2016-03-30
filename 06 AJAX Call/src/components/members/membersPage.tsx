@@ -1,7 +1,7 @@
 import * as React from 'react';
 import MemberEntity from '../../api/memberEntity';
-import MemberAPI from '../../api/memberAPI';
-import MemberRow from './memberRow'
+import memberAPI from '../../api/memberAPI';
+import MemberRow from './memberRow';
 
 interface Props extends React.Props<MembersPage> {
 }
@@ -24,7 +24,7 @@ export default class MembersPage extends React.Component<Props, State> {
 
    // Changing to componentDidMount to handle initial ajax request response
    public componentDidMount() {
-     var promise  : Q.Promise<MemberEntity[]> = MemberAPI.getAllMembersAsync();
+     var promise  : Q.Promise<MemberEntity[]> = memberAPI.getAllMembersAsync();
 
      promise.done(function (members) {
         // React only triggers a re-render if you use setState to update the state.

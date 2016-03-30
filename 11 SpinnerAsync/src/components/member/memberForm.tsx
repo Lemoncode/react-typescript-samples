@@ -1,7 +1,6 @@
 import * as React from 'react';
-import MemberEntity from './../../api/memberEntity'
-
-import Input from './../common/textInput'
+import MemberEntity from './../../api/memberEntity';
+import Input from './../common/textInput';
 
 interface Props extends React.Props<MemberForm> {
   member : MemberEntity

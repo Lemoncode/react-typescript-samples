@@ -1,5 +1,3 @@
-import MemberEntity from '../api/memberEntity';
-
 
 const assignMembers = (members : any) => {
    return {

@@ -1,20 +1,19 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import App from './components/app.tsx'
-import aboutPage from './components/about/aboutPage';
-import membersPage from './components/members/membersPage';
-import memberPage from './components/member/memberPage';
-
-import { Router, Route, IndexRoute, Link, IndexLink, browserHistory, hashHistory  } from 'react-router'
+import { Router, Route, IndexRoute, hashHistory  } from 'react-router';
+import App from './components/app.tsx';
+import AboutPage from './components/about/aboutPage';
+import MembersPage from './components/members/membersPage';
+import MemberPage from './components/member/memberPage';
 
 ReactDOM.render(
   <Router history={hashHistory}>
     <Route  path="/" component={App} >
-      <IndexRoute component={aboutPage}/>
-      <Route path="/about" component={aboutPage} />
-      <Route path="/members"  component={membersPage} />
-      <Route path="/member"  component={memberPage} />
-      <Route path="/memberEdit/:id"  component={memberPage} />
+      <IndexRoute component={AboutPage}/>
+      <Route path="/about" component={AboutPage} />
+      <Route path="/members"  component={MembersPage} />
+      <Route path="/member"  component={MemberPage} />
+      <Route path="/memberEdit/:id"  component={MemberPage} />
     </Route>
   </Router>
 

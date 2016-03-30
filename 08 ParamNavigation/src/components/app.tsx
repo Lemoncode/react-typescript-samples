@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Header from './common/header'
+import Header from './common/header';
 
 interface Props extends React.Props<App> {
 }

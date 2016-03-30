@@ -2,7 +2,6 @@ import { expect } from 'chai';
 import * as deepFreeze from 'deep-freeze';
 import { memberReducer, MemberState } from '../memberReducer';
 import MemberEntity from '../../api/memberEntity';
-import MemberFormErrors from "../../validations/memberFormErrors";
 
 describe('memberReducer', () => {
     it('should return new MemberState with default values when passing initialState equals undefined and action equals {}', () => {

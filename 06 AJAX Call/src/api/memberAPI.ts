@@ -1,8 +1,7 @@
-import MemberEntity from './memberEntity'
-import MembersMockData from './memberMockData'
-import * as _ from 'lodash'
-import * as $ from 'jquery'
-import * as Q from 'q'
+import * as $ from 'jquery';
+import * as Q from 'q';
+import MemberEntity from './memberEntity';
+import MembersMockData from './memberMockData';
 
 // Sync mock data API, inspired from:
 // https://gist.github.com/coryhouse/fd6232f95f9d601158e4

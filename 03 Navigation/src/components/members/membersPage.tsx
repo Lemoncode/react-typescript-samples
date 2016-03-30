@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-interface Props {
+interface Props extends React.Props<Authors> {
 }
 
 // Nice tsx guide: https://github.com/Microsoft/TypeScript/wiki/JSX
