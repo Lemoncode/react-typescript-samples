@@ -8,7 +8,7 @@ export default class About extends React.Component<Props, {}> {
    public render() {
        return (
            <div className="row about-page top-buffer">
-             <h1 className="jumbotron">03 Navigation</h1>
+             <h1 className="jumbotron">02 Components</h1>
 
              <div className="col-xs-12">
                <h1>
