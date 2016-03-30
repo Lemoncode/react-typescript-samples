@@ -119,7 +119,8 @@ describe('MembersPage container component', () => {
     });
 
     it('should renders MembersPage presentational component and calls to loadMembers' +
-        'passing state equals { }', () => {
+        'passing state equals { }', sinon.test(() => {
+        let sinon: Sinon.SinonStatic = this;
         let mockStore = createStore({
         });
 
@@ -131,14 +132,13 @@ describe('MembersPage container component', () => {
             </Provider>
         );
 
-        loadMemberActionsMock.restore();
-
         var membersPagePresentationalWrapper = membersPageContainerWrapper.find('MembersPage');
         expect(loadMemberActionsMock.calledOnce).to.be.true;
-    });
+    }).bind(this));
 
     it('should renders MembersPage presentational component and calls to loadRepos' +
-        'passing state equals { }', () => {
+        'passing state equals { }', sinon.test(() => {
+        let sinon: Sinon.SinonStatic = this;
         let mockStore = createStore({
         });
 
@@ -150,9 +150,7 @@ describe('MembersPage container component', () => {
             </Provider>
         );
 
-        loadRepoActionsMock.restore();
-
         var membersPagePresentationalWrapper = membersPageContainerWrapper.find('MembersPage');
         expect(loadRepoActionsMock.calledOnce).to.be.true;
-    });
+    }).bind(this));
 });

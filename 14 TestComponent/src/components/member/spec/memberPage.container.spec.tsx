@@ -145,8 +145,8 @@ describe('MemberPage container component', () => {
     });
 
     it('should renders MemberPage presentational component and calls to initializeNewMember' +
-        'passing state equals { member: { } }', () => {
-
+        'passing state equals { member: { } }', sinon.test(() => {
+        let sinon: Sinon.SinonStatic = this;
         let mockStore = createStore({
             member: {
 
@@ -161,16 +161,14 @@ describe('MemberPage container component', () => {
             </Provider>
         );
 
-        initializeNewMemberMock.restore();
-
         let memberPagePresentationalWrapper = memberPageContainerWrapper.find('MemberPage');
         expect(memberPagePresentationalWrapper).not.to.be.undefined;
         expect(initializeNewMemberMock.calledOnce).to.be.true;
-    });
+    }).bind(this));
 
     it('should renders MemberPage presentational component and does not call to loadMember' +
-        'passing state equals { member: { } }', () => {
-
+        'passing state equals { member: { } }', sinon.test(() => {
+        let sinon: Sinon.SinonStatic = this;
         let mockStore = createStore({
             member: {
 
@@ -185,16 +183,14 @@ describe('MemberPage container component', () => {
             </Provider>
         );
 
-        loadMemberActionsMock.restore();
-
         let memberPagePresentationalWrapper = memberPageContainerWrapper.find('MemberPage');
         expect(memberPagePresentationalWrapper).not.to.be.undefined;
         expect(loadMemberActionsMock.calledOnce).to.be.false;
-    });
+    }).bind(this));
 
     it('should renders MemberPage presentational component and calls to loadMember(1)' +
-        'passing state equals { member: { } } and property params equals { id: 1 }', () => {
-
+        'passing state equals { member: { } } and property params equals { id: 1 }', sinon.test(() => {
+        let sinon: Sinon.SinonStatic = this;
         let mockStore = createStore({
             member: {
 
@@ -213,17 +209,16 @@ describe('MemberPage container component', () => {
             </Provider>
         );
 
-        loadMemberActionsMock.restore();
-
         let memberPagePresentationalWrapper = memberPageContainerWrapper.find('MemberPage');
         expect(memberPagePresentationalWrapper).not.to.be.undefined;
         expect(loadMemberActionsMock.calledOnce).to.be.true;
         expect(loadMemberActionsMock.calledWith(params.id)).to.be.true;
-    });
+    }).bind(this));
 
     it('should renders MemberPage presentational component and calls to uiInputMember("testField", "testValue")' +
         'passing state equals { member: { } } and calling to fireValidationFieldValueChanged property with ' +
-        'parameters "testField" and "testValue"', () => {
+        'parameters "testField" and "testValue"', sinon.test(() => {
+        let sinon: Sinon.SinonStatic = this;
         let mockStore = createStore({
             member: {
 
@@ -242,16 +237,15 @@ describe('MemberPage container component', () => {
         let fireValidationFieldValueChanged = memberPagePresentationalWrapper.prop('fireValidationFieldValueChanged');
         fireValidationFieldValueChanged("testField", "testValue");
 
-        uiInputMemberActionsMock.restore();
-
         expect(memberPagePresentationalWrapper).not.to.be.undefined;
         expect(memberPagePresentationalWrapper.prop('fireValidationFieldValueChanged')).not.to.be.undefined;
         expect(uiInputMemberActionsMock.called).to.be.true;
         expect(uiInputMemberActionsMock.calledWith("testField", "testValue")).to.be.true;
-    });
+    }).bind(this));
 
     it('should renders MemberPage presentational component and calls to saveMember(member)' +
-        'passing state equals { member: { } } and calling to saveMember property with parameter member', () => {
+        'passing state equals { member: { } } and calling to saveMember property with parameter member', sinon.test(() => {
+        let sinon: Sinon.SinonStatic = this;
         let mockStore = createStore({
             member: {
 
@@ -273,16 +267,15 @@ describe('MemberPage container component', () => {
 
         saveMember(member);
 
-        saveMemberActionsMock.restore();
-
         expect(memberPagePresentationalWrapper).not.to.be.undefined;
         expect(memberPagePresentationalWrapper.prop('saveMember')).not.to.be.undefined;
         expect(saveMemberActionsMock.called).to.be.true;
         expect(saveMemberActionsMock.calledWith(member)).to.be.true;
-    });
+    }).bind(this));
 
     it('should renders MemberPage presentational component and calls to resetSaveCompleted(member)' +
-        'passing state equals { member: { } } and calling to resetSaveCompletedFlag', () => {
+        'passing state equals { member: { } } and calling to resetSaveCompletedFlag', sinon.test(() => {
+        let sinon: Sinon.SinonStatic = this;
         let mockStore = createStore({
             member: {
 
@@ -301,11 +294,9 @@ describe('MemberPage container component', () => {
         let resetSaveCompletedFlag = memberPagePresentationalWrapper.prop('resetSaveCompletedFlag');
         resetSaveCompletedFlag();
 
-        resetSaveCompletedActionsMock.restore();
-
         expect(memberPagePresentationalWrapper).not.to.be.undefined;
         expect(memberPagePresentationalWrapper.prop('resetSaveCompletedFlag')).not.to.be.undefined;
         expect(resetSaveCompletedActionsMock.called).to.be.true;
         expect(resetSaveCompletedActionsMock.calledWith()).to.be.true;
-    });
+    }).bind(this));
 });

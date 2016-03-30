@@ -132,7 +132,8 @@ describe('MembersPage presentational component', () => {
     });
 
     it('should calls to componentDidMount' +
-        'passing members and repos properties equals undefined and using mount enzyme method', () => {
+        'passing members and repos properties equals undefined and using mount enzyme method', sinon.test(() => {
+        let sinon: Sinon.SinonStatic = this;
         let componentDidMountMock = sinon.stub(MembersPage.prototype, 'componentDidMount');
 
         let properties = {
@@ -144,9 +145,8 @@ describe('MembersPage presentational component', () => {
             <MembersPage {...properties} />
         );
 
-        componentDidMountMock.restore();
         expect(componentDidMountMock.calledOnce).to.be.true;
-    });
+    }).bind(this));
 
     it('should calls toloadMembers and loadRepos' +
         'passing members and repos properties equals undefined and using mount enzyme method', () => {

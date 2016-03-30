@@ -27,7 +27,8 @@ describe('MemberPage presentational component', () => {
     });
 
     it('should calls to componentWillMount' +
-        'passing required properties with default values', () => {
+        'passing required properties with default values', sinon.test(() => {
+        let sinon: Sinon.SinonStatic = this;
         let initializeNewMemberMock = sinon.spy();
         let componentWillMountMock = sinon.stub(MemberPage.prototype, 'componentWillMount');
 
@@ -39,9 +40,8 @@ describe('MemberPage presentational component', () => {
             <MemberPage {...properties} />
         );
 
-        componentWillMountMock.restore();
         expect(componentWillMountMock.calledOnce).to.be.true;
-    });
+    }).bind(this));
 
     it('should renders a div with text equals "No data" and calls to initializeNewMember' +
         'passing params property equals 1', () => {
@@ -262,7 +262,8 @@ describe('MemberPage presentational component', () => {
     });
 
     it('should does not call to componentWillReceiveProps' +
-        'passing required properties with default values', () => {
+        'passing required properties with default values', sinon.test(() => {
+        let sinon: Sinon.SinonStatic = this;
         let initializeNewMemberMock = sinon.spy();
         let componentWillReceivePropsMock = sinon.stub(MemberPage.prototype, 'componentWillReceiveProps');
 
@@ -274,12 +275,12 @@ describe('MemberPage presentational component', () => {
             <MemberPage {...properties} />
         );
 
-        componentWillReceivePropsMock.restore();
         expect(componentWillReceivePropsMock.calledOnce).to.be.false;
-    });
+    }).bind(this));
 
     it('should does not call to componentWillReceiveProps' +
-        'passing saveCompleted equals false', () => {
+        'passing saveCompleted equals false', sinon.test(() => {
+        let sinon: Sinon.SinonStatic = this;
         let initializeNewMemberMock = sinon.spy();
         let componentWillReceivePropsMock = sinon.stub(MemberPage.prototype, 'componentWillReceiveProps');
 
@@ -292,13 +293,13 @@ describe('MemberPage presentational component', () => {
             <MemberPage {...properties} />
         );
 
-        componentWillReceivePropsMock.restore();
         expect(componentWillReceivePropsMock.calledOnce).to.be.false;
-    });
+    }).bind(this));
 
     it('should calls to componentWillReceiveProps but does not calls to toastr.success()' +
         'passing saveCompleted equals false and setting root component props with ' +
-        'saveCompleted property equals false', () => {
+        'saveCompleted property equals false', sinon.test(() => {
+        let sinon: Sinon.SinonStatic = this;
         let initializeNewMemberMock = sinon.spy();
         let componentWillReceivePropsMock = sinon.stub(MemberPage.prototype, 'componentWillReceiveProps');
         let toastrMock = sinon.stub(toastr, 'success');
@@ -316,15 +317,14 @@ describe('MemberPage presentational component', () => {
             saveCompleted: false
         });
 
-        componentWillReceivePropsMock.restore();
-        toastrMock.restore();
         expect(componentWillReceivePropsMock.calledOnce).to.be.true;
         expect(toastrMock.calledOnce).to.be.false;
-    });
+    }).bind(this));
 
     it('should calls to componentWillReceiveProps but does not calls to toastr.success()' +
         'passing saveCompleted equals true and setting root component props with ' +
-        'saveCompleted property equals true', () => {
+        'saveCompleted property equals true', sinon.test(() => {
+        let sinon: Sinon.SinonStatic = this;
         let initializeNewMemberMock = sinon.spy();
         let toastrMock = sinon.stub(toastr, 'success');
 
@@ -341,13 +341,13 @@ describe('MemberPage presentational component', () => {
             saveCompleted: true
         });
 
-        toastrMock.restore();
         expect(toastrMock.calledOnce).to.be.false;
-    });
+    }).bind(this));
 
     it('should calls to componentWillReceiveProps but does not calls to toastr.success()' +
         'passing saveCompleted equals true and setting root component props with ' +
-        'saveCompleted property equals false', () => {
+        'saveCompleted property equals false', sinon.test(() => {
+        let sinon: Sinon.SinonStatic = this;
         let initializeNewMemberMock = sinon.spy();
         let toastrMock = sinon.stub(toastr, 'success');
 
@@ -364,13 +364,13 @@ describe('MemberPage presentational component', () => {
             saveCompleted: false
         });
 
-        toastrMock.restore();
         expect(toastrMock.calledOnce).to.be.false;
-    });
+    }).bind(this));
 
     it('should calls to componentWillReceiveProps and toastr.success("Author saved.")' +
         'passing saveCompleted equals false and setting root component props with ' +
-        'saveCompleted property equals true', () => {
+        'saveCompleted property equals true', sinon.test(() => {
+        let sinon: Sinon.SinonStatic = this;
         let initializeNewMemberMock = sinon.spy();
         let resetSaveCompletedFlagMock = sinon.spy();
         let toastrMock = sinon.stub(toastr, 'success');
@@ -389,14 +389,14 @@ describe('MemberPage presentational component', () => {
             saveCompleted: true
         });
 
-        toastrMock.restore();
         expect(toastrMock.calledOnce).to.be.true;
         expect(toastrMock.calledWith('Author saved.')).to.be.true;
-    });
+    }).bind(this));
 
     it('should calls to hashHistory.push("/members")' +
         'passing saveCompleted equals false and setting root component props with ' +
-        'saveCompleted property equals true', () => {
+        'saveCompleted property equals true', sinon.test(() => {
+        let sinon: Sinon.SinonStatic = this;
         let initializeNewMemberMock = sinon.spy();
         let resetSaveCompletedFlagMock = sinon.spy();
         let hashHistoryMock = sinon.stub(hashHistory, 'push');
@@ -415,10 +415,9 @@ describe('MemberPage presentational component', () => {
             saveCompleted: true
         });
 
-        hashHistoryMock.restore();
         expect(hashHistoryMock.calledOnce).to.be.true;
         expect(hashHistoryMock.calledWith('/members')).to.be.true;
-    });
+    }).bind(this));
 
     it('should calls to resetSaveCompletedFlag' +
         'passing saveCompleted equals false and setting root component props with ' +

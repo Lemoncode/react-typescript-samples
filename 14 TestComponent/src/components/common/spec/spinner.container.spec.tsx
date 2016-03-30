@@ -10,8 +10,8 @@ const createStore = configureStore();
 describe('Spinner container component', () =>{
     it('should renders Spinner presentational component and this has property showSpinner equals undefined and ' +
         'it calls to httpInitializeDispatcher when passing to store state equals ' +
-        '{ http: { httpCallsInProgress: undefined } }', () => {
-
+        '{ http: { httpCallsInProgress: undefined } }', sinon.test(() => {
+        let sinon: Sinon.SinonStatic = this;
         let mockStore = createStore({
             http: {
                 httpCallsInProgress: undefined
@@ -26,15 +26,14 @@ describe('Spinner container component', () =>{
             </Provider>
         );
 
-        httpInitializeDispatcherActionStub.restore();
         expect(spinnerWrapper.find('Spinner').prop('showSpinner')).to.be.undefined;
         expect(httpInitializeDispatcherActionStub.called).to.be.true;
-    });
+    }).bind(this));
 
     it('should renders Spinner presentational component and this has property showSpinner equals false and ' +
         'it calls to httpInitializeDispatcher when passing to store state equals ' +
-        '{ http: { httpCallsInProgress: false } }', () => {
-
+        '{ http: { httpCallsInProgress: false } }', sinon.test(() => {
+        let sinon: Sinon.SinonStatic = this;
         let mockStore = createStore({
             http: {
                 httpCallsInProgress: false
@@ -49,15 +48,14 @@ describe('Spinner container component', () =>{
             </Provider>
         );
 
-        httpInitializeDispatcherActionStub.restore();
         expect(spinnerWrapper.find('Spinner').prop('showSpinner')).to.be.false;
         expect(httpInitializeDispatcherActionStub.called).to.be.true;
-    });
+    }).bind(this));
 
     it('should renders Spinner presentational component and this has property showSpinner equals true and ' +
         'it calls to httpInitializeDispatcher when passing to store state equals ' +
-        '{ http: { httpCallsInProgress: true } }', () => {
-
+        '{ http: { httpCallsInProgress: true } }', sinon.test(() => {
+        let sinon: Sinon.SinonStatic = this;
         let mockStore = createStore({
             http: {
                 httpCallsInProgress: true
@@ -72,8 +70,7 @@ describe('Spinner container component', () =>{
             </Provider>
         );
 
-        httpInitializeDispatcherActionStub.restore();
         expect(spinnerWrapper.find('Spinner').prop('showSpinner')).to.be.true;
         expect(httpInitializeDispatcherActionStub.called).to.be.true;
-    });
+    }).bind(this));
 });
