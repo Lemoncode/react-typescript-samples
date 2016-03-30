@@ -1,10 +1,9 @@
-import RepoEntity from '../api/repoEntity';
-import RepoAPI from '../api/repoAPI';
+import repoAPI from '../api/repoAPI';
 import assignRepos from './assignRepos';
 
 function loadRepos() {
     return dispatcher => {
-      return RepoAPI.getAllReposAsync().then(
+      return repoAPI.getAllReposAsync().then(
         data => dispatcher(assignRepos(data))
       );
     }

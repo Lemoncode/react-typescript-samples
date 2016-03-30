@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Link} from 'react-router';
 
-interface Props {
+interface Props extends React.Props<Header> {
 }
 
 export default class Header extends React.Component<Props, {}> {

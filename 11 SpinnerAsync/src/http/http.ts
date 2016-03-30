@@ -1,7 +1,7 @@
-import * as Q from 'q'
-import * as $ from 'jquery'
-import httpCallStarted from "../actions/httpCallStarted"
-import httpCallCompleted from "../actions/httpCallCompleted"
+import * as Q from 'q';
+import * as $ from 'jquery';
+import httpCallStarted from "../actions/httpCallStarted";
+import httpCallCompleted from "../actions/httpCallCompleted";
 
 
 

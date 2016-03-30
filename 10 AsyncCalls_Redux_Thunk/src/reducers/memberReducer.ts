@@ -1,8 +1,6 @@
 import MemberEntity from "../api/memberEntity";
-import MemberAPI from "../api/memberAPI";
 import objectAssign = require('object-assign');
-import MemberFormErrors from "../validations/memberFormErrors"
-import MemberFormValidator from "../validations/memberFormValidator"
+import MemberFormErrors from "../validations/memberFormErrors";
 
 
 let emptyMemberEntity = new MemberEntity();

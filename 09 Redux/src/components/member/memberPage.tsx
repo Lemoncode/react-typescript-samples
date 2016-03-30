@@ -1,17 +1,16 @@
 import * as React from 'react';
-import { connect } from 'react-redux'
-import { hashHistory } from 'react-router'
+import { connect } from 'react-redux';
+import { hashHistory } from 'react-router';
 import * as toastr from 'toastr';
-import MemberEntity from './../../api/memberEntity'
-import MemberForm from './memberForm';
-import MemberAPI from '../../api/memberAPI';
 import objectAssign = require('object-assign');
-import loadMember from '../../actions/loadMember'
-import saveMember from '../../actions/saveMember'
-import MemberErrors from  '../../validations/MemberFormErrors'
-import uiInputMember from '../../actions/uiInputMember'
-import resetSaveCompleted from '../../actions/resetSaveCompleted'
-import newMember from  '../../actions/newMember'
+import MemberEntity from './../../api/memberEntity';
+import MemberForm from './memberForm';
+import MemberErrors from  '../../validations/MemberFormErrors';
+import loadMember from '../../actions/loadMember';
+import saveMember from '../../actions/saveMember';
+import uiInputMember from '../../actions/uiInputMember';
+import resetSaveCompleted from '../../actions/resetSaveCompleted';
+import newMember from  '../../actions/newMember';
 
 interface Props extends React.Props<MemberPage> {
   params : any
@@ -19,7 +18,7 @@ interface Props extends React.Props<MemberPage> {
   ,errors?: MemberErrors
   ,saveCompleted? : boolean
   ,loadMember? : (id : number) => void
-  ,fireValidationFieldValueChanged  : (fieldName : string, value : any) => void
+  ,fireFieldValueChanged  : (fieldName : string, value : any) => void
   ,saveMember: (member: MemberEntity) => void
   ,initializeNewMember: () => void
   ,resetSaveCompletedFlag: () => void
@@ -66,7 +65,7 @@ class MemberPage extends React.Component<Props, {}> {
     var field = event.target.name;
     var value = event.target.value;
 
-    this.props.fireValidationFieldValueChanged(field, value);
+    this.props.fireFieldValueChanged(field, value);
 	}
 
 public saveMember(event) {
@@ -104,7 +103,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     loadMember: (id : number) => {return dispatch(loadMember(id))}
-    ,fireValidationFieldValueChanged: (fieldName : string, value : any) => {return dispatch(uiInputMember(fieldName, value))}
+    ,fireFieldValueChanged: (fieldName : string, value : any) => {return dispatch(uiInputMember(fieldName, value))}
     ,saveMember: (member:MemberEntity) =>  {return dispatch(saveMember(member))}
     ,resetSaveCompletedFlag: () => {return dispatch(resetSaveCompleted())}
     ,initializeNewMember: () => {return dispatch(newMember())

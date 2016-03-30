@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import {Link} from 'react-router';
-import memberEntity from '../../api/memberEntity';
-import MemberAPI from '../../api/memberAPI';
-import MemberRow from './memberRow'
-import loadMembers from '../../actions/loadMembers'
+import MemberEntity from '../../api/memberEntity';
+import MemberRow from './memberRow';
+import loadMembers from '../../actions/loadMembers';
 
 // Presentational
 
@@ -49,7 +48,7 @@ class MembersPage extends React.Component<Props, {}> {
             </thead>
             <tbody>
             {
-              this.props.members.map((member : memberEntity) =>
+              this.props.members.map((member : MemberEntity) =>
                   <MemberRow key={member.id} member = {member}/>
                 )
               }

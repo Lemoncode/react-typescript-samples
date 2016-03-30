@@ -1,8 +1,7 @@
 import * as React from 'react';
-import header from '../common/header'
 import {Link} from 'react-router';
 
-interface Props {
+interface Props extends React.Props<About> {
 }
 
 // Nice tsx guide: https://github.com/Microsoft/TypeScript/wiki/JSX

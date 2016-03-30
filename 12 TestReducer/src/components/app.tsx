@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import Header from './common/header'
+import reduxThunk from 'redux-thunk';
+import Header from './common/header';
 import reducers  from '../reducers';
-import ReduxThunk from 'redux-thunk';
-import Spinner from './common/spinner'
+import Spinner from './common/spinner';
 
 interface Props extends React.Props<App> {
 }
 
 let store = createStore(
   reducers
-  ,applyMiddleware(ReduxThunk)
+  ,applyMiddleware(reduxThunk)
 );
 
 export default class App extends React.Component<Props, {}> {

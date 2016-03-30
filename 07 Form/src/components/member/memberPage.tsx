@@ -1,13 +1,12 @@
 import * as React from 'react';
-import { hashHistory } from 'react-router'
+import { hashHistory } from 'react-router';
 import * as toastr from 'toastr';
-import MemberEntity from './../../api/memberEntity'
-import MemberForm from './memberForm';
-import MemberAPI from '../../api/memberAPI';
-//import * as ObjectAssign from 'object-assign';
 import objectAssign = require('object-assign');
+import MemberEntity from './../../api/memberEntity';
+import MemberForm from './memberForm';
+import memberAPI from '../../api/memberAPI';
 
-interface Props {
+interface Props extends React.Props<MemberPage> {
 }
 
 interface State {
@@ -17,7 +16,7 @@ interface State {
 }
 
 // Nice tsx guide: https://github.com/Microsoft/TypeScript/wiki/JSX
-export default class memberPage extends React.Component<Props, State> {
+export default class MemberPage extends React.Component<Props, State> {
 
   constructor(props : Props){
         super(props);
@@ -31,10 +30,6 @@ export default class memberPage extends React.Component<Props, State> {
 
   // on any update on the form this function will be called
   setMemberState(event) {
-    // https://www.npmjs.com/package/object-assign
-    //var newState : State = objectAssign({}, this.state, {dirty: true});
-    //this.setState(newState);
-
 		var field = event.target.name;
 		var value = event.target.value;
 		this.state.member[field] = value;
@@ -73,7 +68,7 @@ public saveMember(event) {
     return;
   }
 
-  MemberAPI.saveAuthor(this.state.member);
+  memberAPI.saveAuthor(this.state.member);
 
   var newState : State = objectAssign({}, this.state, {dirty: true});
   this.setState(newState);
