@@ -2,23 +2,19 @@ import { expect } from 'chai';
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import Header from '../header';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 
 describe('Header presentational component', () =>{
-    it('should renders a div element with class equals row and this div has a nav like children', () => {
+    it('should renders two Link elements, first one with propert to equals "/about" and ' +
+        'text equals "About" and second one with property to equals "/members" and text' +
+        'equals "Members"', () => {
         let headerWrapper = shallow(<Header />);
 
-        expect(headerWrapper.contains(
-            <div className="row">
-              <nav className="navbar navbar-default">
-                <div className="collapse navbar-collapse">
-                    <ul className="nav navbar-nav">
-                      <li><Link to="/about">About</Link></li>
-                      <li><Link to="/members">Members</Link></li>
-                    </ul>
-                </div>
-              </nav>
-            </div>
-        )).to.be.true;
+        expect(headerWrapper.find('Link').at(0)).to.be.exist;
+        expect(headerWrapper.find('Link').at(0).prop('to')).to.be.equals("/about");
+        expect(headerWrapper.find('Link').at(0).children().text()).to.be.equals("About");
+        expect(headerWrapper.find('Link').at(1)).to.be.exist;
+        expect(headerWrapper.find('Link').at(1).prop('to')).to.be.equals("/members");
+        expect(headerWrapper.find('Link').at(1).children().text()).to.be.equals("Members");
     });
 })
