@@ -26,8 +26,11 @@ describe('MemberPage presentational component', () => {
         expect(initializeNewMemberMock.called).to.be.true;
     });
 
+    //"sinson.test" make automatic cleanup instead of use sinon.restore
+    //https://semaphoreci.com/community/tutorials/best-practices-for-spies-stubs-and-mocks-in-sinon-js
     it('should calls to componentWillMount' +
         'passing required properties with default values', sinon.test(() => {
+        //Just to get tsd instellisense
         let sinon: Sinon.SinonStatic = this;
         let initializeNewMemberMock = sinon.spy();
         let componentWillMountMock = sinon.stub(MemberPage.prototype, 'componentWillMount');
