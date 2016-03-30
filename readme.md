@@ -113,3 +113,37 @@ We have created here:
 have a single entry point for this.
 
 We have updated MemberAPI to use the http helper / wrapper.
+
+## 12 Testing reducers
+
+Testing libraries:
+
+* [Webpack + Karma](https://github.com/webpack/karma-webpack)
+* [Mocha](https://github.com/mochajs/mocha)
+* [Chai](http://chaijs.com/)
+* [Deep Freeze](https://github.com/substack/deep-freeze)
+
+We added a Karma configuration on Webpack, that runs every '.spec' inside src folder and subfolders.
+This configuration allows debugging with Typescript.
+
+With Mocha we can describe our tests and it adds support for async tests.
+
+Chai is for assertions.
+
+With Deep free we ensures that initial states in reducers are immutable.
+
+## 13 Testing actions
+
+Testing libraries, previous libraries and:
+
+* [Sinon](http://sinonjs.org/)
+
+Sinon join Mocha allow us async action tests.
+
+## 14 Testing components (Containers and Presentationals)
+
+Testing libraries, previous libraries and:
+
+* [Enzyme](https://github.com/airbnb/enzyme)
+
+Enzyme provide an easy way to isolate, manipulate, traverse and assert React Components.
