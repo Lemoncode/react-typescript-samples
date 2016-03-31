@@ -4,8 +4,9 @@ import http from '../../http/http';
 
 describe('httpInitializeDispatcher', () => {
     it('should return http action type: HTTP_INITIALIZE_DISPATCHER and calls to http.Initialize(dispatcher) method ' +
-        'when passing dispatcher equals empty object', () => {
+        'when passing dispatcher equals empty object', sinon.test(() => {
         // Arrange
+        let sinon: Sinon.SinonStatic = this;
         let dispatcher = {};
 
         let httpInitializeMethodStub = sinon.stub(http, "Initialize")
@@ -16,14 +17,12 @@ describe('httpInitializeDispatcher', () => {
         expect(result.type).to.be.equal('HTTP_INITIALIZE_DISPATCHER');
         expect(httpInitializeMethodStub.called).to.be.true;
         expect(httpInitializeMethodStub.calledWith(dispatcher)).to.be.true;
-
-        //Restore original method
-        httpInitializeMethodStub.restore();
-    });
+    }).bind(this));
 
     it('should return http action type: HTTP_INITIALIZE_DISPATCHER and calls to http.Initialize(dispatcher) method ' +
-        'when passing dispatcher equals { testField: "test" }', () => {
+        'when passing dispatcher equals { testField: "test" }', sinon.test(() => {
         // Arrange
+        let sinon: Sinon.SinonStatic = this;
         let dispatcher = {
             testField: "test"
         };
@@ -36,8 +35,5 @@ describe('httpInitializeDispatcher', () => {
         expect(result.type).to.be.equal('HTTP_INITIALIZE_DISPATCHER');
         expect(httpInitializeMethodStub.called).to.be.true;
         expect(httpInitializeMethodStub.calledWith(dispatcher)).to.be.true;
-
-        //Restore original method
-        httpInitializeMethodStub.restore();
-    });
+    }).bind(this));
 })
