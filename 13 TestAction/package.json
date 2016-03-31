@@ -21,8 +21,7 @@
     "react-router": "^2.0.0",
     "redux": "^3.3.1",
     "redux-thunk": "^2.0.1",
-    "toastr": "^2.1.2",
-    "typescript": "^1.9.0-dev.20160308"
+    "toastr": "^2.1.2"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -43,6 +42,7 @@
     "sinon": "^1.17.3",
     "style-loader": "^0.13.0",
     "ts-loader": "^0.8.1",
+    "typescript": "^1.8.9",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.13",
     "webpack-dev-server": "~1.10.1"
