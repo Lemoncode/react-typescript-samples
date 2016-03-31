@@ -10,7 +10,8 @@ const mockStore = configureStore(middlewares);
 
 describe('loadRepos', () => {
   it('should return a promise, and this promise dispatch assignRepos action that returns ' +
-    'an action equals { type: REPOS_ASSIGN, repos: expectedRepos }', (done) => {
+    'an action equals { type: REPOS_ASSIGN, repos: expectedRepos }', sinon.test((done) => {
+    let sinon: Sinon.SinonStatic = this;
     let repo1 = new RepoEntity();
     let repo2 = new RepoEntity();
 
@@ -41,8 +42,5 @@ describe('loadRepos', () => {
         expect(store.getActions()[0].repos.length).to.be.equal(2);
         done();
       });
-
-    //Restore original method
-    getAllReposAsyncMethodStub.restore();
-  });
+  }).bind(this));
 });
