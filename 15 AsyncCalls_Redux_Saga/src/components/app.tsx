@@ -6,6 +6,7 @@ import Header from './common/header';
 import reducers  from '../reducers';
 import createSagaMiddleware from 'redux-saga'
 import sagaWatchers from '../sagas/watchersSaga';
+import Spinner from './common/spinner';
 
 interface Props extends React.Props<App> {
 }
@@ -26,6 +27,7 @@ export default class App extends React.Component<Props, {}> {
        return (
          <Provider store={store}>
             <div className="container-fluid">
+              <Spinner/>
               <Header/>
                 {this.props.children}
               </div>
