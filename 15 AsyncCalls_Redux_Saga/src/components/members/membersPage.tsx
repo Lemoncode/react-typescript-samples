@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {Link} from 'react-router';
 import MemberEntity from '../../api/memberEntity';
 import MemberRow from './memberRow';
-import loadMembers from '../../actions/loadMembers';
+import fetchMemberRequest from '../../actions/fetchMembersRequest';
 
 // Presentational
 
@@ -68,7 +68,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadMembers: () => {return dispatch(loadMembers())}
+    loadMembers: () => {return dispatch(fetchMemberRequest())}
   }
 }
 

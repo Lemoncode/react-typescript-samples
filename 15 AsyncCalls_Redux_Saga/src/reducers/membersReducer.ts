@@ -4,7 +4,7 @@ import MemberEntity from "../api/memberEntity";
 // divided into two reducers member load + member load/update/delete
 export default (state : Array<MemberEntity> = [], action) => {
   switch (action.type) {
-    case 'MEMBERS_ASSIGN':
+    case 'FETCH_MEMBERS_COMPLETED':
 
       return [...action.members];
 
