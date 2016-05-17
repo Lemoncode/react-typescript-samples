@@ -1,5 +1,5 @@
 import { takeLatest } from 'redux-saga'
-import { call, put, fork } from 'redux-saga/effects'
+import { fork } from 'redux-saga/effects'
 import {fetchMembers} from './membersSaga';
 
 // add here all your watchers
