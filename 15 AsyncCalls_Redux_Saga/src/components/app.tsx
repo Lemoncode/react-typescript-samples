@@ -3,7 +3,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import Header from './common/header';
 import reducers  from '../reducers';
-import createSagaMiddleware from 'redux-saga'
+import createSagaMiddleware from 'redux-saga';
 import sagaWatchers from '../sagas/watchersSaga';
 import Spinner from './common/spinner';
 
