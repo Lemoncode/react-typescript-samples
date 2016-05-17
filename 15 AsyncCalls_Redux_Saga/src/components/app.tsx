@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import reduxThunk from 'redux-thunk';
 import Header from './common/header';
 import reducers  from '../reducers';
 import createSagaMiddleware from 'redux-saga'

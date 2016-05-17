@@ -10,6 +10,7 @@ import httpCallCompleted from '../actions/httpCallCompleted';
 export function* fetchMembers(action) {
   let members : Array<MemberEntity>;
 
+  // In case you need error handling: https://github.com/yelouafi/redux-saga/blob/master/docs/basics/ErrorHandling.md
   yield put(httpCallStarted());
   members = yield call(memberAPI.getAllMembersAsync)
   yield put(fetchMembersCompleted(members))
