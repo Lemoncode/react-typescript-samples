@@ -1,3 +1,4 @@
+import { Map } from 'immutable';
 import MemberEntity from "../api/memberEntity";
 import MemberAPI from "../api/memberAPI";
 import objectAssign = require('object-assign');
@@ -5,7 +6,7 @@ import MemberFormErrors from "../validations/memberFormErrors"
 import MemberFormValidator from "../validations/memberFormValidator"
 
 class MemberState  {
-  member : MemberEntity;
+  member : any; // MemberEntity
   memberId : number;
   errors : MemberFormErrors;
   isValid : boolean;
@@ -13,7 +14,7 @@ class MemberState  {
 
   public constructor()
   {
-    this.member = new MemberEntity();
+    this.member = Map(new MemberEntity());
     this.memberId = -1;
     this.errors = new MemberFormErrors();
     this.isValid = false;
@@ -28,15 +29,19 @@ let memberReducer = (state : MemberState = new MemberState(), action) => {
 
   switch (action.type) {
     case 'MEMBER_INITIALIZE_NEW':
-      newState = objectAssign({}, state, {member: new MemberEntity(), errors: new MemberFormErrors(), isValid: false});
+      newState = objectAssign({}, state, {member: Map(new MemberEntity()), errors: new MemberFormErrors(), isValid: false});
       return newState;
 
     case 'MEMBER_LOAD':
-    newState = objectAssign({}, state, {dirty: false, member: action.member, errors: new MemberFormErrors(), isValid: true});
+    newState = objectAssign({}, state, {dirty: false, member: Map(action.member), errors: new MemberFormErrors(), isValid: true});
 
     return newState;
 
     case 'MEMBER_UI_INPUT':
+      const newMember = newState.member.set(action['fieldName'], action['value']);
+      newState = objectAssign({}, state, {member: newMember, dirty: true});
+
+      /*
       let fieldName = action['fieldName'];
       let value = action['value']
 
@@ -45,7 +50,7 @@ let memberReducer = (state : MemberState = new MemberState(), action) => {
 
       newState = objectAssign({}, state, {member: newMember, dirty: true});
       return newState;
-
+      */
     case 'MEMBER_SAVE':
       if(action.errors.isEntityValid) {
         newState = objectAssign({}, state, {saveCompleted: true});
