@@ -58,6 +58,9 @@
     },
     "enzyme/enzyme.d.ts": {
       "commit": "6766ed1d0faf02ede9e2edf2e66bbb2388c825ec"
+    },
+    "immutable/immutable.d.ts": {
+      "commit": "73110d92bdab2367e326f297bef3574285cba329"
     }
   }
 }
