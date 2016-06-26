@@ -18,8 +18,8 @@
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
     "react-router": "^2.0.0",
-    "redux": "^3.3.1",
-    "redux-thunk": "^2.0.1",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0",
     "toastr": "^2.1.2"
   },
   "devDependencies": {

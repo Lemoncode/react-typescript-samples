@@ -20,9 +20,6 @@
         "./typings/tsd.d.ts",
         "!./node_modules/**/*"
     ],
-    "exclude": [
-        "node_modules"
-    ],
     "atom": {
         "rewriteTsconfig": false
     }
