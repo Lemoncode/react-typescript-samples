@@ -14,6 +14,7 @@ import * as resetSaveCompletedActions from '../../../actions/resetSaveCompleted'
 
 const createStore = configureStore();
 
+
 describe('MemberPage container component', () => {
     it('should renders MemberPage presentational component with member property equals undefined' +
         'passing state equals { member: { member: undefined } }', () => {
@@ -103,8 +104,8 @@ describe('MemberPage container component', () => {
         expect(memberPagePresentationalWrapper.prop('errors')).not.to.be.undefined;
         expect(memberPagePresentationalWrapper.prop('errors').login).to.be.equals(errors.login);
     });
-
     it('should renders MemberPage presentational component with saveCompleted property equals undefined' +
+
         'passing state equals { member: { saveCompleted: undefined} }', () => {
 
         let mockStore = createStore({
@@ -153,7 +154,15 @@ describe('MemberPage container component', () => {
             }
         });
 
-        let initializeNewMemberMock = sinon.stub(initializeMemberActions, 'initializeNewMember');
+        // Redux 3.0.0 action.type cannot be undefined
+        let initializeNewMemberMock = sinon.stub(initializeMemberActions,
+                                                'initializeNewMember',
+                                                 () => {
+                                                   return {
+                                                     type: 'MEMBER_INITIALIZE_NEW'
+                                                   }
+                                                 }
+         );
 
         let memberPageContainerWrapper = mount(
             <Provider store={mockStore}>
@@ -166,6 +175,7 @@ describe('MemberPage container component', () => {
         expect(initializeNewMemberMock.calledOnce).to.be.true;
     }).bind(this));
 
+
     it('should renders MemberPage presentational component and does not call to loadMember' +
         'passing state equals { member: { } }', sinon.test(() => {
         let sinon: Sinon.SinonStatic = this;
@@ -175,7 +185,16 @@ describe('MemberPage container component', () => {
             }
         });
 
-        let loadMemberActionsMock = sinon.stub(loadMemberActions, 'loadMember');
+        // Redux 3.0.0 action.type cannot be undefined
+        let loadMemberActionsMock = sinon.stub(loadMemberActions,
+                                               'loadMember',
+                                               () => {
+                                                 return {
+                                                   type: 'MEMBER_LOAD'
+                                                 }
+                                               }
+
+                                               );
 
         let memberPageContainerWrapper = mount(
             <Provider store={mockStore}>
@@ -201,7 +220,17 @@ describe('MemberPage container component', () => {
             id: 1
         };
 
-        let loadMemberActionsMock = sinon.stub(loadMemberActions, 'loadMember');
+        let loadMemberActionsMock = sinon.stub(loadMemberActions,
+                                               'loadMember',
+                                               () => {
+                                                 return {
+                                                   type: 'MEMBER_LOAD'
+                                                 }
+                                               }
+
+                                               );
+
+
 
         let memberPageContainerWrapper = mount(
             <Provider store={mockStore}>
@@ -225,7 +254,17 @@ describe('MemberPage container component', () => {
             }
         });
 
-        let uiInputMemberActionsMock = sinon.stub(uiInputMemberActions, 'uiInputMember');
+        let uiInputMemberActionsMock = sinon.stub(uiInputMemberActions,
+                                               'uiInputMember',
+                                               () => {
+                                                 return {
+                                                   type: 'MEMBER_UI_INPUT'
+                                                 }
+                                               }
+
+                                               );
+
+
 
         let memberPageContainerWrapper = mount(
             <Provider store={mockStore}>
@@ -252,7 +291,16 @@ describe('MemberPage container component', () => {
             }
         });
 
-        let saveMemberActionsMock = sinon.stub(saveMemberActions, 'saveMember');
+        let saveMemberActionsMock = sinon.stub(saveMemberActions,
+                                               'saveMember',
+                                               () => {
+                                                 return {
+                                                   type: 'MEMBER_SAVE'
+                                                 }
+                                               }
+
+                                               );
+
 
         let memberPageContainerWrapper = mount(
             <Provider store={mockStore}>
@@ -273,6 +321,7 @@ describe('MemberPage container component', () => {
         expect(saveMemberActionsMock.calledWith(member)).to.be.true;
     }).bind(this));
 
+
     it('should renders MemberPage presentational component and calls to resetSaveCompleted(member)' +
         'passing state equals { member: { } } and calling to resetSaveCompletedFlag', sinon.test(() => {
         let sinon: Sinon.SinonStatic = this;
@@ -281,8 +330,17 @@ describe('MemberPage container component', () => {
 
             }
         });
+        
+        const resetSaveCompletedActionsMock = sinon.stub(resetSaveCompletedActions,
+                                               'resetSaveCompleted',
+                                               () => {
+                                                 return {
+                                                   type: 'MEMBER_RESET_SAVE_COMPLETED'
+                                                 }
+                                               }
 
-        let resetSaveCompletedActionsMock = sinon.stub(resetSaveCompletedActions, 'resetSaveCompleted');
+                                               );
+
 
         let memberPageContainerWrapper = mount(
             <Provider store={mockStore}>
@@ -299,4 +357,5 @@ describe('MemberPage container component', () => {
         expect(resetSaveCompletedActionsMock.called).to.be.true;
         expect(resetSaveCompletedActionsMock.calledWith()).to.be.true;
     }).bind(this));
+
 });
