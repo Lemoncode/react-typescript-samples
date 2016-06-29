@@ -19,8 +19,8 @@
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
     "react-router": "^2.0.0",
-    "redux": "^3.3.1",
-    "redux-thunk": "^2.0.1",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0",
     "toastr": "^2.1.2"
   },
   "devDependencies": {
@@ -42,6 +42,7 @@
     "sinon": "^1.17.3",
     "style-loader": "^0.13.0",
     "ts-loader": "^0.8.1",
+    "tsd": "^0.6.5",
     "typescript": "^1.8.9",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.13",
