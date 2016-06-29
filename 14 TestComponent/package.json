@@ -45,6 +45,7 @@
     "sinon": "^1.17.3",
     "style-loader": "^0.13.0",
     "ts-loader": "^0.8.1",
+    "tsd": "^0.6.5",
     "typescript": "^1.8.9",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.13",
