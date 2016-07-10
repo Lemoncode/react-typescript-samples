@@ -8,6 +8,7 @@ import MemberErrors from '../../../validations/memberFormErrors';
 import * as toastr from 'toastr';
 import { hashHistory } from 'react-router';
 
+
 describe('MemberPage presentational component', () => {
     it('should renders a div with text equals "No data" and calls to initializeNewMember' +
         'passing required properties with default values', () => {

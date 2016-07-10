@@ -7,6 +7,7 @@ import RepoEntity from '../../../api/repoEntity';
 import MemberList from '../memberList';
 import RepoList from "../../repos/repoList";
 
+
 describe('MembersPage presentational component', () => {
     it('should renders a div with text equals "No data" and does not calls to loadMembers and loadRepos' +
         'passing members and repos properties equals undefined and using shallow enzyme method', () => {
