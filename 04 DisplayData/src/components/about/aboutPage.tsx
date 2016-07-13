@@ -64,7 +64,7 @@ export default class About extends React.Component<Props, {}> {
                  <ul className="top-buffer">
                    <li>
                      <h4>
-                       membersPage.tsx: <small>retrieve data and render component.</small>
+                       membersPage.tsx: <small>retrieving data and rendering component.</small>
                      </h4>
                    </li>
                  </ul>
