@@ -25,7 +25,8 @@ export default class About extends React.Component<Props, {}> {
                  </h3>
                  <h3>
                      <small>
-                         We are using <a target="_blank" href="https://github.com/kriskowal/q">q library</a> to retrieve data from GitHub.
+                         We are using <a target="_blank" href="https://jquery.com/">jquery</a> to retrieve data from GitHub
+                         and <a target="_blank" href="https://github.com/kriskowal/q">q library</a> to resolve promise
                      </small>
                  </h3>
              </div>
