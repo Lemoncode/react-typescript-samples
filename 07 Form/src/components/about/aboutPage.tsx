@@ -39,6 +39,17 @@ export default class About extends React.Component<Props, {}> {
            <div className="col-xs-12 top-buffer">
              <ul>
                <li className="top-buffer">
+                 <h4><b>Router:</b></h4>
+                 <ul className="top-buffer">
+                   <li>
+                     <h4>
+                       index.tsx: <small>adding member route.</small>
+                     </h4>
+                   </li>
+                 </ul>
+               </li>
+
+               <li className="top-buffer">
                  <h4><b>API:</b></h4>
                  <ul className="top-buffer">
                    <li>
