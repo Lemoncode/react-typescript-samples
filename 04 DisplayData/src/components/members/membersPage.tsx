@@ -1,5 +1,5 @@
 import * as React from 'react';
-import memberEntity from '../../api/memberEntity';
+import MemberEntity from '../../api/memberEntity';
 import memberAPI from '../../api/memberAPI';
 
 interface Props extends React.Props<MembersPage> {
@@ -8,7 +8,7 @@ interface Props extends React.Props<MembersPage> {
 // We define members as a state (the compoment holding this will be a container
 // component)
 interface State {
-  members : Array<memberEntity>
+  members : Array<MemberEntity>
 }
 
 // Nice tsx guide: https://github.com/Microsoft/TypeScript/wiki/JSX
@@ -20,17 +20,14 @@ export default class MembersPage extends React.Component<Props, State> {
         this.state = {members: []};
   }
 
-
    // Standard react lifecycle function:
    // https://facebook.github.io/react/docs/component-specs.html
    public componentWillMount() {
      this.state.members = memberAPI.getAllMembers();
    }
 
-
-
    public render() {
-      var CreateMemberRow = function(member : memberEntity) {
+      var CreateMemberRow = function(member : MemberEntity) {
         return (
             <tr key={member.id}>
               <td>
