@@ -20,13 +20,7 @@ export default class About extends React.Component<Props, {}> {
              <div className="col-xs-12">
                  <h3>
                      <small>
-                         We are retrieving members data from <a target="_blank" href="https://github.com/Lemoncode"> Lemoncode GitHub</a>
-                     </small>
-                 </h3>
-                 <h3>
-                     <small>
-                         We are using <a target="_blank" href="https://jquery.com/">jquery</a> to retrieve data from GitHub
-                         and <a target="_blank" href="https://github.com/kriskowal/q">q library</a> to resolve promise
+                         We are creating a form to insert new members.
                      </small>
                  </h3>
              </div>
@@ -49,7 +43,7 @@ export default class About extends React.Component<Props, {}> {
                  <ul className="top-buffer">
                    <li>
                      <h4>
-                       memberAPI.tsx: <small>defining getAllMembersAsync method.</small>
+                       memberAPI.tsx: <small>defining saveAuthor method.</small>
                      </h4>
                    </li>
                  </ul>
@@ -60,7 +54,22 @@ export default class About extends React.Component<Props, {}> {
                  <ul className="top-buffer">
                    <li>
                      <h4>
-                       membersPage.tsx: <small>using getAllMembersAsync method.</small>
+                       membersPage.tsx: <small>navigating to memberPage.tsx</small>
+                     </h4>
+                   </li>
+                   <li>
+                     <h4>
+                       memberPage.tsx: <small>Container Component. Defining method to save and validate members data.</small>
+                     </h4>
+                   </li>
+                   <li>
+                     <h4>
+                       memberForm.tsx: <small>Presentational Component. Rendering inputs and save button components.</small>
+                     </h4>
+                   </li>
+                   <li>
+                     <h4>
+                       textInput.tsx: <small>Presentational Component. Rendering input with validation errors.</small>
                      </h4>
                    </li>
                  </ul>
