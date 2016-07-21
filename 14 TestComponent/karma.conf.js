@@ -34,6 +34,7 @@ module.exports = function (config) {
       },
       //Configuration required by enzyme
       externals: {
+        'react/addons': true,
         'react/lib/ExecutionEnvironment': true,
         'react/lib/ReactContext': 'window',
       }
