@@ -4,6 +4,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var basePath = __dirname;
+// var componentsPathRegex = /components\\about\\aboutPage.tsx/;
+var componentsPathRegex = /components\\about[\/\\]([^\/\\]+[\/\\]?[^\/\\]+).tsx/;
 
 module.exports = {
   context: path.join(basePath, "src"),
@@ -41,8 +43,13 @@ module.exports = {
 		loaders: [
       {
         test: /\.(ts|tsx)$/,
-        exclude: /node_modules/,
+        exclude: componentsPathRegex,
         loader: 'ts-loader'
+      },
+      {
+        test: componentsPathRegex,
+        //include: componentsPathRegex,
+        loaders: ['bundle?lazy', 'ts-loader']
       },
       //Note: Doesn't exclude node_modules to load bootstrap
       {
