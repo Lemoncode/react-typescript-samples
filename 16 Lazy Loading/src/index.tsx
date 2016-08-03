@@ -23,7 +23,7 @@ const lazyComponent = (component) => {
 ReactDOM.render(
   <Router history={hashHistory}>
     <Route  path="/" {...lazyComponent('app')} >
-
+      <IndexRoute {...lazyComponent('about/aboutPage')} />
       <Route path="/about" {...lazyComponent('about/aboutPage')} />
       <Route path="/members" {...lazyComponent('members/membersPage')} />
       <Route path="/member" {...lazyComponent('member/memberPage')} />

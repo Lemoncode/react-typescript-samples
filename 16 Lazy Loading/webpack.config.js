@@ -25,7 +25,8 @@ module.exports = {
 
   output: {
     path: path.join(basePath, "dist"),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    chunkFilename: '[id].chunk.js'
   },
 
   //https://webpack.github.io/docs/webpack-dev-server.html#webpack-dev-server-cli
