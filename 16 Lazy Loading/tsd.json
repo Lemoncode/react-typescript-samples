@@ -40,6 +40,9 @@
     },
     "q/Q.d.ts": {
       "commit": "7ff377f4bf59f6f3a6379bca83c4082895e61110"
+    },
+    "webpack/webpack-env.d.ts": {
+      "commit": "cd94d1e2dd95797ebfbdab1d0e8e4a419d5cfc92"
     }
   }
 }
