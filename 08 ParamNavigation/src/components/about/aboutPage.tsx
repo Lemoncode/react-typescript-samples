@@ -54,7 +54,7 @@ export default class About extends React.Component<Props, {}> {
                  <ul className="top-buffer">
                    <li>
                      <h4>
-                       memberAPI.tsx: <small>defining getMemberById method.</small>
+                       memberAPI.tsx: <small>implementing getMemberById method.</small>
                      </h4>
                    </li>
                  </ul>
@@ -70,7 +70,7 @@ export default class About extends React.Component<Props, {}> {
                    </li>
                    <li>
                      <h4>
-                       memberPage.tsx: <small>defining componentWillMount to check memberId param or new member</small>
+                       memberPage.tsx: <small>implementing componentWillMount to check memberId param or new member</small>
                      </h4>
                    </li>
                  </ul>

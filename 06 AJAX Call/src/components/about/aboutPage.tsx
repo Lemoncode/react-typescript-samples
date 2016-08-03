@@ -49,7 +49,7 @@ export default class About extends React.Component<Props, {}> {
                  <ul className="top-buffer">
                    <li>
                      <h4>
-                       memberAPI.tsx: <small>defining getAllMembersAsync method.</small>
+                       memberAPI.tsx: <small>implementing getAllMembersAsync method.</small>
                      </h4>
                    </li>
                  </ul>

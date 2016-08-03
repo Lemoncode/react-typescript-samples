@@ -54,7 +54,7 @@ export default class About extends React.Component<Props, {}> {
                  <ul className="top-buffer">
                    <li>
                      <h4>
-                       memberAPI.tsx: <small>defining saveAuthor method.</small>
+                       memberAPI.tsx: <small>implementing saveAuthor method.</small>
                      </h4>
                    </li>
                  </ul>
@@ -70,7 +70,7 @@ export default class About extends React.Component<Props, {}> {
                    </li>
                    <li>
                      <h4>
-                       memberPage.tsx: <small>Container Component. Defining method to save and validate members data.</small>
+                       memberPage.tsx: <small>Container Component. Implementing method to save and validate members data.</small>
                      </h4>
                    </li>
                    <li>
