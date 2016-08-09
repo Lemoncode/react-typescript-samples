@@ -18,8 +18,8 @@ module.exports = {
     app: [
       './index.tsx',
       './css/site.css',
-        '../node_modules/toastr/build/toastr.css',
-        '../node_modules/bootstrap/dist/css/bootstrap.css'
+      '../node_modules/toastr/build/toastr.css',
+      '../node_modules/bootstrap/dist/css/bootstrap.css'
     ],
     vendor: [
       'jquery',
