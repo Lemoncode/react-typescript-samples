@@ -33,7 +33,7 @@
     "tsd": "^0.6.5",
     "typescript": "^1.8.9",
     "url-loader": "^0.5.7",
-    "webpack": "^1.12.13",
-    "webpack-dev-server": "~1.10.1"
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
   }
 }

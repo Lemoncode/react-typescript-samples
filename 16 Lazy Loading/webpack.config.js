@@ -14,12 +14,12 @@ module.exports = {
       extensions: ['', '.js', '.ts', '.tsx']
   },
 
-  entry: [
-    app: './index.tsx',
-    styles: [
+  entry: {
+    app: [
+      './index.tsx',
       './css/site.css',
-      '../node_modules/toastr/build/toastr.css',
-      '../node_modules/bootstrap/dist/css/bootstrap.css'
+        '../node_modules/toastr/build/toastr.css',
+        '../node_modules/bootstrap/dist/css/bootstrap.css'
     ],
     vendor: [
       'jquery',
@@ -33,7 +33,7 @@ module.exports = {
       'redux-thunk',
       'toastr'
     ]
-  ],
+  },
 
   output: {
     path: path.join(basePath, "dist"),
