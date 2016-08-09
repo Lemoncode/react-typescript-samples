@@ -4,8 +4,6 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var basePath = __dirname;
-var componentsPathRegex = /components\\about/;
-// var componentsPathRegex = /components\\about[\/\\]([^\/\\]+[\/\\]?[^\/\\]+).tsx/;
 
 module.exports = {
   context: path.join(basePath, "src"),
@@ -17,16 +15,29 @@ module.exports = {
   },
 
   entry: [
-    './index.tsx',
-    './css/site.css',
-    '../node_modules/toastr/build/toastr.css',
-    '../node_modules/bootstrap/dist/css/bootstrap.css'
+    app: './index.tsx',
+    styles: [
+      './css/site.css',
+      '../node_modules/toastr/build/toastr.css',
+      '../node_modules/bootstrap/dist/css/bootstrap.css'
+    ],
+    vendor: [
+      'jquery',
+      'lodash',
+      'object-assign',
+      'q',
+      'react',
+      'react-dom',
+      'react-router',
+      'redux',
+      'redux-thunk',
+      'toastr'
+    ]
   ],
 
   output: {
     path: path.join(basePath, "dist"),
     filename: 'bundle.js',
-    chunkFilename: '[id].chunk.js'
   },
 
   //https://webpack.github.io/docs/webpack-dev-server.html#webpack-dev-server-cli
@@ -44,14 +55,9 @@ module.exports = {
 		loaders: [
       {
         test: /\.(ts|tsx)$/,
-        //exclude: componentsPathRegex,
+	      exclude: /node_modules/,
         loader: 'ts-loader'
       },
-      // {
-      //   test: /\.(ts|tsx)$/,
-      //   include: componentsPathRegex,
-      //   loaders: ['bundle?lazy', 'ts-loader']
-      // },
       //Note: Doesn't exclude node_modules to load bootstrap
       {
         test: /\.css$/,
@@ -67,6 +73,7 @@ module.exports = {
 	},
 
   plugins:[
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
     //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html', //Name of file in ./dist/
