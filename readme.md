@@ -147,3 +147,15 @@ Testing libraries, previous libraries and:
 * [Enzyme](https://github.com/airbnb/enzyme)
 
 Enzyme provide an easy way to isolate, manipulate, traverse and assert React Components.
+
+## 15 Replacing Redux Thunk with Redux Saga
+
+Redux Saga it's an interesting alternative for redux-thunk, worth to take a look:
+
+* [Redux Saga](https://github.com/yelouafi/redux-saga)
+
+## 16 Lazy Loading and React-Router
+
+Use webpack require.ensure to load routes on demand.
+
+* [Lazy Loading Webpack / React Router](http://blog.mxstbr.com/2016/01/react-apps-with-pages/)
