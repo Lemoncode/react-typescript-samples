@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "postinstall": "tsd reinstall --overwrite --save",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "build": "rimraf dist && webpack"
   },
   "author": "Braulio Diez",
   "license": "ISC",
@@ -23,11 +24,11 @@
     "toastr": "^2.1.2"
   },
   "devDependencies": {
-    "bundle-loader": "^0.5.4",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "^2.9.0",
+    "rimraf": "^2.5.4",
     "style-loader": "^0.13.0",
     "ts-loader": "^0.8.1",
     "tsd": "^0.6.5",

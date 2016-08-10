@@ -15,8 +15,8 @@ module.exports = {
   },
 
   entry: {
-    app: [
-      './index.tsx',
+    app: './index.tsx',
+    styles: [
       './css/site.css',
       '../node_modules/toastr/build/toastr.css',
       '../node_modules/bootstrap/dist/css/bootstrap.css'
@@ -37,7 +37,9 @@ module.exports = {
 
   output: {
     path: path.join(basePath, "dist"),
-    filename: 'bundle.js',
+    // Make sure to use [name] or [id] in output.filename
+    //  when using multiple entry points
+    filename: '[name].js',
   },
 
   //https://webpack.github.io/docs/webpack-dev-server.html#webpack-dev-server-cli
@@ -73,7 +75,6 @@ module.exports = {
 	},
 
   plugins:[
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
     //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html', //Name of file in ./dist/

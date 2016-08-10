@@ -11,7 +11,7 @@ const lazyLoadAboutComponent = () => {
       getComponent: (loc, cb)=> {
         require.ensure([], require => {
           cb(null, require('./components/about/aboutPage')["default"]);
-        });
+        }, 'aboutComponent');
       }
     }
 };
@@ -21,7 +21,7 @@ const lazyLoadMembersComponent = () => {
       getComponent: (loc, cb)=> {
         require.ensure([], require => {
           cb(null, require('./components/members/membersPage')["default"]);
-        });
+        }, 'membersComponent');
       }
     }
 };
