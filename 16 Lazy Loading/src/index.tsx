@@ -35,6 +35,27 @@ const lazyLoadMembersComponent = () => {
     }
 };
 
+//Second approach to load group of components in one chunk could be:
+/*
+    const lazyLoadMemberAreaPage = (pageName) => {
+      return {
+          getComponent: (location, callback) => {
+            require.ensure(['./components/member/memberPage', './components/members/membersPage'], require => {
+              switch(pageName) {
+                case 'member':
+                  callback(null, require('./components/member/memberPage')["default"]);
+                  break;
+
+                case 'members':
+                  callback(null, require('./components/members/membersPage')["default"]);
+                  break;
+              }
+            }, 'MemberComponents');
+          }
+        }
+    };
+*/
+
 ReactDOM.render(
   <Router history={hashHistory}>
     <Route  path="/" component= {App} >
