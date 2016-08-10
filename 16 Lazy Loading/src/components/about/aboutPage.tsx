@@ -45,8 +45,13 @@ export default class About extends React.Component<Props, {}> {
                      <h4>
                        package.json: <small>adding new command named build. This command clean 'dist' folder and build the app.</small>
                      </h4>
+                     <h3>
+                         <small>
+                             To execute this command we have to run: <code>npm run build</code>
+                         </small>
+                     </h3>
                    </li>
-                   <li>
+                   <li className="top-buffer">
                      <h4>
                        webpack.config.js: <small>code splitting into multiple bundles. We are creating app, styles and vendor bundles.
                         <b>Important</b>: use '[name]' webpack variable in output.filename section when using multiple entry points.</small>
@@ -59,7 +64,7 @@ export default class About extends React.Component<Props, {}> {
                  <ul className="top-buffer">
                    <li>
                      <h4>
-                       index.tsx: <small>using require.ensure to lazy loading AboutPage and MembersPage component.</small>
+                       index.tsx: <small>using require.ensure to lazy loading AboutPage and member components.</small>
                      </h4>
                    </li>
                  </ul>

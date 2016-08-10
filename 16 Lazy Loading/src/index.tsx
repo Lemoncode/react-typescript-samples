@@ -2,24 +2,29 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import App from './components/app.tsx';
-import MemberPage from './components/member/memberPage';
 
+//Loading single component in one chunk
 const lazyLoadAboutComponent = () => {
   return {
-      getComponent: (loc, cb)=> {
+      getComponent: (location, callback)=> {
         require.ensure([], require => {
-          cb(null, require('./components/about/aboutPage')["default"]);
+          callback(null, require('./components/about/aboutPage')["default"]);
         }, 'AboutPage');
       }
     }
 };
 
-const lazyLoadMembersComponent = () => {
+//Loading group of components in one chunk
+const lazyLoadMemberComponents = (memberComponent) => {
   return {
-      getComponent: (loc, cb)=> {
-        require.ensure([], require => {
-          cb(null, require('./components/members/membersPage')["default"]);
-        }, 'MembersPage');
+      getComponent: (location, callback) => {
+        require.ensure(['./components/member/memberPage', './components/members/membersPage'], require => {
+          if (memberComponent === 'member') {
+              callback(null, require('./components/member/memberPage')["default"]);
+          } else if(memberComponent === 'members'){
+              callback(null, require('./components/members/membersPage')["default"]);
+          }
+        }, 'MemberComponents');
       }
     }
 };
@@ -29,9 +34,9 @@ ReactDOM.render(
     <Route  path="/" component= {App} >
       <IndexRoute {...lazyLoadAboutComponent()} />
       <Route path="/about" {...lazyLoadAboutComponent()} />
-      <Route path="/members" {...lazyLoadMembersComponent()} />
-      <Route path="/member" component={MemberPage} />
-      <Route path="/memberEdit/:id" component={MemberPage} />
+      <Route path="/members" {...lazyLoadMemberComponents('members')} />
+      <Route path="/member" {...lazyLoadMemberComponents('member')} />
+      <Route path="/memberEdit/:id" {...lazyLoadMemberComponents('member')} />
     </Route>
   </Router>
 
