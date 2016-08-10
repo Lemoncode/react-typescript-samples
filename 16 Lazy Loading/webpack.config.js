@@ -14,16 +14,32 @@ module.exports = {
       extensions: ['', '.js', '.ts', '.tsx']
   },
 
-  entry: [
-    './index.tsx',
-    './css/site.css',
-    '../node_modules/toastr/build/toastr.css',
-    '../node_modules/bootstrap/dist/css/bootstrap.css'
-  ],
+  entry: {
+    app: './index.tsx',
+    styles: [
+      './css/site.css',
+      '../node_modules/toastr/build/toastr.css',
+      '../node_modules/bootstrap/dist/css/bootstrap.css'
+    ],
+    vendor: [
+      'jquery',
+      'lodash',
+      'object-assign',
+      'q',
+      'react',
+      'react-dom',
+      'react-router',
+      'redux',
+      'redux-thunk',
+      'toastr'
+    ]
+  },
 
   output: {
     path: path.join(basePath, "dist"),
-    filename: 'bundle.js'
+    // Make sure to use [name] or [id] in output.filename
+    //  when using multiple entry points
+    filename: '[name].js',
   },
 
   //https://webpack.github.io/docs/webpack-dev-server.html#webpack-dev-server-cli
@@ -59,6 +75,7 @@ module.exports = {
 	},
 
   plugins:[
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
     //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html', //Name of file in ./dist/
