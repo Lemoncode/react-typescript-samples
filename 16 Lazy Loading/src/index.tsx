@@ -15,15 +15,21 @@ const lazyLoadAboutComponent = () => {
 };
 
 //Loading group of components in one chunk
-const lazyLoadMemberComponents = (memberComponent) => {
+const lazyLoadMemberComponent = () => {
   return {
       getComponent: (location, callback) => {
         require.ensure(['./components/member/memberPage', './components/members/membersPage'], require => {
-          if (memberComponent === 'member') {
-              callback(null, require('./components/member/memberPage')["default"]);
-          } else if(memberComponent === 'members'){
-              callback(null, require('./components/members/membersPage')["default"]);
-          }
+          callback(null, require('./components/member/memberPage')["default"]);
+        }, 'MemberComponents');
+      }
+    }
+};
+
+const lazyLoadMembersComponent = () => {
+  return {
+      getComponent: (location, callback) => {
+        require.ensure(['./components/member/memberPage', './components/members/membersPage'], require => {
+          callback(null, require('./components/members/membersPage')["default"]);
         }, 'MemberComponents');
       }
     }
@@ -34,9 +40,9 @@ ReactDOM.render(
     <Route  path="/" component= {App} >
       <IndexRoute {...lazyLoadAboutComponent()} />
       <Route path="/about" {...lazyLoadAboutComponent()} />
-      <Route path="/members" {...lazyLoadMemberComponents('members')} />
-      <Route path="/member" {...lazyLoadMemberComponents('member')} />
-      <Route path="/memberEdit/:id" {...lazyLoadMemberComponents('member')} />
+      <Route path="/members" {...lazyLoadMembersComponent()} />
+      <Route path="/member" {...lazyLoadMemberComponent()} />
+      <Route path="/memberEdit/:id" {...lazyLoadMemberComponent()} />
     </Route>
   </Router>
 
