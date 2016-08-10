@@ -20,7 +20,8 @@ export default class About extends React.Component<Props, {}> {
              <div className="col-xs-12">
                  <h3>
                      <small>
-                         We are adding Lazy Loading to React Components: we are only loading AboutPage and MembersPage when user requests this components.
+                         We are adding Lazy Loading support to React Router: we are only loading AboutPage at startup and MemberPage + MembersPage
+                         are loaded just on user request.
                      </small>
                  </h3>
              </div>
@@ -41,16 +42,6 @@ export default class About extends React.Component<Props, {}> {
                <li className="top-buffer">
                  <h4><b>Configuration:</b></h4>
                  <ul className="top-buffer">
-                   <li>
-                     <h4>
-                       package.json: <small>adding new command named build. This command clean 'dist' folder and build the app.</small>
-                     </h4>
-                     <h3>
-                         <small>
-                             To execute this command we have to run: <code>npm run build</code>
-                         </small>
-                     </h3>
-                   </li>
                    <li className="top-buffer">
                      <h4>
                        webpack.config.js: <small>code splitting into multiple bundles. We are creating app, styles and vendor bundles.
@@ -64,7 +55,7 @@ export default class About extends React.Component<Props, {}> {
                  <ul className="top-buffer">
                    <li>
                      <h4>
-                       index.tsx: <small>using require.ensure to lazy loading AboutPage and member components.</small>
+                       index.tsx: <small>using require.ensure to request pages on demand.</small>
                      </h4>
                    </li>
                  </ul>
