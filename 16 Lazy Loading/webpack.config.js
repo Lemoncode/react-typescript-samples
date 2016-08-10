@@ -57,7 +57,7 @@ module.exports = {
 		loaders: [
       {
         test: /\.(ts|tsx)$/,
-	      exclude: /node_modules/,
+        exclude: /node_modules/,
         loader: 'ts-loader'
       },
       //Note: Doesn't exclude node_modules to load bootstrap
