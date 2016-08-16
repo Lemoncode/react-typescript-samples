@@ -8,14 +8,16 @@ import {NavigationInfo} from '../middleware/navigationInfo';
 const saveMember = (member : MemberEntity, notificationInfo : UINotificationInfo = null, navigationInfo : NavigationInfo ) => {
   // Candidate to be splitted
   let errorsSave : MemberFormErrors = MemberFormValidator.validateMember(member);
+  notificationInfo.succeeded = false;
+  navigationInfo.succeeded = false;
 
   if(errorsSave.isEntityValid) {
     try {
       memberAPI.saveAuthor(member);
       notificationInfo.succeeded = true;
+      navigationInfo.succeeded = true;
     }
     catch(e) {
-      notificationInfo.succeeded = false;
     }
   }
 
