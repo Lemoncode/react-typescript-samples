@@ -5,13 +5,14 @@ import reduxThunk from 'redux-thunk';
 import Header from './common/header';
 import reducers  from '../reducers';
 import {notification} from '../middleware/uiNotificationMware'
+import {navigationMiddleware} from '../middleware/NavigationMware';
 
 interface Props extends React.Props<App> {
 }
 
 let store = createStore(
   reducers
-  ,applyMiddleware(...[reduxThunk, notification])
+  ,applyMiddleware(...[reduxThunk, notification, navigationMiddleware])
 );
 
 export default class App extends React.Component<Props, {}> {

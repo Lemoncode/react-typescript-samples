@@ -3,8 +3,9 @@ import memberAPI from '../api/memberAPI';
 import MemberFormErrors from '../validations/memberFormErrors';
 import MemberFormValidator from '../validations/memberFormValidator';
 import {UINotificationInfo} from '../middleware/uiNotificationInfo';
+import {NavigationInfo} from '../middleware/navigationInfo';
 
-const saveMember = (member : MemberEntity, notificationInfo : UINotificationInfo = null) => {
+const saveMember = (member : MemberEntity, notificationInfo : UINotificationInfo = null, navigationInfo : NavigationInfo ) => {
   // Candidate to be splitted
   let errorsSave : MemberFormErrors = MemberFormValidator.validateMember(member);
 
@@ -22,6 +23,8 @@ const saveMember = (member : MemberEntity, notificationInfo : UINotificationInfo
      type: 'MEMBER_SAVE'
      ,errors : errorsSave
      ,uiNotificationInfo : notificationInfo
+     ,navigationInfo : navigationInfo
+
    }
 }
 

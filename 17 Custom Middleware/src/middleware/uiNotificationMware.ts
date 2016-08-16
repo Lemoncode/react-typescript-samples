@@ -9,7 +9,7 @@ function createUINotificationMiddleware() {
           toastr.success(uiNotificationInfo.successMessage);
       } else {
           toastr.error(uiNotificationInfo.errorMessage);
-      }      
+      }
     }
 
     return next(action);
@@ -17,4 +17,3 @@ function createUINotificationMiddleware() {
 }
 
 export const notification = createUINotificationMiddleware();
-notification["withExtraArgument"] = createUINotificationMiddleware;

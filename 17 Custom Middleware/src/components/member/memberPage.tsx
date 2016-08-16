@@ -12,6 +12,7 @@ import uiInputMember from '../../actions/uiInputMember';
 import resetSaveCompleted from '../../actions/resetSaveCompleted';
 import initializeNewMember from  '../../actions/initializeNewMember';
 import {UINotificationInfo} from "../../middleware/uiNotificationInfo";
+import {NavigationInfo} from '../../middleware/navigationInfo'
 
 interface Props extends React.Props<MemberPage> {
   params : any
@@ -20,7 +21,7 @@ interface Props extends React.Props<MemberPage> {
   ,saveCompleted? : boolean
   ,loadMember? : (id : number) => void
   ,fireFieldValueChanged  : (fieldName : string, value : any) => void
-  ,saveMember: (member: MemberEntity, notificationInfo : UINotificationInfo) => void
+  ,saveMember: (member: MemberEntity, notificationInfo : UINotificationInfo, navigationInfo : NavigationInfo) => void
   ,initializeNewMember: () => void
   ,resetSaveCompletedFlag: () => void
 }
@@ -53,7 +54,7 @@ class MemberPage extends React.Component<Props, {}> {
      //toastr.success('Author saved.');
 
      // using hashHistory, TODO: proper configure browserHistory on app and here
-     hashHistory.push('/members')
+     //hashHistory.push('/members')
 
      // Reset saveCompleted flag
      this.props.resetSaveCompletedFlag();
@@ -76,8 +77,10 @@ public saveMember(event) {
   notificationInfo.successMessage = 'Author saved.';
   notificationInfo.errorMessage = 'Failed to save author.';
 
+  const navigationInfo = new NavigationInfo();
+  navigationInfo.successNavigationRoute = "/members";
 
-  this.props.saveMember(this.props.member, notificationInfo);
+  this.props.saveMember(this.props.member, notificationInfo, navigationInfo);
 }
 
  public render() {
@@ -110,7 +113,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loadMember: (id : number) => {return dispatch(loadMember(id))}
     ,fireFieldValueChanged: (fieldName : string, value : any) => {return dispatch(uiInputMember(fieldName, value))}
-    ,saveMember: (member: MemberEntity, notificationInfo : UINotificationInfo) =>  {return dispatch(saveMember(member, notificationInfo))}
+    ,saveMember: (member: MemberEntity, notificationInfo : UINotificationInfo, navigationInfo : NavigationInfo) =>  {return dispatch(saveMember(member, notificationInfo, navigationInfo))}
     ,resetSaveCompletedFlag: () => {return dispatch(resetSaveCompleted())}
     ,initializeNewMember: () => {return dispatch(initializeNewMember())
     }
