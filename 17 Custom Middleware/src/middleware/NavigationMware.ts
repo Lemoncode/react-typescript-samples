@@ -7,8 +7,11 @@ function createUINotificationMiddleware() {
     if (action.navigationInfo) {
       const navigationInfo = action.navigationInfo as NavigationInfo;
       if(navigationInfo.succeeded) {
-          hashHistory.push('/members');
+          hashHistory.push(navigationInfo.successNavigationRoute);
       } else {
+        if(navigationInfo.errorNavigationRoute) {
+          hashHistory.push(navigationInfo.errorNavigationRoute);
+        }
       }
     }
 
