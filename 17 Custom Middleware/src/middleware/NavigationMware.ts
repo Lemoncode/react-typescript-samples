@@ -2,7 +2,7 @@ import * as toastr from 'toastr';
 import {NavigationInfo} from './navigationInfo'
 import { hashHistory } from 'react-router';
 
-function createUINotificationMiddleware() {
+function createNavigationMiddleware() {
   return ({ dispatch, getState }) => next => action => {
     if (action.navigationInfo) {
       const navigationInfo = action.navigationInfo as NavigationInfo;
@@ -19,4 +19,4 @@ function createUINotificationMiddleware() {
   };
 }
 
-export const navigationMiddleware = createUINotificationMiddleware();
+export const navigationMiddleware = createNavigationMiddleware();
