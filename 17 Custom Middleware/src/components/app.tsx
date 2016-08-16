@@ -12,7 +12,7 @@ interface Props extends React.Props<App> {
 
 let store = createStore(
   reducers
-  ,applyMiddleware(...[reduxThunk, notification, navigationMiddleware])
+  ,applyMiddleware(reduxThunk, notification, navigationMiddleware)
 );
 
 export default class App extends React.Component<Props, {}> {
