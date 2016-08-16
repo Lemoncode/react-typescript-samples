@@ -1,17 +1,15 @@
 import * as toastr from 'toastr';
 import {UINotificationInfo} from './uiNotificationInfo'
 
-function createUINotificationMiddleware(succeededArg : boolean = null) {
+function createUINotificationMiddleware() {
   return ({ dispatch, getState }) => next => action => {
     if (action.uiNotificationInfo) {
       const uiNotificationInfo = action.uiNotificationInfo as UINotificationInfo;
-      if(succeededArg) {
+      if(uiNotificationInfo.succeeded) {
           toastr.success(uiNotificationInfo.successMessage);
       } else {
           toastr.error(uiNotificationInfo.errorMessage);
-      }
-
-      return action(dispatch, getState);
+      }      
     }
 
     return next(action);
