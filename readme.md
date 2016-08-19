@@ -14,7 +14,11 @@ start working with React and Typescript. Characteristics:
  + More advanced navigation scenarios.
  + Redux samples.
 
-Contributors and reviewers are more than welcome.
+##Call for contributors:
+
+Some months ago this project started as something internal... let's create some simple samples that cover react / redux / typescript scenarios that could serve as a guidance and reference in the future... now, we and other developers are using this repo as quick by sample guidance. We keep on adding more samples to it, but we have found that older samples need some updates / refactoring.
+
+Are you interested in contributing into this project? If that's the case don't hesitate contacting us.: [call for contributors](https://github.com/Lemoncode/react-typescript-samples/issues/62).
 
 ##To get started:  
 1. Install [NodeJS](http://www.nodejs.org)  
