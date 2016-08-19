@@ -7,13 +7,16 @@ start working with React and Typescript. Characteristics:
 + React + Typescript based.
 + Simple navigation using react-router.
 + Managing async calls and updates.
++ Using Redux library.
++ Handling async calls via Redux-Thunk + Redux Saga.
++ Adding unit testing support.
++ Implementing Lazy Loading.
 
 - Future enhancements:
 
- + Form validation.
- + More advanced navigation scenarios.
- + Redux samples.
-
+ + Using Immutablejs.
+ + Using React Hot Loader.
+ 
 ##Call for contributors:
 
 Some months ago this project started as something internal... let's create some simple samples that cover react / redux / typescript scenarios that could serve as a guidance and reference in the future... now, we and other developers are using this repo as quick by sample guidance. We keep on adding more samples to it, but we have found that older samples need some updates / refactoring.
