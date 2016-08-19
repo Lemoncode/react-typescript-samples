@@ -14,7 +14,10 @@ module.exports = {
       extensions: ['', '.js', '.ts', '.tsx']
   },
 
+  // Toake into account: remove hot loading entry points in production
   entry: [
+    'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/only-dev-server',
     './index.tsx',
     './css/site.css',
     '../node_modules/toastr/build/toastr.css',
@@ -42,7 +45,7 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        loader: 'ts-loader'
+        loaders: ['react-hot','ts-loader']
       },
       //Note: Doesn't exclude node_modules to load bootstrap
       {
@@ -64,6 +67,7 @@ module.exports = {
 	},
 
   plugins:[
+    new webpack.HotModuleReplacementPlugin(),
     //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html', //Name of file in ./dist/
