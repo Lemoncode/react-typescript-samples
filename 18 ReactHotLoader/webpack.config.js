@@ -16,8 +16,7 @@ module.exports = {
 
   // Toake into account: remove hot loading entry points in production
   entry: [
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
+    'webpack-hot-middleware/client',
     './index.tsx',
     './css/site.css',
     '../node_modules/toastr/build/toastr.css',
@@ -25,27 +24,21 @@ module.exports = {
   ],
 
   output: {
+    publicPath: 'http://localhost:8080/',
     path: path.join(basePath, "dist"),
     filename: 'bundle.js'
   },
 
-  //https://webpack.github.io/docs/webpack-dev-server.html#webpack-dev-server-cli
-  devServer: {
-    contentBase: './dist', //Content base
-    inline: true, //Enable watch and live reload
-    host: 'localhost',
-    port: 8080
-  },
 
   // http://webpack.github.io/docs/configuration.html#devtool
-  devtool: 'inline-source-map',
+  devtool: 'eval',
 
   module: {
 		loaders: [
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        loaders: ['react-hot','ts-loader']
+        loaders: ['babel','ts-loader']
       },
       //Note: Doesn't exclude node_modules to load bootstrap
       {
@@ -68,6 +61,7 @@ module.exports = {
 
   plugins:[
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
     //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html', //Name of file in ./dist/
