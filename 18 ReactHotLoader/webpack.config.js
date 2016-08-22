@@ -25,7 +25,7 @@ module.exports = {
   ],
 
   output: {
-    publicPath: 'http://localhost:9090/',
+    publicPath: 'http://localhost:8080/',
     path: path.join(basePath, "dist"),
     filename: 'bundle.js'
   },
@@ -39,7 +39,7 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        loaders: ['babel','ts-loader']
+        loaders: ['babel?presets[]=es2015,presets[]=react,presets[]=react-hmre','ts-loader']
       },
       //Note: Doesn't exclude node_modules to load bootstrap
       {

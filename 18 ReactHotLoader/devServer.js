@@ -17,11 +17,15 @@ app.get('*', function (req, res) {
 	res.sendFile(path.join(__dirname + "/dist", 'index.html'));
 });
 
-app.listen(9090, 'localhost', function (err) {
+app.listen(8080, 'localhost', function (err) {
 	if (err) {
 		console.log(err);
 		return;
 	}
 
-	console.log('Listening at http://localhost:9090');
+	console.log('Listening at http://localhost:8080');
+
+	// Package.json two options to test:
+	// "start": "webpack-dev-server --progress --inline --hot",
+	// "start": "node devServer.js",
 });
