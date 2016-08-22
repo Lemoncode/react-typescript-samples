@@ -32,7 +32,7 @@ module.exports = {
 
 
   // http://webpack.github.io/docs/configuration.html#devtool
-  devtool: 'eval',
+  devtool: 'source-map',
 
   module: {
 		loaders: [
