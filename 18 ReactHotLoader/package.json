@@ -59,8 +59,7 @@
     "tsd": "^0.6.5",
     "typescript": "^1.8.9",
     "url-loader": "^0.5.7",
-    "webpack": "^1.12.13",
-    "webpack-dev-middleware": "^1.6.1",
+    "webpack": "^1.12.13",    
     "webpack-hot-middleware": "^2.12.2"
   }
 }
