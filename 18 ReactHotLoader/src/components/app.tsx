@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import Header from './common/header';
 import reducers  from '../reducers';
@@ -9,10 +9,14 @@ import SpinnerContainer from './common/spinner.container';
 interface Props extends React.Props<App> {
 }
 
+const nonTypedWindow : any = window;
+
 let store = createStore(
-  reducers
-  ,applyMiddleware(ReduxThunk)
-  /*, window['devToolsExtension'] && window['devToolsExtension']()*/
+  reducers,
+   compose(
+     applyMiddleware(ReduxThunk)
+     ,nonTypedWindow.devToolsExtension ? nonTypedWindow.devToolsExtension() : f => f
+   )
 );
 
 export default class App extends React.Component<Props, {}> {

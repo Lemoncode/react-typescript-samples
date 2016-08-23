@@ -17,7 +17,8 @@ module.exports = {
 
   // Toake into account: remove hot loading entry points in production
   entry: [
-    'webpack-hot-middleware/client',
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server',
     './index.tsx',
     './css/site.css',
     '../node_modules/toastr/build/toastr.css',
@@ -39,7 +40,7 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        loaders: ['babel?presets[]=es2015,presets[]=react,presets[]=react-hmre','ts-loader']
+        loaders: ['react-hot', 'babel','ts-loader']
       },
       //Note: Doesn't exclude node_modules to load bootstrap
       {

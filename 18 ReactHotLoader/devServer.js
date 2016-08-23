@@ -1,31 +1,16 @@
-var path = require('path');
-var express = require('express');
 var webpack = require('webpack');
+var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.config');
 
-var app = express();
-var compiler = webpack(config);
-
-app.use(require('webpack-dev-middleware')(compiler, {
+new WebpackDevServer(webpack(config), {
+  publicPath: config.output.publicPath,
+  hot: true,
 	noInfo: true,
-	publicPath: config.output.publicPath
-}));
+  historyApiFallback: true
+}).listen(8080, 'localhost', function (err, result) {
+  if (err) {
+    return console.log(err);
+  }
 
-app.use(require('webpack-hot-middleware')(compiler));
-
-app.get('*', function (req, res) {
-	res.sendFile(path.join(__dirname + "/dist", 'index.html'));
-});
-
-app.listen(8080, 'localhost', function (err) {
-	if (err) {
-		console.log(err);
-		return;
-	}
-
-	console.log('Listening at http://localhost:8080');
-
-	// Package.json two options to test:
-	// "start": "webpack-dev-server --progress --inline --hot",
-	// "start": "node devServer.js",
+  console.log('Listening at http://localhost:8080/');
 });
