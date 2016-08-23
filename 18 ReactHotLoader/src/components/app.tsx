@@ -12,6 +12,7 @@ interface Props extends React.Props<App> {
 let store = createStore(
   reducers
   ,applyMiddleware(ReduxThunk)
+  /*, window['devToolsExtension'] && window['devToolsExtension']()*/
 );
 
 export default class App extends React.Component<Props, {}> {

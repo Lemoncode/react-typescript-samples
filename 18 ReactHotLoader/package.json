@@ -5,7 +5,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "postinstall": "tsd reinstall --overwrite --save",
-    "start": "webpack-dev-server --progress --inline --hot",
+    "start": "node devserver.js",
     "test": "karma start"
   },
   "author": "Braulio Diez",
