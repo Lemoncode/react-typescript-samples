@@ -5,7 +5,7 @@ import reduxThunk from 'redux-thunk';
 import Header from './common/header';
 import reducers  from '../reducers';
 import {notification} from '../middleware/uiNotificationMware'
-import {navigationMiddleware} from '../middleware/NavigationMware';
+import {navigationMiddleware} from '../middleware/navigationMware';
 
 interface Props extends React.Props<App> {
 }
