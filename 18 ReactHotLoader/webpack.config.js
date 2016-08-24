@@ -24,8 +24,7 @@ module.exports = {
     '../node_modules/bootstrap/dist/css/bootstrap.css'
   ],
 
-  output: {
-    publicPath: 'http://localhost:8080/',
+  output: {    
     path: path.join(basePath, "dist"),
     filename: 'bundle.js'
   },
