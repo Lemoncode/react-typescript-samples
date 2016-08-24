@@ -6,7 +6,7 @@ import { NavigationInfo } from '../navigationInfo';
 
 describe('navigationMware', () => {
   it('when dispatch an action equals { type: "Test Action" } ' +
-    'should not call to hashHistory.push method', sinon.test(() => {
+    'should does not call to hashHistory.push method', sinon.test(() => {
     //Arrange
     let sinon: Sinon.SinonStatic = this;
 
@@ -27,7 +27,7 @@ describe('navigationMware', () => {
   }).bind(this));
 
   it('when dispatch an action equals { type: "Test Action", navigationInfo: null } ' +
-    'should not call to hashHistory.push method', sinon.test(() => {
+    'should does not call to hashHistory.push method', sinon.test(() => {
     //Arrange
     let sinon: Sinon.SinonStatic = this;
 
@@ -49,7 +49,7 @@ describe('navigationMware', () => {
   }).bind(this));
 
   it('when dispatch an action equals { type: "Test Action", navigationInfo: undefined } ' +
-    'should not call to hashHistory.push method', sinon.test(() => {
+    'should does not call to hashHistory.push method', sinon.test(() => {
     //Arrange
     let sinon: Sinon.SinonStatic = this;
 
@@ -72,7 +72,7 @@ describe('navigationMware', () => {
 
   it('when dispatch an action equals { type: "Test Action", ' +
       'navigationInfo: { succeeded: false, errorNavigationRoute: null} } ' +
-    'should not call to hashHistory.push method', sinon.test(() => {
+    'should does not call to hashHistory.push method', sinon.test(() => {
     //Arrange
     let sinon: Sinon.SinonStatic = this;
 
@@ -99,7 +99,7 @@ describe('navigationMware', () => {
 
   it('when dispatch an action equals { type: "Test Action", ' +
       'navigationInfo: { succeeded: false, errorNavigationRoute: undefined} } ' +
-    'should not call to hashHistory.push method', sinon.test(() => {
+    'should does not call to hashHistory.push method', sinon.test(() => {
     //Arrange
     let sinon: Sinon.SinonStatic = this;
 
@@ -154,7 +154,7 @@ describe('navigationMware', () => {
 
   it('when dispatch an action equals { type: "Test Action", ' +
       'navigationInfo: { succeeded: true, successNavigationRoute: null} } ' +
-    'should not call to hashHistory.push method', sinon.test(() => {
+    'should does not call to hashHistory.push method', sinon.test(() => {
     //Arrange
     let sinon: Sinon.SinonStatic = this;
 
@@ -181,7 +181,7 @@ describe('navigationMware', () => {
 
   it('when dispatch an action equals { type: "Test Action", ' +
       'navigationInfo: { succeeded: true, successNavigationRoute: undefined} } ' +
-    'should not call to hashHistory.push method', sinon.test(() => {
+    'should does not call to hashHistory.push method', sinon.test(() => {
     //Arrange
     let sinon: Sinon.SinonStatic = this;
 
