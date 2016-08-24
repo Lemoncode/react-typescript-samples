@@ -5,8 +5,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var basePath = __dirname;
 
-module.exports = {
-  debug: true,
+module.exports = {  
   context: path.join(basePath, "src"),
   resolve: {
       // .js is required for react imports.
