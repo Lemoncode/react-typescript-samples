@@ -5,7 +5,10 @@ import configureStore = require('redux-mock-store');
 describe('navigationMware', () => {
   it('should return true if karma env is working', () => {
     //Arrange
-    const createStore = configureStore();
+    const createStore = configureStore(navigationMiddleware);
+    const action = {
+      type: "Test Action"
+    };
 
     //Act
 
