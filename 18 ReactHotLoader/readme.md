@@ -12,11 +12,10 @@ You don't need to update the source code of the app, all we have to do is instal
 
 Packages to install (dev dependencies):
 
- - react-hot-loader
- - webpack-hot-middleware
+ - react-hot-loader 
 
 ```
-npm install react-hot-loader webpack-hot-middleware --save-dev
+npm install react-hot-loader --save-dev
 ```
 
 webpack config updates:
