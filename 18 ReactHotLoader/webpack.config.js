@@ -5,7 +5,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var basePath = __dirname;
 
-module.exports = {  
+module.exports = {
   context: path.join(basePath, "src"),
   resolve: {
       // .js is required for react imports.
@@ -30,6 +30,15 @@ module.exports = {
     filename: 'bundle.js'
   },
 
+  devServer: {
+      contentBase: './dist', //Content base
+      inline: true, //Enable watch and live reload
+      host: 'localhost',
+      port: 8080,
+      noInfo: true,
+      hot: true,
+      historyApiFallback: true
+    },
 
   // http://webpack.github.io/docs/configuration.html#devtool
   devtool: 'source-map',
