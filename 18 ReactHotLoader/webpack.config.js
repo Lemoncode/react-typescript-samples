@@ -24,7 +24,7 @@ module.exports = {
     '../node_modules/bootstrap/dist/css/bootstrap.css'
   ],
 
-  output: {    
+  output: {
     path: path.join(basePath, "dist"),
     filename: 'bundle.js'
   },
@@ -47,7 +47,7 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        loaders: ['react-hot', 'babel','ts-loader']
+        loaders: ['react-hot', 'ts']
       },
       //Note: Doesn't exclude node_modules to load bootstrap
       {
