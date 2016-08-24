@@ -12,7 +12,7 @@ function createNavigationMiddleware() {
 }
 
 function navigateToRoute(navigationInfo: NavigationInfo){
-  if(navigationInfo.succeeded) {
+  if(navigationInfo.succeeded && navigationInfo.successNavigationRoute) {
       hashHistory.push(navigationInfo.successNavigationRoute);
   } else if(navigationInfo.errorNavigationRoute) {
       hashHistory.push(navigationInfo.errorNavigationRoute);
