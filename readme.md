@@ -16,7 +16,7 @@ start working with React and Typescript. Characteristics:
 
  + Using Immutablejs.
  + Using React Hot Loader.
- 
+
 ##Call for contributors:
 
 Some months ago this project started as something internal... let's create some simple samples that cover react / redux / typescript scenarios that could serve as a guidance and reference in the future... now, we and other developers are using this repo as quick by sample guidance. We keep on adding more samples to it, but we have found that older samples need some updates / refactoring.
@@ -166,3 +166,12 @@ Redux Saga it's an interesting alternative for redux-thunk, worth to take a look
 Use webpack require.ensure to load routes on demand.
 
 * [Lazy Loading Webpack / React Router](http://blog.mxstbr.com/2016/01/react-apps-with-pages/)
+
+## 18 Add support for ReactHotloader and ReduxDev Tools.
+
+React Hot loader allows us to introduce changes in the application source code meanwhile we are running our web server and get the changes into our page without having to reload the browser and not losing the application state.
+
+Redux dev tool is a chrome add-on that allows us to browse the state, replay actions, inject actions, export / import state...
+
+* [React Hot Loader](https://github.com/gaearon/react-hot-loader)
+* [Redux Dev Tool](https://github.com/gaearon/redux-devtools)
