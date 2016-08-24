@@ -12,28 +12,11 @@ You don't need to update the source code of the app, all we have to do is instal
 
 Packages to install (dev dependencies):
 
- - babel-core
- - babel-loader
- - babel-preset-es2015
- - babel-preset-react
- - babel-preset-stage-0
  - react-hot-loader
  - webpack-hot-middleware
 
 ```
-npm install babel-core babel-loader
-babel-preset-es2015 babel-preset-react
-babel-preset-stage-0
-react-hot-loader
-webpack-hot-middleware --save-dev
-```
-
-.babelrc file content to be added:
-
-```json
-{
-  "presets": ["es2015", "stage-0", "react"]
-}
+npm install react-hot-loader webpack-hot-middleware --save-dev
 ```
 
 webpack config updates:
@@ -52,6 +35,17 @@ module.exports = {
     '../node_modules/bootstrap/dist/css/bootstrap.css'
   ],
 
+  devServer: {
+      contentBase: './dist', //Content base
+      inline: true, //Enable watch and live reload
+      host: 'localhost',
+      port: 8080,
+      noInfo: true,
+      hot: true,
+      historyApiFallback: true
+  },
+
+
   // (...)
 
   module: {
@@ -59,48 +53,19 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        loaders: ['react-hot', 'babel','ts-loader']
+        loaders: ['react-hot', 'ts']
       },
       // (..)
 	},
 
   plugins:[
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
     // (...)
   ]
 }
 ```
 
-We ned to add a new devServer.js file (we could try to setup a call to webpack-dev-server directly).
-
-```javascript
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
-
-new WebpackDevServer(webpack(config), {
-  publicPath: config.output.publicPath,
-  hot: true,
-	noInfo: true,
-  historyApiFallback: true
-}).listen(8080, 'localhost', function (err, result) {
-  if (err) {
-    return console.log(err);
-  }
-
-  console.log('Listening at http://localhost:8080/');
-});
-````
-
-Then update the "start" script on the package.json file:
-
-```json
-"scripts": {
-  // (...)
-  "start": "node devserver.js",
-  //(...)
-},
-```
 
 # Steps to configure Redux dev tool
 
