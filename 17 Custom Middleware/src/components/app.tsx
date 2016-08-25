@@ -4,15 +4,15 @@ import { Provider } from 'react-redux';
 import reduxThunk from 'redux-thunk';
 import Header from './common/header';
 import reducers  from '../reducers';
-import {notification} from '../middleware/uiNotificationMware'
-import {navigationMiddleware} from '../middleware/NavigationMware';
+import {uiNotificationMiddleware} from '../middleware/uiNotificationMware'
+import {navigationMiddleware} from '../middleware/navigationMware';
 
 interface Props extends React.Props<App> {
 }
 
 let store = createStore(
   reducers
-  ,applyMiddleware(reduxThunk, notification, navigationMiddleware)
+  ,applyMiddleware(reduxThunk, uiNotificationMiddleware, navigationMiddleware)
 );
 
 export default class App extends React.Component<Props, {}> {
