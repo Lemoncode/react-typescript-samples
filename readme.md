@@ -167,6 +167,10 @@ Use webpack require.ensure to load routes on demand.
 
 * [Lazy Loading Webpack / React Router](http://blog.mxstbr.com/2016/01/react-apps-with-pages/)
 
+## 17 Add custom middlewares
+
+Create two custom middlewares uiNotificationMiddleware and navigationMiddleware
+
 ## 18 Add support for ReactHotloader and ReduxDev Tools.
 
 React Hot loader allows us to introduce changes in the application source code meanwhile we are running our web server and get the changes into our page without having to reload the browser and not losing the application state.
