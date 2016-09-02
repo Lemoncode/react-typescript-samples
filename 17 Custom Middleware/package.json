@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "postinstall": "tsd reinstall --overwrite --save",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "test": "karma start"
   },
   "author": "Braulio Diez",
   "license": "ISC",
@@ -23,10 +24,21 @@
     "toastr": "^2.1.2"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "^2.9.0",
+    "karma": "^1.2.0",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-mocha": "^1.1.1",
+    "karma-sinon": "^1.0.5",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^1.8.0",
+    "mocha": "^3.0.2",
+    "redux-mock-store": "^1.1.4",
+    "sinon": "^1.17.5",
     "style-loader": "^0.13.0",
     "ts-loader": "^0.8.1",
     "tsd": "^0.6.5",
