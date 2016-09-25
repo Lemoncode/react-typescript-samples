@@ -2,69 +2,50 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import App from './components/app.tsx';
+import * as _AboutPage from "./components/about/aboutPage";
+import * as _MemberPage from "./components/member/memberPage";
+import * as _MembersPage from "./components/members/membersPage";
 
-//Loading single component in one chunk
-const lazyLoadAboutComponent = () => {
-  return {
-      getComponent: (location, callback)=> {
-        require.ensure([], require => {
-          callback(null, require('./components/about/aboutPage')["default"]);
-        }, 'AboutPage');
-      }
-    }
+namespace Chunks {
+  export const About = "AboutPage";
+  export const Member = "MemberPages";
+}
+
+type LoadCallback = (error: any, component: React.ComponentClass<any>) => void;
+
+function loadAboutPage(location: any, callback: LoadCallback) {
+  loadModule<typeof _AboutPage>(
+    "./components/about/aboutPage",
+    Chunks.About,
+    loadedModule => callback(null, loadedModule.default));
 };
 
-//Loading group of components in one chunk
-const lazyLoadMemberComponent = () => {
-  return {
-      getComponent: (location, callback) => {
-        require.ensure(['./components/member/memberPage', './components/members/membersPage'], require => {
-          callback(null, require('./components/member/memberPage')["default"]);
-        }, 'MemberComponents');
-      }
-    }
-};
+function loadMemberPage(location: any, callback: LoadCallback) {
+  loadModule<typeof _MemberPage>(
+    "./components/member/memberPage",
+    Chunks.Member,
+    loadedModule => callback(null, loadedModule.default));
+}
 
-const lazyLoadMembersComponent = () => {
-  return {
-      getComponent: (location, callback) => {
-        require.ensure(['./components/member/memberPage', './components/members/membersPage'], require => {
-          callback(null, require('./components/members/membersPage')["default"]);
-        }, 'MemberComponents');
-      }
-    }
-};
+function loadMembersPage(location: any, callback: LoadCallback) {
+  loadModule<typeof _MembersPage>(
+    "./components/member/membersPage",
+    Chunks.Member,
+    loadedModule => callback(null, loadedModule.default));
+}
 
-//Second approach to load group of components in one chunk could be:
-/*
-    const lazyLoadMemberAreaPage = (pageName) => {
-      return {
-          getComponent: (location, callback) => {
-            require.ensure(['./components/member/memberPage', './components/members/membersPage'], require => {
-              switch(pageName) {
-                case 'member':
-                  callback(null, require('./components/member/memberPage')["default"]);
-                  break;
-
-                case 'members':
-                  callback(null, require('./components/members/membersPage')["default"]);
-                  break;
-              }
-            }, 'MemberComponents');
-          }
-        }
-    };
-*/
+function loadModule<TModule>(moduleName: string, chunkName: string, callback: (module: TModule) => void): void {
+  require.ensure([moduleName], (require) => callback(require(moduleName) as TModule), chunkName);
+}
 
 ReactDOM.render(
   <Router history={hashHistory}>
     <Route  path="/" component= {App} >
-      <IndexRoute {...lazyLoadAboutComponent()} />
-      <Route path="/about" {...lazyLoadAboutComponent()} />
-      <Route path="/members" {...lazyLoadMembersComponent()} />
-      <Route path="/member" {...lazyLoadMemberComponent()} />
-      <Route path="/memberEdit/:id" {...lazyLoadMemberComponent()} />
+      <IndexRoute getComponent={ loadAboutPage } />
+      <Route path="/about" getComponent={ loadAboutPage } />
+      <Route path="/members" getComponent={ loadMembersPage } />
+      <Route path="/member" getComponent={ loadMemberPage } />
+      <Route path="/memberEdit/:id" getComponent={ loadMemberPage } />
     </Route>
-  </Router>
-
-  , document.getElementById('root'));
+  </Router>,
+  document.getElementById('root'));
