@@ -6,36 +6,27 @@ import * as _AboutPage from "./components/about/aboutPage";
 import * as _MemberPage from "./components/member/memberPage";
 import * as _MembersPage from "./components/members/membersPage";
 
-namespace Chunks {
-  export const About = "AboutPage";
-  export const Member = "MemberPages";
-}
-
 type LoadCallback = (error: any, component: React.ComponentClass<any>) => void;
 
 function loadAboutPage(location: any, callback: LoadCallback) {
-  loadModule<typeof _AboutPage>(
-    "./components/about/aboutPage",
-    Chunks.About,
-    loadedModule => callback(null, loadedModule.default));
+  require.ensure(
+    [],
+    () => callback(null, (require("./components/about/aboutPage") as typeof _AboutPage).default),
+    "AboutPage");
 };
 
 function loadMemberPage(location: any, callback: LoadCallback) {
-  loadModule<typeof _MemberPage>(
-    "./components/member/memberPage",
-    Chunks.Member,
-    loadedModule => callback(null, loadedModule.default));
+  require.ensure(
+    [],
+    () => callback(null, (require("./components/member/memberPage") as typeof _MemberPage).default),
+    "MemberPages");
 }
 
 function loadMembersPage(location: any, callback: LoadCallback) {
-  loadModule<typeof _MembersPage>(
-    "./components/member/membersPage",
-    Chunks.Member,
-    loadedModule => callback(null, loadedModule.default));
-}
-
-function loadModule<TModule>(moduleName: string, chunkName: string, callback: (module: TModule) => void): void {
-  require.ensure([moduleName], (require) => callback(require(moduleName) as TModule), chunkName);
+  require.ensure(
+    [],
+    () => callback(null, (require("./components/members/membersPage") as typeof _MembersPage).default),
+    "MemberPages");
 }
 
 ReactDOM.render(
