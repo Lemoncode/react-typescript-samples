@@ -11,15 +11,15 @@
         "emitDecoratorMetadata": true,
         "noLib": false,
         "preserveConstEnums": true,
-        "suppressImplicitAnyIndexErrors": true
+        "suppressImplicitAnyIndexErrors": true,
+        "typeRoots": [
+          "./node_modules/@types"
+        ]
     },
     "compileOnSave": false,
     "filesGlob": [
         "./src/**/*.tsx",
-        "./src/**/*.ts",
-        "./typings/**/*.ts",
-        "./typings/tsd.d.ts",
-        "!./node_modules/**/*"
+        "./src/**/*.ts"
     ],
     "exclude": [
         "node_modules"
