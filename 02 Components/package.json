@@ -1,30 +1,31 @@
 {
-  "name": "reactboiler",
+  "name": "react-components",
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "postinstall": "tsd reinstall --overwrite --save",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Braulio Diez",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^3.3.5",
-    "jquery": "^2.1.4",
-    "react": "^15.2.1",
-    "react-dom": "^15.2.1"
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
   },
   "devDependencies": {
-    "css-loader": "^0.23.1",
+    "@types/react": "^0.14.44",
+    "@types/react-dom": "^0.14.18",
+    "css-loader": "^0.25.0",
     "extract-text-webpack-plugin": "^1.0.1",
-    "file-loader": "^0.8.5",
-    "html-webpack-plugin": "^2.9.0",
-    "style-loader": "^0.13.0",
-    "ts-loader": "^0.8.1",
-    "tsd": "^0.6.5",
-    "typescript": "^1.8.10",
+    "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.24.1",
+    "style-loader": "^0.13.1",
+    "ts-loader": "^1.0.0",
+    "typescript": "^2.0.7",
     "url-loader": "^0.5.7",
-    "webpack": "^1.12.13",
-    "webpack-dev-server": "~1.10.1"
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
   }
 }
