@@ -1,5 +1,34 @@
 # React Typescript by sample
 
+# New samples
+
+We have created a new set of updated samples.
+
+_Typescript_
+
+React:
+
+https://github.com/Lemoncode/react-by-sample
+
+React + Redux:
+
+https://github.com/Lemoncode/redux-by-sample
+
+_ES6_
+
+**Work in progress**
+
+React:
+
+https://github.com/Lemoncode/react-by-sample-es6
+
+React + Redux:
+
+https://github.com/Lemoncode/redux-by-sample-es6
+
+
+# Old Project
+
 The goal of this project is to provide a set of simple samples, providing and step by step guide to
 start working with React and Typescript. Characteristics:
 
