@@ -6,7 +6,7 @@
     "start": "webpack-dev-server",
     "build": "webpack"
   },
-  "author": "Lemoncodnpm ",
+  "author": "Lemoncode ",
   "license": "MIT",
   "dependencies": {
     "bootstrap": "^3.3.7",
