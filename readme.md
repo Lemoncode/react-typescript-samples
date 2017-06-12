@@ -46,13 +46,13 @@ start working with React and Typescript. Characteristics:
  + Using Immutablejs.
  + Using React Hot Loader.
 
-##Call for contributors:
+## Call for contributors:
 
 Some months ago this project started as something internal... let's create some simple samples that cover react / redux / typescript scenarios that could serve as a guidance and reference in the future... now, we and other developers are using this repo as quick by sample guidance. We keep on adding more samples to it, but we have found that older samples need some updates / refactoring.
 
 Are you interested in contributing into this project? If that's the case don't hesitate contacting us.: [call for contributors](https://github.com/Lemoncode/react-typescript-samples/issues/62).
 
-##To get started:  
+## To get started:  
 1. Install [NodeJS](http://www.nodejs.org)  
 2. `npm install webpack -g` - Installs webpack
 3. `npm install tsd -g` - Installs tsd
@@ -62,7 +62,7 @@ Are you interested in contributing into this project? If that's the case don't h
 7. `npm start` - Builds the project and launch a lite web server (webpack-devserver).
 8. Navigate to [http://localhost:8080/](http://localhost:8080/) if your browser doesn't open automatically.
 
-##IDE:
+## IDE:
 We have tested in:
  + [Atom](https://atom.io/).
  + [VS Code](https://code.visualstudio.com/).
