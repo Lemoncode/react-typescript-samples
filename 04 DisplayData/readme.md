@@ -7,6 +7,8 @@ We will take a startup point sample _03 Navigation_.
 Summary steps:
 
 - Update `About` component content.
+- Create member `API`.
+- Update `Members Page`.
 
 ## Prerequisites
 

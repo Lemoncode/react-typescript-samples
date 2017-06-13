@@ -1,4 +1,4 @@
-import { MemberEntity } from './memberEntity';
+import { MemberEntity } from '../../model';
 
 export const members: MemberEntity[] =
   [

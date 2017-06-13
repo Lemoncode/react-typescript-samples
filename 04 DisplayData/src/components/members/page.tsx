@@ -6,15 +6,18 @@ interface State {
   members: MemberEntity[];
 }
 
-export class MembersPage extends React.Component<Props, State> {
+export class MembersPage extends React.Component<{}, State> {
 
   constructor() {
     super();
     this.state = { members: [] };
   }
 
-  public componentWillMount() {
-    this.state.members = memberAPI.fetchMembers();
+  public componentDidMount() {
+    memberAPI.fetchMembers()
+      .then((members) => {
+        this.setState({ members });
+      });
   }
 
   public render() {
@@ -23,20 +26,10 @@ export class MembersPage extends React.Component<Props, State> {
         <h2> Members Page</h2>
         <table className="table">
           <thead>
-            <tr>
-              <th>
-                Avatar
-                </th>
-              <th>
-                Id
-                </th>
-              <th>
-                Name
-                </th>
-            </tr>
+            {MemberHeader()}
           </thead>
           <tbody>
-            {this.state.members.map(CreateMemberRow, this)}
+            {this.state.members.map(MemberRow)}
           </tbody>
         </table>
       </div>
@@ -44,18 +37,28 @@ export class MembersPage extends React.Component<Props, State> {
   }
 };
 
+const MemberHeader = () => {
+  return (
+    <tr>
+      <th>Avatar</th>
+      <th>Id</th>
+      <th>Name</th>
+    </tr>
+  );
+}
+
 const MemberRow = (member: MemberEntity) => {
-      return (
-        <tr key={member.id}>
-          <td>
-            <img src={member.avatar_url} className="avatar" />
-          </td>
-          <td>
-            <span>{member.id}</span>
-          </td>
-          <td>
-            <span>{member.login}</span>
-          </td>
-        </tr>
-      )
-    }
+  return (
+    <tr key={member.id}>
+      <td>
+        <img src={member.avatar_url} className="avatar" />
+      </td>
+      <td>
+        <span>{member.id}</span>
+      </td>
+      <td>
+        <span>{member.login}</span>
+      </td>
+    </tr>
+  )
+}

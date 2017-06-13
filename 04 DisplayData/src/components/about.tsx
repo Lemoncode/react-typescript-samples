@@ -46,12 +46,18 @@ export const About: React.StatelessComponent<{}> = () => {
               </li>
               <li>
                 <h4>
-                  api/member/memberEntity.ts: <small>Model.</small>
+                  api/member/mockData.ts: <small>Mock data.</small>
                 </h4>
               </li>
+            </ul>
+          </li>
+
+          <li className="top-buffer">
+            <h4><b>Model:</b></h4>
+            <ul className="top-buffer">
               <li>
                 <h4>
-                  api/member/mockData.ts: <small>Mock data.</small>
+                  model/memberEntity.ts: <small>Member model.</small>
                 </h4>
               </li>
             </ul>
