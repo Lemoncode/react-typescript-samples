@@ -1,5 +1,7 @@
 # React Typescript by sample
 
+This repo was deprecated (see _new samples_ section), but due to the popularity of it, we have decided to update all the samples to the newest package versions and best practices, already samples 00, 01, 02 has been updated, rest of sample _work in progress_, if you need to progress on more advanced sample please check our [React By Sample](https://github.com/Lemoncode/react-by-sample) and [Redux By Sample](https://github.com/Lemoncode/redux-by-sample) repos. Thanks for your support and stars ;-).
+
 # New samples
 
 We have created a new set of updated samples.
