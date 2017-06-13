@@ -1,12 +1,13 @@
 # 06 AJAX Call
 
-In this sample we will replace Members fake API with async call to api github to retrieve list of members of a given team.
+In this sample we will replace Members fake API with async call to API Github to retrieve list of members of a given team.
 
 We will take a startup point sample _05 Presentational Comp_.
 
 Summary steps:
 
 - Update `About` component content.
+- Replace `Member API` with real async call.
 
 ## Prerequisites
 
@@ -27,6 +28,42 @@ in a terminal/console window. Older versions may produce errors.
  ```
 
 - We update`About` content to show sample `06 AJAX Call` highlights. You can see updates in `./src/components/about.tsx`.
+
+- Update `Member API` with real async call:
+
+### ./src/api/member/index.ts
+```diff
+import { MemberEntity } from '../../model';
+import { members } from './mockData';
+
++ const baseURL = 'https://api.github.com/orgs/lemoncode';
+
+const fetchMembers = (): Promise<MemberEntity[]> => {
+- return Promise.resolve(members);
++ const membersURL = `${baseURL}/members`;
+
++ return fetch(membersURL)
++   .then((response) => (response.json()))
++   .then(mapToMembers);
+};
+
++ const mapToMembers = (githubMembers: any[]): MemberEntity[] => {
++   return githubMembers.map(mapToMember);
++ };
+
++ const mapToMember = (githubMember): MemberEntity => {
++   return {
++     id: githubMember.id,
++    login: githubMember.login,
++    avatar_url: githubMember.avatar_url,
++  };
++ };
+
+export const memberAPI = {
+  fetchMembers,
+};
+
+```
 
 - Execute the example:
 

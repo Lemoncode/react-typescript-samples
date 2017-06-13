@@ -3,17 +3,17 @@ import * as React from 'react';
 export const About: React.StatelessComponent<{}> = () => {
   return (
     <div className="row about-page">
-      <h1 className="jumbotron">05 Presentational Comp</h1>
+      <h1 className="jumbotron">06 AJAX Call</h1>
 
       <div className="col-xs-12">
         <h1>
           <small>
-            This sample takes as starting point sample "04 DisplayData".
+            This sample takes as starting point sample "05 Presentational Comp".
                  </small>
         </h1>
         <div className="col-xs-12">
           <h3>
-            <small>We are extracting MemberHeader and MemberRow as Presentational Components</small>
+            <small>We are replacing Members fake API with real async call to Github</small>
           </h3>
         </div>
       </div>
@@ -29,16 +29,11 @@ export const About: React.StatelessComponent<{}> = () => {
       <div className="col-xs-12 top-buffer">
         <ul>
           <li className="top-buffer">
-            <h4><b>Components:</b></h4>
+            <h4><b>API:</b></h4>
             <ul className="top-buffer">
               <li>
                 <h4>
-                  members/memberHeader.tsx: <small>Members table Header</small>
-                </h4>
-              </li>
-              <li>
-                <h4>
-                  members/memberRow.tsx: <small>Members table Row</small>
+                  api/member/index.ts: <small>Members API</small>
                 </h4>
               </li>
             </ul>
