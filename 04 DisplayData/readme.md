@@ -7,6 +7,7 @@ We will take a startup point sample _03 Navigation_.
 Summary steps:
 
 - Update `About` component content.
+- Create `Member model`.
 - Create member `API`.
 - Update `Members Page`.
 
@@ -30,7 +31,156 @@ in a terminal/console window. Older versions may produce errors.
 
 - We update`About` content to show sample `04 DisplayData` highlights. You can see updates in `./src/components/about.tsx`.
 
+- Create `model`:
 
+### ./src/model/memberEntity.ts
+```javascript
+export interface MemberEntity {
+  id: number;
+  login: string;
+  avatar_url: string;
+}
+
+```
+
+- And its `index.ts`:
+
+### ./src/model/index.ts
+```javascript
+export * from './memberEntity';
+
+```
+
+- Create `mock data`:
+
+### ./src/api/member/mockData.ts
+```javascript
+import { MemberEntity } from '../../model';
+
+export const members: MemberEntity[] =
+  [
+    {
+      id: 1457912,
+      login: "brauliodiez",
+      avatar_url: "https://avatars.githubusercontent.com/u/1457912?v=3"
+    },
+    {
+      id: 4374977,
+      login: "Nasdan",
+      avatar_url: "https://avatars.githubusercontent.com/u/4374977?v=3"
+    }
+  ];
+
+```
+- Create `API`:
+
+### ./src/api/member/index.ts
+```javascript
+import { MemberEntity } from '../../model';
+import { members } from './mockData';
+
+const fetchMembers = (): Promise<MemberEntity[]> => {
+  return Promise.resolve(members);
+};
+
+export const memberAPI = {
+  fetchMembers,
+};
+
+```
+
+- Update `Members Page`:
+
+### ./src/components/members/page.tsx
+```diff
+import * as React from 'react';
++ import { MemberEntity } from '../../model';
++ import { memberAPI } from '../../api/member';
+
++ interface State {
++   members: MemberEntity[];
++ }
+
+- export const MembersPage: React.StatelessComponent<{}> = () => {
+-   return (
+-     <div className="row">
+-       <h2> Members Page</h2>
+-     </div>
+-   );
+- }
+
++ export class MembersPage extends React.Component<{}, State> {
++   constructor() {
++     super();
++     this.state = { members: [] };
++   }
+
++   public componentDidMount() {
++     memberAPI.fetchMembers()
++       .then((members) => {
++         this.setState({ members });
++       });
++   }
+
++   public render() {
++     return (
++       <div className="row">
++         <h2> Members Page</h2>
++         <table className="table">
++           <thead>
++             {MemberHeader()}
++           </thead>
++           <tbody>
++             {this.state.members.map(MemberRow)}
++           </tbody>
++         </table>
++       </div>
++     );
++   }
++ };
+
++ const MemberHeader = () => {
++   return (
++     <tr>
++       <th>Avatar</th>
++       <th>Id</th>
++       <th>Name</th>
++     </tr>
++   );
++ }
+
++ const MemberRow = (member: MemberEntity) => {
++   return (
++     <tr key={member.id}>
++       <td>
++         <img src={member.avatar_url} className="avatar" />
++       </td>
++       <td>
++         <span>{member.id}</span>
++       </td>
++       <td>
++         <span>{member.login}</span>
++       </td>
++     </tr>
++   )
++ }
+
+```
+
+- Update `css`:
+
+### ./src/css/site.css
+```diff
+.navbar .nav .active, .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus{
+  background: #e7e7e7 !important;
+  color: #333 !important;
+}
+
++ .avatar {
++    max-width: 80px
++ }
+
+```
 
 - Execute the example:
 
