@@ -65,11 +65,6 @@ export const About: React.StatelessComponent<{}> = () => {
                   members/page.tsx: <small>Members table</small>
                 </h4>
               </li>
-              <li>
-                <h4>
-                  memberRow.tsx: <small>Member row</small>
-                </h4>
-              </li>
             </ul>
           </li>
         </ul>

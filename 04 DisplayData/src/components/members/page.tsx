@@ -18,22 +18,6 @@ export class MembersPage extends React.Component<Props, State> {
   }
 
   public render() {
-    var CreateMemberRow = function (member: MemberEntity) {
-      return (
-        <tr key={member.id}>
-          <td>
-            <img src={member.avatar_url} className="avatar" />
-          </td>
-          <td>
-            <span>{member.id}</span>
-          </td>
-          <td>
-            <span>{member.login}</span>
-          </td>
-        </tr>
-      )
-    }
-
     return (
       <div className="row">
         <h2> Members Page</h2>
@@ -58,4 +42,20 @@ export class MembersPage extends React.Component<Props, State> {
       </div>
     );
   }
-}
+};
+
+const MemberRow = (member: MemberEntity) => {
+      return (
+        <tr key={member.id}>
+          <td>
+            <img src={member.avatar_url} className="avatar" />
+          </td>
+          <td>
+            <span>{member.id}</span>
+          </td>
+          <td>
+            <span>{member.login}</span>
+          </td>
+        </tr>
+      )
+    }
