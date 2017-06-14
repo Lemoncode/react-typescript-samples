@@ -44,6 +44,31 @@ npm install toastr --save
 npm install @types/toastr --save-dev
 ```
 
+- Update `webpack.config.js` vendors:
+
+### ./webpack.config.js
+```diff
+...
+  entry: {
+    app: './index.tsx',
+    appStyles: './css/site.css',
+    vendor: [
+      'react',
+      'react-dom',
+      'react-router',
++     'toastr',
+    ],
+    vendorStyles: [
+      '../node_modules/bootstrap/dist/css/bootstrap.css',
++     '../node_modules/toastr/build/toastr.css',
+    ],
+    ...
+  },
+  ...
+};
+
+```
+
 - Create dummy `Member Page`:
 
 ### ./src/components/member/page.tsx
@@ -395,30 +420,93 @@ import { MemberEntity } from '../../model';
 import { members } from './mockData';
 
 const baseURL = 'https://api.github.com/orgs/lemoncode';
++ let mockMembers = members;
 
 const fetchMembers = (): Promise<MemberEntity[]> => {
-  const membersURL = `${baseURL}/members`;
-
-  return fetch(membersURL)
-    .then((response) => (response.json()))
-    .then(mapToMembers);
+- return Promise.resolve(members);
++ return Promise.resolve(mockMembers);
 };
 
-const mapToMembers = (githubMembers: any[]): MemberEntity[] => {
-  return githubMembers.map(mapToMember);
-};
+...
 
-const mapToMember = (githubMember): MemberEntity => {
-  return {
-    id: githubMember.id,
-    login: githubMember.login,
-    avatar_url: githubMember.avatar_url,
-  };
-};
++ const saveMember = (member: MemberEntity): Promise<boolean> => {
++   const index = mockMembers.findIndex(m => m.id === member.id);
+
++   index >= 0 ?
++     updateMember(member, index) :
++     insertMember(member);
+
++   return Promise.resolve(true);
++ };
+
++ const updateMember = (member: MemberEntity, index: number) => {
++   mockMembers = [
++     ...mockMembers.slice(0, index),
++     member,
++     ...mockMembers.slice(index + 1),
++   ];
++ };
+
++ const insertMember = (member: MemberEntity) => {
++   member.id = mockMembers.length;
+
++   mockMembers = [
++     ...mockMembers,
++     member,
++   ];
++ };
 
 export const memberAPI = {
   fetchMembers,
+  fetchMembersAsync,
++ saveMember,
 };
+
+```
+
+- Use again `fetchMembers`:
+
+### ./src/components/members/page.tsx
+```diff
+...
+
+  public componentDidMount() {
+-   memberAPI.fetchMembersAsync()
++   memberAPI.fetchMembers()
+      .then((members) => {
+        this.setState({ members });
+      });
+  }
+
+  ...
+};
+
+```
+
+- Update `Member page` container:
+
+### ./src/components/member/pageContainer.tsx
+```diff
+import * as React from 'react';
++ import { hashHistory } from 'react-router';
++ import * as toastr from 'toastr';
++ import { memberAPI } from '../../api/member';
+import { MemberEntity } from '../../model';
+import { MemberPage } from './page';
+
+...
+
+  private onSave() {
+-   console.log('save');
++   memberAPI.saveMember(this.state.member)
++     .then(() => {
++       toastr.success('Member saved.');
++       hashHistory.goBack();
++     });
+  }
+
+  ...
+}
 
 ```
 
