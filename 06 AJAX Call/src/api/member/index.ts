@@ -4,6 +4,10 @@ import { members } from './mockData';
 const baseURL = 'https://api.github.com/orgs/lemoncode';
 
 const fetchMembers = (): Promise<MemberEntity[]> => {
+  return Promise.resolve(members);
+};
+
+const fetchMembersAsync = (): Promise<MemberEntity[]> => {
   const membersURL = `${baseURL}/members`;
 
   return fetch(membersURL)
@@ -25,4 +29,5 @@ const mapToMember = (githubMember): MemberEntity => {
 
 export const memberAPI = {
   fetchMembers,
+  fetchMembersAsync,
 };

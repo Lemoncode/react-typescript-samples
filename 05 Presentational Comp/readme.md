@@ -62,7 +62,7 @@ interface Props {
 
 export const MemberRow: React.StatelessComponent<Props> = ({member}) => {
   return (
-    <tr key={member.id}>
+    <tr>
       <td>
         <img src={member.avatar_url} className="avatar" />
       </td>
@@ -118,7 +118,10 @@ export class MembersPage extends React.Component<{}, State> {
 -           {this.state.members.map(MemberRow)}
 +           {
 +             this.state.members.map((member) =>
-+               <MemberRow member={member} />
++               <MemberRow
++                 key={member.id}
++                 member={member}
++               />
 +             )
 +           }
           </tbody>
