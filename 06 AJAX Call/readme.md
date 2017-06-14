@@ -39,6 +39,10 @@ import { members } from './mockData';
 + const baseURL = 'https://api.github.com/orgs/lemoncode';
 
 const fetchMembers = (): Promise<MemberEntity[]> => {
+  return Promise.resolve(members);
+};
+
++ const fetchMembersAsync = (): Promise<MemberEntity[]> => {
 - return Promise.resolve(members);
 + const membersURL = `${baseURL}/members`;
 
@@ -61,6 +65,26 @@ const fetchMembers = (): Promise<MemberEntity[]> => {
 
 export const memberAPI = {
   fetchMembers,
++ fetchMembersAsync,
+};
+
+```
+
+- Use `fetchMembersAsync`:
+
+### ./src/components/members/page.tsx
+```diff
+...
+
+  public componentDidMount() {
+-   memberAPI.fetchMembers()
++   memberAPI.fetchMembersAsync()
+      .then((members) => {
+        this.setState({ members });
+      });
+  }
+
+  ...
 };
 
 ```

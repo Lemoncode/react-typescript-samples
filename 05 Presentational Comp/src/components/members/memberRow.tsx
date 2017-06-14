@@ -7,7 +7,7 @@ interface Props {
 
 export const MemberRow: React.StatelessComponent<Props> = ({member}) => {
   return (
-    <tr key={member.id}>
+    <tr>
       <td>
         <img src={member.avatar_url} className="avatar" />
       </td>

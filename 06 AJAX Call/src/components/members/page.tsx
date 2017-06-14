@@ -15,7 +15,7 @@ export class MembersPage extends React.Component<{}, State> {
   }
 
   public componentDidMount() {
-    memberAPI.fetchMembers()
+    memberAPI.fetchMembersAsync()
       .then((members) => {
         this.setState({ members });
       });
@@ -32,7 +32,10 @@ export class MembersPage extends React.Component<{}, State> {
           <tbody>
             {
               this.state.members.map((member) =>
-                <MemberRow member={member} />
+                <MemberRow
+                  key={member.id}
+                  member={member}
+                />
               )
             }
           </tbody>
