@@ -34,7 +34,10 @@ export class MembersPage extends React.Component<{}, State> {
           <tbody>
             {
               this.state.members.map((member) =>
-                <MemberRow member={member} />
+                <MemberRow
+                  key={member.id}
+                  member={member}
+                />
               )
             }
           </tbody>

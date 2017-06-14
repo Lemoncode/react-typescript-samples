@@ -11,7 +11,7 @@ export const About: React.StatelessComponent<{}> = () => {
         </h1>
         <div className="col-xs-12">
           <h3>
-            <small>We are replacing Members fake API with real async call to Github</small>
+            <small>We are creating Member page Form to insert and update members</small>
           </h3>
         </div>
       </div>
@@ -31,7 +31,37 @@ export const About: React.StatelessComponent<{}> = () => {
             <ul className="top-buffer">
               <li>
                 <h4>
-                  api/member/index.ts: <small>Members API</small>
+                  api/member/index.ts: <small>Add save method</small>
+                </h4>
+              </li>
+            </ul>
+          </li>
+          <li className="top-buffer">
+            <h4><b>Components:</b></h4>
+            <ul className="top-buffer">
+              <li>
+                <h4>
+                  components/member/pageContainer.tsx: <small>Component with state</small>
+                </h4>
+              </li>
+              <li>
+                <h4>
+                  components/member/page.tsx: <small>Page with presentational component</small>
+                </h4>
+              </li>
+              <li>
+                <h4>
+                  components/member/memberForm.tsx: <small>Member Form</small>
+                </h4>
+              </li>
+              <li>
+                <h4>
+                  common/components/form/input.tsx: <small>Input component to use in Forms</small>
+                </h4>
+              </li>
+              <li>
+                <h4>
+                  common/components/form/button.tsx: <small>Button component to use in Forms</small>
                 </h4>
               </li>
             </ul>
