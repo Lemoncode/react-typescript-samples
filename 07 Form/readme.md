@@ -7,6 +7,15 @@ We will take a startup point sample _06 AJAX Call_.
 Summary steps:
 
 - Update `About` component content.
+- Install `toastr` and typings.
+- Create dummy `Member Page`.
+- Add new route to `Member Page`.
+- Add link for navigation.
+- Create common `form components`.
+- Create `MemberForm component`.
+- Update `Member Page`.
+- Create `Member Page container`.
+- Add save method in `member API`.
 
 ## Prerequisites
 
@@ -27,6 +36,391 @@ in a terminal/console window. Older versions may produce errors.
  ```
 
 - We update`About` content to show sample `07 Form` highlights. You can see updates in `./src/components/about.tsx`.
+
+- Install `toastr` and typings to show toast when save form changes:
+
+```bash
+npm install toastr --save
+npm install @types/toastr --save-dev
+```
+
+- Create dummy `Member Page`:
+
+### ./src/components/member/page.tsx
+```javascript
+import * as React from 'react';
+
+export const MemberPage: React.StatelessComponent<{}> = () => {
+  return (
+    <div className="row">
+      <h2>Member Page</h2>
+    </div>
+  );
+}
+
+```
+
+- And its `index.ts` file:
+
+### ./src/components/member/index.ts
+```javascript
+export * from './page';
+
+```
+
+- Update components `index.ts` file too:
+
+### ./src/components/index.ts
+```diff
+export * from './header';
+export * from './about';
+export * from './members';
++ export * from './member';
+
+```
+
+- Add new route to `Member Page`.
+
+### ./src/router.tsx
+```diff
+import * as React from 'react';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { App } from './app';
+- import { About, MembersPage } from './components';
++ import { About, MembersPage, MemberPage } from './components';
+
+export const AppRouter: React.StatelessComponent<{}> = () => {
+  return (
+    <Router history={hashHistory}>
+      <Route path="/" component={App} >
+        <IndexRoute component={About} />
+        <Route path="/about" component={About} />
+        <Route path="/members" component={MembersPage} />
++       <Route path="/member" component={MemberPage} />
+      </Route>
+    </Router>
+  );
+}
+
+```
+
+- Add link for navigation:
+
+### ./src/components/members/page.tsx
+```diff
+import * as React from 'react';
++ import { Link } from 'react-router';
+import { MemberEntity } from '../../model';
+import { memberAPI } from '../../api/member';
+import { MemberHeader } from './memberHeader';
+import { MemberRow } from './memberRow';
+
+...
+
+public render() {
+    return (
+      <div className="row">
+        <h2> Members Page</h2>
++       <Link to="/member">New Member</Link>
+        <table className="table">
+          <thead>
+            <MemberHeader />
+          </thead>
+          <tbody>
+            {
+              this.state.members.map((member) =>
+                <MemberRow member={member} />
+              )
+            }
+          </tbody>
+        </table>
+      </div>
+    );
+...
+
+```
+
+- It's time to build a form that will contain the data to be edited, we will define it using some special Id's to  make it easier to get the properties updated. Let's start by creating a common input component.
+
+### ./src/common/components/form/input.tsx
+
+```javascript
+import * as React from "react";
+
+interface Props {
+  name: string;
+  label: string;
+  placeholder?: string;
+  value: string;
+  onChange: (fieldName: string, value: string) => void;
+  error?: string;
+}
+
+export const Input: React.StatelessComponent<Props> = (props) => {
+  return (
+    <div className={formatWrapperClass(props)}>
+      <label htmlFor={props.name}>{props.label}</label>
+      <div className="field">
+        <input type="text"
+          name={props.name}
+          className="form-control"
+          placeholder={props.placeholder}
+          value={props.value}
+          onChange={onChangeInput(props)}
+        />
+      </div>
+      <div className="input">{props.error}</div>
+    </div>
+  )
+};
+
+const formatWrapperClass = (props: Props) => {
+  const wrapperClass = 'form-group';
+
+  return props.error ?
+    `${wrapperClass} has-error` :
+    wrapperClass;
+};
+
+const onChangeInput = (props: Props) => (e: React.ChangeEvent<HTMLInputElement>) => {
+  props.onChange(e.target.name, e.target.value);
+};
+
+```
+
+### ./src/common/components/form/button.tsx
+
+```javascript
+import * as React from 'react';
+
+interface Props {
+  label: string;
+  className: string;
+  onClick: () => void;
+}
+
+export const Button: React.StatelessComponent<Props> = (props) => {
+
+  return (
+    <button type="button"
+      className={props.className}
+      onClick={props.onClick}
+    >
+      {props.label}
+    </button>
+  );
+};
+
+```
+
+- Create its `index.ts` file:
+
+### ./src/common/components/form/index.ts
+```javascript
+export * from './input';
+export * from './button';
+
+```
+
+- Create `MemberForm component`:
+
+### ./src/components/member/memberForm.tsx
+```javascript
+import * as React from 'react';
+import { MemberEntity } from '../../model';
+import { Input, Button } from '../../common/components/form';
+
+interface Props {
+  member: MemberEntity;
+  onChange: (fieldName: string, value: string) => void;
+  onSave: () => void;
+}
+
+export const MemberForm: React.StatelessComponent<Props> = (props) => {
+  return (
+    <form>
+      <h1>Manage member</h1>
+
+      <Input
+        name="login"
+        label="Login"
+        value={props.member.login}
+        onChange={props.onChange}
+      />
+
+      <Input
+        name="avatar_url"
+        label="Avatar Url"
+        value={props.member.avatar_url}
+        onChange={props.onChange}
+      />
+
+      <Button
+        label="Save"
+        className="btn btn-default"
+        onClick={props.onSave}
+      />
+    </form>
+  );
+};
+
+```
+
+- Update `Member Page`:
+
+### ./src/components/member/page.tsx
+```diff
+import * as React from 'react';
++ import { MemberEntity } from '../../model';
++ import { MemberForm } from './memberForm';
+
++ interface Props {
++   member: MemberEntity;
++   onChange: (fieldName: string, value: string) => void;
++   onSave: () => void;
++ }
+
+- export const MemberPage: React.StatelessComponent<{}> = () => {
++ export const MemberPage: React.StatelessComponent<Props> = (props) => {
+  return (
+-   <div className="row">
+-     <h2>Member Page</h2>
+-   </div>
++   <MemberForm
++     member={props.member}
++     onChange={props.onChange}
++     onSave={props.onSave}
++   />
+  );
+}
+
+```
+
+- Create `Member Page container`:
+
+### ./src/components/member/pageContainer.tsx
+```javascript
+import * as React from 'react';
+import { MemberEntity } from '../../model';
+import { MemberPage } from './page';
+
+interface State {
+  member: MemberEntity;
+}
+
+export class MemberPageContainer extends React.Component<{}, State> {
+  constructor() {
+    super();
+
+    this.state = {
+      member: {
+        id: -1,
+        login: '',
+        avatar_url: '',
+      }
+    };
+
+    this.onFieldValueChange = this.onFieldValueChange.bind(this);
+    this.onSave = this.onSave.bind(this);
+  }
+
+  private onFieldValueChange(fieldName: string, value: string) {
+    const nextState = {
+      ...this.state,
+      member: {
+        ...this.state.member,
+        [fieldName]: value,
+      }
+    };
+
+    this.setState(nextState);
+  }
+
+  private onSave() {
+    console.log('save');
+  }
+
+  render() {
+    return (
+      <MemberPage
+        member={this.state.member}
+        onChange={this.onFieldValueChange}
+        onSave={this.onSave}
+      />
+    );
+  }
+}
+
+```
+- Update its `index.ts` file:
+
+### ./src/components/member/index.ts
+```diff
+- export * from './page';
++ export * from './pageContainer';
+
+```
+
+- And router:
+
+### ./src/router.tsx
+```diff
+import * as React from 'react';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { App } from './app';
+- import { About, MembersPage, MemberPage } from './components';
++ import { About, MembersPage, MemberPageContainer } from './components';
+
+export const AppRouter: React.StatelessComponent<{}> = () => {
+  return (
+    <Router history={hashHistory}>
+      <Route path="/" component={App} >
+        <IndexRoute component={About} />
+        <Route path="/about" component={About} />
+        <Route path="/members" component={MembersPage} />
+-       <Route path="/member" component={MemberPage} />
++       <Route path="/member" component={MemberPageContainer} />
+      </Route>
+    </Router>
+  );
+}
+
+```
+
+- Add save method in `member API`:
+
+### ./src/api/member/index.ts
+```diff
+import { MemberEntity } from '../../model';
+import { members } from './mockData';
+
+const baseURL = 'https://api.github.com/orgs/lemoncode';
+
+const fetchMembers = (): Promise<MemberEntity[]> => {
+  const membersURL = `${baseURL}/members`;
+
+  return fetch(membersURL)
+    .then((response) => (response.json()))
+    .then(mapToMembers);
+};
+
+const mapToMembers = (githubMembers: any[]): MemberEntity[] => {
+  return githubMembers.map(mapToMember);
+};
+
+const mapToMember = (githubMember): MemberEntity => {
+  return {
+    id: githubMember.id,
+    login: githubMember.login,
+    avatar_url: githubMember.avatar_url,
+  };
+};
+
+export const memberAPI = {
+  fetchMembers,
+};
+
+```
 
 - Execute the example:
 

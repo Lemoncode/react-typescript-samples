@@ -7,9 +7,7 @@ export const About: React.StatelessComponent<{}> = () => {
 
       <div className="col-xs-12">
         <h1>
-          <small>
-            This sample takes as starting point sample "06 AJAX Call<".
-                 </small>
+          <small>This sample takes as starting point sample "06 AJAX Call".</small>
         </h1>
         <div className="col-xs-12">
           <h3>
