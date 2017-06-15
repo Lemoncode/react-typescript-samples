@@ -11,6 +11,7 @@ export const AppRouter: React.StatelessComponent<{}> = () => {
         <Route path="/about" component={About} />
         <Route path="/members" component={MembersPage} />
         <Route path="/member" component={MemberPageContainer} />
+        <Route path="/member/:id" component={MemberPageContainer} />
       </Route>
     </Router>
   );

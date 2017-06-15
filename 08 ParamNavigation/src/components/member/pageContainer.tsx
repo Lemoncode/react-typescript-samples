@@ -5,11 +5,15 @@ import { memberAPI } from '../../api/member';
 import { MemberEntity } from '../../model';
 import { MemberPage } from './page';
 
+interface Props {
+  params: { id: string };
+}
+
 interface State {
   member: MemberEntity;
 }
 
-export class MemberPageContainer extends React.Component<{}, State> {
+export class MemberPageContainer extends React.Component<Props, State> {
   constructor() {
     super();
 
@@ -23,6 +27,17 @@ export class MemberPageContainer extends React.Component<{}, State> {
 
     this.onFieldValueChange = this.onFieldValueChange.bind(this);
     this.onSave = this.onSave.bind(this);
+  }
+
+  public componentDidMount() {
+    const memberId = Number(this.props.params.id) || 0;
+    memberAPI.fetchMemberById(memberId)
+      .then((member) => {
+        this.setState({
+          ...this.state,
+          member,
+        });
+      });
   }
 
   private onFieldValueChange(fieldName: string, value: string) {
