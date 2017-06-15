@@ -1,75 +1,84 @@
-var path = require("path");
-var webpack = require("webpack");
+var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var webpack = require('webpack');
 
 var basePath = __dirname;
 
 module.exports = {
-  context: path.join(basePath, "src"),
+  context: path.join(basePath, 'src'),
   resolve: {
-      // .js is required for react imports.
-      // .tsx is for our app entry point.
-      // .ts is optional, in case you will be importing any regular ts files.
-      extensions: ['', '.js', '.ts', '.tsx']
+    extensions: ['.js', '.ts', '.tsx']
   },
-
-  entry: [
-    './index.tsx',
-    './css/site.css',
-    '../node_modules/toastr/build/toastr.css',
-    '../node_modules/bootstrap/dist/css/bootstrap.css'
-  ],
-
+  entry: {
+    app: './index.tsx',
+    appStyles: './css/site.css',
+    vendor: [
+      'react',
+      'react-dom',
+      'react-router',
+      'toastr',
+    ],
+    vendorStyles: [
+      '../node_modules/bootstrap/dist/css/bootstrap.css',
+      '../node_modules/toastr/build/toastr.css',
+    ],
+  },
   output: {
-    path: path.join(basePath, "dist"),
-    filename: 'bundle.js'
+    path: path.join(basePath, 'dist'),
+    filename: '[name].js',
   },
-
-  //https://webpack.github.io/docs/webpack-dev-server.html#webpack-dev-server-cli
-  devServer: {
-    contentBase: './dist', //Content base
-    inline: true, //Enable watch and live reload
-    host: 'localhost',
-    port: 8080
-  },
-
-  // http://webpack.github.io/docs/configuration.html#devtool
-  devtool: 'source-map',
-
   module: {
-		loaders: [
+    rules: [
       {
-        test: /\.(ts|tsx)$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
-        loader: 'ts-loader'
+        loader: 'awesome-typescript-loader',
+        options: {
+          useBabel: true,
+        },
       },
-      //Note: Doesn't exclude node_modules to load bootstrap
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader','css-loader')
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+        ],
       },
-      //Loading glyphicons => https://github.com/gowravshekar/bootstrap-webpack
-      //Using here url-loader and file-loader
-      {test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
-      {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
-      {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file" },
-      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml" }
-		]
-	},
-
-  plugins:[
+      // Loading glyphicons => https://github.com/gowravshekar/bootstrap-webpack
+      // Using here url-loader and file-loader
+      {
+        test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+      },
+      {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
+      },
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'file-loader'
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
+      },
+    ],
+  },
+  // For development https://webpack.js.org/configuration/devtool/#for-development
+  devtool: 'inline-source-map',
+  devServer: {
+    port: 8080,
+    noInfo: true,
+  },
+  plugins: [
     //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html', //Name of file in ./dist/
-      template: 'index.html' //Name of template in ./src
+      template: 'index.html', //Name of template in ./src
+      hash: true,
     }),
-    //Generate bundle.css => https://github.com/webpack/extract-text-webpack-plugin
-    new ExtractTextPlugin('bundle.css'),
-    //Expose jquery used by bootstrap
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
-    })
-  ]
-}
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor', 'manifest'],
+    }),
+  ],
+};
