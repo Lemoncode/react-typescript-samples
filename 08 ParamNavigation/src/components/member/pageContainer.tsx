@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { hashHistory } from 'react-router';
 import * as toastr from 'toastr';
+import { FieldValidationResult } from 'lc-form-validation';
 import { memberAPI } from '../../api/member';
-import { MemberEntity } from '../../model';
+import { MemberEntity, MemberErrors } from '../../model';
+import { memberFormValidation } from './memberFormValidation';
 import { MemberPage } from './page';
 
 interface Props {
@@ -11,6 +13,7 @@ interface Props {
 
 interface State {
   member: MemberEntity;
+  memberErrors: MemberErrors;
 }
 
 export class MemberPageContainer extends React.Component<Props, State> {
@@ -22,6 +25,9 @@ export class MemberPageContainer extends React.Component<Props, State> {
         id: -1,
         login: '',
         avatar_url: '',
+      },
+      memberErrors: {
+        login: new FieldValidationResult(),
       }
     };
 
@@ -41,22 +47,34 @@ export class MemberPageContainer extends React.Component<Props, State> {
   }
 
   private onFieldValueChange(fieldName: string, value: string) {
-    const nextState = {
-      ...this.state,
-      member: {
-        ...this.state.member,
-        [fieldName]: value,
-      }
-    };
+    memberFormValidation.validateField(this.state.member, fieldName, value)
+      .then((fieldValidationResult) => {
+        const nextState = {
+          ...this.state,
+          member: {
+            ...this.state.member,
+            [fieldName]: value,
+          },
+          memberErrors: {
+            ...this.state.memberErrors,
+            [fieldName]: fieldValidationResult,
+          }
+        };
 
-    this.setState(nextState);
+        this.setState(nextState);
+      });
   }
 
   private onSave() {
-    memberAPI.saveMember(this.state.member)
-      .then(() => {
-        toastr.success('Member saved.');
-        hashHistory.goBack();
+    memberFormValidation.validateForm(this.state.member)
+      .then((formValidationResult) => {
+        if (formValidationResult.succeeded) {
+          memberAPI.saveMember(this.state.member)
+            .then(() => {
+              toastr.success('Member saved.');
+              hashHistory.goBack();
+            });
+        }
       });
   }
 
@@ -64,6 +82,7 @@ export class MemberPageContainer extends React.Component<Props, State> {
     return (
       <MemberPage
         member={this.state.member}
+        memberErrors={this.state.memberErrors}
         onChange={this.onFieldValueChange}
         onSave={this.onSave}
       />

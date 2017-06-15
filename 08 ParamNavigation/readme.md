@@ -140,7 +140,7 @@ import { MemberEntity } from '../../model';
 import { MemberPage } from './page';
 
 + interface Props {
-+   id: string;
++   params: { id: string };
 + }
 
 interface State {
@@ -165,7 +165,7 @@ interface State {
   }
 
 + public componentDidMount() {
-+   const memberId = Number(this.props.id) || 0;
++   const memberId = Number(this.props.params.id) || 0;
 +   memberAPI.fetchMemberById(memberId)
 +     .then((member) => {
 +       this.setState({
@@ -175,36 +175,256 @@ interface State {
 +     });
 + }
 
-  private onFieldValueChange(fieldName: string, value: string) {
-    const nextState = {
-      ...this.state,
+  ...
+
+```
+
+- Now, it's time to add validations. We are going to install [`lc-form-validation`](https://github.com/Lemoncode/lcFormValidation)
+
+```bash
+npm install lc-form-validation --save
+```
+
+- Update `webpack.config.js` vendors:
+
+### ./webpack.config.js
+```diff
+...
+  entry: {
+    app: './index.tsx',
+    appStyles: './css/site.css',
+    vendor: [
+      'react',
+      'react-dom',
+      'react-router',
+      'toastr',
++     'lc-form-validation',
+    ],
+    ...
+  },
+  ...
+};
+
+```
+
+- Let's create an entity that will hold the form errors:
+
+### ./src/model/memberErrors.ts
+```javascript
+import { FieldValidationResult } from 'lc-form-validation';
+
+export interface MemberErrors {
+  login: FieldValidationResult;
+}
+
+```
+
+### ./src/model/index.ts
+```diff
+export * from './memberEntity';
++ export * from './memberErrors';
+
+```
+
+- Create member form validations:
+
+### ./src/components/member/memberFormValidation.ts
+```javascript
+import {
+  Validators, ValidationConstraints, createFormValidation
+} from 'lc-form-validation';
+
+const validationConstraints: ValidationConstraints = {
+  fields: {
+    login: [
+      { validator: Validators.required },
+      {
+        validator: Validators.minLength,
+        customParams: { length: 3 },
+      },
+    ]
+  },
+};
+
+export const memberFormValidation = createFormValidation(validationConstraints);
+
+```
+
+- Update `Member page container`:
+
+### ./src/components/member/pageContainer.tsx
+```diff
+import * as React from 'react';
+import { hashHistory } from 'react-router';
+import * as toastr from 'toastr';
++ import { FieldValidationResult } from 'lc-form-validation';
+import { memberAPI } from '../../api/member';
+- import { MemberEntity } from '../../model';
++ import { MemberEntity, MemberErrors } from '../../model';
+import { MemberPage } from './page';
+
+interface Props {
+  params: { id: string };
+}
+
+interface State {
+  member: MemberEntity;
++ memberErrors: MemberErrors;
+}
+
+export class MemberPageContainer extends React.Component<Props, State> {
+  constructor() {
+    super();
+
+    this.state = {
       member: {
-        ...this.state.member,
-        [fieldName]: value,
-      }
+        id: -1,
+        login: '',
+        avatar_url: '',
+      },
++     memberErrors: {
++       login: new FieldValidationResult(),
++     }
     };
 
-    this.setState(nextState);
+    this.onFieldValueChange = this.onFieldValueChange.bind(this);
+    this.onSave = this.onSave.bind(this);
+  }
+
+  public componentDidMount() {
+    const memberId = Number(this.props.params.id) || 0;
+    memberAPI.fetchMemberById(memberId)
+      .then((member) => {
+        this.setState({
+          ...this.state,
+          member,
+        });
+      });
+  }
+
+  private onFieldValueChange(fieldName: string, value: string) {
++   memberFormValidation.validateField(this.state.member, fieldName, value)
++     .then((fieldValidationResult) => {
+        const nextState = {
+          ...this.state,
+          member: {
+            ...this.state.member,
+            [fieldName]: value,
+          },
++         memberErrors: {
++           ...this.state.memberErrors,
++           [fieldName]: fieldValidationResult,
++         }
+        };
+
+        this.setState(nextState);
++     });
   }
 
   private onSave() {
-    memberAPI.saveMember(this.state.member)
-      .then(() => {
-        toastr.success('Member saved.');
-        hashHistory.goBack();
-      });
++   memberFormValidation.validateForm(this.state.member)
++     .then((formValidationResult) => {
++       if (formValidationResult.succeeded) {
+          memberAPI.saveMember(this.state.member)
+            .then(() => {
+              toastr.success('Member saved.');
+              hashHistory.goBack();
+            });
++       }
++     });
   }
 
   render() {
     return (
       <MemberPage
         member={this.state.member}
++       memberErrors={this.state.memberErrors}
         onChange={this.onFieldValueChange}
         onSave={this.onSave}
       />
     );
   }
 }
+
+```
+
+- Update `Member page`:
+
+### ./src/components/member/page.tsx
+```diff
+import * as React from 'react';
+- import { MemberEntity } from '../../model';
++ import { MemberEntity, MemberErrors } from '../../model';
+import { MemberForm } from './memberForm';
+
+interface Props {
+  member: MemberEntity;
++ memberErrors: MemberErrors;
+  onChange: (fieldName: string, value: string) => void;
+  onSave: () => void;
+}
+
+export const MemberPage: React.StatelessComponent<Props> = (props) => {
+  return (
+    <MemberForm
+      member={props.member}
++     memberErrors={props.memberErrors}
+      onChange={props.onChange}
+      onSave={props.onSave}
+    />
+  );
+}
+
+```
+
+- Update `Member form`:
+
+### ./src/components/member/memberForm.tsx
+```diff
+import * as React from 'react';
+- import { MemberEntity } from '../../model';
++ import { MemberEntity, MemberErrors } from '../../model';
+import { Input, Button } from '../../common/components/form';
+
+interface Props {
+  member: MemberEntity;
++ memberErrors: MemberErrors;
+  onChange: (fieldName: string, value: string) => void;
+  onSave: () => void;
+}
+
+export const MemberForm: React.StatelessComponent<Props> = (props) => {
+  return (
+    <form>
+      <h1>Manage member</h1>
+
+      <Input
+        name="login"
+        label="Login"
+        value={props.member.login}
+        onChange={props.onChange}
++       error={
++         props.memberErrors.login.succeeded ?
++           '' :
++           props.memberErrors.login.errorMessage
++       }
+      />
+
+      <Input
+        name="avatar_url"
+        label="Avatar Url"
+        value={props.member.avatar_url}
+        onChange={props.onChange}
+      />
+
+      <Button
+        label="Save"
+        className="btn btn-default"
+        onClick={props.onSave}
+      />
+    </form>
+  );
+};
 
 ```
 
