@@ -1,6 +1,6 @@
 # 05 Presentational Comp
 
-In this sample we will create a members page, adding navigation using react-router.
+In this sample we will breaking the list component into three: header, table and row components, member row entity passed via props.
 
 We will take a startup point sample _04 DisplayData_.
 
@@ -168,4 +168,4 @@ export class MembersPage extends React.Component<{}, State> {
 # About Lemoncode
 
 We are a team of long-term experienced freelance developers, established as a group in 2010.
-We specialize in Front End technologies and .NET. [Click here](http://lemoncode.net/services/en/#en-home) to get more info about us. 
+We specialize in Front End technologies and .NET. [Click here](http://lemoncode.net/services/en/#en-home) to get more info about us.

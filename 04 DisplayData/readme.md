@@ -1,6 +1,7 @@
 # 04 DisplayData
 
-In this sample we will create a members page, adding navigation using react-router.
+In this sample we will create a read only list component (table >> tr >> td), reading list of members
+from a fake API and dumping it into component state.
 
 We will take a startup point sample _03 Navigation_.
 
@@ -191,4 +192,4 @@ import * as React from 'react';
 # About Lemoncode
 
 We are a team of long-term experienced freelance developers, established as a group in 2010.
-We specialize in Front End technologies and .NET. [Click here](http://lemoncode.net/services/en/#en-home) to get more info about us. 
+We specialize in Front End technologies and .NET. [Click here](http://lemoncode.net/services/en/#en-home) to get more info about us.
