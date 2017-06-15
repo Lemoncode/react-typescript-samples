@@ -11,7 +11,7 @@ export const About: React.StatelessComponent<{}> = () => {
         </h1>
         <div className="col-xs-12">
           <h3>
-            <small>We are creating Member page Form to insert and update members</small>
+            <small>We are adding navigaton with params and form validations</small>
           </h3>
         </div>
       </div>
@@ -31,7 +31,17 @@ export const About: React.StatelessComponent<{}> = () => {
             <ul className="top-buffer">
               <li>
                 <h4>
-                  api/member/index.ts: <small>Add save method</small>
+                  api/member/index.ts: <small>Add fetchMemberById method</small>
+                </h4>
+              </li>
+            </ul>
+          </li>
+          <li className="top-buffer">
+            <h4><b>Validations:</b></h4>
+            <ul className="top-buffer">
+              <li>
+                <h4>
+                  components/member/memberFormValidation.ts: <small>Add member form validations</small>
                 </h4>
               </li>
             </ul>
@@ -41,27 +51,22 @@ export const About: React.StatelessComponent<{}> = () => {
             <ul className="top-buffer">
               <li>
                 <h4>
+                  router.tsx: <small>Add new route</small>
+                </h4>
+              </li>
+              <li>
+                <h4>
                   components/member/pageContainer.tsx: <small>Component with state</small>
                 </h4>
               </li>
               <li>
                 <h4>
-                  components/member/page.tsx: <small>Page with presentational component</small>
+                  components/members/memberRow.tsx: <small>Add Link element to navigate</small>
                 </h4>
               </li>
               <li>
                 <h4>
-                  components/member/memberForm.tsx: <small>Member Form</small>
-                </h4>
-              </li>
-              <li>
-                <h4>
-                  common/components/form/input.tsx: <small>Input component to use in Forms</small>
-                </h4>
-              </li>
-              <li>
-                <h4>
-                  common/components/form/button.tsx: <small>Button component to use in Forms</small>
+                  components/member/pageContainer.tsx: <small>Receiving member id from props and validating fields.</small>
                 </h4>
               </li>
             </ul>
