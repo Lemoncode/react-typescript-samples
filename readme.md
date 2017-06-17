@@ -104,24 +104,20 @@ entity passed via props.
 Members fake api replaced with async call to api github to retrieve list of
 members of a given team.
 
-## 07 Forms + Validations
+## 07 Forms
 
 In this sample we will add a link in the members page that will navigate to a
 "new member page". This new page will display a form where you have to enter
 the avatar url, login and id of a new member (just supossing we can edit that info).
 
-Validation performed so far:
-
-* Login: required, must be a string (at least length 3).
-
-TODO, add this validations:
-* Id: required, must be a number.
-* Avatar URL: optional, must be a valid url.
-
-## 08 Edit member
+## 08 ParamNavigation  + Validations
 
 Edit a given member, here we learn how to add params to a navigation link and
 how to obtain them from a component.
+
+Validation performed so far:
+
+* Login: required, must be a string (at least length 3).
 
 ## 09 Redux
 

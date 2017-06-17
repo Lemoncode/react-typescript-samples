@@ -194,7 +194,7 @@ export const Input: React.StatelessComponent<Props> = (props) => {
           onChange={onChangeInput(props)}
         />
       </div>
-      <div className="input">{props.error}</div>
+      <div className="help-block">{props.error}</div>
     </div>
   )
 };

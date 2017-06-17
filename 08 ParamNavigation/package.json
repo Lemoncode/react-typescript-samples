@@ -1,34 +1,37 @@
 {
-  "name": "reactboiler",
+  "name": "reactboilerplate",
   "version": "1.0.0",
-  "description": "",
+  "description": "Sample working with React,TypeScript and Webpack",
   "scripts": {
-    "postinstall": "tsd reinstall --overwrite --save",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "build": "webpack"
   },
-  "author": "Braulio Diez",
-  "license": "ISC",
+  "author": "Lemoncode",
+  "license": "MIT",
   "dependencies": {
-    "bootstrap": "^3.3.5",
-    "jquery": "^2.1.4",
-    "lodash": "^4.5.1",
-    "object-assign": "^4.0.1",
-    "react": "^15.2.1",
-    "react-dom": "^15.2.1",
-    "react-router": "^2.5.2",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1",
+    "lc-form-validation": "^1.0.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-router": "^3.0.5",
     "toastr": "^2.1.2"
   },
   "devDependencies": {
-    "css-loader": "^0.23.1",
-    "extract-text-webpack-plugin": "^1.0.1",
-    "file-loader": "^0.8.5",
-    "html-webpack-plugin": "^2.9.0",
-    "style-loader": "^0.13.0",
-    "ts-loader": "^0.8.1",
-    "tsd": "^0.6.5",
-    "typescript": "^1.8.10",
-    "url-loader": "^0.5.7",
-    "webpack": "^1.12.13",
-    "webpack-dev-server": "~1.10.1"
+    "@types/react": "^15.0.27",
+    "@types/react-dom": "^15.5.0",
+    "@types/react-router": "^3.0.11",
+    "@types/toastr": "^2.1.33",
+    "awesome-typescript-loader": "^3.1.3",
+    "babel-core": "^6.25.0",
+    "babel-preset-env": "^1.5.2",
+    "css-loader": "^0.28.4",
+    "file-loader": "^0.11.2",
+    "html-webpack-plugin": "^2.28.0",
+    "style-loader": "^0.18.2",
+    "typescript": "^2.3.4",
+    "url-loader": "^0.5.9",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
   }
 }
