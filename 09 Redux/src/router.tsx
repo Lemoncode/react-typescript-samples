@@ -3,7 +3,7 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { App } from './app';
-import { About, MembersPage, MemberPageContainer } from './components';
+import { About, MembersPageContainer, MemberPageContainer } from './components';
 
 export const AppRouter: React.StatelessComponent<{}> = () => {
   return (
@@ -12,7 +12,7 @@ export const AppRouter: React.StatelessComponent<{}> = () => {
         <Route path="/" component={App} >
           <IndexRoute component={About} />
           <Route path="/about" component={About} />
-          <Route path="/members" component={MembersPage} />
+          <Route path="/members" component={MembersPageContainer} />
           <Route path="/member" component={MemberPageContainer} />
           <Route path="/member/:id" component={MemberPageContainer} />
         </Route>

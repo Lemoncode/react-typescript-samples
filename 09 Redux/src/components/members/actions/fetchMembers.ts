@@ -4,7 +4,9 @@ import { memberAPI } from '../../../api/member';
 
 export const fetchMembersAction = () => (dispatch) => {
   memberAPI.fetchMembers()
-    .then(dispatch(fetchMembersCompleted));
+    .then((members) => {
+      dispatch(fetchMembersCompleted(members));
+    });
 };
 
 const fetchMembersCompleted = (members: MemberEntity[]) => ({

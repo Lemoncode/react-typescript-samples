@@ -27,7 +27,5 @@ const saveMember = (member: MemberEntity) => {
 
 const saveMemberActionCompleted = (formValidationResult: FormValidationResult) => ({
   type: actionTypes.SAVE_MEMBER,
-  payload: {
-    formValidationResult,
-  },
+  payload: formValidationResult,
 });

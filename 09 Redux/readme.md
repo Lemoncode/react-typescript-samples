@@ -109,28 +109,7 @@ const fetchMembersCompleted = (members: MemberEntity[]) => ({
 
 ```
 
-- We `dispatch` completed `redux action` when fetch members. In a simple way, we can modify like:
-
-### ./src/components/members/actions/fetchMembers.ts
-```diff
-import { actionTypes } from '../../../common/constants/actionTypes';
-import { MemberEntity } from '../../../model';
-import { memberAPI } from '../../../api/member';
-
-export const fetchMembersAction = () => (dispatch) => {
-  memberAPI.fetchMembers()
--   .then((members) => {
--     dispatch(fetchMembersCompleted(members));
--   });
-+   .then(dispatch(fetchMembersCompleted));
-};
-
-const fetchMembersCompleted = (members: MemberEntity[]) => ({
-  type: actionTypes.FETCH_MEMBERS_COMPLETED,
-  payload: members,
-});
-
-```
+- We `dispatch` completed `redux action` when fetch members.
 
 - Let's move `Member` events to `actionts`. We can see that  `fetchMemberById` action is very similar to `fetchMembers`:
 
@@ -141,8 +120,10 @@ import { MemberEntity } from '../../../model';
 import { memberAPI } from '../../../api/member';
 
 export const fetchMemberByIdAction = (id: number) => (dispatch) => {
-  memberAPI.fetchMemberById(id)
-    .then(dispatch(fetchMemberByIdCompleted));
+  memberAPI.fetchMemberById(id)    
+    .then((member) => {
+      dispatch(fetchMemberByIdCompleted(member));
+    });
 };
 
 const fetchMemberByIdCompleted = (member: MemberEntity) => ({
@@ -212,9 +193,7 @@ const saveMember = (member: MemberEntity) => {
 
 const saveMemberActionCompleted = (formValidationResult: FormValidationResult) => ({
   type: actionTypes.SAVE_MEMBER,
-  payload: {
-    formValidationResult,
-  },
+  payload: formValidationResult,
 });
 
 ```
@@ -292,6 +271,8 @@ const createEmptyMemberErrors = (): MemberErrors => ({
 
 export const memberReducer = (state = createEmptyMemberErrors(), action) => {
   switch (action.type) {
+    case actionTypes.FETCH_MEMBERS_COMPLETED:
+      return handleFetchMembersCompleted(state, action.payload);
     case actionTypes.UPDATE_MEMBER_FIELD:
       return handleUpdateMemberField(state, action.payload);
     case actionTypes.SAVE_MEMBER:
@@ -299,6 +280,10 @@ export const memberReducer = (state = createEmptyMemberErrors(), action) => {
   }
 
   return state;
+};
+
+const handleFetchMembersCompleted = (state: MemberErrors, payload) => {
+  return createEmptyMemberErrors();
 };
 
 const handleUpdateMemberField = (state: MemberErrors, payload: MemberFieldChangePayload): MemberErrors => {
@@ -383,6 +368,283 @@ export const AppRouter: React.StatelessComponent<{}> = () => {
       </Router>
 +   </Provider>
   );
+}
+
+```
+
+- Create `Members pageContainer`:
+
+### ./src/components/members/pageContainer.tsx
+```javascript
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { State } from '../../reducers';
+import { fetchMembersAction } from './actions/fetchMembers';
+import { MembersPage } from './page';
+
+const mapStateToProps = (state: State) => ({
+  members: state.members,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchMembers: () => dispatch(fetchMembersAction()),
+});
+
+export const MembersPageContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(MembersPage);
+
+```
+
+- Update `Members page`:
+
+### ./src/components/members/page.tsx
+```diff
+import * as React from 'react';
+import { Link } from 'react-router';
+import { MemberEntity } from '../../model';
+- import { memberAPI } from '../../api/member';
+import { MemberHeader } from './memberHeader';
+import { MemberRow } from './memberRow';
+
+- interface State {
++ interface Props {
+  members: MemberEntity[];
++ fetchMembers(): void;
+}
+
+- export class MembersPage extends React.Component<{}, State> {
++ export class MembersPage extends React.Component<Props,{}> {
+- constructor() {
+-   super();
+-   this.state = { members: [] };
+- }
+
+  public componentDidMount() {
+-   memberAPI.fetchMembers()
+-     .then((members) => {
+-       this.setState({ members });
+-     });
++   this.props.fetchMembers();
+  }
+
+...
+
+```
+
+- Update `index`:
+
+### ./src/components/members/index.tsx
+```diff
+- export * from './page';
++ export * from './pageContainer';
+
+```
+
+- Update `AppRouter`:
+
+### ./src/router.tsx
+```diff
+import * as React from 'react';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import { store } from './store';
+import { App } from './app';
+- import { About, MembersPage, MemberPageContainer } from './components';
++ import { About, MembersPageContainer, MemberPageContainer } from './components';
+
+export const AppRouter: React.StatelessComponent<{}> = () => {
+  return (
+    <Provider store={store}>
+      <Router history={hashHistory}>
+        <Route path="/" component={App} >
+          <IndexRoute component={About} />
+          <Route path="/about" component={About} />
+-         <Route path="/members" component={MembersPage} />
++         <Route path="/members" component={MembersPageContainer} />
+          <Route path="/member" component={MemberPageContainer} />
+          <Route path="/member/:id" component={MemberPageContainer} />
+        </Route>
+      </Router>
+    </Provider>
+  );
+}
+
+```
+
+- Update `Member pageContainer`:
+
+### ./src/components/member/pageContainer.tsx
+```diff
+import * as React from 'react';
+- import { hashHistory } from 'react-router';
+- import * as toastr from 'toastr';
+- import { FieldValidationResult } from 'lc-form-validation';
+- import { memberAPI } from '../../api/member';
+- import { MemberEntity, MemberErrors } from '../../model';
+- import { memberFormValidation } from './memberFormValidation';
++ import { connect } from 'react-redux';
++ import { State } from '../../reducers';
++ import { MemberEntity } from '../../model';
++ import { fetchMemberByIdAction } from './actions/fetchMemberById';
++ import { memberFieldChangeAction } from './actions/memberFieldChange';
++ import { saveMemberAction } from './actions/saveMember';
+import { MemberPage } from './page';
+
++ const mapStateToProps = (state: State, ownProps: any) => ({
++   memberId: Number(ownProps.params.id) || 0,
++   member: state.member,
++   memberErrors: state.memberErrors,
++ });
+
++ const mapDispatchToProps = (dispatch) => ({
++   fetchMemberById: (id: number) => dispatch(fetchMemberByIdAction(id)),
++   onChange: (member: MemberEntity, fieldName: string, value: string) =>
++     dispatch(memberFieldChangeAction(member, fieldName, value)),
++   onSave: (member: MemberEntity) => dispatch(saveMemberAction(member)),
++ });
+
++ export const MemberPageContainer = connect(
++   mapStateToProps,
++   mapDispatchToProps,
++ )(MemberPage);
+
+- interface Props {
+-   params: { id: string };
+- }
+
+- interface State {
+-   member: MemberEntity;
+-   memberErrors: MemberErrors;
+- }
+
+- export class MemberPageContainer extends React.Component<Props, State> {
+-   constructor() {
+-     super();
+
+-     this.state = {
+-       member: {
+-         id: -1,
+-         login: '',
+-         avatar_url: '',
+-       },
+-       memberErrors: {
+-         login: new FieldValidationResult(),
+-       }
+-     };
+
+-     this.onFieldValueChange = this.onFieldValueChange.bind(this);
+-     this.onSave = this.onSave.bind(this);
+-   }
+
+-   public componentDidMount() {
+-     const memberId = Number(this.props.params.id) || 0;
+-     memberAPI.fetchMemberById(memberId)
+-       .then((member) => {
+-         this.setState({
+-           ...this.state,
+-           member,
+-         });
+-       });
+-   }
+
+-   private onFieldValueChange(fieldName: string, value: string) {
+-     memberFormValidation.validateField(this.state.member, fieldName, value)
+-       .then((fieldValidationResult) => {
+-         const nextState = {
+-           ...this.state,
+-           member: {
+-             ...this.state.member,
+-             [fieldName]: value,
+-           },
+-           memberErrors: {
+-             ...this.state.memberErrors,
+-             [fieldName]: fieldValidationResult,
+-           }
+-         };
+
+-         this.setState(nextState);
+-       });
+-   }
+
+-   private onSave() {
+-     memberFormValidation.validateForm(this.state.member)
+-       .then((formValidationResult) => {
+-         if (formValidationResult.succeeded) {
+-           memberAPI.saveMember(this.state.member)
+-             .then(() => {
+-               toastr.success('Member saved.');
+-               hashHistory.goBack();
+-             });
+-         }
+-       });
+-   }
+
+-   render() {
+-     return (
+-       <MemberPage
+-         member={this.state.member}
+-         memberErrors={this.state.memberErrors}
+-         onChange={this.onFieldValueChange}
+-         onSave={this.onSave}
+-       />
+-     );
+-   }
+- }
+
+```
+
+- Update `Member page`:
+
+### ./src/components/member/page.tsx
+```diff
+import * as React from 'react';
+import { MemberEntity, MemberErrors } from '../../model';
+import { MemberForm } from './memberForm';
+
+interface Props {
++ memberId: number;
+  member: MemberEntity;
+  memberErrors: MemberErrors;
+- onChange: (fieldName: string, value: string) => void;
+- onSave: () => void;
++ fetchMemberById: (id: number) => void;
++ onChange: (member: MemberEntity, fieldName: string, value: string) => void;
++ onSave: (member: MemberEntity) => void;
+}
+
+- export const MemberPage: React.StatelessComponent<Props> = (props) => {
++ export class MemberPage extends React.Component<Props, {}> {
++ constructor() {
++   super();
+
++   this.onChange = this.onChange.bind(this);
++   this.onSave = this.onSave.bind(this);
++ }
+
++ componentDidMount() {
++   this.props.fetchMemberById(this.props.memberId);
++ }
+
++ private onChange(fieldName: string, value: string) {
++   this.props.onChange(this.props.member, fieldName, value);
++ }
+
++ private onSave() {
++   this.props.onSave(this.props.member);
++ }
+
++ render() {
+    return (
+      <MemberForm
+        member={props.member}
+        memberErrors={props.memberErrors}
+        onChange={props.onChange}
+        onSave={props.onSave}
+      />
+    );
++ }
 }
 
 ```

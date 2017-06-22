@@ -1,25 +1,17 @@
 import * as React from 'react';
 import { Link } from 'react-router';
 import { MemberEntity } from '../../model';
-import { memberAPI } from '../../api/member';
 import { MemberHeader } from './memberHeader';
 import { MemberRow } from './memberRow';
 
-interface State {
+interface Props {
   members: MemberEntity[];
+  fetchMembers(): void;
 }
 
-export class MembersPage extends React.Component<{}, State> {
-  constructor() {
-    super();
-    this.state = { members: [] };
-  }
-
+export class MembersPage extends React.Component<Props,{}> {
   public componentDidMount() {
-    memberAPI.fetchMembers()
-      .then((members) => {
-        this.setState({ members });
-      });
+    this.props.fetchMembers();
   }
 
   public render() {
@@ -33,7 +25,7 @@ export class MembersPage extends React.Component<{}, State> {
           </thead>
           <tbody>
             {
-              this.state.members.map((member) =>
+              this.props.members.map((member) =>
                 <MemberRow
                   key={member.id}
                   member={member}

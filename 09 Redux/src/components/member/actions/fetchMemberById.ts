@@ -4,7 +4,9 @@ import { memberAPI } from '../../../api/member';
 
 export const fetchMemberByIdAction = (id: number) => (dispatch) => {
   memberAPI.fetchMemberById(id)
-    .then(dispatch(fetchMemberByIdCompleted));
+    .then((member) => {
+      dispatch(fetchMemberByIdCompleted(member));
+    });
 };
 
 const fetchMemberByIdCompleted = (member: MemberEntity) => ({
