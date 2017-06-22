@@ -3,15 +3,15 @@ import * as React from 'react';
 export const About: React.StatelessComponent<{}> = () => {
   return (
     <div className="row about-page">
-      <h1 className="jumbotron">08 ParamNavigation</h1>
+      <h1 className="jumbotron">09 Redux</h1>
 
       <div className="col-xs-12">
         <h1>
-          <small>This sample takes as starting point sample "07 Form".</small>
+          <small>This sample takes as starting point sample "08 ParamNavigation".</small>
         </h1>
         <div className="col-xs-12">
           <h3>
-            <small>We are adding navigaton with params and form validations</small>
+            <small>We are adding Redux pattern</small>
           </h3>
         </div>
       </div>
@@ -27,21 +27,46 @@ export const About: React.StatelessComponent<{}> = () => {
       <div className="col-xs-12 top-buffer">
         <ul>
           <li className="top-buffer">
-            <h4><b>API:</b></h4>
+            <h4><b>Actions:</b></h4>
             <ul className="top-buffer">
               <li>
                 <h4>
-                  api/member/index.ts: <small>Add fetchMemberById method</small>
+                  components/members/actions/...: <small>Isolated members component actions</small>
+                </h4>
+              </li>
+              <li>
+                <h4>
+                  components/member/actions/...: <small>Isolated member component actions</small>
                 </h4>
               </li>
             </ul>
           </li>
           <li className="top-buffer">
-            <h4><b>Validations:</b></h4>
+            <h4><b>Reducers:</b></h4>
             <ul className="top-buffer">
               <li>
                 <h4>
-                  components/member/memberFormValidation.ts: <small>Add member form validations</small>
+                  reducers/members.ts: <small>Manage members state</small>
+                </h4>
+              </li>
+              <li>
+                <h4>
+                  reducers/member.ts: <small>Manage member state</small>
+                </h4>
+              </li>
+              <li>
+                <h4>
+                  reducers/memberErrors.ts: <small>Manage memberErrors state</small>
+                </h4>
+              </li>
+            </ul>
+          </li>
+          <li className="top-buffer">
+            <h4><b>Store:</b></h4>
+            <ul className="top-buffer">
+              <li>
+                <h4>
+                  store.ts: <small>Configured store to be used in router.tsx</small>
                 </h4>
               </li>
             </ul>
@@ -51,22 +76,27 @@ export const About: React.StatelessComponent<{}> = () => {
             <ul className="top-buffer">
               <li>
                 <h4>
-                  router.tsx: <small>Add new route</small>
+                  router.tsx: <small>Updated to use store</small>
                 </h4>
               </li>
               <li>
                 <h4>
-                  components/member/pageContainer.tsx: <small>Component with state</small>
+                  components/members/pageContainer.tsx: <small>Create component using reducers state</small>
                 </h4>
               </li>
               <li>
                 <h4>
-                  components/members/memberRow.tsx: <small>Add Link element to navigate</small>
+                  components/members/page.tsx: <small>Updated</small>
                 </h4>
               </li>
               <li>
                 <h4>
-                  components/member/pageContainer.tsx: <small>Receiving member id from props and validating fields.</small>
+                  components/member/pageContainer.tsx: <small>Updated component using reducers state</small>
+                </h4>
+              </li>
+              <li>
+                <h4>
+                  components/member/page.tsx: <small>Updated.</small>
                 </h4>
               </li>
             </ul>
