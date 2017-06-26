@@ -1,52 +1,3 @@
-/* entry point css */
-.avatar {
-   max-width: 80px
-}
-
-/* <=Spinner AJAX request loading> */
-.spinnerWrap {
-    z-index: 40001; /* High z-index to ensure it appears above all content */
-}
-
-.vertical-offset {
-    /* Fixed position to provide the vertical offset */
-    position: fixed;
-    top: 30%;
-    width: 100%;
-    z-index: 40002; /* ensures box appears above overlay */
-}
-
-.spinnerOverlay {
-    position: fixed;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    opacity: .5; /* Sets opacity so it's partly transparent */
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; /* IE transparency */
-    filter: alpha(opacity=50); /* More IE transparency */
-    z-index: 40001;
-}
-
-
-div#spinner {
-    width: 100px;
-    height: 100px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    background: url('../images/spinner.gif') no-repeat center #fff;
-    text-align: center;
-    padding: 10px;
-    font: normal 16px Tahoma, Geneva, sans-serif;
-    -moz-border-radius: 15px;
-    border-radius: 15px;
-    border: 1px solid #666;
-    margin-left: -50px;
-    margin-top: -50px;
-}
-/* <#Spinner AJAX request loading> */
-
 .top-buffer{
   margin-top: 20px;
 }
@@ -67,4 +18,8 @@ div#spinner {
 .navbar .nav .active, .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus{
   background: #e7e7e7 !important;
   color: #333 !important;
+}
+
+.avatar {
+   max-width: 80px
 }
