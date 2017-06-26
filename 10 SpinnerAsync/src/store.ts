@@ -1,10 +1,15 @@
 import { Store, createStore, compose, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
-import { state, State } from './reducers';
+import { httpMiddleware } from './middlewares';
+import { state } from './reducers';
 
-export const store: Store<State> = createStore(
+export const store = createStore(
   state,
   compose(
-    applyMiddleware(reduxThunk),
+    applyMiddleware(
+      reduxThunk,
+      httpMiddleware,
+    ),
+    window["devToolsExtension"] ? window["devToolsExtension"]() : (f) => f,
   )
 );
