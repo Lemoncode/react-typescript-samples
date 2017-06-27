@@ -217,7 +217,7 @@ module: {
 
 - Create `Spinner` component:
 
-### ./src/common/components/spinner/spinner.ts
+### ./src/common/components/spinner/spinner.tsx
 ```javascript
 import * as React from 'react';
 
@@ -240,7 +240,7 @@ export const SpinnerComponent: React.StatelessComponent<Props> = (props) => {
 
 ```
 
-### ./src/common/components/spinner/spinnerContainer.ts
+### ./src/common/components/spinner/spinnerContainer.tsx
 ```javascript
 import * as React from 'react';
 import { connect } from 'react-redux';
@@ -300,7 +300,7 @@ export * from './spinnerContainer';
 
 - Use `Spinner` component:
 
-### ./src/app.ts
+### ./src/app.tsx
 ```diff
 import * as React from 'react';
 import { Header } from './components';
