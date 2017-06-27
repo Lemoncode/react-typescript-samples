@@ -1,4 +1,4 @@
-import { httpCallStartAction, httpCallEndAction } from './actions';
+import { httpCallEndAction } from './actions';
 
 export const httpMiddleware = ({ dispatch }) => (next) => (action) => {
   return dispatchHttpCallEndAction(dispatch, next, action);

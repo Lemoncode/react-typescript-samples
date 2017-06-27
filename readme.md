@@ -125,17 +125,7 @@ Added Redux support, isolated state into Redux reducers, implement load, save,
 basic validation cycle. This sample uses the fake api, in following samples
 we will call async operations and fitting them into Redux architecture.
 
-
-## 10 Redux Thunk - Handling Asyhcronous calls
-
-Members fake api replaced with async call to api github to retrieve list of
-members of a given team.
-
-Similar to sample 06, but this time we implement this functionallity fitting it
-in Redux, Redux-Thunk middleware.
-
-
-## 11 Spinner
+## 10 SpinnerAsync
 
 Display a busy indicator when an ajax request is in progress.
 
@@ -143,12 +133,11 @@ We have created here:
 
 * A component that will take care of showing / displaying the busy indicator (spinner).
 * A reducer that will take care of dispatching http requests in progress / completed.
-* A http helper that will wrap the request to trigger the proper messages (new request, request completed...), just to
-have a single entry point for this.
+* A http middleware that dispatch HttpCallCompleted action when http request is completed.
 
 We have updated MemberAPI to use the http helper / wrapper.
 
-## 12 Testing reducers
+## 11 Testing reducers
 
 Testing libraries:
 
@@ -166,7 +155,7 @@ Chai is for assertions.
 
 With Deep free we ensures that initial states in reducers are immutable.
 
-## 13 Testing actions
+## 12 Testing actions
 
 Testing libraries, previous libraries and:
 
@@ -174,7 +163,7 @@ Testing libraries, previous libraries and:
 
 Sinon join Mocha allow us async action tests.
 
-## 14 Testing components (Containers and Presentationals)
+## 13 Testing components (Containers and Presentationals)
 
 Testing libraries, previous libraries and:
 
@@ -182,23 +171,23 @@ Testing libraries, previous libraries and:
 
 Enzyme provide an easy way to isolate, manipulate, traverse and assert React Components.
 
-## 15 Replacing Redux Thunk with Redux Saga
+## 14 Replacing Redux Thunk with Redux Saga
 
 Redux Saga it's an interesting alternative for redux-thunk, worth to take a look:
 
 * [Redux Saga](https://github.com/yelouafi/redux-saga)
 
-## 16 Lazy Loading and React-Router
+## 15 Lazy Loading and React-Router
 
 Use webpack require.ensure to load routes on demand.
 
 * [Lazy Loading Webpack / React Router](http://blog.mxstbr.com/2016/01/react-apps-with-pages/)
 
-## 17 Add custom middlewares
+## 16 Add custom middlewares
 
 Create two custom middlewares uiNotificationMiddleware and navigationMiddleware
 
-## 18 Add support for ReactHotloader and ReduxDev Tools.
+## 17 Add support for ReactHotloader and ReduxDev Tools.
 
 React Hot loader allows us to introduce changes in the application source code meanwhile we are running our web server and get the changes into our page without having to reload the browser and not losing the application state.
 

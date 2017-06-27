@@ -7,9 +7,9 @@ interface Props {
 export const SpinnerComponent: React.StatelessComponent<Props> = (props) => {
   return (
     props.showSpinner ?
-      <div className="spinnerWrap">
-        <div className="spinnerOverlay"></div>
-        <div className="vertical-offset">
+      <div>
+        <div className="spinnerOverlay" />
+        <div className="spinner">
           <span>Loading...</span>
         </div>
       </div> :
