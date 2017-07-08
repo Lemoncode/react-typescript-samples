@@ -1,17 +1,18 @@
-# 09 Redux
+# 10 SpinnerAsync
 
-In this sample we will add Redux, isolated state into Redux reducers, implement load, save, basic validation cycle. This sample uses the fake api, in following samples we will call async operations and fitting them into Redux architecture.
+In this sample we will display a busy indicator when an ajax request is in progress.
 
-We will take a startup point sample _08 ParamNavigation_.
+We will take a startup point sample _09 Redux_.
 
 Summary steps:
 
 - Update `About` component content.
-- Install `redux`,`react-redux` and `redux-thunk`.
-- Move to `actions`.
-- Move to `reducers`.
+- Create `http` actions and middleware.
+- Create `http` reducer.
 - Configure `store`.
-- Update `components`.
+- Add `spinner` image and configure `webpack`.
+- Create `Spinner` component.
+- Dispatch `http` actions in necessary `thunk` actions.
 
 ## Prerequisites
 
@@ -23,7 +24,7 @@ in a terminal/console window. Older versions may produce errors.
 
 ## Steps to build it
 
-- Copy the content of the `08 ParamNavigation` folder to an empty folder for the sample.
+- Copy the content of the `09 Redux` folder to an empty folder for the sample.
 
 - Install the npm packages described in the `package.json` and verify that it works:
 
@@ -31,96 +32,330 @@ in a terminal/console window. Older versions may produce errors.
  $ npm install
  ```
 
-- We update`About` content to show sample `09 Redux` highlights. You can see updates in `./src/components/about.tsx`.
+- We update`About` content to show sample `10 SpinnerAsync` highlights. You can see updates in `./src/components/about.tsx`.
 
-- Install `redux` (it has its own typings), `react-redux` and typings, `redux-thunk` (it has its own typings):
+- Create `http` actions and middleware:
 
- ```bash
- npm install redux react-redux redux-thunk --save
- npm install @types/react-redux --save-dev
- ```
-
-- Update `webpack.config.js` vendors:
-
-### ./webpack.config.js
-```diff
-  ...
-    vendor: [
-      'react',
-      'react-dom',
-      'react-router',
-      'toastr',
-      'lc-form-validation',
-+     'redux',
-+     'react-redux',
-+     'redux-thunk',
-    ],
-  ...
-```
-
-## Move to actions
-
-- At first, we create a constants file to define all `action types`:
-
-### ./src/common/constants/actionTypes.ts
+### ./src/middlewares/http/actionTypes.ts
 ```javascript
 export const actionTypes = {
-  FETCH_MEMBERS_COMPLETED: 'FETCH_MEMBERS_COMPLETED',
-  FETCH_MEMBER_BY_ID_COMPLETED: 'FETCH_MEMBER_BY_ID_COMPLETED',
-  UPDATE_MEMBER_FIELD: 'UPDATE_MEMBER_FIELD',
-  SAVE_MEMBER: 'SAVE_MEMBER',
+  HTTP_CALL_START: 'HTTP_CALL_START',
+  HTTP_CALL_END: 'HTTP_CALL_END',
 };
 
 ```
 
-- Let's move `Members` events to `redux actions`. We can start creating a simple `action creator` that create a redux `action` to be consumed by `reducers`:
-
-### ./src/components/members/actions/fetchMembers.ts
+### ./src/middlewares/http/actions.ts
 ```javascript
-import { actionTypes } from '../../../common/constants/actionTypes';
-import { MemberEntity } from '../../../model';
+import { actionTypes } from './actionTypes';
 
-const fetchMembersCompleted = (members: MemberEntity[]) => ({
-  type: actionTypes.FETCH_MEMBERS_COMPLETED,
-  payload: members,
+export const httpCallStartAction = () => ({
+  type: actionTypes.HTTP_CALL_START,
+});
+
+export const httpCallEndAction = () => ({
+  type: actionTypes.HTTP_CALL_END,
 });
 
 ```
 
-- Previous `action` will go to reducer to update the state. But before that, we need to use API to fetch members. To do that we are going to use [`redux-thunk`](https://github.com/gaearon/redux-thunk). It's a redux middleware to delay the dispatch action until fetch data from server.
+### ./src/middlewares/http/middleware.ts
+```javascript
+import { httpCallEndAction } from './actions';
+
+export const httpMiddleware = ({ dispatch }) => (next) => (action) => {
+  return dispatchHttpCallEndAction(dispatch, next, action);
+};
+
+const dispatchHttpCallEndAction = (dispatch, next, action) => {
+  const httpEnd = action.meta && action.meta.httpEnd;
+
+  if (!httpEnd) {
+    return next(action);
+  }
+  else {
+    const nextAction = cleanAction(action);
+    next(nextAction);
+    return dispatch(httpCallEndAction());
+  }
+};
+
+const cleanAction = (action) => ({
+  ...action,
+  meta: {
+    ...action.meta,
+    httpEnd: null,
+  },
+});
+
+```
+
+### ./src/middlewares/index.ts
+```javascript
+export * from './http/middleware';
+
+```
+
+- Create `http` reducer:
+
+### ./src/reducers/http.ts
+```javascript
+import { actionTypes } from '../middlewares/http/actionTypes';
+
+export interface HttpState {
+  callCount: number;
+  inProgress: boolean;
+}
+
+const newState = (): HttpState => ({
+  callCount: 0,
+  inProgress: false,
+});
+
+export const httpReducer = (state = newState(), action) => {
+  switch (action.type) {
+    case actionTypes.HTTP_CALL_START:
+      return handleHttpCallStart(state, action.payload);
+    case actionTypes.HTTP_CALL_END:
+      return handleHttpCallEnd(state, action.payload);
+  }
+
+  return state;
+}
+
+const handleHttpCallStart = (state: HttpState, payload): HttpState => ({
+  callCount: state.callCount + 1,
+  inProgress: true,
+});
+
+const handleHttpCallEnd = (state: HttpState, payload): HttpState => {
+  const callCount = state.callCount - 1;
+
+  return {
+    callCount,
+    inProgress: callCount > 0,
+  };
+};
+
+```
+
+- Update `index.ts` reducer file:
+
+### ./src/reducers/index.ts
+```diff
+import { combineReducers } from 'redux';
+import { MemberEntity, MemberErrors } from '../model';
+import { membersReducer } from './members';
+import { memberReducer } from './member';
+import { memberErrorsReducer } from './memberErrors';
++ import { httpReducer, HttpState } from './http';
+
+export interface State {
+  members: MemberEntity[];
+  member: MemberEntity;
+  memberErrors: MemberErrors;
++ http: HttpState;
+};
+
+export const state = combineReducers<State>({
+  members: membersReducer,
+  member: memberReducer,
+  memberErrors: memberErrorsReducer,
++ http: httpReducer,
+});
+
+```
+
+- Configure `store`:
+
+### ./src/store.ts
+```diff
+import { Store, createStore, compose, applyMiddleware } from 'redux';
+import reduxThunk from 'redux-thunk';
++ import { httpMiddleware } from './middlewares';
+import { state, State } from './reducers';
+
++ const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
++ const middlewares = [
++   reduxThunk,
++   httpMiddleware,
++ ];
+
+export const store: Store<State> = createStore(
+  state,
+- compose(
++ composeEnhancers(
+-   applyMiddleware(reduxThunk),
++   applyMiddleware(...middlewares),
+  ),
+);
+
+```
+
+- With `__REDUX_DEVTOOLS_EXTENSION_COMPOSE__` we can check if we have installed [`Redux dev-tools extension`](https://github.com/zalmoxisus/redux-devtools-extension).
+
+- Add `spinner` image and configure `webpack`:
+
+### ./src/images/spinner.gif
+
+### ./webpack.config.js
+```diff
+...
+module: {
+    rules: [
+      ...
++     {
++       test: /\.(gif|jpg|png)$/,
++       include: path.join(basePath, "src/images"),
++       loader: 'url-loader?limit=100000'
++     }
+    ],
+  },
+  ...
+```
+
+- Create `Spinner` component:
+
+### ./src/common/components/spinner/spinner.tsx
+```javascript
+import * as React from 'react';
+
+interface Props {
+  showSpinner: boolean;
+}
+
+export const SpinnerComponent: React.StatelessComponent<Props> = (props) => {
+  return (
+    props.showSpinner ?
+      <div>
+        <div className="spinnerOverlay" />
+        <div className="spinner">
+          <span>Loading...</span>
+        </div>
+      </div> :
+      null
+  );
+};
+
+```
+
+### ./src/common/components/spinner/spinnerContainer.tsx
+```javascript
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { State } from '../../../reducers';
+import { SpinnerComponent } from './spinner';
+
+const mapStateToProps = (state: State) => ({
+  showSpinner: state.http.inProgress,
+});
+
+export const SpinnerContainer = connect(
+  mapStateToProps,
+)(SpinnerComponent);
+
+```
+
+### ./src/common/components/spinner/index.ts
+```javascript
+export * from './spinnerContainer';
+
+```
+
+- Add styles:
+
+### ./src/css/site.css
+```diff
+.avatar {
+   max-width: 80px
+}
+
++ .spinnerOverlay {
++   position: fixed;
++   z-index: 40001;
++   left: 0;
++   width: 100%;
++   height: 100%;
++   background-color: rgba(0, 0, 0, 0.5);
++ }
+
++ .spinner {
++   position: fixed;
++   z-index: 40002;
++   width: 100px;
++   height: 100px;
++   top: 50%;
++   left: 50%;
++   background: url('../images/spinner.gif') no-repeat center #fff;
++   text-align: center;
++   padding: 10px;
++   border-radius: 15px;
++   border: 1px solid #666;
++   margin-left: -50px;
++   margin-top: -50px;
++ }
+
+```
+
+- Use `Spinner` component:
+
+### ./src/app.tsx
+```diff
+import * as React from 'react';
+import { Header } from './components';
++ import { SpinnerContainer } from './common/components/spinner';
+
+export const App: React.StatelessComponent<{}> = (props) => {
+  return (
+    <div className="container-fluid">
++     <SpinnerContainer />
+      <Header />
+      {props.children}
+    </div>
+
+  );
+}
+
+```
+
+- Dispatch `http` actions in necessary `thunk` actions.
 
 ### ./src/components/members/actions/fetchMembers.ts
 ```diff
 import { actionTypes } from '../../../common/constants/actionTypes';
 import { MemberEntity } from '../../../model';
-+ import { memberAPI } from '../../../api/member';
+import { memberAPI } from '../../../api/member';
++ import { httpCallStartAction } from '../../../middlewares/http/actions';
 
-+ export const fetchMembersAction = () => (dispatch) => {
-+   memberAPI.fetchMembers()
-+     .then((members) => {
-+       dispatch(fetchMembersCompleted(members));
-+     });
-+ };
+export const fetchMembersAction = () => (dispatch) => {
++ dispatch(httpCallStartAction());
+  memberAPI.fetchMembers()
+    .then((members) => {
+      dispatch(fetchMembersCompleted(members));
+    });
+};
 
 const fetchMembersCompleted = (members: MemberEntity[]) => ({
   type: actionTypes.FETCH_MEMBERS_COMPLETED,
   payload: members,
++ meta: {
++   httpEnd: true,
++ },
 });
 
 ```
 
-- We `dispatch` completed `redux action` when fetch members.
-
-- Let's move `Member` events to `actionts`. We can see that  `fetchMemberById` action is very similar to `fetchMembers`:
-
 ### ./src/components/member/actions/fetchMemberById.ts
-```javascript
+```diff
 import { actionTypes } from '../../../common/constants/actionTypes';
 import { MemberEntity } from '../../../model';
 import { memberAPI } from '../../../api/member';
++ import { httpCallStartAction } from '../../../middlewares/http/actions';
 
 export const fetchMemberByIdAction = (id: number) => (dispatch) => {
-  memberAPI.fetchMemberById(id)    
++ dispatch(httpCallStartAction());
+  memberAPI.fetchMemberById(id)
     .then((member) => {
       dispatch(fetchMemberByIdCompleted(member));
     });
@@ -129,41 +364,15 @@ export const fetchMemberByIdAction = (id: number) => (dispatch) => {
 const fetchMemberByIdCompleted = (member: MemberEntity) => ({
   type: actionTypes.FETCH_MEMBER_BY_ID_COMPLETED,
   payload: member,
-});
-
-```
-
-### ./src/components/member/actions/memberFieldChange.ts
-```javascript
-import { FieldValidationResult } from 'lc-form-validation';
-import { actionTypes } from '../../../common/constants/actionTypes';
-import { MemberEntity } from '../../../model';
-import { memberFormValidation } from '../memberFormValidation';
-
-export const memberFieldChangeAction = (member: MemberEntity, fieldName: string, value: any) => (dispatch) => {
-  memberFormValidation.validateField(member, fieldName, value)
-    .then((fieldValidationResult) => {
-      dispatch(memberFieldChangeCompleted(fieldValidationResult, value));
-    });
-};
-
-export interface MemberFieldChangePayload {
-  fieldValidationResult: FieldValidationResult;
-  value: any;
-}
-
-const memberFieldChangeCompleted = (fieldValidationResult: FieldValidationResult, value: any) => ({
-  type: actionTypes.UPDATE_MEMBER_FIELD,
-  payload: {
-    fieldValidationResult,
-    value,
-  } as MemberFieldChangePayload,
++ meta: {
++   httpEnd: true,
++ },
 });
 
 ```
 
 ### ./src/components/member/actions/saveMember.ts
-```javascript
+```diff
 import { FormValidationResult } from 'lc-form-validation';
 import * as toastr from 'toastr';
 import { hashHistory } from 'react-router';
@@ -171,481 +380,28 @@ import { actionTypes } from '../../../common/constants/actionTypes';
 import { MemberEntity } from '../../../model';
 import { memberAPI } from '../../../api/member';
 import { memberFormValidation } from '../memberFormValidation';
++ import { httpCallStartAction } from '../../../middlewares/http/actions';
 
 export const saveMemberAction = (member: MemberEntity) => (dispatch) => {
   memberFormValidation.validateForm(member)
     .then((formValidationResult) => {
       if (formValidationResult.succeeded) {
++       dispatch(httpCallStartAction());
         saveMember(member);
       }
       dispatch(saveMemberActionCompleted(formValidationResult));
     });
 };
 
-const saveMember = (member: MemberEntity) => {
-  memberAPI.saveMember(member)
-    .then(() => {
-      toastr.success('Member saved.');
-      hashHistory.goBack();
-    })
-    .catch(toastr.error);
-};
+...
 
 const saveMemberActionCompleted = (formValidationResult: FormValidationResult) => ({
   type: actionTypes.SAVE_MEMBER,
   payload: formValidationResult,
++ meta: {
++   httpEnd: true,
++ },
 });
-
-```
-
-## Move to reducers
-
-- Now, it's time to update state based on previous `actions`:
-
-### ./src/reducers/members.ts
-```javascript
-import { actionTypes } from '../common/constants/actionTypes';
-import { MemberEntity } from '../model';
-
-export const membersReducer = (state: MemberEntity[] = [], action) => {
-  switch (action.type) {
-    case actionTypes.FETCH_MEMBERS_COMPLETED:
-      return handleFetchMembersCompleted(state, action.payload);
-  }
-
-  return state;
-};
-
-const handleFetchMembersCompleted = (state: MemberEntity[], payload: MemberEntity[]) => {
-  return payload;
-};
-
-```
-
-### ./src/reducers/member.ts
-```javascript
-import { actionTypes } from '../common/constants/actionTypes';
-import { MemberEntity } from '../model';
-import { MemberFieldChangePayload } from '../components/member/actions/memberFieldChange';
-
-const createEmptyMember = (): MemberEntity => ({
-  id: -1,
-  login: '',
-  avatar_url: '',
-});
-
-export const memberReducer = (state = createEmptyMember(), action) => {
-  switch (action.type) {
-    case actionTypes.FETCH_MEMBER_BY_ID_COMPLETED:
-      return handleFetchMemberByIdCompleted(state, action.payload);
-    case actionTypes.UPDATE_MEMBER_FIELD:
-      return handleUpdateMemberField(state, action.payload);
-  }
-
-  return state;
-};
-
-const handleFetchMemberByIdCompleted = (state: MemberEntity, payload: MemberEntity): MemberEntity => {
-  return payload;
-};
-
-const handleUpdateMemberField = (state: MemberEntity, payload: MemberFieldChangePayload): MemberEntity => {
-  return {
-    ...state,
-    [payload.fieldValidationResult.key]: payload.value,
-  };
-};
-
-```
-
-### ./src/reducers/memberErrors.ts
-```javascript
-import { FieldValidationResult, FormValidationResult } from 'lc-form-validation';
-import { actionTypes } from '../common/constants/actionTypes';
-import { MemberErrors } from '../model';
-import { MemberFieldChangePayload } from '../components/member/actions/memberFieldChange';
-
-const createEmptyMemberErrors = (): MemberErrors => ({
-  login: new FieldValidationResult(),
-});
-
-export const memberReducer = (state = createEmptyMemberErrors(), action) => {
-  switch (action.type) {
-    case actionTypes.FETCH_MEMBERS_COMPLETED:
-      return handleFetchMembersCompleted(state, action.payload);
-    case actionTypes.UPDATE_MEMBER_FIELD:
-      return handleUpdateMemberField(state, action.payload);
-    case actionTypes.SAVE_MEMBER:
-      return handleSaveMember(state, action.payload);
-  }
-
-  return state;
-};
-
-const handleFetchMembersCompleted = (state: MemberErrors, payload) => {
-  return createEmptyMemberErrors();
-};
-
-const handleUpdateMemberField = (state: MemberErrors, payload: MemberFieldChangePayload): MemberErrors => {
-  return {
-    ...state,
-    [payload.fieldValidationResult.key]: payload.fieldValidationResult,
-  };
-};
-
-const handleSaveMember = (state: MemberErrors, payload: FormValidationResult): MemberErrors => {
-  const newMemberErrors = { ...state };
-
-  return payload.fieldErrors.reduce((memberErrors, fieldValidationResult) => {
-    memberErrors[fieldValidationResult.key] = fieldValidationResult;
-    return memberErrors;
-  }, newMemberErrors);
-};
-
-```
-
-### ./src/reducers/index.ts
-```javascript
-import { combineReducers } from 'redux';
-import { MemberEntity, MemberErrors } from '../model';
-import { membersReducer } from './members';
-import { memberReducer } from './member';
-import { memberErrorsReducer } from './memberErrors';
-
-export interface State {
-  members: MemberEntity[];
-  member: MemberEntity;
-  memberErrors: MemberErrors;
-};
-
-export const state = combineReducers<State>({
-  members: membersReducer,
-  member: memberReducer,
-  memberErrors: memberErrorsReducer,
-});
-
-```
-
-- Configure `store`:
-
-### ./src/store.ts
-```javascript
-import { Store, createStore, compose, applyMiddleware } from 'redux';
-import reduxThunk from 'redux-thunk';
-import { state, State } from './reducers';
-
-export const store: Store<State> = createStore(
-  state,
-  compose(
-    applyMiddleware(reduxThunk),
-  )
-);
-
-```
-
-- Update `AppRouter` to use store:
-
-### ./src/router.tsx
-```diff
-import * as React from 'react';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-+ import { Provider } from 'react-redux';
-+ import { store } from './store';
-import { App } from './app';
-import { About, MembersPage, MemberPageContainer } from './components';
-
-export const AppRouter: React.StatelessComponent<{}> = () => {
-  return (
-+   <Provider store={store}>
-      <Router history={hashHistory}>
-        <Route path="/" component={App} >
-          <IndexRoute component={About} />
-          <Route path="/about" component={About} />
-          <Route path="/members" component={MembersPage} />
-          <Route path="/member" component={MemberPageContainer} />
-          <Route path="/member/:id" component={MemberPageContainer} />
-        </Route>
-      </Router>
-+   </Provider>
-  );
-}
-
-```
-
-- Create `Members pageContainer`:
-
-### ./src/components/members/pageContainer.tsx
-```javascript
-import * as React from 'react';
-import { connect } from 'react-redux';
-import { State } from '../../reducers';
-import { fetchMembersAction } from './actions/fetchMembers';
-import { MembersPage } from './page';
-
-const mapStateToProps = (state: State) => ({
-  members: state.members,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  fetchMembers: () => dispatch(fetchMembersAction()),
-});
-
-export const MembersPageContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(MembersPage);
-
-```
-
-- Update `Members page`:
-
-### ./src/components/members/page.tsx
-```diff
-import * as React from 'react';
-import { Link } from 'react-router';
-import { MemberEntity } from '../../model';
-- import { memberAPI } from '../../api/member';
-import { MemberHeader } from './memberHeader';
-import { MemberRow } from './memberRow';
-
-- interface State {
-+ interface Props {
-  members: MemberEntity[];
-+ fetchMembers(): void;
-}
-
-- export class MembersPage extends React.Component<{}, State> {
-+ export class MembersPage extends React.Component<Props,{}> {
-- constructor() {
--   super();
--   this.state = { members: [] };
-- }
-
-  public componentDidMount() {
--   memberAPI.fetchMembers()
--     .then((members) => {
--       this.setState({ members });
--     });
-+   this.props.fetchMembers();
-  }
-
-...
-
-```
-
-- Update `index`:
-
-### ./src/components/members/index.tsx
-```diff
-- export * from './page';
-+ export * from './pageContainer';
-
-```
-
-- Update `AppRouter`:
-
-### ./src/router.tsx
-```diff
-import * as React from 'react';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-import { Provider } from 'react-redux';
-import { store } from './store';
-import { App } from './app';
-- import { About, MembersPage, MemberPageContainer } from './components';
-+ import { About, MembersPageContainer, MemberPageContainer } from './components';
-
-export const AppRouter: React.StatelessComponent<{}> = () => {
-  return (
-    <Provider store={store}>
-      <Router history={hashHistory}>
-        <Route path="/" component={App} >
-          <IndexRoute component={About} />
-          <Route path="/about" component={About} />
--         <Route path="/members" component={MembersPage} />
-+         <Route path="/members" component={MembersPageContainer} />
-          <Route path="/member" component={MemberPageContainer} />
-          <Route path="/member/:id" component={MemberPageContainer} />
-        </Route>
-      </Router>
-    </Provider>
-  );
-}
-
-```
-
-- Update `Member pageContainer`:
-
-### ./src/components/member/pageContainer.tsx
-```diff
-import * as React from 'react';
-- import { hashHistory } from 'react-router';
-- import * as toastr from 'toastr';
-- import { FieldValidationResult } from 'lc-form-validation';
-- import { memberAPI } from '../../api/member';
-- import { MemberEntity, MemberErrors } from '../../model';
-- import { memberFormValidation } from './memberFormValidation';
-+ import { connect } from 'react-redux';
-+ import { State } from '../../reducers';
-+ import { MemberEntity } from '../../model';
-+ import { fetchMemberByIdAction } from './actions/fetchMemberById';
-+ import { memberFieldChangeAction } from './actions/memberFieldChange';
-+ import { saveMemberAction } from './actions/saveMember';
-import { MemberPage } from './page';
-
-+ const mapStateToProps = (state: State, ownProps: any) => ({
-+   memberId: Number(ownProps.params.id) || 0,
-+   member: state.member,
-+   memberErrors: state.memberErrors,
-+ });
-
-+ const mapDispatchToProps = (dispatch) => ({
-+   fetchMemberById: (id: number) => dispatch(fetchMemberByIdAction(id)),
-+   onChange: (member: MemberEntity, fieldName: string, value: string) =>
-+     dispatch(memberFieldChangeAction(member, fieldName, value)),
-+   onSave: (member: MemberEntity) => dispatch(saveMemberAction(member)),
-+ });
-
-+ export const MemberPageContainer = connect(
-+   mapStateToProps,
-+   mapDispatchToProps,
-+ )(MemberPage);
-
-- interface Props {
--   params: { id: string };
-- }
-
-- interface State {
--   member: MemberEntity;
--   memberErrors: MemberErrors;
-- }
-
-- export class MemberPageContainer extends React.Component<Props, State> {
--   constructor() {
--     super();
-
--     this.state = {
--       member: {
--         id: -1,
--         login: '',
--         avatar_url: '',
--       },
--       memberErrors: {
--         login: new FieldValidationResult(),
--       }
--     };
-
--     this.onFieldValueChange = this.onFieldValueChange.bind(this);
--     this.onSave = this.onSave.bind(this);
--   }
-
--   public componentDidMount() {
--     const memberId = Number(this.props.params.id) || 0;
--     memberAPI.fetchMemberById(memberId)
--       .then((member) => {
--         this.setState({
--           ...this.state,
--           member,
--         });
--       });
--   }
-
--   private onFieldValueChange(fieldName: string, value: string) {
--     memberFormValidation.validateField(this.state.member, fieldName, value)
--       .then((fieldValidationResult) => {
--         const nextState = {
--           ...this.state,
--           member: {
--             ...this.state.member,
--             [fieldName]: value,
--           },
--           memberErrors: {
--             ...this.state.memberErrors,
--             [fieldName]: fieldValidationResult,
--           }
--         };
-
--         this.setState(nextState);
--       });
--   }
-
--   private onSave() {
--     memberFormValidation.validateForm(this.state.member)
--       .then((formValidationResult) => {
--         if (formValidationResult.succeeded) {
--           memberAPI.saveMember(this.state.member)
--             .then(() => {
--               toastr.success('Member saved.');
--               hashHistory.goBack();
--             });
--         }
--       });
--   }
-
--   render() {
--     return (
--       <MemberPage
--         member={this.state.member}
--         memberErrors={this.state.memberErrors}
--         onChange={this.onFieldValueChange}
--         onSave={this.onSave}
--       />
--     );
--   }
-- }
-
-```
-
-- Update `Member page`:
-
-### ./src/components/member/page.tsx
-```diff
-import * as React from 'react';
-import { MemberEntity, MemberErrors } from '../../model';
-import { MemberForm } from './memberForm';
-
-interface Props {
-+ memberId: number;
-  member: MemberEntity;
-  memberErrors: MemberErrors;
-- onChange: (fieldName: string, value: string) => void;
-- onSave: () => void;
-+ fetchMemberById: (id: number) => void;
-+ onChange: (member: MemberEntity, fieldName: string, value: string) => void;
-+ onSave: (member: MemberEntity) => void;
-}
-
-- export const MemberPage: React.StatelessComponent<Props> = (props) => {
-+ export class MemberPage extends React.Component<Props, {}> {
-+ constructor() {
-+   super();
-
-+   this.onChange = this.onChange.bind(this);
-+   this.onSave = this.onSave.bind(this);
-+ }
-
-+ componentDidMount() {
-+   this.props.fetchMemberById(this.props.memberId);
-+ }
-
-+ private onChange(fieldName: string, value: string) {
-+   this.props.onChange(this.props.member, fieldName, value);
-+ }
-
-+ private onSave() {
-+   this.props.onSave(this.props.member);
-+ }
-
-+ render() {
-    return (
-      <MemberForm
-        member={props.member}
-        memberErrors={props.memberErrors}
-        onChange={props.onChange}
-        onSave={props.onSave}
-      />
-    );
-+ }
-}
 
 ```
 

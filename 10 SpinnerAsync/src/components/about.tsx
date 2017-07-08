@@ -3,15 +3,15 @@ import * as React from 'react';
 export const About: React.StatelessComponent<{}> = () => {
   return (
     <div className="row about-page">
-      <h1 className="jumbotron">09 Redux</h1>
+      <h1 className="jumbotron">10 SpinnerAsync</h1>
 
       <div className="col-xs-12">
         <h1>
-          <small>This sample takes as starting point sample "08 ParamNavigation".</small>
+          <small>This sample takes as starting point sample "09 Redux".</small>
         </h1>
         <div className="col-xs-12">
           <h3>
-            <small>We are adding Redux pattern</small>
+            <small>we will display a busy indicator when an ajax request is in progress.</small>
           </h3>
         </div>
       </div>
@@ -31,12 +31,17 @@ export const About: React.StatelessComponent<{}> = () => {
             <ul className="top-buffer">
               <li>
                 <h4>
-                  components/members/actions/...: <small>Isolated members component actions</small>
+                  ./src/middlewares/http/actions.ts: <small>Create actions for http middleware</small>
                 </h4>
               </li>
+            </ul>
+          </li>
+          <li className="top-buffer">
+            <h4><b>Middlewares:</b></h4>
+            <ul className="top-buffer">
               <li>
                 <h4>
-                  components/member/actions/...: <small>Isolated member component actions</small>
+                  ./src/middlewares/http/middleware.ts: <small>Create http middleware</small>
                 </h4>
               </li>
             </ul>
@@ -46,17 +51,7 @@ export const About: React.StatelessComponent<{}> = () => {
             <ul className="top-buffer">
               <li>
                 <h4>
-                  reducers/members.ts: <small>Manage members state</small>
-                </h4>
-              </li>
-              <li>
-                <h4>
-                  reducers/member.ts: <small>Manage member state</small>
-                </h4>
-              </li>
-              <li>
-                <h4>
-                  reducers/memberErrors.ts: <small>Manage memberErrors state</small>
+                  ./src/reducers/http.ts: <small>Manage http state</small>
                 </h4>
               </li>
             </ul>
@@ -66,7 +61,7 @@ export const About: React.StatelessComponent<{}> = () => {
             <ul className="top-buffer">
               <li>
                 <h4>
-                  store.ts: <small>Configured store to be used in router.tsx</small>
+                  ./store.ts: <small>Update store to use in http middleware</small>
                 </h4>
               </li>
             </ul>
@@ -76,27 +71,12 @@ export const About: React.StatelessComponent<{}> = () => {
             <ul className="top-buffer">
               <li>
                 <h4>
-                  router.tsx: <small>Updated to use store</small>
+                  ./src/common/components/spinner/spinner.tsx: <small>Presentational component</small>
                 </h4>
               </li>
               <li>
                 <h4>
-                  components/members/pageContainer.tsx: <small>Create component using reducers state</small>
-                </h4>
-              </li>
-              <li>
-                <h4>
-                  components/members/page.tsx: <small>Updated</small>
-                </h4>
-              </li>
-              <li>
-                <h4>
-                  components/member/pageContainer.tsx: <small>Updated component using reducers state</small>
-                </h4>
-              </li>
-              <li>
-                <h4>
-                  components/member/page.tsx: <small>Updated.</small>
+                  ./src/common/components/spinner/spinnerContainer.tsx: <small>Container component</small>
                 </h4>
               </li>
             </ul>

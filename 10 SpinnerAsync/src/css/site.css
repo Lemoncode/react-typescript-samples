@@ -23,3 +23,28 @@
 .avatar {
    max-width: 80px
 }
+
+.spinnerOverlay {
+  position: fixed;
+  z-index: 40001;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.spinner {
+  position: fixed;
+  z-index: 40002;
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  background: url('../images/spinner.gif') no-repeat center #fff;
+  text-align: center;
+  padding: 10px;
+  border-radius: 15px;
+  border: 1px solid #666;
+  margin-left: -50px;
+  margin-top: -50px;
+}
