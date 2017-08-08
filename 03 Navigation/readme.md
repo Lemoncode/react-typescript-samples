@@ -77,7 +77,7 @@ export const MembersPage: React.StatelessComponent<{}> = () => {
 
 - And its `index.ts` file:
 
-### ./src/components/members/index.tsx
+### ./src/components/members/index.ts
 ```javascript
 export * from './page';
 
@@ -110,7 +110,7 @@ export const Header: React.StatelessComponent<{}> = () => {
 
 - Update components `index.ts` file:
 
-### ./src/components/members/index.tsx
+### ./src/components/index.ts
 ```diff
 export * from './header';
 export * from './about';
