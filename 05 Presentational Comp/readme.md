@@ -33,7 +33,7 @@ in a terminal/console window. Older versions may produce errors.
 
 - Extract `MemberHeader` as presentational component:
 
-### ./src/components/members/memberHeader.ts
+### ./src/components/members/memberHeader.tsx
 ```javascript
 import * as React from 'react';
 
@@ -51,7 +51,7 @@ export const MemberHeader: React.StatelessComponent<{}> = () => {
 
 - Extract `MemberRow` as presentational component:
 
-### ./src/components/members/memberRow.ts
+### ./src/components/members/memberRow.tsx
 ```javascript
 import * as React from 'react';
 import { MemberEntity } from '../../model';
