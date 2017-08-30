@@ -234,7 +234,7 @@ const createEmptyMember = (): MemberEntity => ({
   avatar_url: '',
 });
 
-export const memberErrorReducer = (state = createEmptyMember(), action) => {
+export const memberReducer = (state = createEmptyMember(), action) => {
   switch (action.type) {
     case actionTypes.FETCH_MEMBER_BY_ID_COMPLETED:
       return handleFetchMemberByIdCompleted(state, action.payload);
@@ -269,7 +269,7 @@ const createEmptyMemberErrors = (): MemberErrors => ({
   login: new FieldValidationResult(),
 });
 
-export const memberReducer = (state = createEmptyMemberErrors(), action) => {
+export const memberErrorReducer = (state = createEmptyMemberErrors(), action) => {
   switch (action.type) {
     case actionTypes.FETCH_MEMBERS_COMPLETED:
       return handleFetchMembersCompleted(state, action.payload);
