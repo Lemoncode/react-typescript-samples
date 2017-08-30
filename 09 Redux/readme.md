@@ -638,10 +638,10 @@ interface Props {
 + render() {
     return (
       <MemberForm
-        member={props.member}
-        memberErrors={props.memberErrors}
-        onChange={props.onChange}
-        onSave={props.onSave}
+        member={this.props.member}
+        memberErrors={this.props.memberErrors}
+        onChange={this.onChange}
+        onSave={this.onSave}
       />
     );
 + }
