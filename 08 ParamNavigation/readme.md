@@ -261,6 +261,7 @@ import * as toastr from 'toastr';
 import { memberAPI } from '../../api/member';
 - import { MemberEntity } from '../../model';
 + import { MemberEntity, MemberErrors } from '../../model';
++ import { memberFormValidation } from './memberFormValidation';
 import { MemberPage } from './page';
 
 interface Props {
