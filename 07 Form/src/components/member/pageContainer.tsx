@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { hashHistory } from 'react-router';
 import * as toastr from 'toastr';
 import { memberAPI } from '../../api/member';
 import { MemberEntity } from '../../model';
@@ -41,7 +40,7 @@ export class MemberPageContainer extends React.Component<{}, State> {
     memberAPI.saveMember(this.state.member)
       .then(() => {
         toastr.success('Member saved.');
-        hashHistory.goBack();
+        // hashHistory.goBack();
       });
   }
 
