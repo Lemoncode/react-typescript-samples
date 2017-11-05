@@ -7,6 +7,5 @@ export const App: React.StatelessComponent<{}> = (props) => {
       <Header />
       {props.children}
     </div>
-
   );
 }
