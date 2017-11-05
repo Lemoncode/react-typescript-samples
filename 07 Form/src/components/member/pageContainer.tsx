@@ -40,7 +40,7 @@ export class MemberPageContainer extends React.Component<{}, State> {
     memberAPI.saveMember(this.state.member)
       .then(() => {
         toastr.success('Member saved.');
-        // hashHistory.goBack();
+        history.back();
       });
   }
 
