@@ -3,15 +3,20 @@ import * as toastr from 'toastr';
 import { memberAPI } from '../../api/member';
 import { MemberEntity } from '../../model';
 import { MemberPage } from './page';
+import PropTypes from 'prop-types';
 
 interface State {
   member: MemberEntity;
 }
 
-export class MemberPageContainer extends React.Component<{}, State> {
-  constructor() {
-    super();
+interface Props {
+  history: PropTypes.object.isRequired;
+}
 
+export class MemberPageContainer extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    
     this.state = {
       member: {
         id: -1,
@@ -36,11 +41,11 @@ export class MemberPageContainer extends React.Component<{}, State> {
     this.setState(nextState);
   }
 
-  private onSave() {
+  private onSave = (props : Props) => () => {
     memberAPI.saveMember(this.state.member)
       .then(() => {
         toastr.success('Member saved.');
-        history.back();
+        this.props.history.goBack();
       });
   }
 
@@ -49,7 +54,7 @@ export class MemberPageContainer extends React.Component<{}, State> {
       <MemberPage
         member={this.state.member}
         onChange={this.onFieldValueChange}
-        onSave={this.onSave}
+        onSave={this.onSave(this.props)}
       />
     );
   }
