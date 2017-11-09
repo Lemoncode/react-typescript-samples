@@ -503,16 +503,31 @@ import { MemberPage } from './page';
 
 ...
 
-  private onSave() {
++ interface Props {
++   history: PropTypes.object.isRequired;
++ }
+
++  private onSave(props : Props) {
 -   console.log('save');
 +   memberAPI.saveMember(this.state.member)
 +     .then(() => {
 +       toastr.success('Member saved.');
-+       history.back();
++       props.history.goBack();
 +     });
   }
 
   ...
+
+  render() {
+    return (
+      <MemberPage
+        member={this.state.member}
+        onChange={this.onFieldValueChange}
+-        onSave={this.onSave}
++        onSave={this.onSave(this.props)}
+      />
+    );
+  }
 }
 
 ```
