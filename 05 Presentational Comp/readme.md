@@ -168,9 +168,8 @@ export const MemberBody: React.StatelessComponent<Props> = ({ members }) => {
 import * as React from 'react';
 import { MemberEntity } from '../../model';
 import { memberAPI } from '../../api/member';
--import { MemberHeader } from './memberHeader';
+import { MemberHeader } from './memberHeader';
 -import { MemberRow } from './memberRow';
-+import { MemberHeader } from './memberHeader';
 +import { MemberBody } from './memberBody';
 
 interface State {
