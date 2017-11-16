@@ -337,8 +337,8 @@ interface State {
 }
 
 export class MemberPageContainer extends React.Component<{}, State> {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       member: {
@@ -349,7 +349,6 @@ export class MemberPageContainer extends React.Component<{}, State> {
     };
 
     this.onFieldValueChange = this.onFieldValueChange.bind(this);
-    this.onSave = this.onSave.bind(this);
   }
 
   private onFieldValueChange(fieldName: string, value: string) {
@@ -497,16 +496,17 @@ export const memberAPI = {
 import * as React from 'react';
 + import * as toastr from 'toastr';
 + import { memberAPI } from '../../api/member';
++ import { History } from 'history';
 import { MemberEntity } from '../../model';
 import { MemberPage } from './page';
 
 ...
 
 + interface Props {
-+   history: PropTypes.object.isRequired;
++   history: History;
 + }
 
-+  private onSave(props : Props) {
++  private onSave = () => {
 -   console.log('save');
 +   memberAPI.saveMember(this.state.member)
 +     .then(() => {
@@ -522,8 +522,7 @@ import { MemberPage } from './page';
       <MemberPage
         member={this.state.member}
         onChange={this.onFieldValueChange}
--        onSave={this.onSave}
-+        onSave={this.onSave(this.props)}
+        onSave={this.onSave}
       />
     );
   }
