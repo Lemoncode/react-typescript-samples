@@ -109,8 +109,7 @@ export * from './members';
 ### ./src/router.tsx
 ```diff
 import * as React from 'react';
-import { Route, Switch } from 'react-router';
-import { HashRouter } from 'react-router-dom';
+import { Route, Switch, HashRouter } from 'react-router-dom';
 import { App } from './app';
 - import { About, MembersPage } from './components';
 + import { About, MembersPage, MemberPageContainer } from './components';
