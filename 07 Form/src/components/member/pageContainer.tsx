@@ -16,7 +16,7 @@ interface Props {
 export class MemberPageContainer extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    
+
     this.state = {
       member: {
         id: -1,
@@ -41,11 +41,11 @@ export class MemberPageContainer extends React.Component<Props, State> {
     this.setState(nextState);
   }
 
-  private onSave = (props : Props) => () => {
+  private onSave = () => {
     memberAPI.saveMember(this.state.member)
       .then(() => {
         toastr.success('Member saved.');
-        props.history.goBack();
+        this.props.history.goBack();
       });
   }
 
@@ -54,7 +54,7 @@ export class MemberPageContainer extends React.Component<Props, State> {
       <MemberPage
         member={this.state.member}
         onChange={this.onFieldValueChange}
-        onSave={this.onSave(this.props)}
+        onSave={this.onSave}
       />
     );
   }
