@@ -3,14 +3,14 @@ import * as toastr from 'toastr';
 import { memberAPI } from '../../api/member';
 import { MemberEntity } from '../../model';
 import { MemberPage } from './page';
-import PropTypes from 'prop-types';
+import { History } from 'history';
 
 interface State {
   member: MemberEntity;
 }
 
 interface Props {
-  history: PropTypes.object.isRequired;
+  history: History;
 }
 
 export class MemberPageContainer extends React.Component<Props, State> {
