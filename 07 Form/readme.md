@@ -35,7 +35,7 @@ in a terminal/console window. Older versions may produce errors.
  $ npm install
  ```
 
-- We update`About` content to show sample `07 Form` highlights. You can see updates in `./src/components/about.tsx`.
+- We update `About` content to show sample `07 Form` highlights. You can see updates in `./src/components/about.tsx`.
 
 - Install `toastr` and typings to show toast when save form changes:
 
@@ -393,8 +393,7 @@ export class MemberPageContainer extends React.Component<{}, State> {
 ### ./src/router.tsx
 ```diff
 import * as React from 'react';
-import { Route, Switch } from 'react-router';
-import { HashRouter } from 'react-router-dom';
+import { Route, Switch, HashRouter } from 'react-router-dom';
 import { App } from './app';
 - import { About, MembersPage } from './components';
 + import { About, MembersPage, MemberPageContainer } from './components';
