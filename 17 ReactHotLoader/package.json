@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^3.3.5",
-    "jquery": "^2.1.4",
+    "jquery": "^3.2.1",
     "lodash": "^4.5.1",
     "object-assign": "^4.0.1",
     "q": "^1.4.1",
@@ -52,6 +52,6 @@
     "typescript": "^1.8.9",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.13",
-    "webpack-dev-server": "^1.14.1"   
+    "webpack-dev-server": "^1.14.1"
   }
 }
