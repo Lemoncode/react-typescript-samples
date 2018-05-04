@@ -7,8 +7,8 @@ interface State {
 }
 
 export class MembersPage extends React.Component<{}, State> {
-  constructor() {
-    super();
+  constructor(props:State) {
+    super(props);
     this.state = { members: [] };
   }
 
