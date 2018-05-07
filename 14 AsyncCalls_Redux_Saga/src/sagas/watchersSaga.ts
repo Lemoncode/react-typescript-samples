@@ -6,7 +6,7 @@ import {fetchMembers} from './membersSaga';
 // https://github.com/yelouafi/redux-saga/blob/master/examples/real-world/sagas/index.js
 function* watchLoadMembersRequest() {
   while(true) {
-    yield takeLatest('FETCH_MEMBERS_REQUEST', fetchMembers)
+    yield* takeLatest('FETCH_MEMBERS_REQUEST', fetchMembers)
   }
 }
 

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { hashHistory } from 'react-router-dom';
 import * as toastr from 'toastr';
 import objectAssign = require('object-assign');
 import MemberEntity from './../../api/memberEntity';
@@ -13,8 +12,9 @@ import resetSaveCompleted from '../../actions/resetSaveCompleted';
 import initializeNewMember from '../../actions/initializeNewMember';
 
 interface Props extends React.Props<MemberPage> {
-  params: any
-  member?: MemberEntity
+  match: any
+  , history
+  , member?: MemberEntity
   , errors?: MemberErrors
   , saveCompleted?: boolean
   , loadMember?: (id: number) => void
@@ -28,10 +28,10 @@ class MemberPage extends React.Component<Props, {}> {
   constructor(props: Props) {
     super(props);
   }
-
+  
   componentWillMount() {
     // Coming from navigation
-    var memberId = this.props.params.id;
+    var memberId = this.props.match.params.id;
 
     if (memberId) {
       var memberIdNumber: number = parseInt(memberId);
@@ -49,8 +49,8 @@ class MemberPage extends React.Component<Props, {}> {
       // Show toast
       toastr.success('Author saved.');
 
-      // using hashHistory, TODO: proper configure browserHistory on app and here
-      hashHistory.push('/members')
+      // using hashHistory, TODO: proper configure browserHistory on app and here    
+      this.props.history.push('/members');
 
       // Reset saveCompleted flag
       this.props.resetSaveCompletedFlag();
@@ -68,7 +68,6 @@ class MemberPage extends React.Component<Props, {}> {
 
   public saveMember(event) {
     event.preventDefault();
-
     this.props.saveMember(this.props.member);
   }
 

@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "tsd reinstall --overwrite --save",
     "start": "webpack-dev-server --mode development --open",
-    "build": "rimraf dist && webpack  --mode development"
+    "build": "webpack --mode development"
   },
   "author": "Braulio Diez",
   "license": "ISC",
