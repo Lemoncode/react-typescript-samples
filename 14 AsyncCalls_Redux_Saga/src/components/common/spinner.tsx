@@ -38,7 +38,8 @@ const mapStateToProps = (state) => {
 
 
 const ContainerSpinnerComponent = connect(
-                                   mapStateToProps
+                                   mapStateToProps,
+                                   null
                                 )(Spinner)
 
 
