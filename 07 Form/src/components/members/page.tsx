@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { MemberEntity } from '../../model';
 import { memberAPI } from '../../api/member';
 import { MemberHeader } from './memberHeader';
@@ -10,8 +10,8 @@ interface State {
 }
 
 export class MembersPage extends React.Component<{}, State> {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = { members: [] };
   }
 
