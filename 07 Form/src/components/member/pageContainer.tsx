@@ -1,17 +1,21 @@
 import * as React from 'react';
-import { hashHistory } from 'react-router';
 import * as toastr from 'toastr';
 import { memberAPI } from '../../api/member';
 import { MemberEntity } from '../../model';
 import { MemberPage } from './page';
+import { History } from 'history';
 
 interface State {
   member: MemberEntity;
 }
 
-export class MemberPageContainer extends React.Component<{}, State> {
-  constructor() {
-    super();
+interface Props {
+  history: History;
+}
+
+export class MemberPageContainer extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
 
     this.state = {
       member: {
@@ -22,7 +26,6 @@ export class MemberPageContainer extends React.Component<{}, State> {
     };
 
     this.onFieldValueChange = this.onFieldValueChange.bind(this);
-    this.onSave = this.onSave.bind(this);
   }
 
   private onFieldValueChange(fieldName: string, value: string) {
@@ -37,11 +40,11 @@ export class MemberPageContainer extends React.Component<{}, State> {
     this.setState(nextState);
   }
 
-  private onSave() {
+  private onSave = () => {
     memberAPI.saveMember(this.state.member)
       .then(() => {
         toastr.success('Member saved.');
-        hashHistory.goBack();
+        this.props.history.goBack();
       });
   }
 

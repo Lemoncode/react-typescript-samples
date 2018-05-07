@@ -13,8 +13,9 @@ Summary steps:
 - Prerequisites: Install Node.js
 - Initialize **package.json** (with `npm init`)
 - Install:
-    - Webpack and webpack-dev-server.
+    - Webpack, webpack-cli and webpack-dev-server.
     - TypeScript.
+    - Babel.
     - Bootstrap.
 - Setup **webpack.config.js**
 - Create a test ts file.
@@ -22,9 +23,9 @@ Summary steps:
 
 # Prerequisites
 
-Install [Node.js and npm](https://nodejs.org/en/) (v6.9.1) if they are not already installed on your computer.
+Install [Node.js and npm](https://nodejs.org/en/) (v8.9.4) if they are not already installed on your computer.
 
-> Verify that you are running at least node v6.x.x and npm 3.x.x by running `node -v` and `npm -v` in a terminal/console window. Older versions may produce errors.
+> Verify that you are running at least node v8.x.x and npm 5.x.x by running `node -v` and `npm -v` in a terminal/console window. Older versions may produce errors.
 
 ## Steps to build it
 
@@ -34,29 +35,30 @@ Install [Node.js and npm](https://nodejs.org/en/) (v6.9.1) if they are not alrea
 about the project (e.g. set name to _reactboilerplate_ and description to _Sample working with React,TypeScript and Webpack_).
 Once you have successfully fullfilled them a **package.json** file we will generated.
 
- ```
+ ```bash
  npm init
  ```
 
-- Install **webpack** as a development dependency.
+- Install **webpack** locally, as a development dependency.
 
- ```
- npm install webpack --save-dev
+ ```bash
+ npm install webpack webpack-cli --save-dev
  ```
 - Install **webpack-dev-server** locally, as a development dependency (the reason to install it locally and not globally is to be easy to setup, e.g. can be launched on a clean machine without having to install anything globally but nodejs).
 
- ```
+ ```bash
  npm install webpack-dev-server --save-dev
  ```
 
-- Let's install a list of plugins and loaders that will add powers to
-our webpack configuration (handling <abbr title="Cascading Style Sheets">CSS</abbr>, TypeScript...).
+- Let's install a list of plugins and loaders that will add powers to our webpack configuration (handling <abbr title="Cascading Style Sheets">CSS</abbr>, TypeScript...).
 
- ```
- npm install awesome-typescript-loader css-loader file-loader html-webpack-plugin style-loader url-loader --save-dev
+ ```bash
+ npm install awesome-typescript-loader css-loader file-loader html-webpack-plugin style-loader url-loader mini-css-extract-plugin --save-dev
  ```
 
-- In order to launch `webpack-dev-server`, modify the **package.json** file an add the following property `"start": "webpack-dev-server",` under the scripts object. It allows us to launch webpack from the command line through npm typing `npm start`.
+- In order to launch `webpack-dev-server`, modify the **package.json** file an add the following lines under the scripts object:
+  - `"start": "webpack-dev-server --mode development --inline --hot --open",` It allows us to launch webpack from the command line through npm typing `npm start`. 
+  - `"build": "webpack --mode development"`
 
 ### ./package.json
 ```diff
@@ -65,7 +67,9 @@ our webpack configuration (handling <abbr title="Cascading Style Sheets">CSS</ab
   "version": "1.0.0",
   "description": "Sample working with React,TypeScript and Webpack",
   "scripts": {
-+   "start": "webpack-dev-server"
+    "test": "echo \"Error: no test specified\" && exit 1"
++    "start": "webpack-dev-server  --mode development --inline --hot --open",
++    "build": "webpack  --mode development"
   },
   ...
 }
@@ -74,11 +78,11 @@ our webpack configuration (handling <abbr title="Cascading Style Sheets">CSS</ab
 
 - Let's install locally TypeScript (version 2.0 or newer):
 
- ```
+ ```bash
  npm install typescript --save-dev
  ```
 
-- We need as well to drop a **tsconfig.json** file in the root folder of our project
+- We need as well to create a **tsconfig.json** file in the root folder of our project
 
 ### ./tsconfig.json
  ```json
@@ -104,14 +108,14 @@ our webpack configuration (handling <abbr title="Cascading Style Sheets">CSS</ab
 
 - Cause we are working with `es6`, we are going to install `babel` to transpile to `es5`:
 
- ```
+ ```bash
  npm install babel-core babel-preset-env --save-dev
  ```
 
-- And add config file:
+- Babel needs to be configured for works. We will create one file **[./.babelrc](./.babelrc)** in root and later we will see how to put it in **[./webpack.config.js](./webpack.config.js)**. In this example, we will add a config file with this configuration:
 
 ### ./.babelrc
-```javascript
+```json
 {
   "presets": [
     [
@@ -125,10 +129,10 @@ our webpack configuration (handling <abbr title="Cascading Style Sheets">CSS</ab
 
 ```
 
-- Let's install bootstrap (and jquery as Bootstrap's dependency):
+- Let's install bootstrap:
 
- ```
- npm install bootstrap jquery --save
+ ```bash
+ npm install bootstrap --save
  ```
 
 - Now, our **package.json** file should looks something like:
@@ -166,11 +170,11 @@ our webpack configuration (handling <abbr title="Cascading Style Sheets">CSS</ab
 
  ```
 
-- Let's create a basic **src/index.ts** file:
+- Let's create a subfolder called **src**. Inside this folder, let´s create a basic **index.ts** file:
 
 ### ./src/index.ts
  ```javascript
-console.log('Hello from ts');
+document.write('Hello from index.ts!');
 
  ```
 
@@ -193,14 +197,6 @@ console.log('Hello from ts');
 
  ```
 
-- Let's create a basic `site.css`file:
-
-### ./src/css/site.css
-```css
-/* entry point css */
-
-```
-
 - Now it's time to create a basic **webpack.config.js** file, this configuration will
  include plumbing for:
  - Launching a web dev server.
@@ -210,9 +206,10 @@ console.log('Hello from ts');
 
 ### ./webpack.config.js
  ```javascript
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var webpack = require('webpack');
+let path = require('path');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+let MiniCssExtractPlugin = require('mini-css-extract-plugin');
+let webpack = require('webpack');
 
 var basePath = __dirname;
 
@@ -223,7 +220,6 @@ module.exports = {
   },
   entry: {
     app: './index.ts',
-    appStyles: './css/site.css',
     vendorStyles: [
       '../node_modules/bootstrap/dist/css/bootstrap.css',
     ],
@@ -244,28 +240,14 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
-        ],
-      },
-      // Loading glyphicons => https://github.com/gowravshekar/bootstrap-webpack
-      // Using here url-loader and file-loader
-      {
-        test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
-        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
-      },
-      {
-        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file-loader'
-      },
-      {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: 'assets/img/[name].[ext]?[hash]'
+        }
       },
     ],
   },
@@ -282,8 +264,9 @@ module.exports = {
       template: 'index.html', //Name of template in ./src
       hash: true,
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor', 'manifest'],
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
     }),
   ],
 };

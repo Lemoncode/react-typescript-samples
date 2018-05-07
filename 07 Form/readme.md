@@ -35,7 +35,7 @@ in a terminal/console window. Older versions may produce errors.
  $ npm install
  ```
 
-- We update`About` content to show sample `07 Form` highlights. You can see updates in `./src/components/about.tsx`.
+- We update `About` content to show sample `07 Form` highlights. You can see updates in `./src/components/about.tsx`.
 
 - Install `toastr` and typings to show toast when save form changes:
 
@@ -109,21 +109,24 @@ export * from './members';
 ### ./src/router.tsx
 ```diff
 import * as React from 'react';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Route, Switch, HashRouter } from 'react-router-dom';
 import { App } from './app';
 - import { About, MembersPage } from './components';
-+ import { About, MembersPage, MemberPage } from './components';
++ import { About, MembersPage, MemberPageContainer } from './components';
 
 export const AppRouter: React.StatelessComponent<{}> = () => {
   return (
-    <Router history={hashHistory}>
-      <Route path="/" component={App} >
-        <IndexRoute component={About} />
-        <Route path="/about" component={About} />
-        <Route path="/members" component={MembersPage} />
-+       <Route path="/member" component={MemberPage} />
-      </Route>
-    </Router>
+    <HashRouter>
+      <div className="container-fluid">
+        <Route component={App} />
+        <Switch>
+          <Route exact path="/" component={About} />
+          <Route path="/about" component={About} />
+          <Route path="/members" component={MembersPage} />
++         <Route path="/member" component={MemberPageContainer} />
+        </Switch>
+      </div>
+    </HashRouter>
   );
 }
 
@@ -134,7 +137,7 @@ export const AppRouter: React.StatelessComponent<{}> = () => {
 ### ./src/components/members/page.tsx
 ```diff
 import * as React from 'react';
-+ import { Link } from 'react-router';
++ import { Link } from 'react-router-dom';
 import { MemberEntity } from '../../model';
 import { memberAPI } from '../../api/member';
 import { MemberHeader } from './memberHeader';
@@ -334,8 +337,8 @@ interface State {
 }
 
 export class MemberPageContainer extends React.Component<{}, State> {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       member: {
@@ -346,7 +349,6 @@ export class MemberPageContainer extends React.Component<{}, State> {
     };
 
     this.onFieldValueChange = this.onFieldValueChange.bind(this);
-    this.onSave = this.onSave.bind(this);
   }
 
   private onFieldValueChange(fieldName: string, value: string) {
@@ -391,22 +393,25 @@ export class MemberPageContainer extends React.Component<{}, State> {
 ### ./src/router.tsx
 ```diff
 import * as React from 'react';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Route, Switch, HashRouter } from 'react-router-dom';
 import { App } from './app';
-- import { About, MembersPage, MemberPage } from './components';
+- import { About, MembersPage } from './components';
 + import { About, MembersPage, MemberPageContainer } from './components';
 
 export const AppRouter: React.StatelessComponent<{}> = () => {
   return (
-    <Router history={hashHistory}>
-      <Route path="/" component={App} >
-        <IndexRoute component={About} />
-        <Route path="/about" component={About} />
-        <Route path="/members" component={MembersPage} />
--       <Route path="/member" component={MemberPage} />
-+       <Route path="/member" component={MemberPageContainer} />
-      </Route>
-    </Router>
+    <HashRouter>
+      <div className="container-fluid">
+        <Route component={App} />
+        <Switch>
+          <Route exact path="/" component={About} />
+          <Route path="/about" component={About} />
+          <Route path="/members" component={MembersPage} />
+-         <Route path="/member" component={MemberPage} />
++         <Route path="/member" component={MemberPageContainer} />
+        </Switch>
+      </div>
+    </HashRouter>
   );
 }
 
@@ -488,24 +493,38 @@ export const memberAPI = {
 ### ./src/components/member/pageContainer.tsx
 ```diff
 import * as React from 'react';
-+ import { hashHistory } from 'react-router';
 + import * as toastr from 'toastr';
 + import { memberAPI } from '../../api/member';
++ import { History } from 'history';
 import { MemberEntity } from '../../model';
 import { MemberPage } from './page';
 
 ...
 
-  private onSave() {
++ interface Props {
++   history: History;
++ }
+
++  private onSave = () => {
 -   console.log('save');
 +   memberAPI.saveMember(this.state.member)
 +     .then(() => {
 +       toastr.success('Member saved.');
-+       hashHistory.goBack();
++       props.history.goBack();
 +     });
   }
 
   ...
+
+  render() {
+    return (
+      <MemberPage
+        member={this.state.member}
+        onChange={this.onFieldValueChange}
+        onSave={this.onSave}
+      />
+    );
+  }
 }
 
 ```
