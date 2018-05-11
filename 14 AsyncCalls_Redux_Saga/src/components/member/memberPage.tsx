@@ -12,7 +12,7 @@ import resetSaveCompleted from '../../actions/resetSaveCompleted';
 import initializeNewMember from '../../actions/initializeNewMember';
 
 interface Props extends React.Props<MemberPage> {
-  match: any
+    match
   , history
   , member?: MemberEntity
   , errors?: MemberErrors

@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "postinstall": "tsd reinstall --overwrite --save",
     "start": "webpack-dev-server --mode development --open",
     "build": "webpack --mode development"
   },
