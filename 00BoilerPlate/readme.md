@@ -11,13 +11,14 @@ Then we will create a **index.ts** sample.
 Summary steps:
 
 - Prerequisites: Install Node.js
+- Initialize **[./package.json](./package.json)** (with `npm init`)
 - Initialize **package.json** (with `npm init`)
 - Install:
     - Webpack, webpack-cli and webpack-dev-server.
     - TypeScript.
     - Babel.
     - Bootstrap.
-- Setup **webpack.config.js**
+- Setup **[./webpack.config.js](./webpack.config.js)**
 - Create a test ts file.
 - Create a simple HTML file.
 
@@ -56,11 +57,11 @@ Once you have successfully fullfilled them a **package.json** file we will gener
  npm install awesome-typescript-loader css-loader file-loader html-webpack-plugin style-loader url-loader mini-css-extract-plugin --save-dev
  ```
 
-- In order to launch `webpack-dev-server`, modify the **package.json** file an add the following lines under the scripts object:
+- In order to launch `webpack-dev-server`, modify the **[./package.json] (./package.json)** file an add the following lines under the scripts object:
   - `"start": "webpack-dev-server --mode development --inline --hot --open",` It allows us to launch webpack from the command line through npm typing `npm start`. 
   - `"build": "webpack --mode development"`
 
-### ./package.json
+_[./package.json](./package.json)_
 ```diff
 {
   "name": "reactboilerplate",
@@ -82,9 +83,9 @@ Once you have successfully fullfilled them a **package.json** file we will gener
  npm install typescript --save-dev
  ```
 
-- We need as well to create a **tsconfig.json** file in the root folder of our project
+- We need as well to create a **[./tsconfig.json](./tsconfig.json)** file in the root folder of our project
 
-### ./tsconfig.json
+_[./tsconfig.json](./tsconfig.json)_
  ```json
  {
   "compilerOptions": {
@@ -114,7 +115,7 @@ Once you have successfully fullfilled them a **package.json** file we will gener
 
 - Babel needs to be configured for works. We will create one file **[./.babelrc](./.babelrc)** in root and later we will see how to put it in **[./webpack.config.js](./webpack.config.js)**. In this example, we will add a config file with this configuration:
 
-### ./.babelrc
+_[./.babelrc](./.babelrc)_
 ```json
 {
   "presets": [
@@ -135,9 +136,9 @@ Once you have successfully fullfilled them a **package.json** file we will gener
  npm install bootstrap --save
  ```
 
-- Now, our **package.json** file should looks something like:
+- Now, our **[./package.json](./package.json)** file should looks something like:
 
-### ./package.json
+_[./package.json](./package.json)_
  ```json
 {
   "name": "reactboilerplate",
@@ -172,15 +173,15 @@ Once you have successfully fullfilled them a **package.json** file we will gener
 
 - Let's create a subfolder called **src**. Inside this folder, let´s create a basic **index.ts** file:
 
-### ./src/index.ts
+**[main.ts](./src/main.ts)**
  ```javascript
 document.write('Hello from index.ts!');
 
  ```
 
-- Let's create a basic **index.html** file (under **src** folder):
+- Let's create a basic **[index.html](./src/index.html)** file (under **src** folder):
 
-### ./src/index.html
+_[./src/index.html](./src/index.html)_
  ```html
 <!DOCTYPE html>
 <html>
@@ -197,14 +198,14 @@ document.write('Hello from index.ts!');
 
  ```
 
-- Now it's time to create a basic **webpack.config.js** file, this configuration will
+- Now it's time to create a basic **[./webpack.config.js](./webpack.config.js)** file, this configuration will
  include plumbing for:
  - Launching a web dev server.
  - Transpiling from TypeScript to JavaScript.
  - Setup Twitter Bootstrap (including fonts, etc...).
  - Generating the build under a **dist** folder.
 
-### ./webpack.config.js
+_[./webpack.config.js](./webpack.config.js)_
  ```javascript
 let path = require('path');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
