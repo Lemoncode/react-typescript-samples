@@ -1,1 +1,1 @@
-console.log('Hello from ts');
+document.write('Hello from index.ts!');
