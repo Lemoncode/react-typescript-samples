@@ -1,7 +1,6 @@
 # 01 Hello React
 
-In this sample we will create our first react component and connect it with the
-DOM via react-dom.
+In this sample we will create our first react component and connect it with the DOM via react-dom.
 
 We will take a startup point sample _00 Boilerplate_.
 
@@ -15,37 +14,37 @@ Summary steps:
 
 ## Prerequisites
 
-Install [Node.js and npm](https://nodejs.org/en/) (v6.6.0) if they are not already
-installed on your computer.
+Install [Node.js and npm](https://nodejs.org/en/) (v8.9.4 or higher) if they are not already installed on your computer.
 
-> Verify that you are running at least node v6.x.x and npm 3.x.x by running `node -v` and `npm -v`
+> Verify that you are running at least node v8.x.x and npm 5.x.x by running `node -v` and `npm -v`
 in a terminal/console window. Older versions may produce errors.
 
 ## Steps to build it
 
 - Copy the content of the `00 Boilerplate` folder to an empty folder for the sample.
 
-- Install the npm packages described in the `package.json` and verify that it works:
+- Install the npm packages described in the [./package.json](./package.json) and verify that it works:
 
  ```bash
- $ npm install
+ npm install
  ```
 
 - Install `react` and `react-dom` libraries as project dependencies.
 
  ```bash
- $ npm install react react-dom --save
+ npm install react react-dom --save
  ```
 
 - Install also the typescript definitions for `react` and `react-dom`
 but as dev dependencies.
 
  ```bash
- $ npm install @types/react @types/react-dom --save-dev
+ npm install @types/react @types/react-dom --save-dev
  ```
 
-- Update the `index.html` to create a placeholder for the react components.
+- Update the [./src/index.html](./src/index.html) to create a placeholder for the react components.
 
+_[./src/index.html](./src/index.html)_
 ```diff
 <!DOCTYPE html>
 <html>
@@ -63,9 +62,9 @@ but as dev dependencies.
 
 ```
 
-- Create a simple react component (let's create it within a new file called `hello.tsx`).
+- Create a simple react component (let's create it within a new file called `hello.tsx` in `src`folder).
 
-### ./src/hello.tsx
+_[./src/hello.tsx](./src/hello.tsx)_
 ```javascript
 import * as React from 'react';
 
@@ -77,12 +76,12 @@ export const HelloComponent = () => {
 
 ```
 
-- Wire up this component by using `react-dom` under `index.tsx` (we have to rename
+- Wire up this component by using `react-dom` under [./src/index.tsx](./src/index.tsx) (we have to rename
   this file extension from `ts` to `tsx` and replace the content).
 
-### ./src/index.tsx
+_[./src/index.tsx](./src/index.tsx)_
 ```diff
-- console.log('Hello from ts');
+- document.write('Hello from index.ts!');
 
 + import * as React from 'react';
 + import * as ReactDOM from 'react-dom';
@@ -95,10 +94,10 @@ export const HelloComponent = () => {
 + );
 ```
 
-- Modify the `webpack.config.js` file and change the entry point from `./index.ts`
+- Modify the [./webpack.config.js](./webpack.config.js) file and change the entry point from `./index.ts`
 to `./index.tsx`.
 
-### ./webpack.config.js
+_[./webpack.config.js](./webpack.config.js)_
  ```diff
 ...
 
@@ -111,11 +110,6 @@ module.exports = {
   entry: {
 -   app: './index.ts',
 +   app: './index.tsx',
-    appStyles: './css/site.css',
-+   vendor: [
-+     'react',
-+     'react-dom',
-+   ],
     vendorStyles: [
       '../node_modules/bootstrap/dist/css/bootstrap.css',
     ],
@@ -143,7 +137,7 @@ module.exports = {
 - Execute the example:
 
  ```bash
- $ npm start
+ npm start
  ```
 
 # About Lemoncode
