@@ -1,6 +1,7 @@
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var webpack = require('webpack');
+let path = require('path');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+let MiniCssExtractPlugin = require('mini-css-extract-plugin');
+let webpack = require('webpack');
 
 var basePath = __dirname;
 
@@ -11,11 +12,6 @@ module.exports = {
   },
   entry: {
     app: './index.tsx',
-    appStyles: './css/site.css',
-    vendor: [
-      'react',
-      'react-dom',
-    ],
     vendorStyles: [
       '../node_modules/bootstrap/dist/css/bootstrap.css',
     ],
@@ -27,7 +23,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.tsx$/,
         exclude: /node_modules/,
         loader: 'awesome-typescript-loader',
         options: {
@@ -36,28 +32,14 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
-        ],
-      },
-      // Loading glyphicons => https://github.com/gowravshekar/bootstrap-webpack
-      // Using here url-loader and file-loader
-      {
-        test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
-        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
-      },
-      {
-        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file-loader'
-      },
-      {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: 'assets/img/[name].[ext]?[hash]'
+        }
       },
     ],
   },
@@ -74,8 +56,9 @@ module.exports = {
       template: 'index.html', //Name of template in ./src
       hash: true,
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor', 'manifest'],
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
     }),
   ],
 };
