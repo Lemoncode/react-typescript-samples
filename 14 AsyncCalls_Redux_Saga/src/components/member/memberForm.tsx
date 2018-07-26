@@ -20,7 +20,7 @@ export default class MemberForm extends React.Component<Props, State> {
 
   public render() {
      return (
-		    <form>
+		    <form className="container-fluid">
           <h1> Manage member </h1>
 
           <Input

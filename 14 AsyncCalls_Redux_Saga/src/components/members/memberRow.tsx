@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router-dom';
 import MemberEntity from '../../api/memberEntity';
 
 
@@ -20,7 +20,7 @@ export default class MemberRow extends React.Component<Props, {}> {
              <img src={this.props.member.avatar_url} className="avatar"/>
            </td>
            <td>
-            <Link to={`/memberEdit/${this.props.member.id}`}>{this.props.member.id}</Link>
+            <Link to={{ pathname: `/memberEdit/${this.props.member.id}`,state:{ id:this.props.member.id}  }}>{this.props.member.id}</Link>
            </td>
            <td>
              <span>{this.props.member.login}</span>

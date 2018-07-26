@@ -10,7 +10,6 @@ const saveMember = (member : MemberEntity) => {
   if(errorsSave.isEntityValid) {
     memberAPI.saveAuthor(member);
   }
-
    return {
      type: 'MEMBER_SAVE'
      ,errors : errorsSave
