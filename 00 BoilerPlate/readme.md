@@ -173,7 +173,7 @@ _[./package.json](./package.json)_
 
 - Let's create a subfolder called **src**. Inside this folder, let´s create a basic **index.ts** file:
 
-**[main.ts](./src/main.ts)**
+**[index.ts](./src/index.ts)**
  ```javascript
 document.write('Hello from index.ts!');
 
