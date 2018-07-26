@@ -32,11 +32,11 @@ in a terminal/console window. Older versions may produce errors.
  $ npm install
  ```
 
-- Install `react-router` version 3 and typings:
+- Install `react-router-dom` and typings:
 
 ```bash
-npm install react-router@3 --save
-npm install @types/react-router@3 --save-dev
+npm install react-router-dom --save
+npm install @types/react-router-dom --save-dev
 ```
 
 - Update `vendors`:
@@ -50,7 +50,7 @@ entry: {
     vendor: [
       'react',
       'react-dom',
-+     'react-router',
++     'react-router-dom',
     ],
     vendorStyles: [
       '../node_modules/bootstrap/dist/css/bootstrap.css',
@@ -88,7 +88,7 @@ export * from './page';
 ### ./src/components/header.tsx
 ```diff
 import * as React from 'react';
-+ import { Link } from 'react-router';
++ import { Link } from 'react-router-dom';
 
 export const Header: React.StatelessComponent<{}> = () => {
   return (
@@ -120,30 +120,37 @@ export * from './about';
 
 - We update`About` content to show sample `03 Navigation` highlights. You can see updates in `./src/components/about.tsx`.
 
-- Now, we are going to create the `AppRouter` component when we define routes:
+- Now, we are going to create the `AppRouter` component where we define routes:
 
-### ./src/router.tsx
-```javascript
-import * as React from 'react';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-import { App } from './app';
-import { About, MembersPage } from './components';
+  ### ./src/router.tsx
+  ```javascript
+  import * as React from 'react';
+  import { Route, HashRouter, Switch } from 'react-router-dom';
+  import { App } from './app';
+  import { About, MembersPage } from './components';
 
-export const AppRouter: React.StatelessComponent<{}> = () => {
-  return (
-    <Router history={hashHistory}>
-      <Route path="/" component={App} >
-        <IndexRoute component={About} />
-        <Route path="/about" component={About} />
-        <Route path="/members" component={MembersPage} />
-      </Route>
-    </Router>
-  );
-}
+  export const AppRouter: React.StatelessComponent<{}> = () => {
+    return (
+      <HashRouter>
+        <div className="container-fluid">
+          <Route component={App} />
+          <Switch>
+            <Route exact path="/" component={About} />
+            <Route path="/about" component={About} />
+            <Route path="/members" component={MembersPage} />
+          </Switch>
+        </div>
+      </HashRouter>
+    );
+  }
+  ```
 
-```
+  - The type of router that we are using is HashRouter because we are creating a static website.
+  - We will always render App component because we need the header to be always visible. For that reason, we add a Route for App component without path, enclosed within a div.
+  - Switch component is used to group routes. It will decide which component is rendered after rendering App component. The first route that matches current path has the component that will be rendered.
+  - Finally, a route for each path is added, specifying the component that should be rendered in each case.
 
-- Update `App`:
+- Update `App`. We will remove the div enclosing `Header` because we have already added it in `AppRouter`:
 
 ### ./src/app.tsx
 ```diff
@@ -154,11 +161,10 @@ import * as React from 'react';
 - export const App: React.StatelessComponent<{}> = () => {
 + export const App: React.StatelessComponent<{}> = (props) => {
   return (
-    <div className="container-fluid">
+-    <div className="container-fluid">
       <Header />
 -     <About />
-+     {props.children}
-    </div>
+-    </div>
   );
 }
 
