@@ -189,6 +189,22 @@ export const App: React.StatelessComponent<{}> = () => {
 
 ```
 
+>Note: As an alternative to apply CSS to our components we can, in stead, of using it as an imported file, like we've done in _about.tsx_ or we can configure _webpack.config.js_. To do so, we need to make sure to apply the following configuration:
+```diff
+entry: {
+    app: './index.tsx',
++    appStyles: './css/site.css',
+    vendor: [
+      'react',
+      'react-dom',
+    ],
+    vendorStyles: [
+      '../node_modules/bootstrap/dist/css/bootstrap.css',
+    ],
+  },
+```
+>Note that this will apply the provided CSS to every file
+
 - Finally, we update `index.tsx`:
 
 ### ./src/index.tsx
