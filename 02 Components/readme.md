@@ -57,6 +57,7 @@ in a terminal/console window. Older versions may produce errors.
 ### ./src/components/about.tsx
 ```javascript
 import * as React from 'react';
+import '../css/site.css';
 
 export const About: React.StatelessComponent<{}> = () => {
   return (
