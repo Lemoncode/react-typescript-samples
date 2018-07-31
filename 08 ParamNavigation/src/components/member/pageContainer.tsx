@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { hashHistory } from 'react-router';
 import * as toastr from 'toastr';
 import { FieldValidationResult } from 'lc-form-validation';
 import { memberAPI } from '../../api/member';
@@ -16,9 +15,9 @@ interface State {
   memberErrors: MemberErrors;
 }
 
-export class MemberPageContainer extends React.Component<Props, State> {
-  constructor() {
-    super();
+export class MemberPageContainer extends React.Component<any, State> {
+  constructor(props) {
+    super(props);
 
     this.state = {
       member: {
@@ -36,7 +35,7 @@ export class MemberPageContainer extends React.Component<Props, State> {
   }
 
   public componentDidMount() {
-    const memberId = Number(this.props.params.id) || 0;
+    const memberId = Number(this.props.match.params.id) || 0;
     memberAPI.fetchMemberById(memberId)
       .then((member) => {
         this.setState({
@@ -72,7 +71,7 @@ export class MemberPageContainer extends React.Component<Props, State> {
           memberAPI.saveMember(this.state.member)
             .then(() => {
               toastr.success('Member saved.');
-              hashHistory.goBack();
+              this.props.history.goBack();
             });
         }
       });
