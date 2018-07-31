@@ -101,7 +101,9 @@ import * as React from 'react';
 + interface State {
 +   members: MemberEntity[];
 + }
++interface Props {
 
++}
 - export const MembersPage: React.StatelessComponent<{}> = () => {
 -   return (
 -     <div className="row">
@@ -110,9 +112,9 @@ import * as React from 'react';
 -   );
 - }
 
-+ export class MembersPage extends React.Component<{}, State> {
-+   constructor() {
-+     super();
++ export class MembersPage extends React.Component<Props, State> {
++   constructor(props) {
++     super(props);
 +     this.state = { members: [] };
 +   }
 

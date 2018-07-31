@@ -112,7 +112,7 @@ import * as React from 'react';
 import { Route, Switch, HashRouter } from 'react-router-dom';
 import { App } from './app';
 - import { About, MembersPage } from './components';
-+ import { About, MembersPage, MemberPageContainer } from './components';
++ import { About, MembersPage, MemberPage } from './components';
 
 export const AppRouter: React.StatelessComponent<{}> = () => {
   return (
@@ -123,7 +123,7 @@ export const AppRouter: React.StatelessComponent<{}> = () => {
           <Route exact path="/" component={About} />
           <Route path="/about" component={About} />
           <Route path="/members" component={MembersPage} />
-+         <Route path="/member" component={MemberPageContainer} />
++         <Route path="/member" component={MemberPage} />
         </Switch>
       </div>
     </HashRouter>
@@ -395,7 +395,7 @@ export class MemberPageContainer extends React.Component<{}, State> {
 import * as React from 'react';
 import { Route, Switch, HashRouter } from 'react-router-dom';
 import { App } from './app';
-- import { About, MembersPage } from './components';
+- import { About, MembersPage, MemberPage } from './components';
 + import { About, MembersPage, MemberPageContainer } from './components';
 
 export const AppRouter: React.StatelessComponent<{}> = () => {
@@ -505,12 +505,17 @@ import { MemberPage } from './page';
 +   history: History;
 + }
 
+
+- export class MemberPageContainer extends React.Component<{}, State> {
++ export class MemberPageContainer extends React.Component<Props, State> {
+
+
 +  private onSave = () => {
 -   console.log('save');
 +   memberAPI.saveMember(this.state.member)
 +     .then(() => {
 +       toastr.success('Member saved.');
-+       props.history.goBack();
++       this.props.history.goBack();
 +     });
   }
 

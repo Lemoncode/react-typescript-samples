@@ -1,4 +1,5 @@
 import * as React from 'react';
+import '../css/site.css';
 
 export const About: React.StatelessComponent<{}> = () => {
   return (

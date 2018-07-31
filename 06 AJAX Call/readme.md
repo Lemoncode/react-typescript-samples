@@ -43,7 +43,6 @@ const fetchMembers = (): Promise<MemberEntity[]> => {
 };
 
 + const fetchMembersAsync = (): Promise<MemberEntity[]> => {
-- return Promise.resolve(members);
 + const membersURL = `${baseURL}/members`;
 
 + return fetch(membersURL)
