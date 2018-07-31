@@ -43,7 +43,7 @@ in a terminal/console window. Older versions may produce errors.
 ### ./src/router.tsx
 ```diff
 import * as React from 'react';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { App } from './app';
 import { About, MembersPage, MemberPageContainer } from './components';
 
@@ -51,11 +51,14 @@ export const AppRouter: React.StatelessComponent<{}> = () => {
   return (
     <Router history={hashHistory}>
       <Route path="/" component={App} >
-        <IndexRoute component={About} />
-        <Route path="/about" component={About} />
-        <Route path="/members" component={MembersPage} />
-        <Route path="/member" component={MemberPageContainer} />
-+       <Route path="/member/:id" component={MemberPageContainer} />
+        <Route component={App} />
+        <Switch>
+          <Route exact path="/" component={About} />
+          <Route path="/about" component={About} />
+          <Route path="/members" component={MembersPage} />
+          <Route exact path="/member" component={MemberPageContainer} />
+  +       <Route path="/member/:id" component={MemberPageContainer} />
+        <Switch>
       </Route>
     </Router>
   );
@@ -68,7 +71,7 @@ export const AppRouter: React.StatelessComponent<{}> = () => {
 ### ./src/components/members/memberRow.tsx
 ```diff
 import * as React from 'react';
-+ import { Link } from 'react-router';
++ import { Link } from 'react-router-dom';
 import { MemberEntity } from '../../model';
 
 interface Props {
@@ -133,24 +136,27 @@ export const memberAPI = {
 ### ./src/components/member/pageContainer.tsx
 ```diff
 import * as React from 'react';
-import { hashHistory } from 'react-router';
++ import { hashHistory } from 'react-router';
 import * as toastr from 'toastr';
 import { memberAPI } from '../../api/member';
 import { MemberEntity } from '../../model';
 import { MemberPage } from './page';
+- import { History } from 'history';-
 
 + interface Props {
 +   params: { id: string };
 + }
-
+- interface Props {
+-   history: History;
+- }
 interface State {
   member: MemberEntity;
 }
 
 - export class MemberPageContainer extends React.Component<{}, State> {
 + export class MemberPageContainer extends React.Component<Props, State> {
-  constructor() {
-    super();
+ constructor(props:Props) {
+    super(props);
 
     this.state = {
       member: {
@@ -174,6 +180,17 @@ interface State {
 +       });
 +     });
 + }
+
+
+private onSave = () => {
+       
+        memberAPI.saveMember(this.state.member)
+            .then(() => {
+                toastr.success('Member saved.');
+-               this.props.history();
++                this.props.history.goBack();
+            });
+    }
 
   ...
 
@@ -274,8 +291,8 @@ interface State {
 }
 
 export class MemberPageContainer extends React.Component<Props, State> {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       member: {
@@ -293,7 +310,7 @@ export class MemberPageContainer extends React.Component<Props, State> {
   }
 
   public componentDidMount() {
-    const memberId = Number(this.props.params.id) || 0;
+    const memberId = Number(this.props.match.params.id) || 0;
     memberAPI.fetchMemberById(memberId)
       .then((member) => {
         this.setState({
@@ -329,7 +346,7 @@ export class MemberPageContainer extends React.Component<Props, State> {
           memberAPI.saveMember(this.state.member)
             .then(() => {
               toastr.success('Member saved.');
-              hashHistory.goBack();
+              this.props.history.goBack();
             });
 +       }
 +     });
