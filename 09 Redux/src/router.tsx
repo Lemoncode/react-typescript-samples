@@ -5,7 +5,7 @@ import { About, MembersPageContainer, MemberPageContainer } from './components';
 import { Provider } from 'react-redux';
 import { store } from './store';
 
-export const AppRouter: React.StatelessComponent = (props) => {
+export const AppRouter: React.StatelessComponent<{}> = () => {
 
   return (
     <Provider store={store}>
