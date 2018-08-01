@@ -166,7 +166,6 @@ const memberFieldChangeCompleted = (fieldValidationResult: FieldValidationResult
 ```javascript
 import { FormValidationResult } from 'lc-form-validation';
 import * as toastr from 'toastr';
-import { hashHistory } from 'react-router';
 import { actionTypes } from '../../../common/constants/actionTypes';
 import { MemberEntity } from '../../../model';
 import { memberAPI } from '../../../api/member';
@@ -186,7 +185,7 @@ const saveMember = (member: MemberEntity) => {
   memberAPI.saveMember(member)
     .then(() => {
       toastr.success('Member saved.');
-      hashHistory.goBack();
+      history.back();
     })
     .catch(toastr.error);
 };
@@ -345,10 +344,16 @@ export const store: Store<State> = createStore(
 
 - Update `AppRouter` to use store:
 
+Before modifying our router.tsx, we will need to install 'react-router-dom'. 
+```
+npm install react-router-dom --save
+```
+
 ### ./src/router.tsx
 ```diff
 import * as React from 'react';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+- import { Router, Route, IndexRoute, hashHistory } from 'react-router';
++ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 + import { Provider } from 'react-redux';
 + import { store } from './store';
 import { App } from './app';
@@ -357,14 +362,21 @@ import { About, MembersPage, MemberPageContainer } from './components';
 export const AppRouter: React.StatelessComponent<{}> = () => {
   return (
 +   <Provider store={store}>
-      <Router history={hashHistory}>
-        <Route path="/" component={App} >
-          <IndexRoute component={About} />
-          <Route path="/about" component={About} />
-          <Route path="/members" component={MembersPage} />
-          <Route path="/member" component={MemberPageContainer} />
-          <Route path="/member/:id" component={MemberPageContainer} />
-        </Route>
+-      <Router history={hashHistory}>
+-        <Route path="/" component={App} >
+-          <IndexRoute component={About} />
++      <Router>
++       <div className="container-fluid">
++         <Route component = {App}/>
++         <Switch>
++           <Route exact path="/" component={About} />
+            <Route path="/about" component={About} />
+            <Route path="/members" component={MembersPage} />
+            <Route path="/member" component={MemberPageContainer} />
+-            <Route path="/member/:id" component={MemberPageContainer} />
++            <Route exact path="/member/:id" component={MemberPageContainer} />
+-        </Route>
++        </Switch>
       </Router>
 +   </Provider>
   );
@@ -402,7 +414,8 @@ export const MembersPageContainer = connect(
 ### ./src/components/members/page.tsx
 ```diff
 import * as React from 'react';
-import { Link } from 'react-router';
+- import { Link } from 'react-router';
++ import { Link } from 'react-router-dom';
 import { MemberEntity } from '../../model';
 - import { memberAPI } from '../../api/member';
 import { MemberHeader } from './memberHeader';
@@ -447,7 +460,7 @@ import { MemberRow } from './memberRow';
 ### ./src/router.tsx
 ```diff
 import * as React from 'react';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { App } from './app';
@@ -457,15 +470,17 @@ import { App } from './app';
 export const AppRouter: React.StatelessComponent<{}> = () => {
   return (
     <Provider store={store}>
-      <Router history={hashHistory}>
-        <Route path="/" component={App} >
-          <IndexRoute component={About} />
-          <Route path="/about" component={About} />
+      <Router>
+        <div className="container-fluid">
+          <Route component={App} />
+          <Switch>
+          <Route exact path="/" component={About} />
 -         <Route path="/members" component={MembersPage} />
 +         <Route path="/members" component={MembersPageContainer} />
           <Route path="/member" component={MemberPageContainer} />
-          <Route path="/member/:id" component={MemberPageContainer} />
-        </Route>
+          <Route exact path="/member/:id" component={MemberPageContainer} />
+        </Switch>
+        </div>
       </Router>
     </Provider>
   );
@@ -616,8 +631,8 @@ interface Props {
 
 - export const MemberPage: React.StatelessComponent<Props> = (props) => {
 + export class MemberPage extends React.Component<Props, {}> {
-+ constructor() {
-+   super();
++ constructor(props) {
++   super(props);
 
 +   this.onChange = this.onChange.bind(this);
 +   this.onSave = this.onSave.bind(this);
