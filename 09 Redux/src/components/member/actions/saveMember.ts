@@ -1,6 +1,5 @@
 import { FormValidationResult } from 'lc-form-validation';
 import * as toastr from 'toastr';
-import { hashHistory } from 'react-router';
 import { actionTypes } from '../../../common/constants/actionTypes';
 import { MemberEntity } from '../../../model';
 import { memberAPI } from '../../../api/member';
@@ -20,7 +19,7 @@ const saveMember = (member: MemberEntity) => {
   memberAPI.saveMember(member)
     .then(() => {
       toastr.success('Member saved.');
-      hashHistory.goBack();
+      history.back();
     })
     .catch(toastr.error);
 };

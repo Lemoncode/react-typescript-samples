@@ -15,6 +15,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router": "^3.0.5",
+    "react-router-dom": "^4.3.1",
     "toastr": "^2.1.2"
   },
   "devDependencies": {

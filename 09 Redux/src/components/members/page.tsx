@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { MemberEntity } from '../../model';
 import { MemberHeader } from './memberHeader';
 import { MemberRow } from './memberRow';
@@ -10,6 +10,10 @@ interface Props {
 }
 
 export class MembersPage extends React.Component<Props,{}> {
+  constructor(props) {
+    super(props);
+    this.state = { members: [] };
+  }
   public componentDidMount() {
     this.props.fetchMembers();
   }

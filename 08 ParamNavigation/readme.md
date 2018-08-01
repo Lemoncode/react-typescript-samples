@@ -136,7 +136,6 @@ export const memberAPI = {
 ### ./src/components/member/pageContainer.tsx
 ```diff
 import * as React from 'react';
-+ import { hashHistory } from 'react-router';
 import * as toastr from 'toastr';
 import { memberAPI } from '../../api/member';
 import { MemberEntity } from '../../model';

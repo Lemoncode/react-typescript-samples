@@ -12,8 +12,8 @@ interface Props {
 }
 
 export class MemberPage extends React.Component<Props, {}> {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.onChange = this.onChange.bind(this);
     this.onSave = this.onSave.bind(this);
