@@ -8,7 +8,7 @@ import { saveMemberAction } from './actions/saveMember';
 import { MemberPage } from './page';
 
 const mapStateToProps = (state: State, ownProps: any) => ({
-  memberId: Number(ownProps.params.id) || 0,
+  memberId: Number(ownProps.match.params.id) || 0,
   member: state.member,
   memberErrors: state.memberErrors,
 });
