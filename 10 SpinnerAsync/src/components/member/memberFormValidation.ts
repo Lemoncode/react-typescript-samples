@@ -10,6 +10,9 @@ const validationConstraints: ValidationConstraints = {
         validator: Validators.minLength,
         customParams: { length: 3 },
       },
+    ],
+    avatar_url: [
+      { validator: Validators.required },
     ]
   },
 };
