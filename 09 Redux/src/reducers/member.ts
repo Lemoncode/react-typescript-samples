@@ -19,11 +19,11 @@ export const memberReducer = (state = createEmptyMember(), action) => {
   return state;
 };
 
-const handleFetchMemberByIdCompleted = (state: MemberEntity, payload: MemberEntity): MemberEntity => {
+const handleFetchMemberByIdCompleted = (state: MemberEntity = createEmptyMember(), payload: MemberEntity = createEmptyMember()): MemberEntity => {
   return payload;
 };
 
-const handleUpdateMemberField = (state: MemberEntity, payload: MemberFieldChangePayload): MemberEntity => {
+const handleUpdateMemberField = (state: MemberEntity = createEmptyMember(), payload: MemberFieldChangePayload): MemberEntity => {
   return {
     ...state,
     [payload.fieldValidationResult.key]: payload.value,
