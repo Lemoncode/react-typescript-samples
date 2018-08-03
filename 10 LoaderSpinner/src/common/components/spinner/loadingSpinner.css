@@ -1,0 +1,36 @@
+.loading__background {
+	position: fixed;
+	width: 100%;
+	top: 0px;
+	bottom: 0px;
+	z-index: 1070;
+}
+
+.loading__backdrop {
+	height: 100%;
+	background-color: #000;
+	opacity: 0.5;
+}
+
+.loading__box {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.loading__icon {
+	position: relative;
+	width: 200px;
+	height: 200px;
+	border: 20px solid #868e96;
+	border-top-color: #007bff;
+	border-radius: 50%;
+	animation: spin .6s linear infinite;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
