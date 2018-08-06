@@ -4,10 +4,10 @@ import {LoadingSpinnerComponent} from '../src/common/components/spinner/loadingS
 
 export const App: React.StatelessComponent<{}> = (props) => {
   return (
-    <div className="container-fluid">
+    <>
       <LoadingSpinnerComponent />
       <Header />
-    </div>
+    </>
 
   );
 }

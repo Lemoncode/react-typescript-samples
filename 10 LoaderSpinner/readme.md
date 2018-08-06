@@ -258,7 +258,7 @@ import { memberAPI } from '../../../api/member';
 
 export const fetchMembersAction = () => (dispatch) => {
 +  trackPromise(
-    memberAPI.fetchMembers()
+    memberAPI.fetchMembersAsync()
     .then((members) => {
       dispatch(fetchMembersCompleted(members));
     })
