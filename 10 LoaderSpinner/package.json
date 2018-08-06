@@ -38,6 +38,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
+    "react-spinners": "^0.3.3",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
     "toastr": "^2.1.4",

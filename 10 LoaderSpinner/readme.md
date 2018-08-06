@@ -41,11 +41,38 @@ $ npm install react-promise-tracker --save
 First, lets create a new folder to hold the component and its relative files.
 ### ./src/common/spinner/loadingSpinner.tsx
 
-This componnet will display the spinner.
+To do this we will make use of a very cool library called [React Spinners](https://www.npmjs.com/package/react-spinners). You can also check the [demo page](http://www.davidhu.io/react-spinners/).
+
+To start with this. We'll need to install this library:
+```bash
+$npm install react-spinners --save
+```
+
+After we are done with he installation, we'll need to add some configuration to our _.babel.rc_ file:
+
+```diff
+{
+  "presets": [
+    [
+      "env",
+      {
+        "modules": false
+      }
+    ]
+  ],
++  "plugins": [
++    "emotion"
++  ]
+}
+
+```
+Now that we are ready to go, we have to create our spinner component that will display our cool spinner.
+
 
 ```tsx
 import * as React from 'react';
 import './loadingSpinner.css';
+import {BeatLoader} from 'react-spinners';
 
 interface myProps {
   trackedPromiseInProgress?: boolean;
@@ -55,13 +82,9 @@ const InnerLoadingSpinerComponent: React.StatelessComponent<myProps> = (props) =
    if (props.trackedPromiseInProgress === true) {
     return (
       <div className="loading">
-        <div className="loading__background">
-          <div className="loading__backdrop">
-            <div className="loading__box">
-              <div className="loading__icon"></div>
-            </div>
-          </div>
-        </div>
+        <BeatLoader loading= {props.trackedPromiseInProgress}
+                    color={'#FFFF00'}
+        />
       </div>
     )
   } else { return null } 
@@ -69,47 +92,15 @@ const InnerLoadingSpinerComponent: React.StatelessComponent<myProps> = (props) =
 
 ```
 
-
-
-We will also add a CSS file to povide some style to our spinner:
+We will also add a CSS file to povide some style to our spinner, nothing too fancy as we've already defined the color with the component properties, just some positioning to display the component at the center of the screen:
+>Note that [React Spinners](https://www.npmjs.com/package/react-spinners) already provide us with some properties that allows us to style our component.
 
 ### ./src/common/spinner/loadingSpinner.css
 ```css
-.loading__background {
-	position: fixed;
-	width: 100%;
-	top: 0px;
-	bottom: 0px;
-	z-index: 1070;
-}
-
-.loading__backdrop {
-	height: 100%;
-	background-color: #000;
-	opacity: 0.5;
-}
-
-.loading__box {
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.loading__icon {
-	position: relative;
-	width: 200px;
-	height: 200px;
-	border: 20px solid #868e96;
-	border-top-color: #007bff;
-	border-radius: 50%;
-	animation: spin .6s linear infinite;
-}
-
-@keyframes spin {
-	to {
-		transform: rotate(360deg);
-	}
+.loading {
+	position: absolute;
+	left: 50%;
+	top: 50%;
 }
 
 ```
@@ -123,22 +114,20 @@ https://medium.com/@franleplant/react-higher-order-components-in-depth-cf9032ee6
 ```diff
 import * as React from 'react';
 import './loadingSpinner.css';
-+ import { promiseTrackerHoc } from 'react-promise-tracker';
++import { promiseTrackerHoc } from 'react-promise-tracker';
+import {BeatLoader} from 'react-spinners';
+
 interface myProps {
   trackedPromiseInProgress?: boolean;
 }
 
-const InnerLoadingSpinerComponent: React.StatelessComponent<myProps> = (props) => {
+const InnerLoadingSpinerComponent: React.StatelessComponent<myProps> = (props:myProps) => {
    if (props.trackedPromiseInProgress === true) {
     return (
       <div className="loading">
-        <div className="loading__background">
-          <div className="loading__backdrop">
-            <div className="loading__box">
-              <div className="loading__icon"></div>
-            </div>
-          </div>
-        </div>
+        <BeatLoader loading= {props.trackedPromiseInProgress}
+                    color={'#FFFF00'}
+        />
       </div>
     )
   } else { return null } 
