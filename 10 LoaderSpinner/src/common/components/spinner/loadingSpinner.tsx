@@ -1,11 +1,12 @@
 import * as React from 'react';
 import './loadingSpinner.css';
-
-import PropTypes from 'prop-types';
 import { promiseTrackerHoc } from 'react-promise-tracker';
 
+interface myProps {
+  trackedPromiseInProgress?: boolean;
+}
 
-const InnerLoadingSpinerComponent:React.StatelessComponent<PropTypes> = (props) => {
+const InnerLoadingSpinerComponent: React.StatelessComponent<myProps> = (props) => {
    if (props.trackedPromiseInProgress === true) {
     return (
       <div className="loading">
@@ -20,10 +21,6 @@ const InnerLoadingSpinerComponent:React.StatelessComponent<PropTypes> = (props) 
     )
   } else { return null } 
 }
-
- InnerLoadingSpinerComponent.propTypes = {
-  trackedPromiseInProgress: PropTypes.bool.isRequired,
-} 
 
 export const LoadingSpinnerComponent = promiseTrackerHoc(InnerLoadingSpinerComponent);
 
