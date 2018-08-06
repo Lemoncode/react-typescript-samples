@@ -1,6 +1,6 @@
-# 09 Redux
+# 10 Spinner
 
-In this sample we will be using [react-promise-tracker](https://github.com/Lemoncode/react-promise-tracker) to display a loding spinner while loading on asynchronous calls.
+In this sample we will be using [react-promise-tracker](https://github.com/Lemoncode/react-promise-tracker) to display a loading spinner while loading on asynchronous calls.
 To do so we will take as an startup point sample _09 Redux_.
 
 Summary steps:
@@ -10,13 +10,14 @@ Summary steps:
 - Create a CSS to make the spinner looks good.
 - Add HOC react-promise-tracker to the component
 - Update actions to use [react-promise-tracker](https://github.com/Lemoncode/react-promise-tracker) by wraping asynchronous calls. 
+- Include the spinner component in our app
 
 ## Prerequisites
 
-Install [Node.js and npm](https://nodejs.org/en/) (v6.6.0) if they are not already
+Install [Node.js and npm](https://nodejs.org/en/) (v8.11.3) if they are not already
 installed on your computer.
 
-> Verify that you are running at least node v6.x.x and npm 3.x.x by running `node -v` and `npm -v`
+> Verify that you are running at least node v8.x.x and npm 5.x.x by running `node -v` and `npm -v`
 in a terminal/console window. Older versions may produce errors.
 
 ## Steps to build it
@@ -33,6 +34,7 @@ in a terminal/console window. Older versions may produce errors.
 ```bash
 $ npm install react-promise-tracker --save
 ```
+>Note: We don't need to install any typings for this library since is already contained in this library package.
 
 ## Create a Spinner component
 
@@ -45,10 +47,11 @@ This componnet will display the spinner.
 import * as React from 'react';
 import './loadingSpinner.css';
 
-import PropTypes from 'prop-types';
+interface myProps {
+  trackedPromiseInProgress?: boolean;
+}
 
-
-const InnerLoadingSpinerComponent:React.StatelessComponent<PropTypes> = (props) => {
+const InnerLoadingSpinerComponent: React.StatelessComponent<myProps> = (props) => {
    if (props.trackedPromiseInProgress === true) {
     return (
       <div className="loading">
@@ -64,12 +67,9 @@ const InnerLoadingSpinerComponent:React.StatelessComponent<PropTypes> = (props) 
   } else { return null } 
 }
 
- InnerLoadingSpinerComponent.propTypes = {
-  trackedPromiseInProgress: PropTypes.bool.isRequired,
-} 
-
-
 ```
+
+
 
 We will also add a CSS file to povide some style to our spinner:
 
@@ -114,17 +114,21 @@ We will also add a CSS file to povide some style to our spinner:
 
 ```
 
-Now that we have created our component, we will need to use the HOC provided by [react-promise-tracker](https://github.com/Lemoncode/react-promise-tracker) to wrap the component.
+Now that we have created our component, let's wrap it around react-promise-tracker HoC. This HoC listens for any tracked ajax call update and shows / displays the inner spinner component that we have created.
+
+> If you would like to learn more about HoC you can check this sites: https://reactjs.org/docs/higher-order-components.html
+https://medium.com/@franleplant/react-higher-order-components-in-depth-cf9032ee6c3e
 ### ./src/common/spinner/loadingSpinner.tsx
 
 ```diff
 import * as React from 'react';
 import './loadingSpinner.css';
 + import { promiseTrackerHoc } from 'react-promise-tracker';
-import PropTypes from 'prop-types';
+interface myProps {
+  trackedPromiseInProgress?: boolean;
+}
 
-
-const InnerLoadingSpinerComponent:React.StatelessComponent<PropTypes> = (props) => {
+const InnerLoadingSpinerComponent: React.StatelessComponent<myProps> = (props) => {
    if (props.trackedPromiseInProgress === true) {
     return (
       <div className="loading">
@@ -140,9 +144,6 @@ const InnerLoadingSpinerComponent:React.StatelessComponent<PropTypes> = (props) 
   } else { return null } 
 }
 
- InnerLoadingSpinerComponent.propTypes = {
-  trackedPromiseInProgress: PropTypes.bool.isRequired,
-} 
 + export const LoadingSpinnerComponent = promiseTrackerHoc(InnerLoadingSpinerComponent);
 
 ```
@@ -156,7 +157,7 @@ We will also need to create a barrel to ease the access to the spinner component
 export {LoadingSpinnerComponent} from './loadingSpinner';
 ```
 
-After this, we only need to use our tracker whenever we use a promise.
+After this, we only need to wrap our asynchronous calls with a *trackpromise statement* and we will have all the magic done.
 
 ## Wraping the asynchronous calls
 
@@ -282,7 +283,28 @@ const fetchMembersCompleted = (members: MemberEntity[]) => ({
 
 ```
 
+After this, we will only need to place the spinner in the app component.
+
+```diff
+import * as React from 'react';
+import { Header } from './components';
++ import {LoadingSpinnerComponent} from '../src/common/components/spinner/loadingSpinner';
+
+export const App: React.StatelessComponent<{}> = (props) => {
+  return (
+    <div className="container-fluid">
++      <LoadingSpinnerComponent />
+      <Header />
+    </div>
+
+  );
+}
+
+```
+
 - Execute the example:
+
+Finally, lets give it a try:
 
  ```bash
  $ npm start
