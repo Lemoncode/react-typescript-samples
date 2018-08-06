@@ -2,6 +2,7 @@ import { MemberEntity } from '../../model';
 import { members } from './mockData';
 
 const baseURL = 'https://api.github.com/orgs/lemoncode';
+const userURL = 'https://api.github.com/user';
 let mockMembers = members;
 
 const fetchMembers = (): Promise<MemberEntity[]> => {
@@ -61,9 +62,17 @@ const fetchMemberById = (id: number): Promise<MemberEntity> => {
   return Promise.resolve(member);
 }
 
+const fetchMemberByIdAsync = (id: number): Promise<MemberEntity> => {
+  const membersURL = `${userURL}/${id}`;
+  return fetch(membersURL)
+    .then((response) => (response.json()))
+    .then(mapToMember);
+}
+
 export const memberAPI = {
   fetchMembers,
   fetchMembersAsync,
   saveMember,
   fetchMemberById,
+  fetchMemberByIdAsync,
 };

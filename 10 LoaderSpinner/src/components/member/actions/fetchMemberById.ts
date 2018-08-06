@@ -5,7 +5,7 @@ import { trackPromise } from 'react-promise-tracker';
 
 export const fetchMemberByIdAction = (id: number) => (dispatch) => {
   trackPromise(
-    memberAPI.fetchMemberById(id)
+    memberAPI.fetchMemberByIdAsync(id)
       .then((member) => {
         dispatch(fetchMemberByIdCompleted(member));
       })
