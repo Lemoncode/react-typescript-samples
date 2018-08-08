@@ -291,6 +291,274 @@ export const App: React.StatelessComponent<{}> = (props) => {
 
 ```
 
+## Repository
+To make the spinner display more visible, we'll add a new component with and asynchronous call into the members page that will show a list of repositories. To do so, we will start by creating a new folder to hold this new component and the necessary api calls.
+
+First thing we need to do is to define a new model with a repository interface and ipdate its barrel:
+### ./src/model/repositoryEntity.ts
+```ts
+export interface RepositoryEntity {
+    id: string;
+    name: string;
+    description:string;
+}
+```
+### ./src/model/index.ts
+```diff
+export * from './memberEntity';
+export * from './memberErrors';
++ export * from './repositoryEntity';
+
+```
+
+Now that we have our model define, we can begin createing the needed calls.
+
+### ./src/api/member/index.ts
+```diff
+
+-import { MemberEntity } from '../../model';
++import { MemberEntity, RepositoryEntity } from '../../model';
+import { members } from './mockData';
+
+const baseURL = 'https://api.github.com/orgs/lemoncode';
+const userURL = 'https://api.github.com/user';
++const repoURL = 'https://api.github.com/orgs/lemoncode/repos';
+let mockMembers = members;
+
+...
+
++const mapToRepositories = (githubRepositories: any[]): RepositoryEntity[] => {
++  return githubRepositories.map(mapToRepository);
++};
+
++const mapToRepository = (githubRepository: any):RepositoryEntity => {
++  return{
++    id: githubRepository.id,
++    name: githubRepository.name,
++    description: githubRepository.description
++  }
++}
+
+...
+
++const fetchRepositoriesAsync = (): Promise<RepositoryEntity[]> => {
++  const repositoryURL = `${repoURL}`;
+
++  return fetch (repositoryURL)
++    .then((response) => (response.json()))
++    .then(mapToRepositories);
++}
+
+export const memberAPI = {
+  fetchMembers,
+  fetchMembersAsync,
+  saveMember,
+  fetchMemberById,
+  fetchMemberByIdAsync,
++ fetchRepositoriesAsync,
+};
+
+
+```
+Now we need to create new folder _./src/components/repos_ and also another folder to hold the actions to this component _./src/components/repos/actions_
+
+On _./src/components/repos_ we will create a repoHeader and a repoRow just like we did for the _members_ component.
+### ./src/components/repos/repoHeader.tsx
+
+```tsx
+import * as React from 'react';
+
+export const RepoHeader: React.StatelessComponent<{}> = () => {
+    return (
+        <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    );
+};
+
+```
+
+### ./src/components/repos/repoHeader.tsx
+
+```tsx
+import * as React from 'react';
+import { RepositoryEntity } from '../../model';
+
+
+interface Props {
+    repo: RepositoryEntity;
+}
+
+export const RepoRow: React.StatelessComponent<Props> = ({ repo }) => {
+    return (
+        <tr>
+            <td>
+                <span>{repo.id}</span>
+            </td>
+            <td>
+                <span>{repo.name}</span>
+            </td>
+            <td>
+                <span>{repo.description}</span>
+            </td>
+        </tr>
+    );
+};
+
+```
+
+We also need to update our constant file with a new action type.
+### ./src/common/constants/actionTypes.ts
+
+```diff
+export const actionTypes = {
+  FETCH_MEMBERS_COMPLETED: 'FETCH_MEMBERS_COMPLETED',
+  FETCH_MEMBER_BY_ID_COMPLETED: 'FETCH_MEMBER_BY_ID_COMPLETED',
+  UPDATE_MEMBER_FIELD: 'UPDATE_MEMBER_FIELD',
+  SAVE_MEMBER: 'SAVE_MEMBER', 
++ FETCH_REPOSITORIES_COMPLETED:'FETCH_REPOSITORIES_COMPLETED',
+};
+
+```
+Now we can proceed to create our new repositories reducer.
+### ./src/reducers/repositories.ts
+
+```ts
+import {actionTypes} from '../common/constants/actionTypes';
+import {RepositoryEntity} from '../model/repositoryEntity';
+
+export const repositoriesReducer = (state: RepositoryEntity[] = [], action) => {
+    switch (action.type) {
+        case actionTypes.FETCH_REPOSITORIES_COMPLETED:
+            return handleFetchRepositoriesCompleted(state, action.payload);
+    }
+
+    return state;
+};
+
+const handleFetchRepositoriesCompleted = (state: RepositoryEntity[], payload: RepositoryEntity[]) => {
+    return payload;
+};
+```
+Because we want to show our new component into the members page, we will have to reference the needed components inside the members site. 
+To help us look more undestandable we'll use a barrel.
+### ./src/components/members/actions/index.ts
+```ts
+export * from './fetchMembers';
+export * from '../../repos/actions/fetchRepositories';
+```
+Now we move the wanted data with redux.
+### ./src/components/members/pageContainer.tsx
+
+```diff
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { State } from '../../reducers';
+-import { fetchMembersAction} from './actions/fetchMembers.ts';
++import { fetchMembersAction, fetchRepositoriesAction } from './actions';
+import { MembersPage } from './page';
+
+const mapStateToProps = (state: State) => ({
+  members: state.members,
++ repos: state.repositories,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchMembers: () => dispatch(fetchMembersAction()),
++ fetchRepos: () =>dispatch(fetchRepositoriesAction()),
+});
+
+export const MembersPageContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(MembersPage);
+
+```
+### ./src/components/members/page.tsx
+```diff
+import * as React from 'react';
+import { Link } from 'react-router-dom';
+-import { MemberEntity } from '../../model';
++import { MemberEntity, RepositoryEntity } from '../../model';
+import { MemberHeader } from './memberHeader';
+import { MemberRow } from './memberRow';
+
++import {RepoHeader} from '../repos/repoHeader';
++import {RepoRow} from '../repos/repoRow';
+
+interface Props {
+  members: MemberEntity[];
++  repos: RepositoryEntity[];
+  fetchMembers(): void;
++  fetchRepos(): void;
+}
+
+export class MembersPage extends React.Component<Props,{}> {
+  constructor(props) {
+    super(props);
+    this.state = { 
+      members: [], 
++      repos:[] 
+    };
+  }
+  public componentDidMount() {
+    this.props.fetchMembers();
++    this.props.fetchRepos();
+  }
+
+  public render() {
+    return (
+      <div className="row">
++        <div className="col-5">
++         <div className="row">
+          <h2> Members Page</h2>
+          <Link to="/member">New Member</Link>
++          </div>
+          <table className="table" id="members_table">
+            <thead>
+              <MemberHeader />
+            </thead>
+            <tbody>
+              {
+                this.props.members.map((member) =>
+                  <MemberRow
+                    key={member.id}
+                    member={member}
+                  />
+                )
+              }
+            </tbody>
+          </table>
++        </div>
+
++      <div className="col-5">
++        <h2> Repo Page</h2>
++          <table className="table" id="repos_table">
++          <thead>
++            <RepoHeader />
++          </thead>
++          <tbody>
++            {
++              this.props.repos.map((repo) =>
++                <RepoRow
++                  key={repo.id}
++                  repo={repo}
++                />
++              )
++            }
++          </tbody>
++        </table>
++      </div>
+    </div>
+    );
+  }
+};
+
+```
+
+
 - Execute the example:
 
 Finally, lets give it a try:
