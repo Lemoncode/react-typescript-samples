@@ -12,7 +12,6 @@ const InnerLoadingSpinerComponent: React.StatelessComponent<myProps> = (props:my
     return (
       <div className="loading">
         <BeatLoader loading= {props.trackedPromiseInProgress}
-                    color={'#FFFF00'}
         />
       </div>
     )

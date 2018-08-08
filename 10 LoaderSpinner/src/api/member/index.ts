@@ -1,8 +1,11 @@
-import { MemberEntity } from '../../model';
+import { MemberEntity, RepositoryEntity } from '../../model';
 import { members } from './mockData';
+
+
 
 const baseURL = 'https://api.github.com/orgs/lemoncode';
 const userURL = 'https://api.github.com/user';
+const repoURL = 'https://api.github.com/orgs/lemoncode/repos';
 let mockMembers = members;
 
 const fetchMembers = (): Promise<MemberEntity[]> => {
@@ -21,6 +24,17 @@ const mapToMembers = (githubMembers: any[]): MemberEntity[] => {
   return githubMembers.map(mapToMember);
 };
 
+const mapToRepositories = (githubRepositories: any[]): RepositoryEntity[] => {
+  return githubRepositories.map(mapToRepository);
+};
+
+const mapToRepository = (githubRepository: any):RepositoryEntity => {
+  return{
+    id: githubRepository.id,
+    name: githubRepository.name,
+    description: githubRepository.description
+  }
+}
 const mapToMember = (githubMember): MemberEntity => {
   return {
     id: githubMember.id,
@@ -69,10 +83,19 @@ const fetchMemberByIdAsync = (id: number): Promise<MemberEntity> => {
     .then(mapToMember);
 }
 
+const fetchRepositoriesAsync = (): Promise<RepositoryEntity[]> => {
+  const repositoryURL = `${repoURL}`;
+
+  return fetch (repositoryURL)
+    .then((response) => (response.json()))
+    .then(mapToRepositories);
+}
+
 export const memberAPI = {
   fetchMembers,
   fetchMembersAsync,
   saveMember,
   fetchMemberById,
   fetchMemberByIdAsync,
+  fetchRepositoriesAsync,
 };

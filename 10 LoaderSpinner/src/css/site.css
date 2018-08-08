@@ -28,6 +28,10 @@
     max-width: 80px
 }
 
-#navbar{
+#navbar {
     padding-left: 0px !important;
+}
+
+#header-title{
+    background-color: rgb(238, 235, 235);
 }
