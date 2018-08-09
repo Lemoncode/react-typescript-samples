@@ -3,15 +3,15 @@ import '../css/site.css';
 
 export const About: React.StatelessComponent<{}> = () => {
   return (
-    <div className="row about-page top-buffer">
-      <h1 className="jumbotron">02 Components</h1>
-      <div className="col-xs-12">
+    <div className="row about-page col-12">
+      <h1 className="jumbotron col-2">02 Components</h1>
+      <div className="col-10">
         <h1>
           <small>
             This sample takes the sample "01 Hello react" as starting point.
             </small>
         </h1>
-        <div className="col-xs-12">
+        <div className="col-10">
           <h3>
             <small>
               We are adding react components: a main component that consumes a <b>header</b> and an <b>about</b> component.
@@ -20,7 +20,7 @@ export const About: React.StatelessComponent<{}> = () => {
         </div>
       </div>
 
-      <div className="col-xs-12 top-buffer">
+      <div className="col-2 top-buffer">
         <h3>Highlights</h3>
         <hr />
         <h3>
@@ -30,7 +30,7 @@ export const About: React.StatelessComponent<{}> = () => {
         </h3>
       </div>
 
-      <div className="col-xs-12 top-buffer">
+      <div className="col-10">
         <ul>
           <li className="top-buffer">
             <h4><b>Components:</b></h4>
