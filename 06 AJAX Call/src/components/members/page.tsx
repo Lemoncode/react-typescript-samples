@@ -7,10 +7,12 @@ import { MemberRow } from './memberRow';
 interface State {
   members: MemberEntity[];
 }
+interface Props {
 
-export class MembersPage extends React.Component<{}, State> {
-  constructor() {
-    super();
+}
+export class MembersPage extends React.Component<Props, State> {
+  constructor(props) {
+    super(props);
     this.state = { members: [] };
   }
 
