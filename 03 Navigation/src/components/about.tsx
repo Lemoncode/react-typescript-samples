@@ -2,16 +2,16 @@ import * as React from 'react';
 
 export const About: React.StatelessComponent<{}> = () => {
   return (
-    <div className="row about-page">
-      <h1 className="jumbotron">03 Navigation</h1>
+    <div className="row about-page col-12">
+      <h1 className="jumbotron col-2">03 Navigation</h1>
 
-      <div className="col-xs-12">
+      <div className="col-10" id="header-title">
         <h1>
           <small>
             This sample takes as starting point sample "02 Components".
                  </small>
         </h1>
-        <div className="col-xs-12">
+        <div className="col-10">
           <h3>
             <small>
               We are adding page navigation to this project:
@@ -29,7 +29,7 @@ export const About: React.StatelessComponent<{}> = () => {
         </div>
       </div>
 
-      <div className="col-xs-12 top-buffer">
+      <div className="col-2 top-buffer">
         <h3>Highlights</h3>
         <hr />
         <h3>
@@ -39,7 +39,7 @@ export const About: React.StatelessComponent<{}> = () => {
         </h3>
       </div>
 
-      <div className="col-xs-12 top-buffer">
+      <div className="col-10">
         <ul>
           <li className="top-buffer">
             <h4><b>Router:</b></h4>
