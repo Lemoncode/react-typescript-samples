@@ -1,31 +1,27 @@
 import * as React from 'react';
-import {Link} from 'react-router';
-import MemberEntity from '../../api/memberEntity';
+import { Link } from 'react-router-dom';
+import { MemberEntity } from '../../model';
 
-
-interface Props extends React.Props<MemberRow> {
-  member : MemberEntity;
+interface Props {
+  member: MemberEntity;
 }
 
-export default class MemberRow extends React.Component<Props, {}> {
-
-  constructor(props : Props){
-        super(props);
-  }
-
-   public render() {
-       return (
-         <tr>
-           <td>
-             <img src={this.props.member.avatar_url} className="avatar"/>
-           </td>
-           <td>
-            <Link to={`/memberEdit/${this.props.member.id}`}>{this.props.member.id}</Link>
-           </td>
-           <td>
-             <span>{this.props.member.login}</span>
-           </td>
-         </tr>
-       );
-  }
-}
+export const MemberRow: React.StatelessComponent<Props> = ({ member }) => {
+  return (
+    <tr>
+      <td>
+        <img src={member.avatar_url} className="avatar" />
+      </td>
+      <td>
+        <Link
+          to={`/member/${member.id}`}
+        >
+          {member.id}
+        </Link>
+      </td>
+      <td>
+        <span>{member.login}</span>
+      </td>
+    </tr>
+  );
+};
