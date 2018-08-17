@@ -1,35 +1,14 @@
 # React Typescript by sample
 
-This repo was deprecated (see _new samples_ section), but due to the popularity of it, we have decided to update all the samples to the newest package versions and best practices, sample that are already uptodate: 00, 01, 02, 03, 04, 05, 06, 07, 08, rest of sample _work in progress_, if you need to progress on more advanced sample please check our [React By Sample](https://github.com/Lemoncode/react-by-sample) and [Redux By Sample](https://github.com/Lemoncode/redux-by-sample) repos. Thanks for your support and stars ;-).
+Due to the popularity of this repo @jsagardoy is getting them uptodate, right now migrated from 00 to 12.
 
-# New samples
+You can check as well other repos (react / redux + typescript):
+ - [React By Sample](https://github.com/Lemoncode/react-by-sample)
+ - [Redux By Sample](https://github.com/Lemoncode/redux-by-sample)
+ - [From React to Redux](https://github.com/Lemoncode/from-react-to-redux-ts)
+ - [Redux Testing Typescript](https://github.com/Lemoncode/redux-testing-typescript)
 
-We have created a new set of updated samples.
-
-_Typescript_
-
-React:
-
-https://github.com/Lemoncode/react-by-sample
-
-React + Redux:
-
-https://github.com/Lemoncode/redux-by-sample
-
-_ES6_
-
-**Work in progress**
-
-React:
-
-https://github.com/Lemoncode/react-by-sample-es6
-
-React + Redux:
-
-https://github.com/Lemoncode/redux-by-sample-es6
-
-
-# Old Project
+# Samples
 
 The goal of this project is to provide a set of simple samples, providing and step by step guide to
 start working with React and Typescript. Characteristics:
@@ -42,11 +21,7 @@ start working with React and Typescript. Characteristics:
 + Handling async calls via Redux-Thunk + Redux Saga.
 + Adding unit testing support.
 + Implementing Lazy Loading.
-
-- Future enhancements:
-
- + Using Immutablejs.
- + Using React Hot Loader.
++ ...
 
 ## Call for contributors:
 
@@ -56,18 +31,11 @@ Are you interested in contributing into this project? If that's the case don't h
 
 ## To get started:  
 1. Install [NodeJS](http://www.nodejs.org)  
-2. `npm install webpack -g` - Installs webpack
-3. `npm install tsd -g` - Installs tsd
-4. Download this repo
+2. Download this repo
 5. Open the command line of your choice and cd to the root directory of this repo on your machine  
 6. `npm install` - Installs packages
 7. `npm start` - Builds the project and launch a lite web server (webpack-devserver).
 8. Navigate to [http://localhost:8080/](http://localhost:8080/) if your browser doesn't open automatically.
-
-## IDE:
-We have tested in:
- + [Atom](https://atom.io/).
- + [VS Code](https://code.visualstudio.com/).
 
 # samples
 
@@ -129,72 +97,37 @@ we will call async operations and fitting them into Redux architecture.
 
 Display a busy indicator when an ajax request is in progress.
 
-We have created here:
-
-* A component that will take care of showing / displaying the busy indicator (spinner).
-* A reducer that will take care of dispatching http requests in progress / completed.
-* A http middleware that dispatch HttpCallCompleted action when http request is completed.
-
-We have updated MemberAPI to use the http helper / wrapper.
+To have a global count of promises gong on we are using [reat-promise-tracker](https://github.com/Lemoncode/react-promise-tracker) and to display a cool spinner [react-spinner](https://github.com/davidhu2000/react-spinners)
 
 ## 11 Testing reducers
 
-Testing libraries:
+Sample updated using Jest.
 
-* [Webpack + Karma](https://github.com/webpack/karma-webpack)
-* [Mocha](https://github.com/mochajs/mocha)
-* [Chai](http://chaijs.com/)
-* [Deep Freeze](https://github.com/substack/deep-freeze)
-
-We added a Karma configuration on Webpack, that runs every '.spec' inside src folder and subfolders.
-This configuration allows debugging with Typescript.
-
-With Mocha we can describe our tests and it adds support for async tests.
-
-Chai is for assertions.
-
-With Deep free we ensures that initial states in reducers are immutable.
 
 ## 12 Testing actions
 
-Testing libraries, previous libraries and:
+Sample updated using Jest.
 
-* [Sinon](http://sinonjs.org/)
-
-Sinon join Mocha allow us async action tests.
 
 ## 13 Testing components (Containers and Presentationals)
 
-Testing libraries, previous libraries and:
-
-* [Enzyme](https://github.com/airbnb/enzyme)
-
-Enzyme provide an easy way to isolate, manipulate, traverse and assert React Components.
+Pending update Jest + Enzyme
 
 ## 14 Replacing Redux Thunk with Redux Saga
 
-Redux Saga it's an interesting alternative for redux-thunk, worth to take a look:
-
-* [Redux Saga](https://github.com/yelouafi/redux-saga)
+Pending update
 
 ## 15 Lazy Loading and React-Router
 
-Use webpack require.ensure to load routes on demand.
-
-* [Lazy Loading Webpack / React Router](http://blog.mxstbr.com/2016/01/react-apps-with-pages/)
+Pending update
 
 ## 16 Add custom middlewares
 
-Create two custom middlewares uiNotificationMiddleware and navigationMiddleware
+Pending update
 
 ## 17 Add support for ReactHotloader and ReduxDev Tools.
 
-React Hot loader allows us to introduce changes in the application source code meanwhile we are running our web server and get the changes into our page without having to reload the browser and not losing the application state.
-
-Redux dev tool is a chrome add-on that allows us to browse the state, replay actions, inject actions, export / import state...
-
-* [React Hot Loader](https://github.com/gaearon/react-hot-loader)
-* [Redux Dev Tool](https://github.com/gaearon/redux-devtools)
+Pending update
 
 # About Lemoncode
 
