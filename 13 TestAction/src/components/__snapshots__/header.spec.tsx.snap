@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`/src/components/header test should render as expected 1`] = `
+<div
+  className="row col-12"
+>
+  <nav
+    className="navbar navbar-expand-lg navbar-light bg-white"
+    id="navbar"
+  >
+    <img
+      alt="logo"
+      className="navbar-icon"
+      src={null}
+    />
+    <a
+      className="navbar-brand"
+      href="#"
+    >
+      Lemoncode
+    </a>
+    <button
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      className="navbar-toggler"
+      data-target="#navbarSupportedContent"
+      data-toggle="collapse"
+      type="button"
+    >
+      <span
+        className="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      className="collapse navbar-collapse"
+      id="navbarSupportedContent"
+    >
+      <ul
+        className="navbar-nav mr-auto"
+      >
+        <li
+          className="nav-item"
+        >
+          <Link
+            className="nav-link"
+            replace={false}
+            to="/about"
+          >
+             About
+          </Link>
+        </li>
+        <li
+          className="nav-item "
+        >
+          <Link
+            className="nav-link"
+            replace={false}
+            to="/members"
+          >
+             Members 
+          </Link>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+`;
