@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { MemberEntity } from '../../model';
 
-interface Props {
+export interface Props {
   member: MemberEntity;
 }
 

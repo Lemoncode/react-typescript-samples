@@ -1,21 +1,16 @@
 import * as React from 'react';
 import {MemberPage, Props} from './page';
 import * as SaveMember from './actions/saveMember';
-import {saveMemberAction} from './actions/saveMember';
 import {shallow} from 'enzyme';
 import { createEmptyMember } from '../../reducers/member';
 import { createEmptyMemberErrors } from '../../reducers/memberErrors';
 import { MemberEntity } from '../../model';
-import configureStore from 'redux-mock-store';
-import reduxThunk from 'redux-thunk';
 
-const middlewares = [reduxThunk];
-const getMockStore = configureStore(middlewares);
 
 describe ('/components/member/page specs',()=>{
     it('should retur as expected when definde props',()=>{
         //arrange
-        const data:Props = {
+        const props:Props = {
             memberId:-1,
             member: createEmptyMember(),
             memberErrors: createEmptyMemberErrors(),
@@ -25,7 +20,7 @@ describe ('/components/member/page specs',()=>{
         }
         //act
         const component = shallow (
-            <MemberPage {...data} />
+            <MemberPage {...props} />
         );
         //assert
         expect(component).toMatchSnapshot();
@@ -38,15 +33,15 @@ describe ('/components/member/page specs',()=>{
             avatar_url:'test new avatar',
             login: 'test new login'
         }
-        const data: Props = {
+        const props: Props = {
             memberId: -1,
-            member: createEmptyMember(),
+            member: newMember,
             memberErrors: createEmptyMemberErrors(),
             fetchMemberById: () => { },
             onChange: () => { },
             onSave: jest.fn(),
         }
-        const store = getMockStore();
+       
 
         const actionSaveStub = jest.spyOn(SaveMember, 'saveMemberAction')
              .mockImplementation(()=>(
@@ -54,42 +49,68 @@ describe ('/components/member/page specs',()=>{
             ));
                
         const component = shallow(
-            <MemberPage {...data} />,
-            {
-            context: { store },
-            },
+            <MemberPage {...props} />,
         );
 
         
-        component.prop('onSave')();
-        console.log(`pete ${component}`);
+        //component.prop('onSave')();
+        component.simulate('save',newMember);
+       
         //assert
-        expect(actionSaveStub).toHaveBeenCalledWith(newMember);
+        expect(props.onSave).toHaveBeenCalledWith(newMember);
 
     });
 
-    /* it('should call onChange when Changes are made', () => {
+    it('should call onChange when Changes are made', () => {
         //arrange
 
-        const data: Props = {
+         const newMember: MemberEntity = {
+             id: 56789,
+             avatar_url: 'test new avatar',
+             login: 'test new login'
+         }
+        const props: Props = {
             memberId: -1,
-            member: createEmptyMember(),
+            member: newMember,
             memberErrors: createEmptyMemberErrors(),
             fetchMemberById: () => { },
             onChange: jest.fn(),
             onSave: () => { } ,
         }
 
+        let fieldName =  'test fieldName';
+        let value =  'test value';
 
         //act
         const component = shallow(
-            <MemberPage {...data} />
+            <MemberPage {...props} />
         );
 
 
-        component.find('data.onChange');
+         component.simulate('change', fieldName, value);
         //assert
-        expect(component).toHaveBeenCalled();
+         expect(props.onChange).toHaveBeenCalledWith(newMember,fieldName, value);
 
-    }); */
+    }); 
+    it ('should componetDidMount when component is called',()=>{
+        //arrange
+        const props: Props = {
+            memberId: -1,
+            member: createEmptyMember(),
+            memberErrors: createEmptyMemberErrors(),
+            fetchMemberById: jest.fn(),
+            onChange: ()=>{},
+            onSave: () => { },
+        }
+
+        //act
+        const component = shallow(
+            <MemberPage {...props} />
+        );
+
+        component.find('componentDidMount');
+       
+        //assert
+        expect (props.fetchMemberById).toHaveBeenCalled();
+    });
 });

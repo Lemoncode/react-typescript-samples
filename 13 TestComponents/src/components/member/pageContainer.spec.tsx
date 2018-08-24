@@ -9,8 +9,6 @@ import {createEmptyMemberErrors} from '../../reducers/memberErrors';
 import * as MemberFieldChange from './actions/memberFieldChange';
 import * as SaveMember from './actions/saveMember';
 
-
-
 const getMockStore = configureStore();
 
 describe('pages/login/pageContainer tests', () => {
