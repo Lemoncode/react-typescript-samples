@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`common/components/member/memberForm test should render as expected when passing required properties 1`] = `
+<form>
+  <h1>
+    Manage member
+  </h1>
+  <Component
+    error=""
+    label="Login"
+    name="login"
+    onChange={[Function]}
+    value="some loging test"
+  />
+  <Component
+    label="Avatar Url"
+    name="avatar_url"
+    onChange={[Function]}
+    value="some url test"
+  />
+  <Component
+    className="btn btn-default"
+    label="Save"
+    onClick={[Function]}
+  />
+</form>
+`;

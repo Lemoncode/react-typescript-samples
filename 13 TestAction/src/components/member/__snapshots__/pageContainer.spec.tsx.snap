@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pages/login/pageContainer tests should render as expected passing state 1`] = `
+<MemberPage
+  fetchMemberById={[Function]}
+  member={
+    Object {
+      "avatar_url": "",
+      "id": -1,
+      "login": "",
+    }
+  }
+  memberErrors={
+    Object {
+      "login": FieldValidationResult {
+        "errorMessage": "",
+        "key": "",
+        "succeeded": false,
+        "type": "",
+      },
+    }
+  }
+  memberId={0}
+  onChange={[Function]}
+  onSave={[Function]}
+/>
+`;

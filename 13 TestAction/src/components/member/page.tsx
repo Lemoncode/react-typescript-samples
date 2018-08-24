@@ -2,7 +2,7 @@ import * as React from 'react';
 import { MemberEntity, MemberErrors } from '../../model';
 import { MemberForm } from './memberForm';
 
-interface Props {
+export interface Props {
   memberId: number;
   member: MemberEntity;
   memberErrors: MemberErrors;

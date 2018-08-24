@@ -3,7 +3,7 @@ import { actionTypes } from '../common/constants/actionTypes';
 import { MemberErrors } from '../model';
 import { MemberFieldChangePayload } from '../components/member/actions/memberFieldChange';
 
-const createEmptyMemberErrors = (): MemberErrors => ({
+export const createEmptyMemberErrors = (): MemberErrors => ({
   login: new FieldValidationResult(),
 });
 

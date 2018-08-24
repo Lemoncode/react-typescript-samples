@@ -7,11 +7,14 @@ import { memberFieldChangeAction } from './actions/memberFieldChange';
 import { saveMemberAction } from './actions/saveMember';
 import { MemberPage } from './page';
 
-const mapStateToProps = (state: State, ownProps: any) => ({
-  memberId: Number(ownProps.match.params.id) || 0,
-  member: state.member,
-  memberErrors: state.memberErrors,
-});
+const mapStateToProps = (state: State, ownProps: any) => (
+  //if (ownProps.match===undefined) 
+    {
+      memberId: Number(ownProps && ownProps.match && ownProps.match.params && ownProps.match.params.id) || 0,
+      member: state.member,
+      memberErrors: state.memberErrors,
+    }
+  );
 
 const mapDispatchToProps = (dispatch) => ({
   fetchMemberById: (id: number) => dispatch(fetchMemberByIdAction(id)),
@@ -20,7 +23,9 @@ const mapDispatchToProps = (dispatch) => ({
   onSave: (member: MemberEntity) => dispatch(saveMemberAction(member)),
 });
 
-export const MemberPageContainer = connect(
+const MemberPageContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(MemberPage);
+
+export default MemberPageContainer;

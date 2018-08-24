@@ -2,7 +2,7 @@ import { actionTypes } from '../common/constants/actionTypes';
 import { MemberEntity } from '../model';
 import { MemberFieldChangePayload } from '../components/member/actions/memberFieldChange';
 
-const createEmptyMember = (): MemberEntity => ({
+export const createEmptyMember = (): MemberEntity => ({
   id: -1,
   login: '',
   avatar_url: '',

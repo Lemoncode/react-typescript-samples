@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Header} from  './header';
 
-import { shallow, mount, ShallowWrapper} from 'enzyme';
+import { shallow} from 'enzyme';
 
 
 describe('/src/components/header test',()=>{
@@ -13,7 +13,6 @@ describe('/src/components/header test',()=>{
         );
         
         //assert
-
         expect(component).toMatchSnapshot();
     });
 });
