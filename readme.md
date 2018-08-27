@@ -1,6 +1,6 @@
 # React Typescript by sample
 
-Due to the popularity of this repo [Jehu Sagardoy](https://github.com/jsagardoy) is getting them up to date, right now migrated from 00 to 12.
+Due to the popularity of this repo [Jehu Sagardoy](https://github.com/jsagardoy) is getting them up to date, right now migrated from 00 to 13.
 
 You can check as well other repos (react / redux + typescript):
  - [React By Sample](https://github.com/Lemoncode/react-by-sample)
