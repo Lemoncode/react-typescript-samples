@@ -4,7 +4,7 @@ import { MemberEntity } from '../../model';
 import { MemberHeader } from './memberHeader';
 import { MemberRow } from './memberRow';
 
-interface Props {
+export interface Props {
   members: MemberEntity[];
   fetchMembers(): void;
 }

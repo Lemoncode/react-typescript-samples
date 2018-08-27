@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`/components/member/page specs should retur as expected when definde props 1`] = `
+exports[`/components/member/page specs should return as expected when props are passed 1`] = `
 <Component
   member={
     Object {

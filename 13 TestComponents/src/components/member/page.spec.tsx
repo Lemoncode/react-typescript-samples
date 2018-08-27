@@ -8,7 +8,7 @@ import { MemberEntity } from '../../model';
 
 
 describe ('/components/member/page specs',()=>{
-    it('should retur as expected when definde props',()=>{
+    it('should return as expected when props are passed',()=>{
         //arrange
         const props:Props = {
             memberId:-1,
