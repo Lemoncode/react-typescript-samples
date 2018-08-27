@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`/components/members/memberRow should render as expected whenprops are passed 1`] = `
+<tr>
+  <td>
+    <img
+      className="avatar"
+      src=""
+    />
+  </td>
+  <td>
+    <Link
+      replace={false}
+      to="/member/-1"
+    >
+      -1
+    </Link>
+  </td>
+  <td>
+    <span />
+  </td>
+</tr>
+`;

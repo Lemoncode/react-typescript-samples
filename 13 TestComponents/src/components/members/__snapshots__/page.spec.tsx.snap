@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/members/page specs should return as expected when props are passed 1`] = `
+<div
+  className="row"
+>
+  <h2>
+     Members Page
+  </h2>
+  <Link
+    replace={false}
+    to="/member"
+  >
+    New Member
+  </Link>
+  <table
+    className="table"
+  >
+    <thead>
+      <Component />
+    </thead>
+    <tbody />
+  </table>
+</div>
+`;

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`/components/members/pageContainer should call to fetchMembers action creator when call to fetchMembers prop 1`] = `[MockFunction]`;
+
+exports[`/components/members/pageContainer should render as spected passing state 1`] = `
+<MembersPage
+  fetchMembers={[Function]}
+  members={Array []}
+/>
+`;

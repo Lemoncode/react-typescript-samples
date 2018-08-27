@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`/components/member/page specs should return as expected when props are passed 1`] = `
+<Component
+  member={
+    Object {
+      "avatar_url": "",
+      "id": -1,
+      "login": "",
+    }
+  }
+  memberErrors={
+    Object {
+      "login": FieldValidationResult {
+        "errorMessage": "",
+        "key": "",
+        "succeeded": false,
+        "type": "",
+      },
+    }
+  }
+  onChange={[Function]}
+  onSave={[Function]}
+/>
+`;

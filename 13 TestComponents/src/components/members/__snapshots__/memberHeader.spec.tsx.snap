@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`./components/members/memberHeader should render memberHeader as expected 1`] = `
+<tr>
+  <th>
+    Avatar
+  </th>
+  <th>
+    Id
+  </th>
+  <th>
+    Name
+  </th>
+</tr>
+`;

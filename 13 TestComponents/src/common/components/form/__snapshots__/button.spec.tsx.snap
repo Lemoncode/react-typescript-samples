@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`common/components/form/button specs should render as expected when passing required properties 1`] = `
+<button
+  className="test className"
+  onClick={[Function]}
+  type="button"
+>
+  test label
+</button>
+`;

@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`/common/components specs should render as expected when passing required and optional properties 1`] = `
+<div
+  className="form-group has-error"
+>
+  <label
+    htmlFor="test name"
+  >
+    test label
+  </label>
+  <div
+    className="field"
+  >
+    <input
+      className="form-control"
+      name="test name"
+      onChange={[Function]}
+      type="text"
+      value="test value"
+    />
+  </div>
+  <div
+    className="help-block"
+  >
+    test error
+  </div>
+</div>
+`;
+
+exports[`/common/components specs should render as expected when passing required properties 1`] = `
+<div
+  className="form-group"
+>
+  <label
+    htmlFor="test name"
+  >
+    test label
+  </label>
+  <div
+    className="field"
+  >
+    <input
+      className="form-control"
+      name="test name"
+      onChange={[Function]}
+      type="text"
+      value="test value"
+    />
+  </div>
+  <div
+    className="help-block"
+  />
+</div>
+`;
