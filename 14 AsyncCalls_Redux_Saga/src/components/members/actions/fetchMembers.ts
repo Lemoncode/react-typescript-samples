@@ -23,3 +23,6 @@ export const fetchMembersActionSaga = (members: MemberEntity[]) => (
     payload: members,
   }
 );
+export const fetchMembersRequest = () => ({
+  type: actionTypes.FETCH_MEMBER_REQUEST,
+});

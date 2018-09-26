@@ -1,5 +1,5 @@
-
-import { fork, takeLatest, all, call } from 'redux-saga/effects';
+//import {takeLatest} from 'redux-saga';
+import { fork, all, takeLatest } from 'redux-saga/effects';
 import { fetchMembers } from './membersSaga';
 import {actionTypes} from '../common/constants/actionTypes';
 
@@ -8,14 +8,13 @@ import {actionTypes} from '../common/constants/actionTypes';
 function* watchLoadMembersRequest() {
         console.log("Estoy en members Saga llamando");
         while (true){
-          yield* takeLatest (actionTypes.FETCH_MEMBERS_COMPLETED_SAGA,fetchMembers);
+            yield takeLatest (actionTypes.FETCH_MEMBER_REQUEST, fetchMembers);
         }
 }
 // Register all your watchers
 export default function* root() {
     console.log("Estoy en members Saga Watcher");
     yield all([
-        
         fork(watchLoadMembersRequest),
     ])
 }
