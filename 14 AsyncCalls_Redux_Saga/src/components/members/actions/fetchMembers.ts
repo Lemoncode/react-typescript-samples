@@ -7,7 +7,7 @@ export const fetchMembersAction = () => (dispatch) => {
   trackPromise(
     memberAPI.fetchMembersAsync()
     .then((members) => {
-      dispatch(fetchMembersCompleted(members));
+      dispatch(fetchMembersActionSaga(members));
     })
   );
 };
@@ -19,10 +19,10 @@ const fetchMembersCompleted = (members: MemberEntity[]) => ({
 
 export const fetchMembersActionSaga = (members: MemberEntity[]) => (
   {
-    type: actionTypes.FETCH_MEMBERS_COMPLETED_SAGA,
+    type: actionTypes.FETCH_MEMBER_REQUEST,
     payload: members,
   }
 );
-export const fetchMembersRequest = () => ({
+/* export const fetchMembersRequest = () => ({
   type: actionTypes.FETCH_MEMBER_REQUEST,
-});
+}); */

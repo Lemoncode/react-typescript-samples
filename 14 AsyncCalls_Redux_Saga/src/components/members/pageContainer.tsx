@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { State } from '../../reducers';
-import { fetchMembersAction, fetchRepositoriesAction, fetchMembersRequest } from './actions';
+import { fetchMembersAction, fetchRepositoriesAction} from './actions';
 import { MembersPage } from './page';
 
 const mapStateToProps = (state: State) => ({
@@ -10,7 +10,7 @@ const mapStateToProps = (state: State) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchMembers: () => dispatch(fetchMembersRequest()),
+  fetchMembers: () => dispatch(fetchMembersAction()),
   fetchRepos: () =>dispatch(fetchRepositoriesAction()),
 });
 

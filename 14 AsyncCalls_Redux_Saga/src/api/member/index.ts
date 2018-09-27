@@ -1,8 +1,5 @@
 import { MemberEntity, RepositoryEntity } from '../../model';
 import { members } from './mockData';
-import {trackPromise} from 'react-promise-tracker';
-
-
 
 const baseURL = 'https://api.github.com/orgs/lemoncode';
 const userURL = 'https://api.github.com/user';
@@ -16,9 +13,9 @@ const fetchMembers = (): Promise<MemberEntity[]> => {
 const fetchMembersAsync = (): Promise<MemberEntity[]> => {
   const membersURL = `${baseURL}/members`;
 
-  return trackPromise(fetch(membersURL)
+  return fetch(membersURL)
     .then((response) => (response.json()))
-    .then(mapToMembers));
+    .then(mapToMembers);
 };
 
 const mapToMembers = (githubMembers: any[]): MemberEntity[] => {
