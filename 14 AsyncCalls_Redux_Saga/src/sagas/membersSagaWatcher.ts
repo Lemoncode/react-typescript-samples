@@ -1,4 +1,4 @@
-import { fork, all, takeLatest, takeEvery } from 'redux-saga/effects';
+import { fork, all, takeLatest} from 'redux-saga/effects';
 import { fetchMembers } from './membersSaga';
 import {actionTypes} from '../common/constants/actionTypes';
 
@@ -6,7 +6,7 @@ import {actionTypes} from '../common/constants/actionTypes';
 // https://github.com/yelouafi/redux-saga/blob/master/examples/real-world/sagas/index.js
 function* watchLoadMembersRequest() {
        while (true){
-        yield takeEvery(actionTypes.FETCH_MEMBER_REQUEST, fetchMembers);
+        yield takeLatest(actionTypes.FETCH_MEMBER_REQUEST, fetchMembers);
        }
 }
 // Register all your watchers
