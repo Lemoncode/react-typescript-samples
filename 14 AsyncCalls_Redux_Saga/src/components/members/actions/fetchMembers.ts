@@ -12,17 +12,10 @@ export const fetchMembersAction = () => (dispatch) => {
   );
 };
 
-const fetchMembersCompleted = (members: MemberEntity[]) => ({
-  type: actionTypes.FETCH_MEMBERS_COMPLETED,
-  payload: members,
-});
-
 export const fetchMembersActionSaga = (members: MemberEntity[]) => (
   {
     type: actionTypes.FETCH_MEMBER_REQUEST,
     payload: members,
   }
 );
-/* export const fetchMembersRequest = () => ({
-  type: actionTypes.FETCH_MEMBER_REQUEST,
-}); */
+

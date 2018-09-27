@@ -9,8 +9,6 @@ const createEmptyMemberErrors = (): MemberErrors => ({
 
 export const memberErrorsReducer = (state = createEmptyMemberErrors(), action) => {
   switch (action.type) {
-    case actionTypes.FETCH_MEMBERS_COMPLETED:
-      return handleFetchMembersCompleted(state, action.payload);
     case actionTypes.UPDATE_MEMBER_FIELD:
       return handleUpdateMemberField(state, action.payload);
     case actionTypes.SAVE_MEMBER:

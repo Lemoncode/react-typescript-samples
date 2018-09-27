@@ -1,4 +1,3 @@
-//import {takeLatest} from 'redux-saga';
 import { fork, all, takeLatest, takeEvery } from 'redux-saga/effects';
 import { fetchMembers } from './membersSaga';
 import {actionTypes} from '../common/constants/actionTypes';
