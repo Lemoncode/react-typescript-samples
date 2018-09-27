@@ -1,6 +1,5 @@
 const httpCallStarted = () => {
-    console.log("call started");
-    return {
+        return {
         type: 'HTTP_GET_CALL_STARTED'
     }
 }

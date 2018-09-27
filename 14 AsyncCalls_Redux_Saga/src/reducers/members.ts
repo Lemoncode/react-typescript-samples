@@ -16,6 +16,5 @@ const handleFetchMembersCompleted = (state: MemberEntity[], payload: MemberEntit
   return payload;
 };
 const handleFetchMembersStartedSaga = (state: MemberEntity[], payload: MemberEntity[]) => {
-  console.log(`I'm using SAGA`);
   return payload;
 };

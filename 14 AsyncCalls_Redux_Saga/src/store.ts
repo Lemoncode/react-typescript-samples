@@ -12,5 +12,4 @@ export const store: Store<State> = createStore(
     applyMiddleware(reduxThunk, sagaMiddleware),
   )
 );
-console.log("Estoy en store");
 sagaMiddleware.run(membersSagaWatcher);
