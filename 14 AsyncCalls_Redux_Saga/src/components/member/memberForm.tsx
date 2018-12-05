@@ -1,44 +1,43 @@
 import * as React from 'react';
-import MemberEntity from './../../api/memberEntity';
-import Input from './../common/textInput';
+import { MemberEntity, MemberErrors } from '../../model';
+import { Input, Button } from '../../common/components/form';
 
-interface Props extends React.Props<MemberForm> {
-  member : MemberEntity
-  onChange : (event:any) => any;
-  onSave : (event:any) => any;
-  errors: any;
+interface Props {
+  member: MemberEntity;
+  memberErrors: MemberErrors;
+  onChange: (fieldName: string, value: string) => void;
+  onSave: () => void;
 }
 
-interface State {
-}
+export const MemberForm: React.StatelessComponent<Props> = (props) => {
+  return (
+    <form>
+      <h1>Manage member</h1>
 
-export default class MemberForm extends React.Component<Props, State> {
-  constructor(props : Props){
-      super(props);
-  }
+      <Input
+        name="login"
+        label="Login"
+        value={props.member.login}
+        onChange={props.onChange}
+        error={
+          props.memberErrors.login.succeeded ?
+            '' :
+            props.memberErrors.login.errorMessage
+        }
+      />
 
+      <Input
+        name="avatar_url"
+        label="Avatar Url"
+        value={props.member.avatar_url}
+        onChange={props.onChange}
+      />
 
-  public render() {
-     return (
-		    <form className="container-fluid">
-          <h1> Manage member </h1>
-
-          <Input
-  					name="login"
-  					label="Login"
-  					value={this.props.member.login}
-  					onChange={this.props.onChange}
-  					error={this.props.errors.login} />
-
-            <Input
-    					name="avatar_url"
-    					label="Avatar Url"
-    					value={this.props.member.avatar_url}
-    					onChange={this.props.onChange}
-    					error={this.props.errors.avatar_rul} />
-
-           <input type="submit" value="Save" className="btn btn-default" onClick={this.props.onSave} />
-        </form>
-     );
-  }
-}
+      <Button
+        label="Save"
+        className="btn btn-default"
+        onClick={props.onSave}
+      />
+    </form>
+  );
+};
