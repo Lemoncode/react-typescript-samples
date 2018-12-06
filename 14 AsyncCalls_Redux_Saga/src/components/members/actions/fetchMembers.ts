@@ -3,18 +3,19 @@ import { MemberEntity } from '../../../model';
 import { memberAPI } from '../../../api/member';
 import { trackPromise } from 'react-promise-tracker';
 
-export const fetchMembersAction = () => (dispatch) => {
-  trackPromise(
-    memberAPI.fetchMembersAsync()
-    .then((members) => {
-      dispatch(fetchMembersActionSaga(members));
-    })
-  );
-};
 
-export const fetchMembersActionSaga = (members: MemberEntity[]) => (
+export const fetchMembersStartAction = () => (
   {
-    type: actionTypes.FETCH_MEMBER_REQUEST,
+    type: actionTypes.FETCH_MEMBER_REQUEST_START,
+  }
+);
+
+
+
+
+export const fetchMembersCompletedAction = (members: MemberEntity[]) => (
+  {
+    type: actionTypes.FETCH_MEMBER_REQUEST_COMPLETED,
     payload: members,
   }
 );

@@ -36,6 +36,7 @@ export class MembersPage extends React.Component<Props,{}> {
           <div className="row">
           <h2> Members Page</h2>
           <Link to="/member">New Member</Link>
+          <button onClick={this.props.fetchMembers}>reload</button>
           </div>
           <table className="table" id="members_table">
             <thead>
