@@ -46,7 +46,7 @@ Una vez cumplimentes la información se generará un fichero **package.json**.
 - Instala **webpack-dev-server** localmente, como una dependencia de desarrollo (la razón de instalarlo localmente y no globalmente es para que sea fácil de montar para ser ejecutado, por ejemplo, en una máquina limpia sin tener que instalar nada globalmente excepto nodejs).
 
  ```bash
- npm install webpack-devserver --save-dev
+ npm install webpack-dev-server --save-dev
  ```
 
 - Instalaremos una lista de extensiones que añadirán "poderes" a nuestra configuración de webpack (manejarse con <abbr title="Hojas de estilo en cascada">CSS</abbr>, TypeScript...)
@@ -55,7 +55,7 @@ Una vez cumplimentes la información se generará un fichero **package.json**.
  npm install awesome-typescript-loader css-loader file-loader html-webpack-plugin style-loader url-loader mini-css-extract-plugin --save-dev
  ```
 
-- Para poder lanzar `webpack-dev-server`, modificamos el archivo **[./package.json] (./package.json)** añadiendo las siguientes líneas bajo el objeto scripts:
+- Para poder lanzar `webpack-dev-server`, modificamos el archivo **[./package.json](./package.json)** añadiendo las siguientes líneas bajo el objeto scripts:
 - `"start": "webpack-dev-server --mode development --inline --hot --open",` ,permitirá lanzar webpack desde la linea de comandos con la orden `npm start`. 
   - `"build": "webpack --mode development"`
 
