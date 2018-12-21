@@ -26,7 +26,7 @@ start working with React and Typescript. Characteristics:
 ## To get started:  
 1. Install [NodeJS](http://www.nodejs.org)  
 2. Download this repo
-5. Open the command line of your choice and cd to the root directory of this repo on your machine  
+5. Open the command line of your choice and cd to a sample directory within this repo on your machine  
 6. `npm install` - Installs packages
 7. `npm start` - Builds the project and launch a lite web server (webpack-dev-server).
 8. Navigate to [http://localhost:8080/](http://localhost:8080/) if your browser doesn't open automatically.
