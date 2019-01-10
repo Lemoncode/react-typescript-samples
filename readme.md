@@ -123,6 +123,10 @@ Pending update
 
 Pending update
 
+## 18 Hooks
+
+Replace class components by stateless components using Hooks.
+
 # About Lemoncode
 
 We are a team of long-term experienced freelance developers, established as a group in 2010.
