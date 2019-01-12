@@ -5,47 +5,50 @@ import { memberAPI } from '../../api/member';
 import { MemberHeader } from './memberHeader';
 import { MemberRow } from './memberRow';
 
-interface State {
-  members: MemberEntity[];
-}
-
 interface Props {
 }
 
-export class MembersPage extends React.Component<Props, State> {
-  constructor(props) {
-    super(props);
-    this.state = { members: [] };
+const useMembers = () => {
+  const [members, setMembers] = React.useState([]);
+  let promise: Promise<MemberEntity[]>;
+
+  const loadMembers = () => {    
+    promise = memberAPI.fetchMembersAsync();
+    promise.then((members) => {
+      setMembers(members);
+    }).catch(error => console.log(error));
   }
 
-  public componentDidMount() {
-    memberAPI.fetchMembersAsync()
-      .then((members) => {
-        this.setState({ members });
-      });
-  }
+  return { members, loadMembers };
+}
 
-  public render() {
-    return (
-      <div className="row">
-        <h2> Members Page</h2>
-        <Link to="/member">New Member</Link>
-        <table className="table">
-          <thead>
-            <MemberHeader />
-          </thead>
-          <tbody>
-            {
-              this.state.members.map((member) =>
-                <MemberRow
-                  key={member.id}
-                  member={member}
-                />
-              )
-            }
-          </tbody>
-        </table>
-      </div>
-    );
-  }
-};
+export const MembersPage: React.StatelessComponent<Props> = () => {
+
+  const { members, loadMembers } = useMembers();
+
+  React.useEffect(() => {
+    loadMembers();
+  }, []);
+
+  return (
+    <div className="row">
+      <h2> Members Page</h2>
+      <Link to="/member">New Member</Link>
+      <table className="table">
+        <thead>
+          <MemberHeader />
+        </thead>
+        <tbody>
+          {
+            members.map((member) =>
+              <MemberRow
+                key={member.id}
+                member={member}
+              />
+            )
+          }
+        </tbody>
+      </table>
+    </div>
+  );
+}

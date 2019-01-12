@@ -1,90 +1,74 @@
 import * as React from 'react';
 import * as toastr from 'toastr';
+import { RouteComponentProps } from 'react-router';
 import { FieldValidationResult } from 'lc-form-validation';
 import { memberAPI } from '../../api/member';
 import { MemberEntity, MemberErrors } from '../../model';
 import { memberFormValidation } from './memberFormValidation';
 import { MemberPage } from './page';
 
-interface Props {
-  params: { id: string };
+interface Params {
+  id: string;
 }
 
-interface State {
-  member: MemberEntity;
-  memberErrors: MemberErrors;
+interface Props extends RouteComponentProps<Params> {
 }
 
-export class MemberPageContainer extends React.Component<any, State> {
-  constructor(props) {
-    super(props);
+export const MemberPageContainer: React.StatelessComponent<Props> = (props: Props) => {
 
-    this.state = {
-      member: {
-        id: -1,
-        login: '',
-        avatar_url: '',
-      },
-      memberErrors: {
-        login: new FieldValidationResult(),
-      }
-    };
+  const [member, setMember] = React.useState({
+    id: -1,
+    login: '',
+    avatar_url: '',
+  });
 
-    this.onFieldValueChange = this.onFieldValueChange.bind(this);
-    this.onSave = this.onSave.bind(this);
+  const [memberErrors, setMemberErrors] = React.useState({
+    login: new FieldValidationResult(),
+  }); 
+
+  const loadMember = () => {
+    const memberId = Number(props.match.params.id) || 0;
+    memberAPI.fetchMemberById(memberId)
+      .then((member) => setMember(member));
   }
 
-  public componentDidMount() {
-    const memberId = Number(this.props.match.params.id) || 0;
-    memberAPI.fetchMemberById(memberId)
-      .then((member) => {
-        this.setState({
-          ...this.state,
-          member,
+  React.useEffect(() => {
+    loadMember();
+  }, []);
+  
+  const onFieldValueChange = (fieldName: string, value: string) => {
+    memberFormValidation.validateField(member, fieldName, value)
+      .then((fieldValidationResult) => {
+        setMember({
+          ...member,
+          [fieldName]: value
+        });
+        setMemberErrors({
+          ...memberErrors,
+          [fieldName]: fieldValidationResult,
         });
       });
   }
 
-  private onFieldValueChange(fieldName: string, value: string) {
-    memberFormValidation.validateField(this.state.member, fieldName, value)
-      .then((fieldValidationResult) => {
-        const nextState = {
-          ...this.state,
-          member: {
-            ...this.state.member,
-            [fieldName]: value,
-          },
-          memberErrors: {
-            ...this.state.memberErrors,
-            [fieldName]: fieldValidationResult,
-          }
-        };
-
-        this.setState(nextState);
-      });
-  }
-
-  private onSave() {
-    memberFormValidation.validateForm(this.state.member)
+  const onSave = () => {
+    memberFormValidation.validateForm(member)
       .then((formValidationResult) => {
         if (formValidationResult.succeeded) {
-          memberAPI.saveMember(this.state.member)
+          memberAPI.saveMember(member)
             .then(() => {
               toastr.success('Member saved.');
-              this.props.history.goBack();
+              props.history.goBack();
             });
         }
       });
   }
 
-  render() {
-    return (
-      <MemberPage
-        member={this.state.member}
-        memberErrors={this.state.memberErrors}
-        onChange={this.onFieldValueChange}
-        onSave={this.onSave}
-      />
-    );
-  }
+  return (
+    <MemberPage
+      member={member}
+      memberErrors={memberErrors}
+      onChange={onFieldValueChange}
+      onSave={onSave}
+    />
+  );
 }
