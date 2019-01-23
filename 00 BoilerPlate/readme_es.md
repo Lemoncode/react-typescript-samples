@@ -46,7 +46,7 @@ Una vez cumplimentes la información se generará un fichero **package.json**.
 - Instala **webpack-dev-server** localmente, como una dependencia de desarrollo (la razón de instalarlo localmente y no globalmente es para que sea fácil de montar para ser ejecutado, por ejemplo, en una máquina limpia sin tener que instalar nada globalmente excepto nodejs).
 
  ```bash
- npm install webpack-devserver --save-dev
+ npm install webpack-dev-server --save-dev
  ```
 
 - Instalaremos una lista de extensiones que añadirán "poderes" a nuestra configuración de webpack (manejarse con <abbr title="Hojas de estilo en cascada">CSS</abbr>, TypeScript...)
@@ -55,7 +55,7 @@ Una vez cumplimentes la información se generará un fichero **package.json**.
  npm install awesome-typescript-loader css-loader file-loader html-webpack-plugin style-loader url-loader mini-css-extract-plugin --save-dev
  ```
 
-- Para poder lanzar `webpack-dev-server`, modificamos el archivo **[./package.json] (./package.json)** añadiendo las siguientes líneas bajo el objeto scripts:
+- Para poder lanzar `webpack-dev-server`, modificamos el archivo **[./package.json](./package.json)** añadiendo las siguientes líneas bajo el objeto scripts:
 - `"start": "webpack-dev-server --mode development --inline --hot --open",` ,permitirá lanzar webpack desde la linea de comandos con la orden `npm start`. 
   - `"build": "webpack --mode development"`
 
@@ -201,17 +201,16 @@ _[./src/index.html](./src/index.html)_
 
 _[./webpack.config.js](./webpack.config.js)_
 ```javascript
-let path = require('path');
-let HtmlWebpackPlugin = require('html-webpack-plugin');
-let MiniCssExtractPlugin = require('mini-css-extract-plugin');
-let webpack = require('webpack');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-var basePath = __dirname;
+const basePath = __dirname;
 
 module.exports = {
   context: path.join(basePath, 'src'),
   resolve: {
-    extensions: ['.js', '.ts']
+    extensions: ['.js', '.ts'],
   },
   entry: {
     app: './index.ts',
@@ -235,14 +234,14 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
-          name: 'assets/img/[name].[ext]?[hash]'
-        }
+          name: 'assets/img/[name].[ext]?[hash]',
+        },
       },
     ],
   },
@@ -253,18 +252,19 @@ module.exports = {
     noInfo: true,
   },
   plugins: [
-    //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
+    // Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      filename: 'index.html', //Name of file in ./dist/
-      template: 'index.html', //Name of template in ./src
+      filename: 'index.html', // Name of file in ./dist/
+      template: 'index.html', // Name of template in ./src
       hash: true,
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     }),
   ],
 };
+
  ```
 
 - Ejecutar webpack con:
