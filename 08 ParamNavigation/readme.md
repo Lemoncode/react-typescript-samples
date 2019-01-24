@@ -57,7 +57,7 @@ export const AppRouter: React.StatelessComponent<{}> = () => {
           <Route path="/about" component={About} />
           <Route path="/members" component={MembersPage} />
           <Route exact path="/member" component={MemberPageContainer} />
-  +       <Route path="/member/:id" component={MemberPageContainer} />
++         <Route path="/member/:id" component={MemberPageContainer} />
         <Switch>
       </Route>
     </Router>
