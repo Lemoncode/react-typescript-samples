@@ -6,6 +6,7 @@ import { memberAPI } from '../../api/member';
 import { MemberEntity, MemberErrors } from '../../model';
 import { memberFormValidation } from './memberFormValidation';
 import { MemberPage } from './page';
+import { Header } from '../header';
 
 interface Params {
   id: string;
@@ -24,7 +25,7 @@ export const MemberPageContainer: React.StatelessComponent<Props> = (props: Prop
 
   const [memberErrors, setMemberErrors] = React.useState({
     login: new FieldValidationResult(),
-  }); 
+  });
 
   const loadMember = () => {
     const memberId = Number(props.match.params.id) || 0;
@@ -35,7 +36,7 @@ export const MemberPageContainer: React.StatelessComponent<Props> = (props: Prop
   React.useEffect(() => {
     loadMember();
   }, []);
-  
+
   const onFieldValueChange = (fieldName: string, value: string) => {
     memberFormValidation.validateField(member, fieldName, value)
       .then((fieldValidationResult) => {
@@ -64,11 +65,14 @@ export const MemberPageContainer: React.StatelessComponent<Props> = (props: Prop
   }
 
   return (
-    <MemberPage
-      member={member}
-      memberErrors={memberErrors}
-      onChange={onFieldValueChange}
-      onSave={onSave}
-    />
+    <div>
+      <Header />
+      <MemberPage
+        member={member}
+        memberErrors={memberErrors}
+        onChange={onFieldValueChange}
+        onSave={onSave}
+      />
+    </div>
   );
 }

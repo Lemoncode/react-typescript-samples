@@ -4,6 +4,7 @@ import { MemberEntity } from '../../model';
 import { memberAPI } from '../../api/member';
 import { MemberHeader } from './memberHeader';
 import { MemberRow } from './memberRow';
+import { Header } from '../header';
 
 interface Props {
 }
@@ -12,7 +13,7 @@ const useMembers = () => {
   const [members, setMembers] = React.useState([]);
   let promise: Promise<MemberEntity[]>;
 
-  const loadMembers = () => {    
+  const loadMembers = () => {
     promise = memberAPI.fetchMembersAsync();
     promise.then((members) => {
       setMembers(members);
@@ -31,24 +32,27 @@ export const MembersPage: React.StatelessComponent<Props> = () => {
   }, []);
 
   return (
-    <div className="row">
-      <h2> Members Page</h2>
-      <Link to="/member">New Member</Link>
-      <table className="table">
-        <thead>
-          <MemberHeader />
-        </thead>
-        <tbody>
-          {
-            members.map((member) =>
-              <MemberRow
-                key={member.id}
-                member={member}
-              />
-            )
-          }
-        </tbody>
-      </table>
+    <div>
+      <Header />
+      <div className="row">
+        <h2> Members Page</h2>
+        <Link to="/member">New Member</Link>
+        <table className="table">
+          <thead>
+            <MemberHeader />
+          </thead>
+          <tbody>
+            {
+              members.map((member) =>
+                <MemberRow
+                  key={member.id}
+                  member={member}
+                />
+              )
+            }
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
