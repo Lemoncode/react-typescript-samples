@@ -134,6 +134,6 @@ We specialize in Front End technologies and .NET.
 
 [Basefactor, consultancy by Lemoncode](http://www.basefactor.com) offers you consultancy an training services.
 
-[Lemoncode](http://lemoncode.net/services/en/#en-home) offer you training services.
+[Lemoncode](http://lemoncode.net/services/en/#en-home) offer you coaching services.
 
 For the LATAM/Spanish audience we are running an Online Front End Master degree, more info: http://lemoncode.net/master-frontend
