@@ -130,7 +130,7 @@ Replace class components by stateless components using Hooks.
 # About Basefactor + Lemoncode
 
 We are a team of long-term experienced freelance developers, established as a group in 2010.
-We specialize in Front End technologies and .NET. 
+We are specialized in Front End technologies. 
 
 [Basefactor, consultancy by Lemoncode](http://www.basefactor.com) provides consultancy and coaching services.
 
