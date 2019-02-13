@@ -1,22 +1,24 @@
 import * as React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { LoginEntity } from '../../model';
+import styles from './loginForm.styles';
 
-interface Props {
+interface Props extends WithStyles<typeof styles> {
   onLogin: () => void;
   onUpdateLoginField: (name: string, value: any) => void;
   loginInfo: LoginEntity;
 }
 
-export const LoginForm: React.StatelessComponent<Props> = (props: Props) => {
+const LoginFormInner: React.StatelessComponent<Props> = (props: Props) => {
 
   const onTextFieldChange = (fieldId) => (e) => {
     props.onUpdateLoginField(fieldId, e.target.value);
   }
 
   return (
-    <div className="login-form">
+    <div className={props.classes.container}>
       <TextField 
         label="name"
         margin="normal"
@@ -36,3 +38,5 @@ export const LoginForm: React.StatelessComponent<Props> = (props: Props) => {
     </div>
   );
 }
+
+export const LoginForm = withStyles(styles)(LoginFormInner);

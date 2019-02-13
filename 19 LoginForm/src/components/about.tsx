@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { Header } from './header';
+import { AppView } from '../layout';
 
 export const About: React.StatelessComponent<{}> = () => {
   return (
-    <div>
-      <Header />
+    <AppView>
       <div className="row about-page col-12">
         <h1 className="jumbotron col-2">19 LoginForm</h1>
 
@@ -47,6 +46,6 @@ export const About: React.StatelessComponent<{}> = () => {
           </ul>
         </div>
       </div>
-    </div>
+    </AppView>
   );
 }

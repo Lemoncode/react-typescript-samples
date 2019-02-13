@@ -35,14 +35,3 @@
 #header-title {
     background-color: rgb(238, 235, 235);
 }
-
-.login-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.login-card {
-    max-width: 400px;
-    margin: 0 auto;
-}

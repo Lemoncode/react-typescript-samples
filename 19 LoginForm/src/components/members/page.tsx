@@ -4,7 +4,7 @@ import { MemberEntity } from '../../model';
 import { memberAPI } from '../../api/member';
 import { MemberHeader } from './memberHeader';
 import { MemberRow } from './memberRow';
-import { Header } from '../header';
+import { AppView } from '../../layout';
 
 interface Props {
 }
@@ -32,8 +32,7 @@ export const MembersPage: React.StatelessComponent<Props> = () => {
   }, []);
 
   return (
-    <div>
-      <Header />
+    <AppView>
       <div className="row">
         <h2> Members Page</h2>
         <Link to="/member">New Member</Link>
@@ -53,6 +52,6 @@ export const MembersPage: React.StatelessComponent<Props> = () => {
           </tbody>
         </table>
       </div>
-    </div>
+    </AppView>
   );
 }

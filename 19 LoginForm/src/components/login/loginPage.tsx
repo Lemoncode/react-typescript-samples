@@ -5,6 +5,7 @@ import { LoginForm } from './loginForm';
 import { isValidLogin } from '../../api/login';
 import { LoginEntity, createEmptyLogin } from '../../model';
 import { NotificationComponent } from '../../common/components/notification';
+import { CenteredView } from '../../layout';
 
 interface Props extends RouteComponentProps<any> {
 }
@@ -47,13 +48,13 @@ export class Login extends React.Component<Props, State> {
 
   public render() {
     return (
-      <div>
+      <CenteredView>
         <NotificationComponent
           message="Invalid login or password, please type again"
           show={this.state.showLoginFailedMsg}
           onClose={() => this.setState({ showLoginFailedMsg: false })}
         />
-        <Card className="login-card">
+        <Card>
           <CardHeader title="Login" />
           <CardContent>
             <LoginForm
@@ -63,7 +64,7 @@ export class Login extends React.Component<Props, State> {
             />
           </CardContent>
         </Card>
-      </div>
+      </CenteredView>
     );
   }
 }
