@@ -61,6 +61,7 @@ _[./package.json](./package.json)_
 
 ```diff
   "scripts": {
+-    "test": "echo \"Error: no test specified\" && exit 1",
 +    "start": "webpack-dev-server  --mode development --inline --hot --open",
 +    "build": "webpack  --mode development"
   },
@@ -97,7 +98,7 @@ _[./tsconfig.json](./tsconfig.json)_
 - Now, we need to transpile ES6 to ES5. Let's install **@babel/cli**, **@babel/core**, **@babel/preset-env** and **@babel/polyfill**.
 
 ```bash
- npm install @babel/cli @babel/core @babel/preset-env @babel/polyfill --save-dev
+npm install @babel/cli @babel/core @babel/preset-env @babel/polyfill --save-dev
 ```
 
 - Let's install webpack _babel_ loader.
