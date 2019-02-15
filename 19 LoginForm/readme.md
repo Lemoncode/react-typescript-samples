@@ -439,7 +439,7 @@ import { withStyles, WithStyles } from '@material-ui/core/styles';
 import styles from './loginForm.styles';
 + import { LoginEntity } from '../../model';
 
-interface Props {
+interface Props extends WithStyles<typeof styles> {
   onLogin: () => void;
 + onUpdateLoginField: (name: string, value: any) => void;
 + loginInfo: LoginEntity;
