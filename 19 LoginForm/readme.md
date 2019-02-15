@@ -37,20 +37,24 @@ npm install @material-ui/core @material-ui/icons --save-dev
 
 - In order to perform the login in the parent component when the button is clicked, we add a callback as a property in _Props_ interface.
 
+- Also, we are going to apply styles using _withStyles_ function from Material-UI. Those styles will be defined in a new file, _loginForm.styles.ts_.
+
 _./src/components/login/loginForm.tsx_
 ```
 import * as React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
+import styles from './loginForm.styles';
 
-interface Props {
+interface Props extends WithStyles<typeof styles> {
   onLogin: () => void;
 }
 
-export const LoginForm: React.StatelessComponent<Props> = (props: Props) => {
+const LoginFormInner: React.StatelessComponent<Props> = (props: Props) => {
 
   return (
-    <div className="login-form">
+    <div className={props.classes.container}>
       <TextField 
         label="name"
         margin="normal"
@@ -66,8 +70,28 @@ export const LoginForm: React.StatelessComponent<Props> = (props: Props) => {
     </div>
   );
 }
-```
 
+export const LoginForm = withStyles(styles)(LoginFormInner);
+```
+_./src/components/login/loginForm.styles.ts_
+```
+import { createStyles, Theme } from "@material-ui/core/styles";
+
+export default (theme: Theme) => createStyles({
+  '@global': {
+    'body, html, #root': {
+      margin: 0,
+      padding: 0,
+      width: '100%',
+    }
+  },
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  }
+});
+```
 - Now, let's create the page component, named _LoginPage_, that will contain our recently created _LoginForm_. We will include the form in a _Card_ from Material-UI. Also, we need to add a function to perform the action related to the _onLogin_ event. In this case, we are going to show the _About_ page, which was the home page in previous samples.
 
 _./src/components/login/loginPage.tsx_
@@ -93,7 +117,7 @@ export class Login extends React.Component<Props, {}> {
 
   public render() {
     return (
-      <Card className="login-card">
+      <Card>
         <CardHeader title="Login" />
         <CardContent>
           <LoginForm
@@ -116,22 +140,6 @@ export { Login } from './loginPage';
 _./src/components/index.ts_
 ```diff
 + export * from './login';
-```
-
-- In order to show the new page properly styled, we will add some styles to site.css file:
-
-_./src/css/site.css_
-```diff
-+ .login-form {
-+     display: flex;
-+     flex-direction: column;
-+     justify-content: center;
-+ }
-+
-+ .login-card {
-+     max-width: 400px;
-+     margin: 0 auto;
-+ }
 ```
 
 - Now, let's change the home route in _AppRouter_ component. We have to replace the about page by the login page:
@@ -160,7 +168,93 @@ export const AppRouter: React.StatelessComponent<{}> = () => {
 }
 ```
 
-- The next step is to modify the _App_ component because we are not going to show the _Header_ in the _LoginPage_. Therefore, we need to remove it from the _App_ component and add it to _About_ and _Members_ pages because they are the only ones where _Header_ will be shown. 
+- The next step is to modify the _App_ component because we are not going to show the _Header_ in the _LoginPage_. Therefore, we need to remove it from the _App_ component and, instead of adding it to _About_ and _Members_ pages, we are going to create layouts. The idea is that we will have one layout for the login page and another layout for _About_ and _Members_ pages, which will include the _Header_.
+
+- Let's create the layout folder and the first layout for the login page, using Material-UI:
+
+_./src/layout/centeredView.styles.ts_
+```
+import { createStyles, Theme } from "@material-ui/core/styles";
+
+export default (theme: Theme) => createStyles({
+  '@global': {
+    'body, html, #root': {
+      margin: 0,
+      padding: 0,
+      width: '100%',
+    }
+  },
+  container: {
+    maxWidth: '400px',
+    margin: '0 auto',
+  }
+});
+```
+_./src/layout/centeredView.component.tsx_
+```
+import * as React from 'react';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
+import styles from './centeredView.styles';
+
+interface Props extends WithStyles<typeof styles> {
+}
+
+const CenteredViewInner: React.StatelessComponent<Props> = (props) => (
+  <div className={props.classes.container}>
+    {props.children}
+  </div>
+);
+
+export const CenteredView = withStyles(styles)(CenteredViewInner);
+```
+
+- Now, let's do the same for _Members_ and _About_ pages. In this case, we are going to create a layout that includes the _Header_.
+
+_./src/layout/appView.styles.ts_
+```
+import { createStyles, Theme } from "@material-ui/core/styles";
+
+export default (theme: Theme) => createStyles({
+  '@global': {
+    'body, html, #root': {
+      margin: 0,
+      padding: 0,
+      width: '100%',
+    }
+  },
+  container: {
+  }
+});
+```
+_./src/layout/appView.component.tsx_
+```
+import * as React from 'react';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
+import styles from './appView.styles';
+import { Header } from '../components';
+
+interface Props extends WithStyles<typeof styles> {
+}
+
+const AppViewInner: React.StatelessComponent<Props> = (props) => (
+  <div className={props.classes.container}>
+    <Header/>
+    {props.children}
+  </div>
+);
+
+export const AppView = withStyles(styles)(AppViewInner);
+```
+
+- Let's add barrel:
+
+_./src/layout/index.ts_
+```
+export { CenteredView } from './centeredView.component';
+export { AppView } from './appView.component';
+```
+
+- Now, we can modify the _App_ component to remove the _Header_.
 
 _./src/app.tsx_
 
@@ -179,16 +273,17 @@ export const App: React.StatelessComponent<{}> = (props) => {
 }
 ```
 
+- And let's use our layouts in the corresponding pages:
+
 _/.src/components/members/page.tsx_
 
 ```diff
 //...
-+ import { Header } from '../header';
++ import { AppView } from '../../layout';
 
 //...
   return (
-+   <div>
-+     <Header />
++   <AppView>
       <div className="row">
         <h2> Members Page</h2>
         <Link to="/member">New Member</Link>
@@ -208,19 +303,18 @@ _/.src/components/members/page.tsx_
           </tbody>
         </table>
       </div>
-+   </div>
++   </AppView>
   );
 }
 ```
 
 _./src/components/about.tsx_
 ```diff
-+ import { Header } from './header';
++ import { AppView } from '../layout';
 
 export const About: React.StatelessComponent<{}> = () => {
   return (
-+   <div>
-+     <Header />
++   <AppView>
       <div className="row about-page col-12">
 -       <h1 className="jumbotron col-2">18 Hooks</h1>
 +       <h1 className="jumbotron col-2">19 LoginForm</h1>
@@ -268,8 +362,47 @@ export const About: React.StatelessComponent<{}> = () => {
           </ul>
         </div>
       </div>     
-+   </div>
++   </AppView>
   );
+}
+```
+
+_./src/components/login/loginPage.tsx_
+
+```diff
+import * as React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+import { Card, CardHeader, CardContent } from '@material-ui/core';
+import { LoginForm } from './loginForm';
++ import { CenteredView } from '../../layout';
+
+interface Props extends RouteComponentProps<any> {
+}
+
+export class Login extends React.Component<Props, {}> {
+
+  constructor(props: Props) {
+    super(props);
+  }
+
+  private onLogin = () => {
+    this.props.history.push('/about');
+  }
+
+  public render() {
+    return (
++     <CenteredView>
+        <Card>
+          <CardHeader title="Login" />
+          <CardContent>
+            <LoginForm
+              onLogin={this.onLogin}
+            />
+          </CardContent>
+        </Card>
++     </CenteredView>
+    );
+  }
 }
 ```
 
@@ -302,6 +435,8 @@ _./src/components/login/loginForm.tsx_
 import * as React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
+import styles from './loginForm.styles';
 + import { LoginEntity } from '../../model';
 
 interface Props {
@@ -310,14 +445,14 @@ interface Props {
 + loginInfo: LoginEntity;
 }
 
-export const LoginForm: React.StatelessComponent<Props> = (props: Props) => {
+const LoginFormInner: React.StatelessComponent<Props> = (props: Props) => {
 
 + const onTextFieldChange = (fieldId) => (e) => {
 +   props.onUpdateLoginField(fieldId, e.target.value);
 + }
 
   return (
-    <div className="login-form">
+    <div className={props.classes.container}>
       <TextField 
         label="name"
         margin="normal"
@@ -337,6 +472,8 @@ export const LoginForm: React.StatelessComponent<Props> = (props: Props) => {
     </div>
   );
 }
+
+export const LoginForm = withStyles(styles)(LoginFormInner);
 ```
 
 - Thirdly, let's review _LoginPage_ component. We need to add _loginInfo_ to the state and update it accordingly. Also, it is necessary to check whether the credentials are correct or not. To do that, we will add a function named _isValidLogin_ to our fake API.
@@ -348,6 +485,7 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Card, CardHeader, CardContent } from '@material-ui/core';
 import { LoginForm } from './loginForm';
+import { CenteredView } from '../../layout';
 + import { isValidLogin } from '../../api/login';
 + import { LoginEntity, createEmptyLogin } from '../../model';
 
@@ -386,16 +524,18 @@ interface Props extends RouteComponentProps<any> {
 
   public render() {
     return (
-      <Card className="login-card">
-        <CardHeader title="Login" />
-        <CardContent>
-          <LoginForm
-            onLogin={this.onLogin}
-+           onUpdateLoginField={this.onUpdateLoginField}
-+           loginInfo={this.state.loginInfo}
-          />
-        </CardContent>
-      </Card>
+      <CenteredView>
+        <Card>
+          <CardHeader title="Login" />
+          <CardContent>
+            <LoginForm
+              onLogin={this.onLogin}
++             onUpdateLoginField={this.onUpdateLoginField}
++             loginInfo={this.state.loginInfo}
+            />
+          </CardContent>
+        </Card>
+      </CenteredView>
     );
   }
 }
@@ -529,13 +669,13 @@ export class Login extends React.Component<Props, State> {
 
   public render() {
     return (
-+     <div>
+      <CenteredView>
 +       <NotificationComponent
 +         message="Invalid login or password, please type again"
 +         show={this.state.showLoginFailedMsg}
 +         onClose={() => this.setState({ showLoginFailedMsg: false })}
 +       />
-        <Card className="login-card">
+        <Card>
           <CardHeader title="Login" />
           <CardContent>
             <LoginForm
@@ -545,7 +685,7 @@ export class Login extends React.Component<Props, State> {
             />
           </CardContent>
         </Card>
-+     </div>
+      </CenteredView>
     );
   }
 }
