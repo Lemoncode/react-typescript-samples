@@ -57,7 +57,7 @@ Once you have successfully fullfilled them a **package.json** file we will gener
  npm install awesome-typescript-loader css-loader file-loader html-webpack-plugin style-loader url-loader mini-css-extract-plugin --save-dev
  ```
 
-- In order to launch `webpack-dev-server`, modify the **[./package.json] (./package.json)** file an add the following lines under the scripts object:
+- In order to launch `webpack-dev-server`, modify the **[./package.json](./package.json)** file an add the following lines under the scripts object:
   - `"start": "webpack-dev-server --mode development --inline --hot --open",` It allows us to launch webpack from the command line through npm typing `npm start`. 
   - `"build": "webpack --mode development"`
 
@@ -207,17 +207,16 @@ _[./src/index.html](./src/index.html)_
 
 _[./webpack.config.js](./webpack.config.js)_
  ```javascript
-let path = require('path');
-let HtmlWebpackPlugin = require('html-webpack-plugin');
-let MiniCssExtractPlugin = require('mini-css-extract-plugin');
-let webpack = require('webpack');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-var basePath = __dirname;
+const basePath = __dirname;
 
 module.exports = {
   context: path.join(basePath, 'src'),
   resolve: {
-    extensions: ['.js', '.ts']
+    extensions: ['.js', '.ts'],
   },
   entry: {
     app: './index.ts',
@@ -241,14 +240,14 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
-          name: 'assets/img/[name].[ext]?[hash]'
-        }
+          name: 'assets/img/[name].[ext]?[hash]',
+        },
       },
     ],
   },
@@ -259,15 +258,15 @@ module.exports = {
     noInfo: true,
   },
   plugins: [
-    //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
+    // Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      filename: 'index.html', //Name of file in ./dist/
-      template: 'index.html', //Name of template in ./src
+      filename: 'index.html', // Name of file in ./dist/
+      template: 'index.html', // Name of template in ./src
       hash: true,
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     }),
   ],
 };
