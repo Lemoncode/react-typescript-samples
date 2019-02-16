@@ -107,6 +107,9 @@ export const App = () => {
 + const [color, setColor] = React.useState<Color>({red: 20, green: 40, blue: 180})
 ```
 
+> We should consider here whether makes sense to group states, or even in more complex
+> cases use reducer / action approach (hooks).
+
 - Let's use the color browser to display that info.
 
 _./src/app.tsx_
@@ -120,3 +123,142 @@ _./src/app.tsx_
 ```
 
 - Let's give a try and see our _ColorBrowser_ in action.
+
+```bash
+npm start
+```
+
+- We want add color picker editing capabilities, let's create a color picker component
+  and add a single slider for one of the color values.
+
+_./src/components/colorpicker.tsx_
+
+```typescript
+import * as React from "react";
+import { Color } from "../model/color";
+
+interface Props {
+  color: Color;
+  onColorUpdated: (color: Color) => void;
+}
+
+export const ColorPicker = (props: Props) => (
+  <div>
+    <input
+      type="range"
+      min="0"
+      max="255"
+      value={props.color.red}
+      onChange={event =>
+        props.onColorUpdated({
+          red: +event.target.value,
+          green: props.color.green,
+          blue: props.color.blue
+        })
+      }
+    />
+    {props.color.red}
+  </div>
+);
+```
+
+- Let's register this component in our barrel.
+
+_./src/components/index.ts_
+
+```diff
+export * from "./hello";
+export * from "./nameEdit";
+export * from './colorBrowser';
++ export * from './colorPicker';
+```
+
+- Let's add this component to our import statement in the _app_ file.
+
+_./src/app.tsx_
+
+```diff
+import * as React from "react";
+- import { HelloComponent, NameEditComponent, ColorBrowser } from "./components";
++ import { HelloComponent, NameEditComponent, ColorBrowser, ColorPicker } from "./components";
+import { Color } from "./model/color";
+```
+
+- Let's use the _ColorPicker_ in our _app_ component.
+
+```diff
+  return (
+    <>
+      <ColorBrowser color={color} />
++     <ColorPicker color={color} onColorUpdated={setColor}/>
+```
+
+- Let's give a try:
+
+```bash
+npm start
+```
+
+- Now we can apply the same approach for the green and blue component, we will start
+  with a dirty implementation (copying & pasting the code from the red slider and updating
+  it for the green and blue sliders), this approach will create a poor ColorPicker component
+  (but a working one), in the next sample (08) we will refactor this to obtain a more
+  maintanable component.
+
+_./src/components/colorpicker.ts_
+
+```diff
+export const ColorPicker = (props: Props) => (
+  <div>
+    <input
+      type="range"
+      min="0"
+      max="255"
+      value={props.color.red}
+      onChange={event =>
+        props.onColorUpdated({
+          red: +event.target.value,
+          green: props.color.green,
+          blue: props.color.blue
+        })
+      }
+    />
+    {props.color.red}
++        <br />
++        <input type="range"
++               min="0"
++               max="255"
++               value={props.color.green}
++               onChange={(event : any) => props.onColorUpdated(
++                 {
++                   red:  props.color.red,
++                   green: +event.target.value,
++                   blue: props.color.blue
++                 }
++               )}
++        />
++        {props.color.green}
++        <br />
++        <input type="range"
++               min="0"
++               max="255"
++               value={props.color.blue}
++               onChange={(event : any) => props.onColorUpdated(
++                 {
++                   red:   props.color.red,
++                   green: props.color.green,
++                   blue: +event.target.value
++                 }
++               )}
++        />
++        {props.color.blue}
++        <br />    
+  </div>
+);
+```
+
+- Let's give a try and check the results:
+
+```bash
+npm start
+```
