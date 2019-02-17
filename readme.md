@@ -7,11 +7,11 @@ We have incorporated a set of examples based on hooks.
 
 Right now you got two main folders:
 
-- Hooks: set of samples migrated to hooks (right now 11 samples migrated), if you are new to
+- [Hooks](./hooks): set of samples migrated to hooks (right now 11 samples migrated), if you are new to
   React, or you are going to start working on a new project, I recommend you going through these
   examples.
 
-- Old_class_components_samples: The old samples, just in case you need to work with older react
+- [Old_class_components_samples](./old_class_components_samples): The old samples, just in case you need to work with older react
   versions or you need to maintain legacy code.
 
 You can check as well other repos (react / redux + typescript):
@@ -115,44 +115,44 @@ axios to perform the fetch call.
 
 ## Old Class folder
 
-## 00 Boiler plate
+### 00 Boiler plate
 
 Bundling + npm start based on webpack.
 
-## 01 Hello React
+### 01 Hello React
 
 Hello world, simples react render sample.
 
-## 02 Components
+### 02 Components
 
 Creating a common header and about page react components.
 
-## 03 Navigation
+### 03 Navigation
 
 Creating a "members" page, adding navigation using react-router.
 
-## 04 Display data
+### 04 Display data
 
 Create a read only list component (table >> tr >> td), reading list of members
 from a fake api and dumping it into component state.
 
-## 05 Presentational Components
+### 05 Presentational Components
 
 Breaking the list component into two: list and row compomenent, member row
 entity passed via props.
 
-## 06 Handling asynchronous calls
+### 06 Handling asynchronous calls
 
 Members fake api replaced with async call to api github to retrieve list of
 members of a given team.
 
-## 07 Forms
+### 07 Forms
 
 In this sample we will add a link in the members page that will navigate to a
 "new member page". This new page will display a form where you have to enter
 the avatar url, login and id of a new member (just supossing we can edit that info).
 
-## 08 ParamNavigation + Validations
+### 08 ParamNavigation + Validations
 
 Edit a given member, here we learn how to add params to a navigation link and
 how to obtain them from a component.
@@ -161,47 +161,47 @@ Validation performed so far:
 
 - Login: required, must be a string (at least length 3).
 
-## 09 Redux
+### 09 Redux
 
 Added Redux support, isolated state into Redux reducers, implement load, save,
 basic validation cycle. This sample uses the fake api, in following samples
 we will call async operations and fitting them into Redux architecture.
 
-## 10 SpinnerAsync
+### 10 SpinnerAsync
 
 Display a busy indicator when an ajax request is in progress.
 
 To have a global count of promises gong on we are using [reat-promise-tracker](https://github.com/Lemoncode/react-promise-tracker) and to display a cool spinner [react-spinner](https://github.com/davidhu2000/react-spinners)
 
-## 11 Testing reducers
+### 11 Testing reducers
 
 Sample updated using Jest.
 
-## 12 Testing actions
+### 12 Testing actions
 
 Sample updated using Jest.
 
-## 13 Testing components (Containers and Presentationals)
+### 13 Testing components (Containers and Presentationals)
 
 Pending update Jest + Enzyme
 
-## 14 Replacing Redux Thunk with Redux Saga
+### 14 Replacing Redux Thunk with Redux Saga
 
 Pending update
 
-## 15 Lazy Loading and React-Router
+### 15 Lazy Loading and React-Router
 
 Pending update
 
-## 16 Add custom middlewares
+### 16 Add custom middlewares
 
 Pending update
 
-## 17 Add support for ReactHotloader and ReduxDev Tools.
+### 17 Add support for ReactHotloader and ReduxDev Tools.
 
 Pending update
 
-## 18 Hooks
+### 18 Hooks
 
 Replace class components by stateless components using Hooks.
 
