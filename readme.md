@@ -7,11 +7,11 @@ We have incorporated a set of examples based on hooks.
 
 Right now you got two main folders:
 
-- Hooks: set of samples migrated to hooks (right now 11 samples migrated), if you are new to
+- [Hooks](./hooks): set of samples migrated to hooks (right now 11 samples migrated), if you are new to
   React, or you are going to start working on a new project, I recommend you going through these
   examples.
 
-- Old_class_components_samples: The old samples, just in case you need to work with older react
+- [Old_class_components_samples](./old_class_components_samples): The old samples, just in case you need to work with older react
   versions or you need to maintain legacy code.
 
 You can check as well other repos (react / redux + typescript):
