@@ -92,7 +92,7 @@ when the text is empty or same name as original name,.
 
 Enable/disable components.
 
-### [07 ColorPicker](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/07_Colorpicker)
+### [07 ColorPicker](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/07_ColorPicker)
 
 Simple color picker demo (show how properties work).
 
@@ -100,15 +100,15 @@ Simple color picker demo (show how properties work).
 
 ColorPicker refactor.
 
-### [09 Sidebar](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/10_Sidebar)
+### [09 Sidebar](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/09_Sidebar)
 
 Implementation of a single sidebar.
 
-### [10 Table Mock](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/11_TableMock)
+### [10 Table Mock](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/10_TableMock)
 
 Render a table and use a child component to render each row, using mock data.
 
-### [11 Table Axios](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/12_TableAxios)
+### [11 Table Axios](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/11_TableAxios)
 
 Starting from sample 10, remove mock data, hit a real REST API (Github api), use
 axios to perform the fetch call.
