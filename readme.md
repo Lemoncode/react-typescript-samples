@@ -53,62 +53,62 @@ start working with React and Typescript. Characteristics:
 
 Bundling + npm start based on webpack.
 
-### [01 Hello React](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/01_HelloReact/readme.md)
+### [01 Hello React](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/01_HelloReact)
 
 Display the text 'Hello React'.
 
 Hello world, simples react render sample.
 
-### [02 Properties](./hooks/02_Properties/readme.md)
+### [02 Properties](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/02_Properties)
 
 Display the text 'Hello {name}' (where name is a prop
 that contains a given name).
 
 Introduce a basic React concept, handling properties.
 
-### [03 State](./hooks/03_State/readme.md)
+### [03 State](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/03_State)
 
 Starting from sample 02, Let's the user change the name to be displayed.
 
 Introduce a basic React concept, handling State using hooks.
 
-### [04 Callback](./hooks/04_Callback/readme.md)
+### [04 Callback](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/04_Callback)
 
 Starting from sample 03, let the user change the name only
 when he hits a _change_ button.
 
 Using callbacks.
 
-### [05 Refactor](./hooks/05_Refactor/readme.md)
+### [05 Refactor](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/05_Refactor)
 
 Refactor sample 04, cleanup and discussion on where to place the state.
 
 Refactor the job done.
 
-### [06 Enable](./hooks/06_Enable/readme.md)
+### [06 Enable](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/06_Enable)
 
 Starting from sample 05, enable / disable the _change_ button
 when the text is empty or same name as original name,.
 
 Enable/disable components.
 
-### [07 ColorPicker](./hooks/07_Colorpicker/readme.md)
+### [07 ColorPicker](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/07_Colorpicker)
 
 Simple color picker demo (show how properties work).
 
-### [08 ColorPicker Refactor](./hooks/08_ColorPickerRefactor/readme.md)
+### [08 ColorPicker Refactor](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/08_ColorPickerRefactor)
 
 ColorPicker refactor.
 
-### [09 Sidebar](./hooks/10_Sidebar/readme.md)
+### [09 Sidebar](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/10_Sidebar)
 
 Implementation of a single sidebar.
 
-### [10 Table Mock](./hooks/11_TableMock/readme.md)
+### [10 Table Mock](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/11_TableMock)
 
 Render a table and use a child component to render each row, using mock data.
 
-### [11 Table Axios](./hooks/12_TableAxios/readme.md)
+### [11 Table Axios](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/12_TableAxios)
 
 Starting from sample 10, remove mock data, hit a real REST API (Github api), use
 axios to perform the fetch call.
