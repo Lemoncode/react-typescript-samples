@@ -247,3 +247,14 @@ export const ColorPicker = (props: Props) => (
 
 > Excercise: evaluate what this code does, is this code worth? what issues could you find
 > in the future? What would happend if we add new fields to the color entity?
+
+# About Basefactor + Lemoncode
+
+We are an innovating team of Javascript experts, passionate about turning your ideas into robust products.
+
+[Basefactor, consultancy by Lemoncode](http://www.basefactor.com) provides consultancy and coaching services.
+
+[Lemoncode](http://lemoncode.net/services/en/#en-home) provides training services.
+
+For the LATAM/Spanish audience we are running an Online Front End Master degree, more info: http://lemoncode.net/master-frontend
+
