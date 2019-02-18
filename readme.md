@@ -49,11 +49,11 @@ start working with React and Typescript. Characteristics:
 
 ## Hooks
 
-### [00 Boiler plate](./hooks/00_BoilerPlate/readme.md)
+### [00 Boiler plate](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/00_BoilerPlate)
 
 Bundling + npm start based on webpack.
 
-### [01 Hello React](./hooks/01_HelloReact/readme.md)
+### [01 Hello React](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/01_HelloReact/readme.md)
 
 Display the text 'Hello React'.
 
