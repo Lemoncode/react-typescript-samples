@@ -154,8 +154,6 @@ export const App = () => {
 };
 ```
 
-Side note: mind the use of the fat arrow function. This avoids losing the context for _this_ in the callback.
-
 - Finally let's test everything works once more.
 
   ```
