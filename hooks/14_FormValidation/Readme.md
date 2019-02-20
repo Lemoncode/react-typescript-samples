@@ -128,6 +128,124 @@ export const createDefaultLoginFormErrors = (): LoginFormErrors => ({
 
 - First let's add the dataFormErrors to the state of the component.
 
+_./src/pages/loginPage.tsx_
+
+```diff
+import { isValidLogin } from "../api/login";
+import { NotificationComponent } from "../common";
++ import {LoginFormErrors, createDefaultLoginFormErrors} from './loginPage.viewmodel';
+```
+
+_./src/pages/loginPage.tsx_
+
+```diff
+const LoginPageInner = (props: Props) => {
+  const [loginInfo, setLoginInfo] = React.useState<LoginEntity>(
+    createEmptyLogin()
+  );
++ const [loginFormErrors, setLoginFormErrors] = React.useState<LoginFormErrors>(createDefaultLoginFormErrors());
+  const [showLoginFailedMsg, setShowLoginFailedMsg] = React.useState(false);
+```
+
+- Let's fire the validation on viemodel update.
+
+_./src/pages/loginPage.tsx_
+
+```diff
++ import { loginFormValidation } from "./loginPage.validation";
+```
+
+_./src/pages/loginPage.tsx_
+
+```diff
+const onUpdateLoginField = (name, value) => {
+    setLoginInfo({
+      ...loginInfo,
+      [name]: value
+    });
+
++    loginFormValidation.validateField(loginInfo, name, value)
++    .then((fieldValidationResult) => {
+
++        setLoginFormErrors({
++          ...loginFormErrors,
++          [name]: fieldValidationResult,
++        });
++   });
+  }
+```
+
+- We need to pass down dataFormErrors
+
+_./src/pages/loginPage.tsx_
+
+```diff
+          <LoginForm
+            onLogin={onLogin}
+            onUpdateField={onUpdateLoginField}
+            loginInfo={loginInfo}
++       loginFormErrors={this.state.loginFormErrors}
+          />
+```
+
+_./src/pages/loginPage.tsx_
+
+```diff
+interface PropsForm {
+  onLogin: () => void;
+  onUpdateField: (string, any) => void;
+  loginInfo: LoginEntity;
++ loginFormErrors : LoginFormErrors;
+}
+```
+
+- Let's replace the _TextFieldForm_ entries with the wrapper we have created (includes
+  displaying validation errors).
+
+_./src/pages/loginPage.tsx_
+
+```diff
++ import { TextFieldForm } from '../common';
+```
+
+_./src/pages/loginPage.tsx_
+
+```diff
+const LoginForm = (props: PropsForm) => {
+-  const { onLogin, onUpdateField, loginInfo } = props;
++  const { onLogin, onUpdateField, loginInfo, loginFormErrors } = props;
+```
+
+```diff
+-      <TextField
++      <TextFieldForm
+        label="Name"
+        name="login"
+-        margin="normal"
+        value={loginInfo.login}
+-        onChange={onTexFieldChange("login")}
++        onChange={onUpdateField}
++        error={loginFormErrors.login.errorMessage}
+      />
+-      <TextField
++      <TextFieldForm
+        label="Password"
+        name="password"
+        type="password"
+-        margin="normal"
+        value={loginInfo.password}
+-        onChange={onTexFieldChange("password")}
++        onChange={onUpdateField}
++        error={loginFormErrors.password.errorMessage}
+      />
+```
+
+- let's give a try
+
+```
+npm start
+```
+
 # About Basefactor + Lemoncode
 
 We are an innovating team of Javascript experts, passionate about turning your ideas into robust products.

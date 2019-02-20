@@ -11,6 +11,12 @@ import { FormHelperText } from "@material-ui/core";
 import { LoginEntity, createEmptyLogin } from "../model/login";
 import { isValidLogin } from "../api/login";
 import { NotificationComponent } from "../common";
+import {
+  LoginFormErrors,
+  createDefaultLoginFormErrors
+} from "./loginPage.viewmodel";
+import { loginFormValidation } from "./loginPage.validation";
+import { TextFieldForm } from "../common";
 
 // https://material-ui.com/guides/typescript/
 const styles = theme =>
@@ -26,6 +32,9 @@ interface Props extends RouteComponentProps, WithStyles<typeof styles> {}
 const LoginPageInner = (props: Props) => {
   const [loginInfo, setLoginInfo] = React.useState<LoginEntity>(
     createEmptyLogin()
+  );
+  const [loginFormErrors, setLoginFormErrors] = React.useState<LoginFormErrors>(
+    createDefaultLoginFormErrors()
   );
   const [showLoginFailedMsg, setShowLoginFailedMsg] = React.useState(false);
   const { classes } = props;
@@ -43,6 +52,15 @@ const LoginPageInner = (props: Props) => {
       ...loginInfo,
       [name]: value
     });
+
+    loginFormValidation
+      .validateField(loginInfo, name, value)
+      .then(fieldValidationResult => {
+        setLoginFormErrors({
+          ...loginFormErrors,
+          [name]: fieldValidationResult
+        });
+      });
   };
 
   return (
@@ -54,6 +72,7 @@ const LoginPageInner = (props: Props) => {
             onLogin={onLogin}
             onUpdateField={onUpdateLoginField}
             loginInfo={loginInfo}
+            loginFormErrors={loginFormErrors}
           />
         </CardContent>
       </Card>
@@ -72,10 +91,11 @@ interface PropsForm {
   onLogin: () => void;
   onUpdateField: (string, any) => void;
   loginInfo: LoginEntity;
+  loginFormErrors: LoginFormErrors;
 }
 
 const LoginForm = (props: PropsForm) => {
-  const { onLogin, onUpdateField, loginInfo } = props;
+  const { onLogin, onUpdateField, loginInfo, loginFormErrors } = props;
 
   // TODO: Enhacement move this outside the stateless component discuss why is a good idea
   const onTexFieldChange = fieldId => e => {
@@ -90,18 +110,20 @@ const LoginForm = (props: PropsForm) => {
         justifyContent: "center"
       }}
     >
-      <TextField
+      <TextFieldForm
         label="Name"
-        margin="normal"
+        name="login"
         value={loginInfo.login}
-        onChange={onTexFieldChange("login")}
+        onChange={onUpdateField}
+        error={loginFormErrors.login.errorMessage}
       />
-      <TextField
+      <TextFieldForm
         label="Password"
         type="password"
-        margin="normal"
+        name="password"
         value={loginInfo.password}
-        onChange={onTexFieldChange("password")}
+        onChange={onUpdateField}
+        error={loginFormErrors.password.errorMessage}
       />
       <Button variant="contained" color="primary" onClick={onLogin}>
         Login
