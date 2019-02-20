@@ -109,7 +109,7 @@ _./src/index.html_
 - Let's build a proper _login_ layout, _loginPage.tsx_. To build a nice layout, we will install _@material-ui/core_
 
 ```bash
-npm install @material-ui/core @material-ui/icons --save-dev
+npm install @material-ui/core @material-ui/icons --save
 ```
 
 - Now we could create a login form it could look something like:
