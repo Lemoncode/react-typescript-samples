@@ -40,11 +40,22 @@ const LoginPageInner = (props: Props) => {
   const { classes } = props;
 
   const onLogin = () => {
-    if (isValidLogin(loginInfo)) {
-      props.history.push("/pageB");
-    } else {
-      setShowLoginFailedMsg(true);
-    }
+    loginFormValidation.validateForm(loginInfo).then(formValidationResult => {
+      if (formValidationResult.succeeded) {
+        if (isValidLogin(loginInfo)) {
+          props.history.push("/pageB");
+        } else {
+          setShowLoginFailedMsg(true);
+        }
+      } else {
+        alert("error, review the fields");
+        const updatedLoginFormErrors = {
+          ...loginFormErrors,
+          ...formValidationResult.fieldErrors
+        };
+        setLoginFormErrors(updatedLoginFormErrors);
+      }
+    });
   };
 
   const onUpdateLoginField = (name, value) => {

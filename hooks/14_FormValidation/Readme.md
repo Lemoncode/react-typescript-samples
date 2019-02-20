@@ -246,6 +246,36 @@ const LoginForm = (props: PropsForm) => {
 npm start
 ```
 
+- And let's add an alert (Excercise and a notification) when the user clicks and the form all the fields are valid.
+
+_./src/pages/loginPage.tsx_
+
+```diff
+const onLogin = () => {
++  loginFormValidation.validateForm(loginInfo)
++    .then((formValidationResult) => {
++        if(formValidationResult.succeeded) {
+            if (isValidLogin(loginInfo)) {
+              props.history.push("/pageB");
+            } else {
+              setShowLoginFailedMsg(true);
+            }
++        } else {
++            alert('error, review the fields');
++          const updatedLoginFormErrors = {
++             ...loginFormErrors,
++             ...formValidationResult.fieldErrors,
++          }
++          setLoginFormErrors(updatedLoginFormErrors);
++       }
+
+
++    });
+};
+```
+
+> Excercise, refactor this method following single abstraction level principle and single resposibility principle.
+
 # About Basefactor + Lemoncode
 
 We are an innovating team of Javascript experts, passionate about turning your ideas into robust products.
