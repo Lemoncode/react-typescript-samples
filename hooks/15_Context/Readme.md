@@ -19,7 +19,7 @@ import * as React from "react";
 
 export interface SessionContextProps {
   login: string;
-  updateLogin: value => void;
+  updateLogin: (value: string) => void;
 }
 
 export const createDefaultUser = (): SessionContextProps => ({
