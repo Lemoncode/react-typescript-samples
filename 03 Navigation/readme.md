@@ -20,7 +20,7 @@ Install [Node.js and npm](https://nodejs.org/en/) (v6.6.0) if they are not alrea
 installed on your computer.
 
 > Verify that you are running at least node v6.x.x and npm 3.x.x by running `node -v` and `npm -v`
-in a terminal/console window. Older versions may produce errors.
+> in a terminal/console window. Older versions may produce errors.
 
 ## Steps to build it
 
@@ -28,20 +28,22 @@ in a terminal/console window. Older versions may produce errors.
 
 - Install the npm packages described in the `package.json` and verify that it works:
 
- ```bash
- $ npm install
- ```
+```bash
+$ npm install
+```
 
 - Install `react-router-dom` and typings:
 
 ```bash
 npm install react-router-dom --save
 npm install @types/react-router-dom --save-dev
+npm i @types/node
 ```
 
 - Update `vendors`:
 
 ### ./webpack.config.js
+
 ```diff
 ...
 entry: {
@@ -62,8 +64,9 @@ entry: {
 - Now, we can start adding a dummy `Members Page`:
 
 ### ./src/components/members/page.tsx
+
 ```javascript
-import * as React from 'react';
+import * as React from "react";
 
 export const MembersPage: React.StatelessComponent<{}> = () => {
   return (
@@ -71,21 +74,21 @@ export const MembersPage: React.StatelessComponent<{}> = () => {
       <h2> Members Page</h2>
     </div>
   );
-}
-
+};
 ```
 
 - And its `index.ts` file:
 
 ### ./src/components/members/index.ts
-```javascript
-export * from './page';
 
+```javascript
+export * from "./page";
 ```
 
 - Update `header` component to add links to navigate other pages:
 
 ### ./src/components/header.tsx
+
 ```diff
 import * as React from 'react';
 + import { Link } from 'react-router-dom';
@@ -103,13 +106,12 @@ export const Header: React.StatelessComponent<{}> = () => {
 +                <div className="collapse navbar-collapse" id="navbarSupportedContent">
 +                    <ul className="navbar-nav mr-auto">
 +                        <li className="nav-item">
-+                            {/* <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a> */}
 +                            <Link className="nav-link" to="/about"> About</Link>
 +                        </li>
 +                        <li className="nav-item ">
 +                            <Link className="nav-link" to="/members"> Members </Link>
-+                        </li>                    
-+                    </ul>            
++                        </li>
++                    </ul>
 +                </div>
 +            </nav>
     </div>
@@ -121,6 +123,7 @@ export const Header: React.StatelessComponent<{}> = () => {
 - Update components `index.ts` file:
 
 ### ./src/components/index.ts
+
 ```diff
 export * from './header';
 export * from './about';
@@ -133,11 +136,12 @@ export * from './about';
 - Now, we are going to create the `AppRouter` component where we define routes:
 
   ### ./src/router.tsx
+
   ```javascript
-  import * as React from 'react';
-  import { Route, HashRouter, Switch } from 'react-router-dom';
-  import { App } from './app';
-  import { About, MembersPage } from './components';
+  import * as React from "react";
+  import { Route, HashRouter, Switch } from "react-router-dom";
+  import { App } from "./app";
+  import { About, MembersPage } from "./components";
 
   export const AppRouter: React.StatelessComponent<{}> = () => {
     return (
@@ -152,7 +156,7 @@ export * from './about';
         </div>
       </HashRouter>
     );
-  }
+  };
   ```
 
   - The type of router that we are using is HashRouter because we are creating a static website.
@@ -163,6 +167,7 @@ export * from './about';
 - Update `App`. We will remove the div enclosing `Header` because we have already added it in `AppRouter`:
 
 ### ./src/app.tsx
+
 ```diff
 import * as React from 'react';
 - import { Header, About } from './components';
@@ -183,6 +188,7 @@ import * as React from 'react';
 - And finally, update main file:
 
 ### ./src/index.tsx
+
 ```diff
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -198,11 +204,11 @@ ReactDOM.render(
 
 - Execute the example:
 
- ```bash
- $ npm start
- ```
+```bash
+$ npm start
+```
 
 # About Lemoncode
 
 We are a team of long-term experienced freelance developers, established as a group in 2010.
-We specialize in Front End technologies and .NET. [Click here](http://lemoncode.net/services/en/#en-home) to get more info about us. 
+We specialize in Front End technologies and .NET. [Click here](http://lemoncode.net/services/en/#en-home) to get more info about us.
