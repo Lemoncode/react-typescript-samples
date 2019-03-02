@@ -205,6 +205,10 @@ Pending update
 
 Replace class components by stateless components using Hooks.
 
+### 19 LoginForm
+
+Add a login page using Material-UI.
+
 # Contributors
 
 Special thanks to [Jehu Sagardoy](https://github.com/jsagardoy) for his contributions checking
