@@ -70,7 +70,7 @@ export const LoginPage = withStyles(styles)(withRouter<Props>(LoginPageInner));
 
 interface PropsForm {
   onLogin: () => void;
-  onUpdateField: (string, any) => void;
+  onUpdateField: (name: string, value: any) => void;
   loginInfo: LoginEntity;
 }
 
