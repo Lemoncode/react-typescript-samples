@@ -122,8 +122,8 @@ import { Link } from "react-router-dom";
 _./src/pages/loginPage.tsx_
 
 ```diff
-+ import { TextFieldForm } from "../common";
-import { TextFieldForm, SessionContext } from "../common";
+- import { TextFieldForm } from "../common";
++ import { TextFieldForm, SessionContext } from "../common";
 
 ```
 
