@@ -424,7 +424,7 @@ _./src/pages/loginPage.tsx_
 ```diff
 interface PropsForm {
   onLogin: () => void;
-+  onUpdateField: (string, any) => void;
++  onUpdateField: (name: string, value: any) => void;
 +  loginInfo : LoginEntity;
 }
 
