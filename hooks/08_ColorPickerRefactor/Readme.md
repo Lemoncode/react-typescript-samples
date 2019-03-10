@@ -1,4 +1,4 @@
-# 09 Colorpicker Refactor
+# 08 Colorpicker Refactor
 
 In this example we are going to review the colorpicker component we have created and simplify it. Right now we have three slider controls with many details that make our HTML hard to read. Let's componentize this scenario.
 
@@ -219,13 +219,13 @@ export const ColorPicker = (props: Props) => {
 }
 ```
 
-- Now we got a great result !! we have enhanced code quality in our component.
+- Now we got a great result!! We have enhanced code quality in our component.
 
 ```bash
 npm start
 ```
 
-- Could we go one step furhter refactoring? The answer is yes, could it be worth? That's
+- Could we go one step further refactoring? The answer is yes, could it be worth? That's
   worth a discussion, sometimes is a good idea to keep on refactoring, and then rollback
   one step, let's apply the following trick, let's replace our color picker with this code:
 
