@@ -108,7 +108,7 @@ export const loginFormValidation = createFormValidation(
 
 - Let's create now a class to hold the dataFormErrors.
 
-_./src/login/loginPage.viewmodel.ts_
+_./src/pages/loginPage.viewmodel.ts_
 
 ```typescript
 import { FieldValidationResult } from "lc-form-validation";

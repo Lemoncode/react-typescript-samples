@@ -32,7 +32,7 @@ export const createDefaultUser = (): SessionContextProps => ({
 });
 
 export const SessionContext =
-  React.createContext < SessionContextProps > createDefaultUser();
+  React.createContext < SessionContextProps >(createDefaultUser());
 ```
 
 - This session context will expose a _provider_ (it will serve us to set the login name in the context), and a _consumer_ (that will let us consume the login name from the context at any point of the application).
@@ -122,8 +122,8 @@ import { Link } from "react-router-dom";
 _./src/pages/loginPage.tsx_
 
 ```diff
-+ import { TextFieldForm } from "../common";
-import { TextFieldForm, SessionContext } from "../common";
+- import { TextFieldForm } from "../common";
++ import { TextFieldForm, SessionContext } from "../common";
 
 ```
 
