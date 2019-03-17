@@ -2,7 +2,7 @@ import * as React from "react";
 
 interface Props {
   userName: string;
-  onChange: (e : React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const NameEditComponent = (props: Props) => (

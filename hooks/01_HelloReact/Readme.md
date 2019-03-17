@@ -109,13 +109,13 @@ module.exports = {
  resolve: {
    extensions: ['.js', '.ts', '.tsx']
  },
- entry: {
--   app: './index.ts',
-+   app: './index.tsx',
-   vendorStyles: [
-     '../node_modules/bootstrap/dist/css/bootstrap.css',
-   ],
- },
+ entry: ["@babel/polyfill", 
+ -  "main.ts"],
+ +  "./index.tsx"],
+  output: {
+    path: path.join(basePath, "dist"),
+    filename: "bundle.js"
+  },
 ```
 
 - Execute the example:
