@@ -1,18 +1,16 @@
 # 09 Sidebar
 
-In this example we are going to add a sidebar to our application, we will start with a specific
-implementation, then we will make it generic.
+En este ejemplo vamos a añadir una barra lateral a nuestra aplicación, empezaremos con una implementación específica, y luego la haremos genérica.
 
-# Steps
+# Pasos a seguir
 
-- We will take as starting point sample _08 ColorPickerRefactor_, let's copy the content
-  from that file and execute _npm install_.
+- Tomaremos como punto de partida el ejemplo _08 ColorPickerRefactor_, copiamos el contenido de ese archivo y ejecutamos _npm install_. 
 
 ```bash
 npm install
 ```
 
-- Create a file called _src/sidebar.css_ and add the following styles (http://www.w3schools.com/howto/howto_js_sidenav.asp):
+- Cree un archivo llamado _src/sidebar.css_ y añada los siguientes estilos (http://www.w3schools.com/howto/howto_js_sidenav.asp):
 
 _./src/components/sidebar.css_
 
@@ -57,7 +55,7 @@ _./src/components/sidebar.css_
 }
 ```
 
-- We are going to use CSS Modules, so let's configure it.
+- Vamos a usar módulos CSS, así que vamos a configurarlo.
 
 _./webpack.config.js_
 
@@ -70,7 +68,7 @@ _./webpack.config.js_
     },
 ```
 
-- We will only use CSS Modules for custom app stylesheets. We will not use CSS Modules for other CSS files, like Bootstrap (folder node_modules).
+- Sólo usaremos módulos CSS para hojas de estilo personalizadas. No usaremos Módulos CSS para otros archivos CSS, como Bootstrap (carpeta node_modules).
 
 _./webpack.config.js_
 
@@ -100,11 +98,10 @@ _./webpack.config.js_
 
 ```
 
-- We are going to create now a sidebar component, _src/sidebar.tsx_. Right now we will create just
-  a rectangle and we will interact with the animation.
+- Vamos a crear el componente de la barra lateral, _src/sidebar.tsx_. Crearemos sólo
+  un rectángulo e interactuaremos con la animación.
 
-We need to install node typings, since we are goin to make use of _require_ to import from
-the _css_.
+Necesitamos instalar los tipos para _node_, ya que usaremos _require_ a la hora de importar desde el _css_.
 
 ```bash
 npm install @types/node --save-dev
@@ -124,7 +121,7 @@ export const SidebarComponent = () => (
 );
 ```
 
-- Let's add this component to the _index_ barrel.
+- Añadimos este componente a nuestro barrel _index_
 
 _./src/components/index.ts_
 
@@ -136,7 +133,7 @@ export * from "./colorPicker";
 + export * from "./sidebar";
 ```
 
-- We are going to add a known id to the body section of _src/index.html_ page
+- Vamos a añadir un _id_ al elemento _body_ de la página _src/index.html_
 
 _./src/index.html_
 
@@ -145,7 +142,7 @@ _./src/index.html_
 +  <body id="main">
 ```
 
-- Let's place the component adding it into the `app.tsx`:
+- Colocamos el componente añadiéndolo en `app.tsx`: 
 
 _./src/app.tsx_
 
@@ -165,8 +162,7 @@ _./src/app.tsx_
       <ColorBrowser color={color} />
 ```
 
-- Let's start with the interesting part of this implementation, let's add a flag to show/hide the
-  sidebar _sidebar.tsx_.
+- Comencemos con la parte interesante de esta implementación, agreguemos una opción para mostrar/ocultar la barra lateral _sidebar.tsx_.
 
 _./src/components/sidebar.tsx_
 
@@ -186,7 +182,8 @@ const classNames = require('./sidebar.css');
     </div>
 ```
 
-- Now let's add some logic to show / hide the sidebar in case the flag gets updated
+- Ahora vamos a añadir algo de lógica para mostrar / ocultar la barra lateral en caso de que se actualice dicha opción.
+
 
 _./src/sidebar.tsx_
 
@@ -212,7 +209,7 @@ export const SidebarComponent = (props: Props) =>
     </div>
 ```
 
-- Let's make a quick test we will show always the side bar:
+- Hagamos una prueba rápida para mostrar siempre la barra lateral:
 
 _./src/app.tsx_
 
@@ -224,18 +221,16 @@ _./src/app.tsx_
       <ColorBrowser color={color} />
 ```
 
-- If we start the project we should now see the sidebar that we have created (a gray rectangle).
+- Si arrancamos el proyecto veremos la barra lateral que hemos creado (un rectángulo gris).
+
 
 ```bash
 npm start
 ```
+_¿Qué pasa si no puedo ver la barra lateral?_ Compruebe que _webpack.config.js_ y sus estilos se han aplicado, es posible que tenga que iniciar de nuevo _webpack-dev-sever_ (relanzar _npm start_), compruebe con dev tools que está cargando los estilos CSS.
 
-_What if I cannot see the sidebar?_ Check that your styles and webpackconfig has been applied,
-you may need to start and top webpack-dev-sever (relaunch _npm \_start_), check with dev tools
-that you are loading the CSS styles.
+- Ahora a nivel de aplicación podemos recordar la opción de visibilidad, y añadir un botón para alternar la visualización de la barra lateral.
 
-- Now at app level we can remember the visible status and add a button to toggle the
-  visibility of the sidebar.
 
 _./src/app.tsx_
 
@@ -277,22 +272,24 @@ _./src/app.tsx_
     </>
 ```
 
-- Let's start the application to check how it behaves:
+- Iniciemos la aplicación para comprobar cómo se comporta:
 
 ```bash
 npm start
 ```
 
-> Excercise: the inline call to the function in _onClick_ is not considered a
-> good pratice (on each render the function will be recreated), let's refactor this in two
-> steps:
+> Ejercicio: la llamada en línea a la función dentro de _onClick_ no se
+> considera una buena práctica (en cada render se recreará la función), 
+> vamos a refactorizarla en dos pasos:
 
-- First we will extract this logic to a function, we will call it _toggleSidebarVisibility_.
-- Then let's wrap visibility + toggleSidebarVisibility in a custom hook.
+- Primero extraeremos esta lógica a una función, la llamaremos _toggleSidebarVisibility_.
 
-* So far so good, but what happens if we want to make this sidebar a reusable component? We could just show the frame but the content should be dynamic.
+- Ahora envolvemos _visibility_ y _toggleSidebarVisibility_ en un _hook_ personalizado.
 
-* Let's start by adding some content when instantiating the sidebar (_app.tsx_).
+* Hasta ahora todo va bien, pero ¿qué pasa si queremos que esta barra lateral sea un componente reutilizable? Podríamos simplemente mostrar el marco pero el contenido debe ser dinámico.
+
+* Comencemos por añadir algo de contenido al instanciar la barra lateral (_app.tsx_).
+
 
 _./src/app.tsx_
 
@@ -310,10 +307,10 @@ _./src/app.tsx_
       <ColorBrowser color={color} />
 ```
 
-> We got an error, _children_ is not defined, that's something we are going to fix in the
-> next step...
+> Tenemos un error, _children_ no está definido, vamos a arreglarlo en el 
+> siguiente paso....
 
-- Now in the _sidebar.tsx_ let's dump this content by using {this.props.children}
+- Ahora en _sidebar.tsx_ volcaremos este contenido usando {this.props.children}
 
 _./src/components/sidebar.tsx_
 
@@ -328,7 +325,7 @@ _./src/components/sidebar.tsx_
 );
 ```
 
-- Let's try the sample
+- Probemos el ejemplo
 
 ```
 npm start
