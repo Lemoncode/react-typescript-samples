@@ -184,7 +184,7 @@ _./src/pages/loginPage.tsx_
             onLogin={onLogin}
             onUpdateField={onUpdateLoginField}
             loginInfo={loginInfo}
-+       loginFormErrors={this.state.loginFormErrors}
++       loginFormErrors={loginFormErrors}
           />
 ```
 
