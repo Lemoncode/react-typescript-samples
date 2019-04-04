@@ -22,7 +22,7 @@ npm install
 - Let's install the _lc-form-validation-library_.
 
 ```bash
-npm install lc-form-validation
+npm install lc-form-validation --save
 ```
 
 - To avoid having too much repeated code let's move to common an input component, including it's
