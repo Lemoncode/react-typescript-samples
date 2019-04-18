@@ -24,7 +24,7 @@ Summary steps:
 
 # Prerequisites
 
-Install [Node.js and npm](https://nodejs.org/en/) (v8.9.4) if they are not already installed on your computer.
+Install at least [Node.js and npm](https://nodejs.org/en/) (v8.9.4) if they are not already installed on your computer.
 
 > Verify that you are running at least node v8.x.x and npm 5.x.x by running `node -v` and `npm -v` in a terminal/console window. Older versions may produce errors.
 
@@ -143,29 +143,32 @@ _[./package.json](./package.json)_
 {
   "name": "reactboilerplate",
   "version": "1.0.0",
-  "description": "Sample working with React,TypeScript and Webpack",
+  "description": "sample working with React, Typescript and Webpack",
+  "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "webpack"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server  --mode development --inline --hot --open",
+    "build": "webpack  --mode development"
   },
-  "author": "Lemoncode",
-  "license": "MIT",
-  "dependencies": {
-    "bootstrap": "^3.3.7",
-    "jquery": "^3.2.1"
-  },
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "awesome-typescript-loader": "^3.1.3",
-    "babel-core": "^6.25.0",
-    "babel-preset-env": "^1.5.2",
-    "css-loader": "^0.28.4",
-    "file-loader": "^0.11.2",
-    "html-webpack-plugin": "^2.28.0",
-    "style-loader": "^0.18.2",
-    "typescript": "^2.3.4",
-    "url-loader": "^0.5.9",
-    "webpack": "^2.6.1",
-    "webpack-dev-server": "^2.4.5"
+    "awesome-typescript-loader": "^5.0.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "css-loader": "^0.28.11",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.0",
+    "style-loader": "^0.21.0",
+    "typescript": "^2.8.3",
+    "url-loader": "^1.0.1",
+    "webpack": "^4.8.1",
+    "webpack-cli": "^2.1.3",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "dependencies": {
+    "bootstrap": "^4.1.1"
   }
 }
 
@@ -198,8 +201,7 @@ _[./src/index.html](./src/index.html)_
 
  ```
 
-- Now it's time to create a basic **[./webpack.config.js](./webpack.config.js)** file, this configuration will
- include plumbing for:
+- Now it's time to create a basic **[./webpack.config.js](./webpack.config.js)** file, this configuration will include plumbing for:
  - Launching a web dev server.
  - Transpiling from TypeScript to JavaScript.
  - Setup Twitter Bootstrap (including fonts, etc...).
@@ -278,6 +280,7 @@ module.exports = {
  ```
  npm start
  ```
+ ## Note: If you have problems when running the app  you should update webpack-cli to : "webpack-cli": "3.2.3"
 
 # About Lemoncode
 

@@ -162,3 +162,57 @@ export const App = () => {
   );
 };
 ```
+
+- Now let's jump into _NameEditComponent_ and update the contract and
+  implementation:
+
+```diff
+interface Props {
+  initialUserName: string;
++   editingName: string;
+-  onNameUpdated: (newName: string) => any;
++  onNameUpdated: () => any;
++   onEditingNameUpdated: (newEditingName: string) => any;
+}
+```
+
+```diff
+export const NameEditComponent = (props: Props) => {
+-  const [editingName, setEditingName] = React.useState(props.initialUserName);
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+-    setEditingName(e.target.value);
++    props.onEditingNameUpdated(e.target.value);
+  };
+
+  const onNameSubmit = (event: any): any => {
+-    props.onNameUpdated(editingName);
++   props.onNameUpdated();
+  };
+
+- if(props.initialUserName !== lastInitialName) {
+-    setLastInitialName(props.initialUserName);
+-    setEditingName(props.initialUserName);
+- }
+
+
+  return (
+    <>
+      <label>Update name:</label>
+-      <input value={editingName} onChange={onChange} />
++      <input value={props.editingName} onChange={onChange} />
+      <button onClick={onNameSubmit}>Change</button>
+    </>
+  );
+};
+```
+
+# About Basefactor + Lemoncode
+
+We are an innovating team of Javascript experts, passionate about turning your ideas into robust products.
+
+[Basefactor, consultancy by Lemoncode](http://www.basefactor.com) provides consultancy and coaching services.
+
+[Lemoncode](http://lemoncode.net/services/en/#en-home) provides training services.
+
+For the LATAM/Spanish audience we are running an Online Front End Master degree, more info: http://lemoncode.net/master-frontend

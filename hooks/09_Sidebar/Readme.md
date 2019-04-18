@@ -77,9 +77,9 @@ _./webpack.config.js_
 ```diff
   {
     test: /\.css$/,
-+    include: /node_modules/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"]
-      },
++   include: /node_modules/,
+    use: [MiniCssExtractPlugin.loader, "css-loader"]
+  },
 +  // Use CSS modules for custom stylesheets
 +  {
 +    test: /\.css$/,
@@ -161,7 +161,7 @@ _./src/app.tsx_
 ```diff
   return (
     <>
-+      <SidebarComponent>
++      <SidebarComponent />
       <ColorBrowser color={color} />
 ```
 
@@ -287,7 +287,7 @@ npm start
 > good pratice (on each render the function will be recreated), let's refactor this in two
 > steps:
 
-- First we will extract this logic to a function, we will call it _toggleSidebarVisbility_.
+- First we will extract this logic to a function, we will call it _toggleSidebarVisibility_.
 - Then let's wrap visibility + toggleSidebarVisibility in a custom hook.
 
 * So far so good, but what happens if we want to make this sidebar a reusable component? We could just show the frame but the content should be dynamic.
@@ -333,3 +333,13 @@ _./src/components/sidebar.tsx_
 ```
 npm start
 ```
+
+# About Basefactor + Lemoncode
+
+We are an innovating team of Javascript experts, passionate about turning your ideas into robust products.
+
+[Basefactor, consultancy by Lemoncode](http://www.basefactor.com) provides consultancy and coaching services.
+
+[Lemoncode](http://lemoncode.net/services/en/#en-home) provides training services.
+
+For the LATAM/Spanish audience we are running an Online Front End Master degree, more info: http://lemoncode.net/master-frontend

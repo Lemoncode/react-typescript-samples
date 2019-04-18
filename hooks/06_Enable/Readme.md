@@ -22,8 +22,6 @@ We will take a startup point sample _05 Refactor_
 npm install
 ```
 
-- Let's start by adding
-
 - Let's start by adding a condition to disable the field whenever is empty.
 
 _./src/nameEdit.tsx_
@@ -46,13 +44,13 @@ _./src/nameEdit.tsx_
   the editingName is empty and when the editing name is the same as the finalname, how
   could we do that? We can choose between two options here:
 
-  - [Excercise] Add to the disabled option on more condition and cover the case where
+  - [Excercise] Add to the disabled option one more condition and cover the case where
     the editingName is equal to the initialName.
 
   - Create a generic disable property on the NameEditComponent and let the parent control
     decide in which cases it should be disabled (thanks to [Victor Borrego](https://github.com/v-borrego) to point out this great solution).
 
-We will follow the second approach since is the one that can provide more flexiblity to the
+We will follow the second approach since is the one that can provide more flexibility to the
 control (in a real project, choosing between one approach or the other depends on specfication details).
 
 We will expose a _disabled_ property in the _NameEdit_ component.
@@ -110,3 +108,14 @@ strength component:
 - Create a password strenght indicator (you can do it just showing plain text
   in future samples we will teach you how to interact with CSS and you will
   be able to display a color bar indicating password strength).
+
+# About Basefactor + Lemoncode
+
+We are an innovating team of Javascript experts, passionate about turning your ideas into robust products.
+
+[Basefactor, consultancy by Lemoncode](http://www.basefactor.com) provides consultancy and coaching services.
+
+[Lemoncode](http://lemoncode.net/services/en/#en-home) provides training services.
+
+For the LATAM/Spanish audience we are running an Online Front End Master degree, more info: http://lemoncode.net/master-frontend
+

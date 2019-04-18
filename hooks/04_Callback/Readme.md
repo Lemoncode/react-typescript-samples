@@ -110,3 +110,14 @@ Now we've got a clear event, strongly typed and simplified (as it is more straig
 Now, the greetings message only changes when the user clicks the change button.
 
 > What happens if we simulate an AJAX call? Let's place in the app's componentWillMount a timeout and set the name value in the timeout's callback.
+
+# About Basefactor + Lemoncode
+
+We are an innovating team of Javascript experts, passionate about turning your ideas into robust products.
+
+[Basefactor, consultancy by Lemoncode](http://www.basefactor.com) provides consultancy and coaching services.
+
+[Lemoncode](http://lemoncode.net/services/en/#en-home) provides training services.
+
+For the LATAM/Spanish audience we are running an Online Front End Master degree, more info: http://lemoncode.net/master-frontend
+

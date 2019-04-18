@@ -13,7 +13,7 @@ We take as startup point the example **01 Hello React**:
 
 ## Prerequisites
 
-Install [Node.js and npm](https://nodejs.org/en/) (v6.6.0) if they are not already installed on your computer.
+Install [Node.js and npm](https://nodejs.org/en/) (v6.6.0 or higher) if they are not already installed on your computer.
 
 > Verify that you are running at least node v6.x.x and npm 3.x.x by running `node -v` and `npm -v` in a terminal/console window. Older versions may produce errors.
 
@@ -37,12 +37,13 @@ import * as React from 'react';
 + }
 
 - export const HelloComponent = () => {
-+ export const HelloComponent = (props: Props) => {
-  return (
++ export const HelloComponent = (props: Props) => (
+- {
+-  return (
 -    <h2>Hello component !</h2>
 +    <h2>Hello user: { props.userName } !</h2>
   );
-}
+- }
 ```
 
 - Let's update _index.tsx_ and provide a value to the _userName_ property:
@@ -66,3 +67,14 @@ _./src/index.tsx_
 ```cmd
 npm start
 ```
+
+# About Basefactor + Lemoncode
+
+We are an innovating team of Javascript experts, passionate about turning your ideas into robust products.
+
+[Basefactor, consultancy by Lemoncode](http://www.basefactor.com) provides consultancy and coaching services.
+
+[Lemoncode](http://lemoncode.net/services/en/#en-home) provides training services.
+
+For the LATAM/Spanish audience we are running an Online Front End Master degree, more info: http://lemoncode.net/master-frontend
+
