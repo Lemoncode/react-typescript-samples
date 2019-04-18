@@ -66,7 +66,7 @@ _./src/index.tsx_
   ```
 
 - It's time to revisit _app.tsx_. We want to store the user's name and let the user updated it. We will use hooks to
-  allow _App_ fucntional components to make use of state (this works in React 16.8.2 and above if you have to use
+  allow _App_ functional components to make use of state (this works in React 16.8.2 and above if you have to use
   older verions you have to use a class component, check the "old*classes_components" on the root of this repo for example).
   We will add \_userName* to the state.
 
