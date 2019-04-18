@@ -1,6 +1,6 @@
 # 04 Callback + State
 
-In this example we refactor the previous **03 State** example.
+In this example we will refactor the previous **03 State** example.
 
 We will update the name property only when the user clicks a _change_ button, and we will simplify the prop callback signature.
 
@@ -14,7 +14,7 @@ Obviously, we take the example **03 State** as a starting point.
 
 ## Prerequisites
 
-Install [Node.js and npm](https://nodejs.org/en/) (v6.6.0) if they are not already installed on your computer.
+Install [Node.js and npm](https://nodejs.org/en/) (v6.6.0 or higher) if they are not already installed on your computer.
 
 > Verify that you are running at least node v6.x.x and npm 3.x.x by running `node -v` and `npm -v` in a terminal/console window. Older versions may produce errors.
 
