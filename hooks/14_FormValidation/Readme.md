@@ -1,4 +1,4 @@
-# 13 Login Form
+# 14 Form Validation
 
 Let's add validation support to this form.
 
@@ -147,7 +147,7 @@ const LoginPageInner = (props: Props) => {
   const [showLoginFailedMsg, setShowLoginFailedMsg] = React.useState(false);
 ```
 
-- Let's fire the validation on viemodel update.
+- Let's fire the validation on viewmodel update.
 
 _./src/pages/loginPage.tsx_
 
@@ -172,7 +172,7 @@ const onUpdateLoginField = (name, value) => {
 +          [name]: fieldValidationResult,
 +        });
 +   });
-  }
+  };
 ```
 
 - We need to pass down dataFormErrors
@@ -220,7 +220,7 @@ const LoginForm = (props: PropsForm) => {
 -      <TextField
 +      <TextFieldForm
         label="Name"
-        name="login"
++        name="login"
 -        margin="normal"
         value={loginInfo.login}
 -        onChange={onTexFieldChange("login")}
@@ -230,7 +230,7 @@ const LoginForm = (props: PropsForm) => {
 -      <TextField
 +      <TextFieldForm
         label="Password"
-        name="password"
++        name="password"
         type="password"
 -        margin="normal"
         value={loginInfo.password}
@@ -240,7 +240,7 @@ const LoginForm = (props: PropsForm) => {
       />
 ```
 
-- let's give a try
+- Let's give a try
 
 ```
 npm start
@@ -274,7 +274,7 @@ const onLogin = () => {
 };
 ```
 
-> Excercise, refactor this method following single abstraction level principle and single resposibility principle.
+> Excercise, refactor this method following single abstraction level principle and single responsibility principle.
 
 # About Basefactor + Lemoncode
 

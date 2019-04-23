@@ -1,12 +1,12 @@
 # 08 Colorpicker Refactor
 
-In this example we are going to review the colorpicker component we have created and simplify it. Right now we have three slider controls with many details that make our HTML hard to read. Let's componentize this scenario.
+In this example we are going to review the colorPicker component we have created and simplify it. Right now we have three slider controls with many details that make our HTML hard to read. Let's componentize this scenario.
 
-We take _07 Colorpicker_ as reference.
+We take _07 ColorPicker_ as reference.
 
 # Steps to reproduce this sample
 
-- Copy the content from _07 Colorpicker_ and execute _npm install_.
+- Copy the content from _07 ColorPicker_ and execute _npm install_.
 
 ```bash
 npm install
@@ -37,9 +37,9 @@ _DO NOT COPY THIS_
 
 - We will start our refactor by componentizing this piece of code,
   let's append to the _colorPicker.tsx_ the following component
-  (another approach could be to create a new file, that's a tetchty decisition,
+  (another approach could be to create a new file, that's a tetchy decision,
   on one hand it makes sense to keep in the same file the slider since is quite
-  related to the picker, on the other segregating in diferent files is another
+  related to the picker, on the other segregating in different files is another
   valid approach).
 
 _./src/components/colorPicker.tsx_

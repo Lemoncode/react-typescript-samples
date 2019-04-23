@@ -1,18 +1,18 @@
-# 11 Table fetch
+# 11 Table Axios
 
-In this sample we are going to update the previous sampe (mock table) and instead of
+In this sample we are going to update the previous sample (mock table) and instead of
 returning mock data, return real data from the github rest api.
 
 # Steps to reproduce the sample
 
-- We will take as starting point sample _10 tableMock_, let's copy the content from this
+- We will take as starting point sample _10 TableMock_. Let's copy the content from this
   sample and execute _npm install_.
 
 ```bash
 npm install
 ```
 
-- To retrieve data from the Github REST api we will make use of axios, let's install the package
+- To retrieve data from the Github REST api we will make use of axios. Let's install the package
   (no need to install typing, they are already included in the library).
 
 ```bash
@@ -68,7 +68,7 @@ export const getMembersCollection = (): Promise<MemberEntity[]> => {
 ```
 
 - Aaaand... we don't need to add any update on the rest of the application, why?
-  The function is providing the same contract it returns a promise<MemberEntity[]>,
+  The function is providing the same contract, it returns a promise<MemberEntity[]>,
   let's give a try:
 
 ```bash

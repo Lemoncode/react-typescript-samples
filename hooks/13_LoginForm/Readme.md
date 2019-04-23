@@ -2,9 +2,9 @@
 
 In this sample we are going to implement a basic login page, that will redirect the user to another page whenever the login has completed successfully.
 
-We will attempt to create a realistic layout, in order to keep simplicity we will break it into subcomponents and perform some refactor in order to make the solution more maintenable.
+We will attempt to create a realistic layout, in order to keep simplicity we will break it into subcomponents and perform some refactor in order to make the solution more maintainable.
 
-We will take a startup point sample 12 ReactRouter:
+We will take a starting point the sample 12 ReactRouter:
 
 ## Steps
 
@@ -20,19 +20,19 @@ npm install
 
 _./src/pages/loginPage.tsx_
 
-```javascript
+```diff
 import * as React from "react";
 import { Link } from "react-router-dom";
 
-export const LoginPage = () => {
-  return (
+- export const PageA = () => (
++ export const LoginPage = () => (
     <div>
-      <h2> Hello from login Page</h2>
+-     <h2>Hello from page A</h2>
++     <h2> Hello from login Page</h2>
       <br />
       <Link to="/pageB">Navigate to Page B</Link>
     </div>
   );
-};
 ```
 
 - Let's update _app.tsx_ (routes, names and add a redirect from root to login page).
@@ -40,27 +40,29 @@ export const LoginPage = () => {
 _./src/app.tsx_
 
 ```diff
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { HashRouter, Switch, Route } from 'react-router-dom';
+import * as React from "react";
+import { HashRouter, Switch, Route } from "react-router-dom";
 - import { PageA } from "./pages/pageA";
 + import { LoginPage } from "./pages/loginPage";
 import { PageB } from "./pages/pageB";
 
-ReactDOM.render(
-   <HashRouter>
-     <Switch>
--       <Route exact={true} path="/" component={PageA} />
-+       <Route exact={true} path="/" component={LoginPage} />
-       <Route path="/pageB" component={PageB} />
-     </Switch>
-   </HashRouter>
-  ,
-  document.getElementById('root')
-);
+export const App = () => {
+
+  return (
+    <>
+      <HashRouter>
+        <Switch>
+-         <Route exact={true} path="/" component={PageA} />
++         <Route exact={true} path="/" component={LoginPage} />
+          <Route path="/pageB" component={PageB} />
+        </Switch>
+      </HashRouter>
+    </>
+  );
+};
 ```
 
-- Let's update as well the navigation from _pageB_ to _loginPage_, _pageB.tsx_.
+- Let's update as well the navigation from _pageB_ to _loginPage_.
 
 _./src/pages/b/pageB.tsx_
 
@@ -80,7 +82,7 @@ export const PageB = () => {
 }
 ```
 
-- Let's make a quick test and check that everyting is still working fine.
+- Let's make a quick test and check that everything is still working fine.
 
 ```
 npm start
@@ -106,7 +108,7 @@ _./src/index.html_
 </html>
 ```
 
-- Let's build a proper _login_ layout, _loginPage.tsx_. To build a nice layout, we will install _@material-ui/core_
+- Let's build a proper _login_ layout, _loginPage.tsx_. To build a nice layout, we will install _@material-ui/core_ and _@material-ui/icons_
 
 ```bash
 npm install @material-ui/core @material-ui/icons --save
@@ -118,7 +120,6 @@ _./src/pages/loginPage.tsx_
 
 ```javascript
 import * as React from "react";
-import { Link } from "react-router-dom";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { withStyles, createStyles, WithStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -126,7 +127,6 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { FormHelperText } from "@material-ui/core";
 
 // https://material-ui.com/guides/typescript/
 const styles = theme =>
@@ -164,9 +164,7 @@ const LoginPageInner = (props: Props) => {
   );
 };
 
-export const LoginPage = withStyles(styles)(
-  withRouter < Props > LoginPageInner
-);
+export const LoginPage = withStyles(styles)(withRouter<Props>(LoginPageInner));
 ```
 
 - This can be ok, but if we take a deeper look to this component, we could break down into two, one is the card itself the other the form dialog, so it should finally look like:
@@ -182,7 +180,7 @@ export const LoginPage = withStyles(styles)(
 </Card>
 ```
 
-- Let's create the loginformcomponent (append it to the loginPage file):
+- Let's create the LoginForm component (append it to the loginPage file):
 
 _./src/pages/loginPage.tsx_
 
@@ -241,7 +239,7 @@ _./src/pages/loginPage.tsx_
 npm start
 ```
 
-- Le'ts add the navigation on button clicked, we will do it in two steps.
+- Let's add the navigation on button clicked, we will do it in two steps.
 
 - First we will expose a method to do that in the loginPage.
 
@@ -279,8 +277,7 @@ const LoginPageInner = (props) => {
   )
 }
 
-- export const LoginPage = withStyles(styles)(LoginPageInner);
-+ export const LoginPage = withStyles(styles)(withRouter<Props>((LoginPageInner)));
+export const LoginPage = withStyles(styles)(withRouter<Props>(LoginPageInner));
 ```
 
 - Let's add the navigation on button clicked (later on we will check for user and pwd) _form.tsx_.
@@ -293,33 +290,26 @@ _./src/pages/loginPage.tsx_
 +interface PropsForm {
 +  onLogin : () => void;
 +}
-
-+export const LoginForm = (props : PropsForm) => {
-- export const LoginForm = () => {
+-const LoginForm = props => {
++const LoginForm = (props : PropsForm) => {
 +   const { onLogin } = props;
-
-  return (
-    <div className="panel-body">
-      <form accept-charset="UTF-8" role="form">
-        <fieldset>
-          <div className="form-group">
-      		  <input className="form-control" placeholder="E-mail" name="email" type="text"/>
-      		</div>
-          <div className="form-group">
-            <input className="form-control" placeholder="Password" name="password" type="password" value=""/>
-          </div>
--          <input className="btn btn-lg btn-success btn-block" type="submit" value="Login"
--          />
--          <Button variant="contained" color="primary">
-+          <Button variant="contained" color="primary" onClick={onLogin}>
-            Login
-          </Button>
-        </fieldset>
-      </form>
-    </div>
-  );
-- }
-+})
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center"
+        }}
+      >
+        <TextField label="Name" margin="normal" />
+        <TextField label="Password" type="password" margin="normal" />
+-       <Button variant="contained" color="primary">
++       <Button variant="contained" color="primary" onClick={onLogin}>
+          Login
+        </Button>
+      </div>
+    );
+  };
 ```
 
 - Let's give a quick try.
@@ -330,9 +320,9 @@ npm start
 
 Ok, we can navigate whenever we click on the login page.
 
-- Let's keep on progressing, now is time to collect the username and password info, and check if password is valid or not.
+- Let's keep on progressing, now it is time to collect the username and password info, and check if password is valid or not.
 
-- Let's define an entity for the loginInfo let's create the following path and file
+- Let's define an entity for the loginInfo. Let's create the following path and file
 
 _src/model/login.ts_
 
@@ -348,7 +338,7 @@ export const createEmptyLogin = (): LoginEntity => ({
 });
 ```
 
-- Let's add login validation fake restApi: create a folder _src/api_. and a file called _login.ts_
+- Let's add login validation fake restApi: create a folder _src/api_ and a file called _login.ts_
 
 _./src/api/login.ts_
 
@@ -469,7 +459,6 @@ _./src/common/notification.tsx_
 
 ```javascript
 import * as React from "react";
-import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";

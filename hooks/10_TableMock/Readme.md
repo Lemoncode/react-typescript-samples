@@ -3,7 +3,7 @@
 In this sample we are going to show a table with mock data.
 
 We will simulate that this method is calling an ajax api (it will return a promise),
-by doing this we can check how easy is to replace it by a reall call in the next
+by doing this we can check how easy is to replace it by a real call in the next
 example.
 
 # Steps to reproduce the sample
@@ -14,8 +14,6 @@ example.
 ```bash
 npm install
 ```
-
-- Let's define a model entity:
 
 - Let's define a model entity in _src/model/member.ts_:
 
@@ -65,7 +63,7 @@ export const getMembersCollection = (): Promise<MemberEntity[]> => {
 
 > Using promises means you are going to use ES6 or you are going to include a
 > polyfill to provide compatibility on ES5 (need to install the polifyll and
-> include it your wepback entry point).
+> include it your webpack entry point).
 
 - Let's jump into the ui side, to create the table component we are going to follow
   a progressive approach:
@@ -122,7 +120,7 @@ export const MemberTableComponent = () => {
 In this component we are doing many things:
 
 - First we have created a custom hook to encapsulate the getter to memberCollection and
-  the loadMemberCollection call to the api, by doing this code is more maintenalbe plus
+  the loadMemberCollection call to the api, by doing this code is more maintenable plus
   is a potential effect to be reused in other components.
 
 - We just use the custom hook that we have create in the component.
@@ -149,7 +147,7 @@ export * from "./sidebar";
 + export * from './memberTable';
 ```
 
-- Let's instatiate this component into the app:
+- Let's instantiate this component into the app:
 
 First we import it
 
@@ -303,7 +301,7 @@ _./src/components/memberTable.tsx_
 ```
 
 > Excercise: we could go further with the refactoring, what about creating a
-> _TableHeaderComponent_ component and a _tableBodyComponent_ ?.
+> _TableHeaderComponent_ component and a _tableBodyComponent_ ?
 
 # About Basefactor + Lemoncode
 

@@ -62,7 +62,7 @@ We can think about two possible solutions:
 
   - The child components remains as pure presentational.
   - You have only one place where the updates is being done, and you have control over it, you could easily change behavior
-    e.g. if the user has alreay started typing then name then ignore the ajax call.
+    e.g. if the user has already started typing the name then ignore the ajax call.
 
 We will stick with the second approach in the rest of examples, but we encourage you to go through both approaches as
 a learning excercise.
@@ -119,7 +119,7 @@ The first approach was fine if we come from a Java / C# mindset, but it has it d
 what would happen if we want the editingName to be preserved if it has changed (async call
 would have no effect then)? When there is a conflict updating the state between parent and child
 a valid solution is to lift up that part of the state to the parent component, if we follow
-this approach we can endup having the core state isolated in container components (prior step
+this approach we can end up having the core state isolated in container components (prior step
 to build redux on top of it).
 
 Let's see how can we lift up this state:

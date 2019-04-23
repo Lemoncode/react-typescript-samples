@@ -30,7 +30,7 @@ npm install
 
 - Then, we need to install Material-UI:
 ```
-npm install @material-ui/core @material-ui/icons --save-dev
+npm install @material-ui/core @material-ui/icons --save
 ```
 
 - We are going to add a new component to show a login form. So, firstly, let's create a new folder under _./src/components_, named _login_. Secondly, we will add there a new file, _loginForm.tsx_, which will contain a form with two text fields and a button from Material-UI.

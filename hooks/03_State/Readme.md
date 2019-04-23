@@ -12,7 +12,7 @@ We take as a starting point the example _02 Properties_:
   username (with default value "defaultUserName").
   This _App_ component renders the _Hello_ component. At first we create a simple stateless
   _App_ component.
-- Update _main.tsx_ file to include our _App_ component.
+- Update _index.tsx_ file to include our _App_ component.
 - Change _App_ component to a stateful class component to hold the _userName_ state.
 - Create a _NameEdit_ component to let the user change the value of username. This changes the _App_ state
   using a function from _App_.
@@ -67,7 +67,7 @@ _./src/index.tsx_
 
 - It's time to revisit _app.tsx_. We want to store the user's name and let the user updated it. We will use hooks to
   allow _App_ functional components to make use of state (this works in React 16.8.2 and above if you have to use
-  older verions you have to use a class component, check the "old*classes_components" on the root of this repo for example).
+  older versions you have to use a class component, check the "old*classes_components" on the root of this repo for example).
   We will add \_userName* to the state.
 
 Let's move this component to a class stateful component and define a state including _userName_, and pass this value to the _Hello_ component.

@@ -7,7 +7,7 @@ We have incorporated a set of examples based on hooks.
 
 Right now you got two main folders:
 
-- [Hooks](./hooks): set of samples migrated to hooks (right now 11 samples migrated), if you are new to
+- [Hooks](./hooks): set of samples migrated to hooks (right now 15 samples migrated), if you are new to
   React, or you are going to start working on a new project, I recommend you going through these
   examples.
 
@@ -68,7 +68,7 @@ Introduce a basic React concept, handling properties.
 
 ### [03 State](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/03_State)
 
-Starting from sample 02, Let's the user change the name to be displayed.
+Starting from sample 02, let's the user change the name to be displayed.
 
 Introduce a basic React concept, handling State using hooks.
 
@@ -112,6 +112,22 @@ Render a table and use a child component to render each row, using mock data.
 
 Starting from sample 10, remove mock data, hit a real REST API (Github api), use
 axios to perform the fetch call.
+
+### [12 React Router](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/12_ReactRouter)
+
+Starting from sample 03,start using React-Router (SPA navigation).
+
+### [13 Login Form](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/13_LoginForm)
+
+Starting from sample 12, implement a basic login page, that will redirect the user to another page  whenever the login has completed successfully.
+
+### [14 Form Validation](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/14_FormValidation)
+
+Starting from sample 13, add validation support to login form.
+
+### [15 Context](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/15_Context)
+
+Starting from sample 14, learn how React 16 context api works.
 
 ## Old Class folder
 
@@ -171,7 +187,7 @@ we will call async operations and fitting them into Redux architecture.
 
 Display a busy indicator when an ajax request is in progress.
 
-To have a global count of promises gong on we are using [reat-promise-tracker](https://github.com/Lemoncode/react-promise-tracker) and to display a cool spinner [react-spinner](https://github.com/davidhu2000/react-spinners)
+To have a global count of promises gong on we are using [react-promise-tracker](https://github.com/Lemoncode/react-promise-tracker) and to display a cool spinner [react-spinner](https://github.com/davidhu2000/react-spinners)
 
 ### 11 Testing reducers
 

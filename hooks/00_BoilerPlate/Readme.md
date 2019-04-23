@@ -15,7 +15,6 @@ Summary steps:
   - Webpack and webpack-dev-server.
   - TypeScript.
   - Babel.
-  - Bootstrap.
 - Setup **[./webpack.config.js](./webpack.config.js)**
 - Create a test JS file.
 - Create a simple HTML file.
@@ -136,8 +135,7 @@ _[./package.json](./package.json)_
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server  --mode development --inline --hot --open",
-    "build": "webpack  --mode development",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack  --mode development"
   },
   "author": "",
   "license": "ISC",
@@ -198,7 +196,6 @@ _[./src/index.html](./src/index.html)_
 - Now it's time to create a basic **[./webpack.config.js](./webpack.config.js)** file. This configuration includes plumbing for:
 - Launching a web dev server.
 - Transpiling from TypeScript to JavaScript.
-- Setting up Twitter Bootstrap (including fonts, etc...).
 - Generating the build under a **dist** folder.
 
 _[./webpack.config.js](./webpack.config.js)_
