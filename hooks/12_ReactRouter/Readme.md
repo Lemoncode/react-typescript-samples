@@ -1,6 +1,6 @@
 # 12 React Router
 
-n this sample we will start using React-Router (<acronym title="Single Page Application">SPA</acronym> navigation).
+In this sample we will start using React-Router (<acronym title="Single Page Application">SPA</acronym> navigation).
 
 We take as a starting point the example _03 State_:
 
@@ -14,7 +14,7 @@ npm install
 
 - Let's make some cleanup (remove _src/hello.tsx_ and _src/nameEdit.tsx_ files).
 
-- Let's create a component called _PageA_ as _src/pageA.tsx_:
+- Let's create a component called _PageA_ as _src/pages/pageA.tsx_:
 
 _./src/pages/pageA.tsx_
 
@@ -27,7 +27,7 @@ export const PageA = () =>
     </div>
 ```
 
-- Let's create a component called _PageB_ as _src/pageB.tsx_:
+- Let's create a component called _PageB_ as _src/pages/pageB.tsx_:
 
 _./src/pages/pageB.tsx_
 
@@ -54,22 +54,29 @@ _./src/app.tsx_
 ```diff
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-- import { App } from './app';
 - import { HelloComponent } from './hello';
+- import { NameEditComponent } from './nameEdit';
 + import { HashRouter, Switch, Route } from 'react-router-dom';
 + import { PageA } from './pages/pageA';
 + import { PageB } from './pages/pageB';
 
-ReactDOM.render(
-- <HelloComponent userName={name} />
-- <NameEditComponent userName={name} onChange={setUsernameState} />
-+ <HashRouter>
-+   <Switch>
-+     <Route exact={true} path="/" component={PageA} />
-+     <Route path="/pageB" component={PageB} />
-+   </Switch>
-+ </HashRouter>,
-document.getElementById('root')
+export const App = () => {
+- const [name, setName] = React.useState("initialName");
+
+- const setUsernameState = (event: React.ChangeEvent<HTMLInputElement>) => {
+-    setName(event.target.value);
+-  };
+  return (
+    <>
+-     <HelloComponent userName={name} />
+-     <NameEditComponent userName={name} onChange={setUsernameState} />
++     <HashRouter>
++       <Switch>
++         <Route exact={true} path="/" component={PageA} />
++         <Route path="/pageB" component={PageB} />
++       </Switch>
++     </HashRouter>,
+    </>
 );
 
 ```

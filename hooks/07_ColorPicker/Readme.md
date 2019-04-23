@@ -1,14 +1,13 @@
 # 07 Colopicker
 
-In this sample we are going to implement a color picker component, it will allow us to choose
-between red / green / blue components and displaty the resulting color.
+In this sample we are going to implement a color picker component, it will allow us to choose between red / green / blue components and display the resulting color.
 
-We will start with a non optimal implementation and we will refactor it in sample 09.
+We will start with a non optimal implementation and we will refactor it in sample 08.
 
 # Steps
 
 - We will take as starting point sample _06 Enable_, copy the content from that project and
-  exectue _npm install_
+  execute _npm install_
 
 ```bash
 npm install
@@ -18,7 +17,7 @@ npm install
 
 - We will create a components folder under _src_ (_src/components_).
 
-- Inside that components folder we will copy all the components that we have created (_nameEdit_
+- Inside that components folder we will copy all the components that we have created (_nameEdit.tsx_
   and _hello.tsx_).
 
 - We will create an _index_ file under _src/components_ and create a barrel (by doing this, later
@@ -47,7 +46,7 @@ export interface Color {
 
 - Let's start by creating a _ColorBrowser_ component: this color will just display the
   selected color (under the hood is just a div, by applying css styling we provide a width
-  and height to that rectanble, and a background color).
+  and height to that rectangle, and a background color).
 
 _./src/components/colorBrowser.tsx_
 
@@ -128,7 +127,7 @@ _./src/app.tsx_
 npm start
 ```
 
-- We want add color picker editing capabilities, let's create a color picker component
+- We want to add color picker editing capabilities, let's create a color picker component
   and add a single slider for one of the color values.
 
 _./src/components/colorpicker.tsx_

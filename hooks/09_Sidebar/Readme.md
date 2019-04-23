@@ -12,7 +12,7 @@ implementation, then we will make it generic.
 npm install
 ```
 
-- Create a file called _src/sidebar.css_ and add the following styles (http://www.w3schools.com/howto/howto_js_sidenav.asp):
+- Create a file called _src/components/sidebar.css_ and add the following styles (http://www.w3schools.com/howto/howto_js_sidenav.asp):
 
 _./src/components/sidebar.css_
 
@@ -100,10 +100,10 @@ _./webpack.config.js_
 
 ```
 
-- We are going to create now a sidebar component, _src/sidebar.tsx_. Right now we will create just
+- We are going to create now a sidebar component, _src/components/sidebar.tsx_. Right now we will create just
   a rectangle and we will interact with the animation.
 
-We need to install node typings, since we are goin to make use of _require_ to import from
+We need to install node typings, since we are going to make use of _require_ to import from
 the _css_.
 
 ```bash
@@ -212,7 +212,7 @@ export const SidebarComponent = (props: Props) =>
     </div>
 ```
 
-- Let's make a quick test we will show always the side bar:
+- Let's make a quick test, we will show always the side bar:
 
 _./src/app.tsx_
 

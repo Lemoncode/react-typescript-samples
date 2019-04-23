@@ -3,7 +3,7 @@
 Let's continue with the update name sample, this time we want to disable the
 "update" button when the input is empty or when the value hasn't changed.
 
-We will take a startup point sample _05 Refactor_
+We will take as startup point sample _05 Refactor_
 
 ## Summary steps:
 
@@ -51,7 +51,7 @@ _./src/nameEdit.tsx_
     decide in which cases it should be disabled (thanks to [Victor Borrego](https://github.com/v-borrego) to point out this great solution).
 
 We will follow the second approach since is the one that can provide more flexibility to the
-control (in a real project, choosing between one approach or the other depends on specfication details).
+control (in a real project, choosing between one approach or the other depends on specification details).
 
 We will expose a _disabled_ property in the _NameEdit_ component.
 
@@ -97,7 +97,7 @@ npm start
 
 # Excercise
 
-Ideas to further implement this, let's convert our NamEdit component to a password
+Ideas to further implement this, let's convert our NameEdit component to a password
 strength component:
 
 - Extract the disabled condition to function.

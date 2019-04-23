@@ -4,11 +4,11 @@ In this sample we are going to learn how React 16 context api works.
 
 This will allow us to share information between components without having to go through props drilldown or having to add redux support to our project.
 
-We will take a startup point sample 15 Context:
+We will take a startup point sample 14 FormValidation:
 
 ## Steps
 
-- We want to store just the _login_ field once the user logs in and display it in the page B (or in wathever page or component we need it), let's add a default value ('no user').
+- We want to store just the _login_ field once the user logs in and display it in the page B (or in whatever page or component we need it), let's add a default value ('no user').
 
 - Let's start by creating a context, we will call it _sessionContext_, and add the proper typing
 
@@ -40,7 +40,7 @@ export const SessionContext =
 
 _./src/common/sessionContext.tsx_
 
-Append this to the bottom of the file.
+Append this at the bottom of the file.
 
 ```typescript
 export const SessionProvider: React.StatelessComponent = props => {

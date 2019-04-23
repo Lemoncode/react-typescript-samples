@@ -10,7 +10,7 @@ En este ejemplo vamos a añadir una barra lateral a nuestra aplicación, empezar
 npm install
 ```
 
-- Cree un archivo llamado _src/sidebar.css_ y añada los siguientes estilos (http://www.w3schools.com/howto/howto_js_sidenav.asp):
+- Cree un archivo llamado _src/components/sidebar.css_ y añada los siguientes estilos (http://www.w3schools.com/howto/howto_js_sidenav.asp):
 
 _./src/components/sidebar.css_
 
@@ -98,7 +98,7 @@ _./webpack.config.js_
 
 ```
 
-- Vamos a crear el componente de la barra lateral, _src/sidebar.tsx_. Crearemos sólo
+- Vamos a crear el componente de la barra lateral, _src/components/sidebar.tsx_. Crearemos sólo
   un rectángulo e interactuaremos con la animación.
 
 Necesitamos instalar los tipos para _node_, ya que usaremos _require_ a la hora de importar desde el _css_.

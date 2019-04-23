@@ -96,7 +96,7 @@ _[./src/index.tsx](./src/index.tsx)_
 
 - Delete the file _main.ts_ we are not going to need it anymore.
 
-- Modify the [./webpack.config.js](./webpack.config.js) file and change the entry point from `./index.ts`
+- Modify the [./webpack.config.js](./webpack.config.js) file and change the entry point from `./main.ts`
   to `./index.tsx`.
 
 _[./webpack.config.js](./webpack.config.js)_
@@ -110,8 +110,8 @@ module.exports = {
    extensions: ['.js', '.ts', '.tsx']
  },
  entry: ["@babel/polyfill", 
- -  "main.ts"],
- +  "./index.tsx"],
+-  "./main.ts"],
++  "./index.tsx"],
   output: {
     path: path.join(basePath, "dist"),
     filename: "bundle.js"

@@ -4,11 +4,6 @@ import { PageA } from "./pages/pageA";
 import { PageB } from "./pages/pageB";
 
 export const App = () => {
-  const [name, setName] = React.useState("defaultUserName");
-
-  const setUsernameState = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value);
-  };
 
   return (
     <>
