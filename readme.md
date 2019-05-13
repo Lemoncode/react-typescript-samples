@@ -14,12 +14,13 @@ Right now you got two main folders:
 - [Old_class_components_samples](./old_class_components_samples): The old samples, just in case you need to work with older react
   versions or you need to maintain legacy code.
 
-You can check as well other repos (react / redux + typescript):
+If you want to make a deeper dive on React Hooks you can check this repo [React Hooks By Example](https://github.com/Lemoncode/react-hooks-by-example)
 
-- [React By Sample](https://github.com/Lemoncode/react-by-sample)
+Other guided repos available (react / redux + typescript):
+
 - [Redux By Sample](https://github.com/Lemoncode/redux-by-sample)
 - [From React to Redux](https://github.com/Lemoncode/from-react-to-redux-ts)
-- [Redux Testing Typescript](https://github.com/Lemoncode/redux-testing-typescript)
+- [Redux Sagas](https://github.com/Lemoncode/redux-sagas-typescript-by-example)
 
 # Examples
 
