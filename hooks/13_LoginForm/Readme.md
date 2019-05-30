@@ -121,26 +121,28 @@ _./src/pages/loginPage.tsx_
 ```javascript
 import * as React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { withStyles, createStyles, WithStyles } from "@material-ui/core/styles";
+import makeStyles from "@material-ui/styles/makeStyles";
+import createStyles from "@material-ui/styles/createStyles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-// https://material-ui.com/guides/typescript/
-const styles = theme =>
+// https://material-ui.com/styles/api/#makestyles-styles-options-hook
+const useStyles = makeStyles(theme =>
   createStyles({
     card: {
       maxWidth: 400,
       margin: "0 auto"
     }
-  });
+  })
+);
 
 interface Props extends RouteComponentProps, WithStyles<typeof styles> {}
 
 const LoginPageInner = (props: Props) => {
-  const { classes } = props;
+  const classes = useStyles();
 
   return (
     <Card className={classes.card}>
@@ -164,7 +166,7 @@ const LoginPageInner = (props: Props) => {
   );
 };
 
-export const LoginPage = withStyles(styles)(withRouter<Props>(LoginPageInner));
+export const LoginPage = withRouter < Props > LoginPageInner;
 ```
 
 - This can be ok, but if we take a deeper look to this component, we could break down into two, one is the card itself the other the form dialog, so it should finally look like:
@@ -248,16 +250,17 @@ _./src/pages/login/loginPage.tsx_
 ```diff
 // ...
 
-// https://material-ui.com/guides/typescript/
-const styles = theme => createStyles({
-  card: {
-    maxWidth: 400,
-    margin: '0 auto',
-  },
-});
+// https://material-ui.com/styles/api/#makestyles-styles-options-hook
+const useStyles = makeStyles(theme =>
+  createStyles({
+    card: {
+      maxWidth: 400,
+      margin: "0 auto"
+    }
+  })
+);
 
-interface Props extends RouteComponentProps, WithStyles<typeof styles> {
-}
+interface Props extends RouteComponentProps {}
 
 const LoginPageInner = (props) => {
   const { classes } = props;
@@ -277,7 +280,7 @@ const LoginPageInner = (props) => {
   )
 }
 
-export const LoginPage = withStyles(styles)(withRouter<Props>(LoginPageInner));
+export const LoginPage = withRouter<Props>(LoginPageInner);
 ```
 
 - Let's add the navigation on button clicked (later on we will check for user and pwd) _form.tsx_.
@@ -462,23 +465,26 @@ import * as React from "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import { withStyles } from "@material-ui/core";
+import createStyles from "@material-ui/core/styles/createStyles";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
 interface Props {
-  classes?: any;
   message: string;
   show: boolean;
   onClose: () => void;
 }
 
-const styles = theme => ({
-  close: {
-    padding: theme.spacing.unit / 2
-  }
-});
+const useStyles = makeStyles(theme =>
+  createStyles({
+    close: {
+      padding: theme.spacing(0.5)
+    }
+  })
+);
 
-const NotificationComponentInner = (props: Props) => {
-  const { classes, message, show, onClose } = props;
+export const NotificationComponent = (props: Props) => {
+  const { message, show, onClose } = props;
+  const classes = useStyles();
 
   return (
     <Snackbar
@@ -507,10 +513,6 @@ const NotificationComponentInner = (props: Props) => {
     />
   );
 };
-
-export const NotificationComponent = withStyles(styles)(
-  NotificationComponentInner
-);
 ```
 
 - Let's expose this common component via an _index_ file.
@@ -535,7 +537,7 @@ const LoginPageInner = (props: Props) => {
     createEmptyLogin()
   );
 + const [showLoginFailedMsg, setShowLoginFailedMsg] = React.useState(false);
-  const { classes } = props;
+  const classes = useStyles();
 
   const onLogin = () => {
     if (isValidLogin(loginInfo)) {
