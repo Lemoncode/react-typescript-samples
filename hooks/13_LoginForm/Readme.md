@@ -139,7 +139,7 @@ const useStyles = makeStyles(theme =>
   })
 );
 
-interface Props extends RouteComponentProps, WithStyles<typeof styles> {}
+interface Props extends RouteComponentProps {}
 
 const LoginPageInner = (props: Props) => {
   const classes = useStyles();
@@ -166,7 +166,7 @@ const LoginPageInner = (props: Props) => {
   );
 };
 
-export const LoginPage = withRouter < Props > LoginPageInner;
+export const LoginPage = withRouter<Props>(LoginPageInner);
 ```
 
 - This can be ok, but if we take a deeper look to this component, we could break down into two, one is the card itself the other the form dialog, so it should finally look like:
