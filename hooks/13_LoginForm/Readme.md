@@ -166,7 +166,7 @@ const LoginPageInner = (props: Props) => {
   );
 };
 
-export const LoginPage = withRouter<Props>(LoginPageInner);
+export const LoginPage = withRouter < Props > LoginPageInner;
 ```
 
 - This can be ok, but if we take a deeper look to this component, we could break down into two, one is the card itself the other the form dialog, so it should finally look like:
@@ -445,6 +445,62 @@ const LoginForm = (props: PropsForm) => {
       <TextField label="Password" type="password" margin="normal"
 +        value={loginInfo.password}
 +        onChange={onTexFieldChange('password')}
+      />
+      <Button variant="contained" color="primary" onClick={onLogin}>
+        Login
+      </Button>
+    </div>
+  );
+};
+```
+
+- We will add material-ui classes to LoginForm component.
+
+_./src/pages/loginPage.tsx_
+
+```diff
+interface PropsForm {
+  onLogin: () => void;
+  onUpdateField: (name: string, value: any) => void;
+  loginInfo : LoginEntity;
+}
+
++ // https://material-ui.com/styles/api/#makestyles-styles-options-hook
++ const useFormStyles = makeStyles(theme =>
++   createStyles({
++     formContainer: {
++       display: "flex",
++       flexDirection: "column",
++       justifyContent: "center"
++     }
++   })
++ );
+
+const LoginForm = (props: PropsForm) => {
++ const classes = useFormStyles();
+  const { onLogin, onUpdateField, loginInfo } = props;
+
+  // TODO: Enhacement move this outside the stateless component discuss why is a good idea
+  const onTexFieldChange = (fieldId) => (e) => {
+    onUpdateField(fieldId, e.target.value);
+  }
+
+  return (
+-   <div
+-     style={{
+-       display: "flex",
+-       flexDirection: "column",
+-       justifyContent: "center"
+-     }}
+-   >
++   <div className={classes.formContainer}>
+      <TextField label="Name" margin="normal"
+        value={loginInfo.login}
+        onChange={onTexFieldChange('login')}
+      />
+      <TextField label="Password" type="password" margin="normal"
+        value={loginInfo.password}
+        onChange={onTexFieldChange('password')}
       />
       <Button variant="contained" color="primary" onClick={onLogin}>
         Login
