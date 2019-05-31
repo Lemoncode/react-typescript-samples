@@ -74,7 +74,19 @@ interface PropsForm {
   loginInfo: LoginEntity;
 }
 
+// https://material-ui.com/styles/api/#makestyles-styles-options-hook
+const useFormStyles = makeStyles(theme =>
+  createStyles({
+    formContainer: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center"
+    }
+  })
+);
+
 const LoginForm = (props: PropsForm) => {
+  const classes = useFormStyles();
   const { onLogin, onUpdateField, loginInfo } = props;
 
   // TODO: Enhacement move this outside the stateless component discuss why is a good idea
@@ -83,13 +95,7 @@ const LoginForm = (props: PropsForm) => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center"
-      }}
-    >
+    <div className={classes.formContainer}>
       <TextField
         label="Name"
         margin="normal"
