@@ -111,7 +111,7 @@ _./src/index.html_
 - Let's build a proper _login_ layout, _loginPage.tsx_. To build a nice layout, we will install _@material-ui/core_ and _@material-ui/icons_
 
 ```bash
-npm install @material-ui/core@^4.0.1 @material-ui/icons@^4.0.1 --save
+npm install @material-ui/core @material-ui/icons --save
 ```
 
 - However, we must be careful with the compatibility of certain versions of _typescript_ with the new _hooks_ of _material-ui_. For this example, we can install _typescript@3.3.3_ version.
