@@ -20,8 +20,8 @@ const useStyles = makeStyles(theme =>
 );
 
 export const NotificationComponent = (props: Props) => {
-  const { message, show, onClose } = props;
   const classes = useStyles();
+  const { message, show, onClose } = props;
 
   return (
     <Snackbar
