@@ -114,7 +114,7 @@ _./src/index.html_
 npm install @material-ui/core @material-ui/icons --save
 ```
 
-- However, we must be careful with the compatibility of certain versions of _typescript_ with the new _hooks_ of _material-ui_. The latest version of typescript at this time (v.3.5.1) shows a TSERROR when using _useStyles()_. If you have the same error, you can solve it temporarily using typescript@3.3.3 version.
+- However, we must be careful with the compatibility of certain versions of _typescript_ with the new _hooks_ of _material-ui_. For this example, we can install _typescript@3.3.3_ version. You can get more information about this issue in the following link https://github.com/mui-org/material-ui/issues/14018
 
 - Now we could create a login form it could look something like:
 
