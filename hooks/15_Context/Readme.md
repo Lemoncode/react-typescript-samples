@@ -32,7 +32,7 @@ export const createDefaultUser = (): SessionContextProps => ({
 });
 
 export const SessionContext =
-  React.createContext < SessionContextProps >(createDefaultUser());
+  React.createContext < SessionContextProps > createDefaultUser();
 ```
 
 - This session context will expose a _provider_ (it will serve us to set the login name in the context), and a _consumer_ (that will let us consume the login name from the context at any point of the application).
@@ -140,7 +140,7 @@ const LoginPageInner = (props: Props) => {
     createDefaultLoginFormErrors()
   );
   const [showLoginFailedMsg, setShowLoginFailedMsg] = React.useState(false);
-  const { classes } = props;
+  const classes = useStyles();
 
   const onLogin = () => {
     loginFormValidation.validateForm(loginInfo).then(formValidationResult => {

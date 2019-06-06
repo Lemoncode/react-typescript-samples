@@ -1,6 +1,7 @@
 import * as React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { withStyles, createStyles, WithStyles } from "@material-ui/core/styles";
+import makeStyles from "@material-ui/styles/makeStyles";
+import createStyles from "@material-ui/styles/createStyles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
@@ -10,23 +11,24 @@ import { LoginEntity, createEmptyLogin } from "../model/login";
 import { isValidLogin } from "../api/login";
 import { NotificationComponent } from "../common";
 
-// https://material-ui.com/guides/typescript/
-const styles = theme =>
+// https://material-ui.com/styles/api/#makestyles-styles-options-hook
+const useStyles = makeStyles(theme =>
   createStyles({
     card: {
       maxWidth: 400,
       margin: "0 auto"
     }
-  });
+  })
+);
 
-interface Props extends RouteComponentProps, WithStyles<typeof styles> {}
+interface Props extends RouteComponentProps {}
 
 const LoginPageInner = (props: Props) => {
   const [loginInfo, setLoginInfo] = React.useState<LoginEntity>(
     createEmptyLogin()
   );
   const [showLoginFailedMsg, setShowLoginFailedMsg] = React.useState(false);
-  const { classes } = props;
+  const classes = useStyles();
 
   const onLogin = () => {
     if (isValidLogin(loginInfo)) {
@@ -64,7 +66,7 @@ const LoginPageInner = (props: Props) => {
   );
 };
 
-export const LoginPage = withStyles(styles)(withRouter<Props>(LoginPageInner));
+export const LoginPage = withRouter<Props>(LoginPageInner);
 
 interface PropsForm {
   onLogin: () => void;
@@ -72,7 +74,19 @@ interface PropsForm {
   loginInfo: LoginEntity;
 }
 
+// https://material-ui.com/styles/api/#makestyles-styles-options-hook
+const useFormStyles = makeStyles(theme =>
+  createStyles({
+    formContainer: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center"
+    }
+  })
+);
+
 const LoginForm = (props: PropsForm) => {
+  const classes = useFormStyles();
   const { onLogin, onUpdateField, loginInfo } = props;
 
   // TODO: Enhacement move this outside the stateless component discuss why is a good idea
@@ -81,13 +95,7 @@ const LoginForm = (props: PropsForm) => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center"
-      }}
-    >
+    <div className={classes.formContainer}>
       <TextField
         label="Name"
         margin="normal"

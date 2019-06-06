@@ -1,25 +1,27 @@
 import * as React from "react";
-import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import { withStyles } from "@material-ui/core";
+import createStyles from "@material-ui/core/styles/createStyles";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
 interface Props {
-  classes?: any;
   message: string;
   show: boolean;
   onClose: () => void;
 }
 
-const styles = theme => ({
-  close: {
-    padding: theme.spacing.unit / 2
-  }
-});
+const useStyles = makeStyles(theme =>
+  createStyles({
+    close: {
+      padding: theme.spacing(0.5)
+    }
+  })
+);
 
-const NotificationComponentInner = (props: Props) => {
-  const { classes, message, show, onClose } = props;
+export const NotificationComponent = (props: Props) => {
+  const classes = useStyles();
+  const { message, show, onClose } = props;
 
   return (
     <Snackbar
@@ -48,7 +50,3 @@ const NotificationComponentInner = (props: Props) => {
     />
   );
 };
-
-export const NotificationComponent = withStyles(styles)(
-  NotificationComponentInner
-);
