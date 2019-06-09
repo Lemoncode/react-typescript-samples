@@ -134,7 +134,6 @@ _./src/app.tsx_
 import * as React from "react";
 import { HelloComponent } from "./hello";
 import { NameEditComponent } from './nameEdit';
-import { NameEditComponent } from './nameEdit';
 
 
 export const App = () => {
