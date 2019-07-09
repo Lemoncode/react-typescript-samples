@@ -6,7 +6,7 @@ interface Props {
   onColorUpdated: (color: Color) => void;
 }
 
-const updateColor = (props: Props, colorId: keyof Color) => value => {
+const updateColor = (props: Props, colorId: keyof Color) => (value: any) => {
   // keyof Color ensures only 'red', 'blue' or 'green' can be passed in.
   props.onColorUpdated({
     ...props.color, // this creates a clone of the current props.color object...
