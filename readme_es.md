@@ -179,10 +179,6 @@ La validación realizada hasta ahora:
 
 ### 09 Redux
 
-Added Redux support, isolated state into Redux reducers, implement load, save,
-basic validation cycle. This sample uses the fake api, in following samples
-we will call async operations and fitting them into Redux architecture.
-
 Añadido soporte para Redux, estado aislado en 'Redux reducers', implementa carga, guardar,
 ciclo de validación simple. Esta muestra usa una API falsa, en las siguientes muentras
 haremos llamadas a operaciones asíncronas y las ajustaremos dentro de la arquitectura de Redux.
