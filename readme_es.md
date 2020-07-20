@@ -16,7 +16,7 @@ un nuevo proyecto, Te recomendamos que lo hagas a través de ´estos ejemplos.
 
 Si quieres sumerjirte más en React Hooks puedes chequear este repo: [React Hooks By Example](https://github.com/Lemoncode/react-hooks-by-example)
 
-Other guided repos available (react / redux + typescript):
+Otros repos guiados disponibles (React / Redux + TypeScript):
 
 - [Redux By Sample](https://github.com/Lemoncode/redux-by-sample)
 - [Desde React a Redux](https://github.com/Lemoncode/from-react-to-redux-ts)
