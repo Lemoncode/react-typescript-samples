@@ -10,126 +10,123 @@ Ahora mismo hay dos carpetas principales:
 - [Hooks](./hooks): set de ejemplos migrados a hooks (ahora mismo 15 ejemplos), si eres nuevo en React, o vas a empezar a trabajar en
 un nuevo proyecto, Te recomendamos que lo hagas a través de ´estos ejemplos.
 
-- [Old_class_components_samples](./old_class_components_samples): The old samples, just in case you need to work with older react
-  versions or you need to maintain legacy code.
+- [Old_class_components_samples](./old_class_components_samples): Los ejemplos viejos, sólo en caso de que necesite trabajar en un proyecto de versiones viejas de React o necesites mantener código legacy.
 
-If you want to make a deeper dive on React Hooks you can check this repo [React Hooks By Example](https://github.com/Lemoncode/react-hooks-by-example)
+Si quieres sumerjirte más en React Hooks puedes chequear este repo: [React Hooks By Example](https://github.com/Lemoncode/react-hooks-by-example)
 
 Other guided repos available (react / redux + typescript):
 
 - [Redux By Sample](https://github.com/Lemoncode/redux-by-sample)
-- [From React to Redux](https://github.com/Lemoncode/from-react-to-redux-ts)
+- [Desde React a Redux](https://github.com/Lemoncode/from-react-to-redux-ts)
 - [Redux Sagas](https://github.com/Lemoncode/redux-sagas-typescript-by-example)
 
-# Examples
+# Ejemplos
 
-The goal of this project is to provide a set of simple samples, providing and step by step guide to
-start working with React and Typescript. Characteristics:
+Características:
 
-- Bundling based on webpack.
-- React + Typescript based.
-- Simple navigation using react-router.
-- Managing async calls and updates.
-- Using Redux library (not available yet on hooks version, coming soon).
-- Handling async calls via Redux-Thunk + Redux Saga (not available yet on hooks version, coming soon)
-- Adding unit testing support (not available yet on hooks version, coming soon).
-- Implementing Lazy Loading (not available yet on hooks version, coming soon).
+- Bundling basado en webpack.
+- Basado en React + Typescript.
+- Navegación simple usando react-router.
+- Gestionando llamadas asíncronas y actualizaciones.
+- Usando la librería Redux (todavía no está disponible para la version en Hooks, próximamente).
+- Manejando llamadas asíncronas vía Redux-Thunk + Redux Saga (todavía no está disponible para la version en Hooks, próximamente).
+- Añadiendo sporte para test unitarios (todavía no está disponible para la version en Hooks, próximamente).
+- Implementando Lazy Loading (todavía no está disponible para la version en Hooks, próximamente).
 - ...
 
-## To get started:
+## Para empezar:
 
-1. Install [NodeJS](http://www.nodejs.org)
-2. Download this repo
-3. Open the command line of your choice and cd to a sample directory within this repo on your machine
-4. `npm install` - Installs packages
-5. `npm start` - Builds the project and launch a lite web server (webpack-dev-server).
-6. Navigate to [http://localhost:8080/](http://localhost:8080/) if your browser doesn't open automatically.
+1. Instalar [NodeJS](http://www.nodejs.org)
+2. Descarga este repo
+3. Abre la consola de comandos que prefieras y haz 'cd' en el directorio de ejemplo dentro de este repo en tu máquina.
+4. `npm install` - Instalación de los paquetes
+5. `npm start` - Build del proyecto y lanza el servidor web (webpack-dev-server).
+6. Copia y pega esta dirección en tu navegador [http://localhost:8080/](http://localhost:8080/) si ´éste no se abre automáticamente.
 
-# samples
+# muestras
 
 ## Hooks
 
 ### [00 Boiler plate](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/00_BoilerPlate)
 
-Bundling + npm start based on webpack.
+Bundling + npm start basado en webpack.
 
 ### [01 Hello React](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/01_HelloReact)
 
-Display the text 'Hello React'.
+Muestra el texto 'Hello React'.
 
-Hello world, simples react render sample.
+Hello world, muestra siemple de React render.
 
 ### [02 Properties](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/02_Properties)
 
-Display the text 'Hello {name}' (where name is a prop
-that contains a given name).
+Muestra el texto 'Hello {name}' (donde nombre es una propiedad que contiene el nombre).
 
-Introduce a basic React concept, handling properties.
+Introducción al concepto básico de React, manejando propiedades.
 
 ### [03 State](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/03_State)
 
-Starting from sample 02, let's the user change the name to be displayed.
+Empezando desde la muestra 02, permite que el usuario cambie el nombre que se muestra.
 
-Introduce a basic React concept, handling State using hooks.
+Introducción al concepto básico de React, manejando el Estado (State) usando Hooks.
 
 ### [04 Callback](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/04_Callback)
 
-Starting from sample 03, let the user change the name only
+Empezando desde la nuestra 03, permite que el usario cambie la propiedad name solo cuando presiona sobre el botón _change_ .
 when he hits a _change_ button.
 
-Using callbacks.
+Usando callbacks.
 
 ### [05 Refactor](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/05_Refactor)
 
-Refactor sample 04, cleanup and discussion on where to place the state.
+Refactor de la muestra 04, Limpieza y discusión sobre dónde debe estar el estado.
 
-Refactor the job done.
+Reafactorizar el trabajo realizado.
 
 ### [06 Enable](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/06_Enable)
 
-Starting from sample 05, enable / disable the _change_ button
-when the text is empty or same name as original name,.
+Empezando desde la nuestra 05, enable / disable del botón _change_
+cuando el texto está vacío o tiene el mismo nombre que originalmente,.
 
-Enable/disable components.
+Componentes Enable/disable
 
 ### [07 ColorPicker](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/07_ColorPicker)
 
-Simple color picker demo (show how properties work).
+demo simple de color picker (muestras cómo funcionan las propiedades).
 
 ### [08 ColorPicker Refactor](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/08_ColorPickerRefactor)
 
-ColorPicker refactor.
+ColorPicker refactorizado.
 
 ### [09 Sidebar](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/09_Sidebar)
 
-Implementation of a single sidebar.
+Simple implementación de un menú lateral.
 
 ### [10 Table Mock](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/10_TableMock)
 
-Render a table and use a child component to render each row, using mock data.
+Renderiza una tabla y usa un componente hijo para renderizar cada fila, usando un mock de datos.
 
 ### [11 Table Axios](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/11_TableAxios)
 
-Starting from sample 10, remove mock data, hit a real REST API (Github api), use
-axios to perform the fetch call.
+Empezando desde la nuestra 10, elimina el mock de datos, utiliza una REST API real (api Github), utiliza axios para mejorar el rendimiento de la llamada fetch.
 
 ### [12 React Router](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/12_ReactRouter)
 
-Starting from sample 03,start using React-Router (SPA navigation).
+Empezando desde la nuestra 03, empezando a utilizar React-Router (navegación SPA).
 
 ### [13 Login Form](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/13_LoginForm)
 
-Starting from sample 12, implement a basic login page, that will redirect the user to another page  whenever the login has completed successfully.
+Empezando desde la nuestra 12, implementa una página de login básica, que redireccione al usuario a otra página cuando el login haya completado satisfactoriamente.
 
 ### [14 Form Validation](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/14_FormValidation)
 
-Starting from sample 13, add validation support to login form.
+Empezando desde la nuestra 13, añadir validaciones al formulario de login.
 
 ### [15 Context](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/15_Context)
 
-Starting from sample 14, learn how React 16 context api works.
+SEmpezando desde la nuestra 14, learn how React 16 context api works.
+SEmpezando desde la nuestra 14, emprender cómo funciona la API de React 16 Context.
 
-## Old Class folder
+## Carpeta class vieja
 
 ### 00 Boiler plate
 
