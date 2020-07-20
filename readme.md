@@ -188,9 +188,11 @@ we will call async operations and fitting them into Redux architecture.
 
 ### 10 SpinnerAsync
 
-Display a busy indicator when an ajax request is in progress.
+Display a busy indicator while an ajax request is in progress.
 
-To have a global count of promises gong on we are using [react-promise-tracker](https://github.com/Lemoncode/react-promise-tracker) and to display a cool spinner [react-spinner](https://github.com/davidhu2000/react-spinners)
+To have a global count of promises gong on we are using
+[react-promise-tracker](https://github.com/Lemoncode/react-promise-tracker)
+and to display a cool spinner [react-spinner](https://github.com/davidhu2000/react-spinners)
 
 ### 11 Testing reducers
 

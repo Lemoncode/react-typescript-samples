@@ -59,7 +59,7 @@ Muestra el texto 'Hello React'.
 
 Hello world, muestra siemple de React render.
 
-### [02 Properties](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/02_Properties)
+### [02 Propiedades](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/02_Properties)
 
 Muestra el texto 'Hello {name}' (donde nombre es una propiedad que contiene el nombre).
 
@@ -99,15 +99,15 @@ demo simple de color picker (muestras cómo funcionan las propiedades).
 
 ColorPicker refactorizado.
 
-### [09 Sidebar](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/09_Sidebar)
+### [09 menú lateral](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/09_Sidebar)
 
 Simple implementación de un menú lateral.
 
-### [10 Table Mock](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/10_TableMock)
+### [10 Tabla Mock](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/10_TableMock)
 
 Renderiza una tabla y usa un componente hijo para renderizar cada fila, usando un mock de datos.
 
-### [11 Table Axios](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/11_TableAxios)
+### [11 Tabla Axios](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/11_TableAxios)
 
 Empezando desde la nuestra 10, elimina el mock de datos, utiliza una REST API real (api Github),
 utiliza axios para mejorar el rendimiento de la llamada fetch.
@@ -116,12 +116,12 @@ utiliza axios para mejorar el rendimiento de la llamada fetch.
 
 Empezando desde la nuestra 03, empezando a utilizar React-Router (navegación SPA).
 
-### [13 Login Form](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/13_LoginForm)
+### [13 Formulario Login](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/13_LoginForm)
 
 Empezando desde la nuestra 12, implementa una página de login básica,
 que redireccione al usuario a otra página cuando el login haya completado satisfactoriamente.
 
-### [14 Form Validation](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/14_FormValidation)
+### [14 Validación de formulario](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/14_FormValidation)
 
 Empezando desde la nuestra 13, añadir validaciones al formulario de login.
 
@@ -140,35 +140,35 @@ Bundling + npm start basado en webpack.
 
 Hello world, muestra siemple de React render.
 
-### 02 Components
+### 02 Componentes
 
 Creando una cabecera común y una página 'about' con componentes de React.
 
-### 03 Navigation
+### 03 Navegación
 
 Creando una página de "miembros", añadir navegación usando react-router.
 
-### 04 Display data
+### 04 Motrar datos
 
 Crear un componenente de lista de 'sólo lectura' (table >> tr >> td),
 leer una lista de miembros desde una API falsa y añadirlos dentro del componente 'state'
 
-### 05 Presentational Components
+### 05 Prensentación de componentes
 
 Dividir el componente de lista en dos: componente de Lista y Fila,
 pasar la entidad del miembro a través de las 'props' del componente.
 
-### 06 Handling asynchronous calls
+### 06 Manejando llamadas asíncronas
 
 Reemplazar la API false con una llamada asíncrona a la API de github y obtener la lista de miembros de una organización.
 
-### 07 Forms
+### 07 Formularios
 
 En esta muestra añadiremos un link en la página de miembros que navegará hacia la 'página del miembro'.
 Esta nueva página mostrará un formulario donde tendrás que introducir la url del avatar, el 'login' y el 'id'
 del nuevo miembro (sólo suponiendo que podemos añadir esa info).
 
-### 08 ParamNavigation + Validations
+### 08 Parámetros de navegación + Validaciones
 
 Editar un miembro seleccionado, aquí aprenderemos cómo añadir parámetros al link de navegación
 y cómo obtenerlo desde el componente.
@@ -185,57 +185,58 @@ haremos llamadas a operaciones asíncronas y las ajustaremos dentro de la arquit
 
 ### 10 SpinnerAsync
 
-Display a busy indicator when an ajax request is in progress.
+Muestra un indicador de carga mientras la petición ajax está en progreso.
 
-To have a global count of promises gong on we are using [react-promise-tracker](https://github.com/Lemoncode/react-promise-tracker) and to display a cool spinner [react-spinner](https://github.com/davidhu2000/react-spinners)
+Para tener un recuento global de las promesas que estamos usando
+[react-promise-tracker](https://github.com/Lemoncode/react-promise-tracker)
+y mostras un bonito spinner [react-spinner](https://github.com/davidhu2000/react-spinners)
 
-### 11 Testing reducers
+### 11 Testeando reducers
 
-Sample updated using Jest.
+Muestra actualizada usando Jest.
 
-### 12 Testing actions
+### 12 Testeando acciones
 
-Sample updated using Jest.
+Muestra actualizada usando Jest.
 
-### 13 Testing components (Containers and Presentationals)
+### 13 Testeando componentes (Contenedores y presentaciones)
 
-Pending update Jest + Enzyme
+Pendiente de actualizar Jest + Enzyme
 
-### 14 Replacing Redux Thunk with Redux Saga
+### 14 Reemplazando Redux Thunk con Redux Saga
 
-Pending update
+Pendiente de actualizar
 
-### 15 Lazy Loading and React-Router
+### 15 Lazy Loading y React-Router
 
-Pending update
+Pendiente de actualizar
 
-### 16 Add custom middlewares
+### 16 Añadir middlewares personalizados
 
-Pending update
+Pendiente de actualizar
 
-### 17 Add support for ReactHotloader and ReduxDev Tools.
+### 17 Añadir soporte para ReactHotloader y herramientas ReduxDev
 
-Pending update
+Pendiente de actualizar
 
 ### 18 Hooks
 
 Replace class components by stateless components using Hooks.
 
-### 19 LoginForm
+### 19 Formulario Login
 
-Add a login page using Material-UI.
+Añadir página de Login usando AMaterial-UI.
 
-# Contributors
+# Colaboradores
 
-Special thanks to [Jehu Sagardoy](https://github.com/jsagardoy) for his contributions checking
-and getting uptodate examples.
+Gracias, en especial a [Jehu Sagardoy](https://github.com/jsagardoy) por su colaboración, revisión y actualizaciones de los ejemplos.
 
-# About Basefactor + Lemoncode
+# Sobre Basefactor + Lemoncode
 
-We are an innovating team of Javascript experts, passionate about turning your ideas into robust products.
+Somos un equipo innovador de expertos en JavaScript, apasionados en convertir tus ideas en productos robustos y consistentes.
 
-[Basefactor, consultancy by Lemoncode](http://www.basefactor.com) provides consultancy and coaching services.
+[Basefactor, consultoría por Lemoncode](http://www.basefactor.com) proporciona servicios de consultoría y servicios de orientación.
 
-[Lemoncode](http://lemoncode.net/services/en/#en-home) provides training services.
+[Lemoncode](http://lemoncode.net/services/en/#en-home) proporciona servicios de formación.
 
-For the LATAM/Spanish audience we are running an Online Front End Master degree, more info: http://lemoncode.net/master-frontend
+Para la audiencia de LATAM/España estamos llevando a cabo un Master Online Front End, más info: [http://lemoncode.net/master-frontend](http://lemoncode.net/master-frontend)
