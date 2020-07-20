@@ -1,15 +1,14 @@
-# React Typescript by sample
+# React Typescript - ejemplos
 
-The goal of this project is to provide a set of simple samples, providing and step by step guide to
-start working with React and TypeScript.
+El objetivo de este proyecto es ofrecer un set de ejemplos simples, proporcionando una guía paso a paso
+para empezar a trabajar con React y TypeScript.
 
-We have incorporated a set of examples based on hooks.
+Hemos incorporado un set de ejemplos basados en hooks.
 
-Right now you got two main folders:
+Ahora mismo hay dos carpetas principales:
 
-- [Hooks](./hooks): set of samples migrated to hooks (right now 15 samples migrated), if you are new to
-  React, or you are going to start working on a new project, We recommend you going through these
-  examples.
+- [Hooks](./hooks): set de ejemplos migrados a hooks (ahora mismo 15 ejemplos), si eres nuevo en React, o vas a empezar a trabajar en
+un nuevo proyecto, Te recomendamos que lo hagas a través de ´estos ejemplos.
 
 - [Old_class_components_samples](./old_class_components_samples): The old samples, just in case you need to work with older react
   versions or you need to maintain legacy code.
