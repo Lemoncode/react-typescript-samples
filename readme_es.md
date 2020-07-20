@@ -36,7 +36,7 @@ Características:
 - Implementando Lazy Loading (todavía no está disponible para la version en Hooks, próximamente).
 - ...
 
-## Para empezar:
+## Para empezar
 
 1. Instalar [NodeJS](http://www.nodejs.org)
 2. Descarga este repo
@@ -239,4 +239,5 @@ Somos un equipo innovador de expertos en JavaScript, apasionados en convertir tu
 
 [Lemoncode](http://lemoncode.net/services/en/#en-home) proporciona servicios de formación.
 
-Para la audiencia de LATAM/España estamos llevando a cabo un Master Online Front End, más info: [http://lemoncode.net/master-frontend](http://lemoncode.net/master-frontend)
+Para la audiencia de LATAM/España estamos llevando a cabo un Master Online Front End, más info:
+[http://lemoncode.net/master-frontend](http://lemoncode.net/master-frontend)

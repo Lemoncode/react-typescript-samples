@@ -243,4 +243,5 @@ We are an innovating team of Javascript experts, passionate about turning your i
 
 [Lemoncode](http://lemoncode.net/services/en/#en-home) provides training services.
 
-For the LATAM/Spanish audience we are running an Online Front End Master degree, more info: http://lemoncode.net/master-frontend
+For the LATAM/Spanish audience we are running an Online Front End Master degree,
+more info: [http://lemoncode.net/master-frontend](http://lemoncode.net/master-frontend)
