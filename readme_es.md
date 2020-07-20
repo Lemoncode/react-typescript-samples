@@ -1,5 +1,7 @@
 # React Typescript - ejemplos
 
+[🇬🇧 English version](./readme.md)
+
 El objetivo de este proyecto es ofrecer un set de ejemplos simples, proporcionando una guía paso a paso
 para empezar a trabajar con React y TypeScript.
 
@@ -71,8 +73,8 @@ Introducción al concepto básico de React, manejando el Estado (State) usando H
 
 ### [04 Callback](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/04_Callback)
 
-Empezando desde la nuestra 03, permite que el usario cambie la propiedad name solo cuando presiona sobre el botón _change_ .
-when he hits a _change_ button.
+Empezando desde la nuestra 03, permite que el usario cambie la propiedad name
+solo cuando presiona sobre el botón _change_ .
 
 Usando callbacks.
 
@@ -107,7 +109,8 @@ Renderiza una tabla y usa un componente hijo para renderizar cada fila, usando u
 
 ### [11 Table Axios](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/11_TableAxios)
 
-Empezando desde la nuestra 10, elimina el mock de datos, utiliza una REST API real (api Github), utiliza axios para mejorar el rendimiento de la llamada fetch.
+Empezando desde la nuestra 10, elimina el mock de datos, utiliza una REST API real (api Github),
+utiliza axios para mejorar el rendimiento de la llamada fetch.
 
 ### [12 React Router](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/12_ReactRouter)
 
@@ -115,7 +118,8 @@ Empezando desde la nuestra 03, empezando a utilizar React-Router (navegación SP
 
 ### [13 Login Form](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/13_LoginForm)
 
-Empezando desde la nuestra 12, implementa una página de login básica, que redireccione al usuario a otra página cuando el login haya completado satisfactoriamente.
+Empezando desde la nuestra 12, implementa una página de login básica,
+que redireccione al usuario a otra página cuando el login haya completado satisfactoriamente.
 
 ### [14 Form Validation](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/14_FormValidation)
 
@@ -130,55 +134,58 @@ SEmpezando desde la nuestra 14, emprender cómo funciona la API de React 16 Cont
 
 ### 00 Boiler plate
 
-Bundling + npm start based on webpack.
+Bundling + npm start basado en webpack.
 
 ### 01 Hello React
 
-Hello world, simples react render sample.
+Hello world, muestra siemple de React render.
 
 ### 02 Components
 
-Creating a common header and about page react components.
+Creando una cabecera común y una página 'about' con componentes de React.
 
 ### 03 Navigation
 
-Creating a "members" page, adding navigation using react-router.
+Creando una página de "miembros", añadir navegación usando react-router.
 
 ### 04 Display data
 
-Create a read only list component (table >> tr >> td), reading list of members
-from a fake api and dumping it into component state.
+Crear un componenente de lista de 'sólo lectura' (table >> tr >> td),
+leer una lista de miembros desde una API falsa y añadirlos dentro del componente 'state'
 
 ### 05 Presentational Components
 
-Breaking the list component into two: list and row compomenent, member row
-entity passed via props.
+Dividir el componente de lista en dos: componente de Lista y Fila,
+pasar la entidad del miembro a través de las 'props' del componente.
 
 ### 06 Handling asynchronous calls
 
-Members fake api replaced with async call to api github to retrieve list of
-members of a given team.
+Reemplazar la API false con una llamada asíncrona a la API de github y obtener la lista de miembros de una organización.
 
 ### 07 Forms
 
-In this sample we will add a link in the members page that will navigate to a
-"new member page". This new page will display a form where you have to enter
-the avatar url, login and id of a new member (just supossing we can edit that info).
+En esta muestra añadiremos un link en la página de miembros que navegará hacia la 'página del miembro'.
+Esta nueva página mostrará un formulario donde tendrás que introducir la url del avatar, el 'login' y el 'id'
+del nuevo miembro (sólo suponiendo que podemos añadir esa info).
 
 ### 08 ParamNavigation + Validations
 
-Edit a given member, here we learn how to add params to a navigation link and
-how to obtain them from a component.
+Editar un miembro seleccionado, aquí aprenderemos cómo añadir parámetros al link de navegación
+y cómo obtenerlo desde el componente.
 
-Validation performed so far:
+La validación realizada hasta ahora:
 
-- Login: required, must be a string (at least length 3).
+- Login: requerido, debe ser una cadena de texto (al menos 3 caracteres de longitud).
 
 ### 09 Redux
 
 Added Redux support, isolated state into Redux reducers, implement load, save,
 basic validation cycle. This sample uses the fake api, in following samples
 we will call async operations and fitting them into Redux architecture.
+
+Añadido soporte para Redux, estado aislado en 'Redux reducers', implementa carga, guardar,
+ciclo de validación simple. Esta muestra usa una API falsa, en las siguientes muentras
+haremos llamadas a operaciones asíncronas y las ajustaremos dentro de la arquitectura de Redux.
 
 ### 10 SpinnerAsync
 

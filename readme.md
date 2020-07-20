@@ -1,5 +1,7 @@
 # React Typescript by sample
 
+[🇪🇸 Versión Español](./readme_es.md)
+
 The goal of this project is to provide a set of simple samples, providing and step by step guide to
 start working with React and TypeScript.
 
@@ -161,7 +163,7 @@ entity passed via props.
 ### 06 Handling asynchronous calls
 
 Members fake api replaced with async call to api github to retrieve list of
-members of a given team.
+members of a given organization.
 
 ### 07 Forms
 
