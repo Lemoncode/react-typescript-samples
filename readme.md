@@ -232,8 +232,9 @@ Add a login page using Material-UI.
 
 # Contributors
 
-Special thanks to [Jehu Sagardoy](https://github.com/jsagardoy) for his contributions checking
-and getting uptodate examples.
+Thank you very much to the contributors for keeping the project updated in all the examples.
+
+- [Jehu Sagardoy](https://github.com/jsagardoy)
 
 # About Basefactor + Lemoncode
 

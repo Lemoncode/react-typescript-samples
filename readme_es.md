@@ -229,7 +229,9 @@ Añadir página de Login usando AMaterial-UI.
 
 # Colaboradores
 
-Gracias, en especial a [Jehu Sagardoy](https://github.com/jsagardoy) por su colaboración, revisión y actualizaciones de los ejemplos.
+Muchas gracias a los colaborades por mantener el proyecto actualizado en todos los ejemplos.
+
+- [Jehu Sagardoy](https://github.com/jsagardoy)
 
 # Sobre Basefactor + Lemoncode
 
