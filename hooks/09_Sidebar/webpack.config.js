@@ -33,11 +33,11 @@ module.exports = {
           useBabel: true,
           babelCore: "@babel/core", // needed for Babel v7
         },
-      },	
-      {	
-        test: /\.css$/,	
-        include: /node_modules/,	
-        use: [MiniCssExtractPlugin.loader, "css-loader"]	
+      },
+      {
+        test: /\.css$/,
+        include: /node_modules/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
         test: /\.css$/,
