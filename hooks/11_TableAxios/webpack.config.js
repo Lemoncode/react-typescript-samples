@@ -36,15 +36,21 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        include: /node_modules/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+      {
+        test: /\.css$/,
         exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader,
           {
             loader: "css-loader",
             options: {
-              modules: true,
-              localIdentName: "[name]__[local]___[hash:base64:5]",
-              camelCase: true,
+              modules: {
+                localIdentName: "[name]__[local]___[hash:base64:5]",
+              },
+              localsConvention: "camelCase",
             },
           },
         ],
