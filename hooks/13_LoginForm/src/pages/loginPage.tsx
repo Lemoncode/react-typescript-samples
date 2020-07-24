@@ -1,5 +1,5 @@
 import * as React from "react";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import makeStyles from "@material-ui/styles/makeStyles";
 import createStyles from "@material-ui/styles/createStyles";
 import Card from "@material-ui/core/Card";
@@ -21,18 +21,19 @@ const useStyles = makeStyles(theme =>
   })
 );
 
-interface Props extends RouteComponentProps {}
+interface Props {};
 
-const LoginPageInner = (props: Props) => {
+export const LoginPage = (props: Props) => {
   const [loginInfo, setLoginInfo] = React.useState<LoginEntity>(
     createEmptyLogin()
   );
+  const history = useHistory();
   const [showLoginFailedMsg, setShowLoginFailedMsg] = React.useState(false);
   const classes = useStyles();
 
   const onLogin = () => {
     if (isValidLogin(loginInfo)) {
-      props.history.push("/pageB");
+      history.push("/pageB");
     } else {
       setShowLoginFailedMsg(true);
     }
@@ -65,8 +66,6 @@ const LoginPageInner = (props: Props) => {
     </>
   );
 };
-
-export const LoginPage = withRouter<Props>(LoginPageInner);
 
 interface PropsForm {
   onLogin: () => void;
