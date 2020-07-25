@@ -12,17 +12,17 @@ interface Props {
 }
 
 const defaultProps: Partial<Props> = {
-  type: "text"
+  type: "text",
 };
 
 const onTextFieldChange = (
   fieldId: string,
   onChange: (fieldId, value) => void
-) => e => {
+) => (e) => {
   onChange(fieldId, e.target.value);
 };
 
-export const TextFieldForm: React.StatelessComponent<Props> = props => {
+export const TextFieldForm: React.StatelessComponent<Props> = (props) => {
   const { name, label, onChange, value, error, type } = props;
   return (
     <>
@@ -34,7 +34,7 @@ export const TextFieldForm: React.StatelessComponent<Props> = props => {
         onChange={onTextFieldChange(name, onChange)}
       />
       <Typography variant="caption" color="error" gutterBottom>
-        {props.error}
+        {error}
       </Typography>
     </>
   );

@@ -7,18 +7,18 @@ export interface SessionContextProps {
 
 export const createDefaultUser = (): SessionContextProps => ({
   login: "no user",
-  updateLogin: value => {
+  updateLogin: (value) => {
     console.warn(
       "if you are reading this, likely you forgot to add the provider on top of your app"
     );
-  }
+  },
 });
 
 export const SessionContext = React.createContext<SessionContextProps>(
   createDefaultUser()
 );
 
-export const SessionProvider: React.FunctionComponent = props => {
+export const SessionProvider: React.FC = (props) => {
   const [login, setLogin] = React.useState<string>("");
 
   return (

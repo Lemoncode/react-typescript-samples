@@ -12,18 +12,18 @@ import { isValidLogin } from "../api/login";
 import { NotificationComponent } from "../common";
 
 // https://material-ui.com/styles/api/#makestyles-styles-options-hook
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     card: {
       maxWidth: 400,
-      margin: "0 auto"
-    }
+      margin: "0 auto",
+    },
   })
 );
 
-interface Props {};
+interface Props {}
 
-export const LoginPage = (props: Props) => {
+export const LoginPage: React.FC<Props> = (props) => {
   const [loginInfo, setLoginInfo] = React.useState<LoginEntity>(
     createEmptyLogin()
   );
@@ -42,7 +42,7 @@ export const LoginPage = (props: Props) => {
   const onUpdateLoginField = (name, value) => {
     setLoginInfo({
       ...loginInfo,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -74,22 +74,22 @@ interface PropsForm {
 }
 
 // https://material-ui.com/styles/api/#makestyles-styles-options-hook
-const useFormStyles = makeStyles(theme =>
+const useFormStyles = makeStyles((theme) =>
   createStyles({
     formContainer: {
       display: "flex",
       flexDirection: "column",
-      justifyContent: "center"
-    }
+      justifyContent: "center",
+    },
   })
 );
 
-const LoginForm = (props: PropsForm) => {
+const LoginForm: React.FC<PropsForm> = (props) => {
   const classes = useFormStyles();
   const { onLogin, onUpdateField, loginInfo } = props;
 
   // TODO: Enhacement move this outside the stateless component discuss why is a good idea
-  const onTexFieldChange = fieldId => e => {
+  const onTexFieldChange = (fieldId) => (e) => {
     onUpdateField(fieldId, e.target.value);
   };
 

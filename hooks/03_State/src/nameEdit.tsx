@@ -5,7 +5,7 @@ interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const NameEditComponent = (props: Props) => (
+export const NameEditComponent: React.FC<Props> = (props) => (
   <>
     <label>Update name:</label>
     <input value={props.userName} onChange={props.onChange} />

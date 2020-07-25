@@ -1,38 +1,34 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import makeStyles from "@material-ui/styles/makestyles";
 import createStyles from "@material-ui/styles/createStyles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { FormHelperText } from "@material-ui/core";
 import { LoginEntity, createEmptyLogin } from "../model/login";
 import { isValidLogin } from "../api/login";
 import { NotificationComponent } from "../common";
 import {
   LoginFormErrors,
-  createDefaultLoginFormErrors
+  createDefaultLoginFormErrors,
 } from "./loginPage.viewmodel";
 import { loginFormValidation } from "./loginPage.validation";
 import { TextFieldForm, SessionContext } from "../common";
 
 // https://material-ui.com/styles/api/#makestyles-styles-options-hook
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     card: {
       maxWidth: 400,
-      margin: "0 auto"
-    }
+      margin: "0 auto",
+    },
   })
 );
 
-interface Props extends RouteComponentProps {}
-
-const LoginPageInner = (props: Props) => {
+const LoginPage: React.FC = (props) => {
   const loginContext = React.useContext(SessionContext);
+  const history = useHistory();
 
   const [loginInfo, setLoginInfo] = React.useState<LoginEntity>(
     createEmptyLogin()
@@ -44,10 +40,10 @@ const LoginPageInner = (props: Props) => {
   const classes = useStyles();
 
   const onLogin = () => {
-    loginFormValidation.validateForm(loginInfo).then(formValidationResult => {
+    loginFormValidation.validateForm(loginInfo).then((formValidationResult) => {
       if (formValidationResult.succeeded) {
         if (isValidLogin(loginInfo)) {
-          props.history.push("/pageB");
+          history.push("/pageB");
           loginContext.updateLogin(loginInfo.login);
         } else {
           setShowLoginFailedMsg(true);
@@ -56,7 +52,7 @@ const LoginPageInner = (props: Props) => {
         alert("error, review the fields");
         const updatedLoginFormErrors = {
           ...loginFormErrors,
-          ...formValidationResult.fieldErrors
+          ...formValidationResult.fieldErrors,
         };
         setLoginFormErrors(updatedLoginFormErrors);
       }
@@ -66,15 +62,15 @@ const LoginPageInner = (props: Props) => {
   const onUpdateLoginField = (name, value) => {
     setLoginInfo({
       ...loginInfo,
-      [name]: value
+      [name]: value,
     });
 
     loginFormValidation
       .validateField(loginInfo, name, value)
-      .then(fieldValidationResult => {
+      .then((fieldValidationResult) => {
         setLoginFormErrors({
           ...loginFormErrors,
-          [name]: fieldValidationResult
+          [name]: fieldValidationResult,
         });
       });
   };
@@ -101,8 +97,6 @@ const LoginPageInner = (props: Props) => {
   );
 };
 
-export const LoginPage = withRouter<Props>(LoginPageInner);
-
 interface PropsForm {
   onLogin: () => void;
   onUpdateField: (string, any) => void;
@@ -111,22 +105,22 @@ interface PropsForm {
 }
 
 // https://material-ui.com/styles/api/#makestyles-styles-options-hook
-const useFormStyles = makeStyles(theme =>
+const useFormStyles = makeStyles((theme) =>
   createStyles({
     formContainer: {
       display: "flex",
       flexDirection: "column",
-      justifyContent: "center"
-    }
+      justifyContent: "center",
+    },
   })
 );
 
-const LoginForm = (props: PropsForm) => {
+const LoginForm: React.FC<PropsForm> = (props) => {
   const classes = useFormStyles();
   const { onLogin, onUpdateField, loginInfo, loginFormErrors } = props;
 
   // TODO: Enhacement move this outside the stateless component discuss why is a good idea
-  const onTexFieldChange = fieldId => e => {
+  const onTexFieldChange = (fieldId) => (e) => {
     onUpdateField(fieldId, e.target.value);
   };
 

@@ -14,24 +14,24 @@ import { isValidLogin } from "../api/login";
 import { NotificationComponent } from "../common";
 import {
   LoginFormErrors,
-  createDefaultLoginFormErrors
+  createDefaultLoginFormErrors,
 } from "./loginPage.viewmodel";
 import { loginFormValidation } from "./loginPage.validation";
 import { TextFieldForm } from "../common";
 
 // https://material-ui.com/styles/api/#makestyles-styles-options-hook
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     card: {
       maxWidth: 400,
-      margin: "0 auto"
-    }
+      margin: "0 auto",
+    },
   })
 );
 
 interface Props {}
 
-export const LoginPage = (props: Props) => {
+export const LoginPage: React.FC<Props> = (props) => {
   const [loginInfo, setLoginInfo] = React.useState<LoginEntity>(
     createEmptyLogin()
   );
@@ -43,7 +43,7 @@ export const LoginPage = (props: Props) => {
   const history = useHistory();
 
   const onLogin = () => {
-    loginFormValidation.validateForm(loginInfo).then(formValidationResult => {
+    loginFormValidation.validateForm(loginInfo).then((formValidationResult) => {
       if (formValidationResult.succeeded) {
         if (isValidLogin(loginInfo)) {
           history.push("/pageB");
@@ -54,7 +54,7 @@ export const LoginPage = (props: Props) => {
         alert("error, review the fields");
         const updatedLoginFormErrors = {
           ...loginFormErrors,
-          ...formValidationResult.fieldErrors
+          ...formValidationResult.fieldErrors,
         };
         setLoginFormErrors(updatedLoginFormErrors);
       }
@@ -64,15 +64,15 @@ export const LoginPage = (props: Props) => {
   const onUpdateLoginField = (name, value) => {
     setLoginInfo({
       ...loginInfo,
-      [name]: value
+      [name]: value,
     });
 
     loginFormValidation
       .validateField(loginInfo, name, value)
-      .then(fieldValidationResult => {
+      .then((fieldValidationResult) => {
         setLoginFormErrors({
           ...loginFormErrors,
-          [name]: fieldValidationResult
+          [name]: fieldValidationResult,
         });
       });
   };
@@ -107,22 +107,22 @@ interface PropsForm {
 }
 
 // https://material-ui.com/styles/api/#makestyles-styles-options-hook
-const useFormStyles = makeStyles(theme =>
+const useFormStyles = makeStyles((theme) =>
   createStyles({
     formContainer: {
       display: "flex",
       flexDirection: "column",
-      justifyContent: "center"
-    }
+      justifyContent: "center",
+    },
   })
 );
 
-const LoginForm = (props: PropsForm) => {
+const LoginForm: React.FC<PropsForm> = (props) => {
   const classes = useFormStyles();
   const { onLogin, onUpdateField, loginInfo, loginFormErrors } = props;
 
   // TODO: Enhacement move this outside the stateless component discuss why is a good idea
-  const onTexFieldChange = fieldId => e => {
+  const onTexFieldChange = (fieldId) => (e) => {
     onUpdateField(fieldId, e.target.value);
   };
 
