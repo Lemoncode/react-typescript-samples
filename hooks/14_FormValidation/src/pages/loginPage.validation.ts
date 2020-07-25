@@ -1,16 +1,11 @@
-import {
-  createFormValidation,
-  ValidationConstraints,
-  Validators
-} from "lc-form-validation";
+import { ValidationSchema, Validators } from "@lemoncode/fonk";
+import { createFormikValidation } from "@lemoncode/fonk-formik";
 
-const loginFormValidationConstraints: ValidationConstraints = {
-  fields: {
-    login: [{ validator: Validators.required }],
-    password: [{ validator: Validators.required }]
-  }
+const validationSchema: ValidationSchema = {
+  field: {
+    login: [Validators.required],
+    password: [Validators.required],
+  },
 };
 
-export const loginFormValidation = createFormValidation(
-  loginFormValidationConstraints
-);
+export const loginFormValidation = createFormikValidation(validationSchema);

@@ -6,7 +6,7 @@ For this we will use lc-form-validation library
 
 Summary steps:
 
-- Install lc-form-validation library.
+- Install formik, fonk, fonk-formik library.
 - Refactor input component to a common component and include error validation info.
 - Let's define the validation for the form.
 - Let's hook it.
@@ -19,10 +19,10 @@ Summary steps:
 npm install
 ```
 
-- Let's install the _lc-form-validation-library_.
+- Let's install the _formik, @lemoncode/fonk, @lemoncode/fonk-formik _.
 
 ```bash
-npm install lc-form-validation --save
+npm install formik @lemoncode/fonk @lemoncode/fonk-formik --save
 ```
 
 - To avoid having too much repeated code let's move to common an input component, including it's
@@ -88,22 +88,17 @@ export * from './notification';
 _./src/pages/loginPage.validation.ts_
 
 ```typescript
-import {
-  createFormValidation,
-  ValidationConstraints,
-  Validators
-} from "lc-form-validation";
+import { ValidationSchema, Validators } from "@lemoncode/fonk";
+import { createFormikValidation } from "@lemoncode/fonk-formik";
 
-const loginFormValidationConstraints: ValidationConstraints = {
-  fields: {
-    login: [{ validator: Validators.required }],
-    password: [{ validator: Validators.required }]
-  }
+const validationSchema: ValidationSchema = {
+  field: {
+    login: [Validators.required],
+    password: [Validators.required],
+  },
 };
 
-export const loginFormValidation = createFormValidation(
-  loginFormValidationConstraints
-);
+export const loginFormValidation = createFormikValidation(validationSchema);
 ```
 
 - Let's create now a class to hold the dataFormErrors.
