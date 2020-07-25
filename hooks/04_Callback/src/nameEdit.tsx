@@ -13,7 +13,7 @@ export const NameEditComponent: React.FC<Props> = (props) => {
   };
 
   const onNameSubmit = (event: any): any => {
-    props.
+    props.onNameUpdated(editingName);
   };
 
   return (
