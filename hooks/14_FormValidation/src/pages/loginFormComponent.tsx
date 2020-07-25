@@ -27,11 +27,6 @@ export const LoginForm: React.FC<PropsForm> = (props) => {
   const classes = useFormStyles();
   const { onLogin, onUpdateField, loginInfo } = props;
 
-  // TODO: Enhacement move this outside the stateless component discuss why is a good idea
-  const onTexFieldChange = (fieldID) => (e) => {
-    onUpdateField(fieldID, e.target.value);
-  };
-
   return (
     <Form>
       <div className={classes.formContainer}>
@@ -39,14 +34,14 @@ export const LoginForm: React.FC<PropsForm> = (props) => {
           label="Name"
           name="login"
           value={loginInfo.login}
-          onChange={onTexFieldChange("login")}
+          onChange={onUpdateField}
         />
         <TextFieldForm
           label="Password"
           type="password"
           name="password"
           value={loginInfo.password}
-          onChange={onTexFieldChange("password")}
+          onChange={onUpdateField}
         />
         <Button variant="contained" color="primary" onClick={onLogin}>
           Login
