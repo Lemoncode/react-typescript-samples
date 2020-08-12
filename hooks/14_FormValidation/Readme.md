@@ -2,7 +2,7 @@
 
 Let's add validation support to this form.
 
-For this we will use lc-form-validation library
+For this we will use formik, fonk and fonk-formik library
 
 Summary steps:
 
@@ -101,24 +101,6 @@ const validationSchema: ValidationSchema = {
 export const loginFormValidation = createFormikValidation(validationSchema);
 ```
 
-- Let's create now a class to hold the dataFormErrors.
-
-_./src/pages/loginPage.viewmodel.ts_
-
-```typescript
-import { FieldValidationResult } from "lc-form-validation";
-
-export interface LoginFormErrors {
-  login: FieldValidationResult;
-  password: FieldValidationResult;
-}
-
-export const createDefaultLoginFormErrors = (): LoginFormErrors => ({
-  login: new FieldValidationResult(),
-  password: new FieldValidationResult()
-});
-```
-
 - Now let's go for the component side.
 
 - First let's add the dataFormErrors to the state of the component.
@@ -128,7 +110,6 @@ _./src/pages/loginPage.tsx_
 ```diff
 import { isValidLogin } from "../api/login";
 import { NotificationComponent } from "../common";
-+ import {LoginFormErrors, createDefaultLoginFormErrors} from './loginPage.viewmodel';
 ```
 
 _./src/pages/loginPage.tsx_
