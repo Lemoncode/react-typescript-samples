@@ -31,7 +31,6 @@ export const LoginContainer: React.FC<Props> = (props) => {
         message="Invalid Form"
         onClose={() => setShowAlert(false)}
       />
-      ;
     </>
   );
 };
