@@ -26,8 +26,8 @@ export const NotificationComponent: React.FC<Props> = (props) => {
   return (
     <Snackbar
       anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "left",
+        vertical: "top",
+        horizontal: "right",
       }}
       open={show}
       autoHideDuration={3000}
