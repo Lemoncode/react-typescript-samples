@@ -119,7 +119,7 @@ import { Link } from "react-router-dom";
 
 - Let's update the loginPage.
 
-_./src/pages/loginPage.tsx_
+_./src/pages/login.container.tsx_
 
 ```diff
 - import { TextFieldForm } from "../common";
@@ -130,37 +130,25 @@ _./src/pages/loginPage.tsx_
 _./src/pages/loginPage.tsx_
 
 ```diff
-const LoginPageInner = (props: Props) => {
-+   const loginContext = React.useContext(SessionContext);
+export const LoginContainer: React.FC<Props> = (props) => {
++  const loginContext = React.useContext(SessionContext);
+  const history = useHistory();
+  const [isShowAlert, setShowAlert] = React.useState(false);
+  const classes = useFormStyles();
 
-  const [loginInfo, setLoginInfo] = React.useState<LoginEntity>(
-    createEmptyLogin()
-  );
-  const [loginFormErrors, setLoginFormErrors] = React.useState<LoginFormErrors>(
-    createDefaultLoginFormErrors()
-  );
-  const [showLoginFailedMsg, setShowLoginFailedMsg] = React.useState(false);
-  const classes = useStyles();
-
-  const onLogin = () => {
-    loginFormValidation.validateForm(loginInfo).then(formValidationResult => {
-      if (formValidationResult.succeeded) {
-        if (isValidLogin(loginInfo)) {
-          props.history.push("/pageB");
-+         loginContext.updateLogin(loginInfo.login);
-        } else {
-          setShowLoginFailedMsg(true);
-        }
-      } else {
-        alert("error, review the fields");
-        const updatedLoginFormErrors = {
-          ...loginFormErrors,
-          ...formValidationResult.fieldErrors
-        };
-        setLoginFormErrors(updatedLoginFormErrors);
-      }
-    });
+  const loginSucceeded = (isValid: boolean, login: LoginEntity) => {
+    if (isValid) {
+      history.push("/pageB");
++      loginContext.updateLogin(login.login);
+    } else {
+      setShowAlert(true);
+    }
   };
+
+  const handleLogin = (login: LoginEntity) => {
+    isValidLogin(login).then((isValid) => loginSucceeded(isValid, login));
+  };
+};
 ```
 
 - Let's give a try.

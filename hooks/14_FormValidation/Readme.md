@@ -28,47 +28,31 @@ npm install formik @lemoncode/fonk @lemoncode/fonk-formik --save
 - To avoid having too much repeated code let's move to common an input component, including it's
   label plus validation text.
 
-_./common/textFieldForm.tsx_
+_./common/textField.component.tsx_
 
 ```tsx
 import * as React from "react";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography/Typography";
+import { useField } from "formik";
+import MuiTextField, { TextFieldProps } from "@material-ui/core/TextField";
 
-interface Props {
-  name: string;
-  label: string;
-  onChange: any;
-  value: string;
-  error?: string;
-  type?: string;
-}
+export const TextFieldComponent: React.FC<TextFieldProps> = (props) => {
+  const [field, meta] = useField(props.name);
+  const textFieldProps = Boolean(field) ? field : props;
+  const hasError = Boolean(meta && meta.touched && meta.error);
 
-const defaultProps: Partial<Props> = {
-  type: "text"
-};
-
-const onTextFieldChange = (
-  fieldId: string,
-  onChange: (fieldId, value) => void
-) => e => {
-  onChange(fieldId, e.target.value);
-};
-
-export const TextFieldForm: React.StatelessComponent<Props> = props => {
-  const { name, label, onChange, value, error, type } = props;
   return (
     <>
-      <TextField
-        label={label}
+      <MuiTextField
+        {...props}
+        name={textFieldProps.name}
+        onChange={textFieldProps.onChange}
+        onBlur={textFieldProps.onBlur}
+        value={textFieldProps.value}
+        error={hasError}
+        helperText={hasError ? meta.error : ""}
+        fullWidth={true}
         margin="normal"
-        value={value}
-        type={type}
-        onChange={onTextFieldChange(name, onChange)}
       />
-      <Typography variant="caption" color="error" gutterBottom>
-        {props.error}
-      </Typography>
     </>
   );
 };
@@ -80,12 +64,12 @@ _./src/common/index.ts_
 
 ```diff
 export * from './notification';
-+ export * from './textFieldForm';
++ export * from './TextFieldComponent';
 ```
 
 - Now let's define a basic validation for the form, we want to ensure both fields are informed.
 
-_./src/pages/loginPage.validation.ts_
+_./src/pages/login.validation.ts_
 
 ```typescript
 import { ValidationSchema, Validators } from "@lemoncode/fonk";
@@ -105,150 +89,61 @@ export const loginFormValidation = createFormikValidation(validationSchema);
 
 - First let's add the dataFormErrors to the state of the component.
 
-_./src/pages/loginPage.tsx_
+_./src/pages/login.container.tsx_
 
 ```diff
 import { isValidLogin } from "../api/login";
 import { NotificationComponent } from "../common";
 ```
 
-_./src/pages/loginPage.tsx_
 
-```diff
-const LoginPageInner = (props: Props) => {
-  const [loginInfo, setLoginInfo] = React.useState<LoginEntity>(
-    createEmptyLogin()
-  );
-+ const [loginFormErrors, setLoginFormErrors] = React.useState<LoginFormErrors>(createDefaultLoginFormErrors());
-  const [showLoginFailedMsg, setShowLoginFailedMsg] = React.useState(false);
-```
-
-- Let's fire the validation on viewmodel update.
-
-_./src/pages/loginPage.tsx_
-
-```diff
-+ import { loginFormValidation } from "./loginPage.validation";
-```
-
-_./src/pages/loginPage.tsx_
-
-```diff
-const onUpdateLoginField = (name, value) => {
-    setLoginInfo({
-      ...loginInfo,
-      [name]: value
-    });
-
-+    loginFormValidation.validateField(loginInfo, name, value)
-+    .then((fieldValidationResult) => {
-
-+        setLoginFormErrors({
-+          ...loginFormErrors,
-+          [name]: fieldValidationResult,
-+        });
-+   });
-  };
-```
-
-- We need to pass down dataFormErrors
-
-_./src/pages/loginPage.tsx_
-
-```diff
-          <LoginForm
-            onLogin={onLogin}
-            onUpdateField={onUpdateLoginField}
-            loginInfo={loginInfo}
-+       loginFormErrors={loginFormErrors}
-          />
-```
-
-_./src/pages/loginPage.tsx_
-
-```diff
-interface PropsForm {
-  onLogin: () => void;
-  onUpdateField: (string, any) => void;
-  loginInfo: LoginEntity;
-+ loginFormErrors : LoginFormErrors;
-}
-```
-
-- Let's replace the _TextFieldForm_ entries with the wrapper we have created (includes
+- Let's fire the validation on viewmodel update and replace the _TextFieldForm_ entries with the wrapper we have created (includes
   displaying validation errors).
 
-_./src/pages/loginPage.tsx_
+_./src/pages/login.component.tsx_
 
 ```diff
-+ import { TextFieldForm } from '../common';
-```
++ import { loginFormValidation } from "./login.validation";
++ import { TextFieldComponent } from '../common';
 
-_./src/pages/loginPage.tsx_
-
-```diff
-const LoginForm = (props: PropsForm) => {
--  const { onLogin, onUpdateField, loginInfo } = props;
-+  const { onLogin, onUpdateField, loginInfo, loginFormErrors } = props;
-```
-
-```diff
--      <TextField
-+      <TextFieldForm
-        label="Name"
-+        name="login"
--        margin="normal"
-        value={loginInfo.login}
--        onChange={onTexFieldChange("login")}
-+        onChange={onUpdateField}
-+        error={loginFormErrors.login.errorMessage}
-      />
--      <TextField
-+      <TextFieldForm
-        label="Password"
-+        name="password"
-        type="password"
--        margin="normal"
-        value={loginInfo.password}
--        onChange={onTexFieldChange("password")}
-+        onChange={onUpdateField}
-+        error={loginFormErrors.password.errorMessage}
-      />
++<Formik
++      onSubmit={onLogin}
++      initialValues={createEmptyLogin()}
++      validate={loginFormValidation.validateForm}
++    >
++      {() => (
++        <Form>
++          <div className={classes.formContainer}>
+-             <TextField
++             <TextFieldComponent
+               label="Name"
++               name="login"
+-               margin="normal"
+-               value={loginInfo.login}
+-               onChange={onTexFieldChange("login")}
+               />
+-             <TextField
++             <TextFieldComponent
+               label="Password"
++               name="password"
+               type="password"
+-               margin="normal"
+-               value={loginInfo.password}
+-               onChange={onTexFieldChange("password")}
++          />
++      </div>
++    </Form>
++  )}
++</Formik>
 ```
 
 - Let's give a try
 
-```
+```bash
 npm start
 ```
 
 - And let's add an alert (Excercise and a notification) when the user clicks and the form all the fields are valid.
-
-_./src/pages/loginPage.tsx_
-
-```diff
-const onLogin = () => {
-+  loginFormValidation.validateForm(loginInfo)
-+    .then((formValidationResult) => {
-+        if(formValidationResult.succeeded) {
-            if (isValidLogin(loginInfo)) {
-              props.history.push("/pageB");
-            } else {
-              setShowLoginFailedMsg(true);
-            }
-+        } else {
-+            alert('error, review the fields');
-+          const updatedLoginFormErrors = {
-+             ...loginFormErrors,
-+             ...formValidationResult.fieldErrors,
-+          }
-+          setLoginFormErrors(updatedLoginFormErrors);
-+       }
-
-
-+    });
-};
-```
 
 > Excercise, refactor this method following single abstraction level principle and single responsibility principle.
 
