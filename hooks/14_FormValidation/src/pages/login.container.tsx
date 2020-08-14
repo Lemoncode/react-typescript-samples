@@ -48,7 +48,7 @@ export const LoginContainer: React.FC<Props> = (props) => {
           <LoginComponent onLogin={handleLogin} />
           <NotificationComponent
             show={isShowAlert}
-            message="Invalid Form"
+            message="Invalid login or password, please type again"
             onClose={() => setShowAlert(false)}
           />
         </CardContent>
