@@ -7,10 +7,9 @@ const useMemberCollection = () => {
     MemberEntity[]
   >([]);
 
-  const loadMemberCollection = () => {
-    getMembersCollection().then(memberCollection =>
-      setMemberCollection(memberCollection)
-    );
+  const loadMemberCollection = async () => {
+    const memberCollection = await getMembersCollection();
+    setMemberCollection(memberCollection);
   };
 
   return { memberCollection, loadMemberCollection };
@@ -34,7 +33,7 @@ export const MemberTableComponent = () => {
           </tr>
         </thead>
         <tbody>
-          {memberCollection.map(member => (
+          {memberCollection.map((member) => (
             <MemberRow key={member.id} member={member} />
           ))}
         </tbody>

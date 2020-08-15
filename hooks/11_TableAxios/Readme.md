@@ -67,6 +67,31 @@ export const getMembersCollection = (): Promise<MemberEntity[]> => {
 +  }));
 ```
 
+- Adding async await calling member api
+
+To make the async await work, we should install
+- `npm install -D @babel/plugin-transform-runtime`
+- `npm install -P @babel/runtime`
+
+and add to the .babelrc
+
+_.babelrc_
+```bash
+  "plugins": ["@babel/plugin-transform-runtime"]
+```
+
+_./src/components/memberTable.tsx_
+```diff
+- const loadMemberCollection = () => {
+-   getMembersCollection().then(memberCollection =>
+-   setMemberCollection(memberCollection)
+-   );
+
++ const loadMemberCollection = async () => {
++    const memberCollection = await getMembersCollection();
++    setMemberCollection(memberCollection);
+```
+
 - Aaaand... we don't need to add any update on the rest of the application, why?
   The function is providing the same contract, it returns a promise<MemberEntity[]>,
   let's give a try:

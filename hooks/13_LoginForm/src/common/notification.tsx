@@ -11,29 +11,29 @@ interface Props {
   onClose: () => void;
 }
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     close: {
-      padding: theme.spacing(0.5)
-    }
+      padding: theme.spacing(0.5),
+    },
   })
 );
 
-export const NotificationComponent = (props: Props) => {
+export const NotificationComponent: React.FC<Props> = (props) => {
   const classes = useStyles();
   const { message, show, onClose } = props;
 
   return (
     <Snackbar
       anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "left"
+        vertical: "top",
+        horizontal: "right",
       }}
       open={show}
       autoHideDuration={3000}
       onClose={onClose}
       ContentProps={{
-        "aria-describedby": "message-id"
+        "aria-describedby": "message-id",
       }}
       message={<span id="message-id">{message}</span>}
       action={[
@@ -45,7 +45,7 @@ export const NotificationComponent = (props: Props) => {
           onClick={onClose}
         >
           <CloseIcon />
-        </IconButton>
+        </IconButton>,
       ]}
     />
   );

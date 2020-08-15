@@ -4,6 +4,6 @@ interface Props {
   userName: string;
 }
 
-export const HelloComponent = (props: Props) => (
-    <h2>Hello user: {props.userName} !</h2>
+export const HelloComponent: React.FC<Props> = (props) => (
+  <h2>Hello user: {props.userName} !</h2>
 );

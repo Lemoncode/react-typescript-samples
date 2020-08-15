@@ -5,6 +5,8 @@
       {
         "useBuiltIns": "entry"
       }
-    ]
+    ],
+    "@babel/preset-typescript",
+    "@babel/preset-react"
   ]
 }

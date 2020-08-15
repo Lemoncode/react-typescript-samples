@@ -6,7 +6,7 @@ interface Props {
   onColorUpdated: (color: Color) => void;
 }
 
-export const ColorPicker = (props: Props) => (
+export const ColorPicker: React.FC<Props> = (props) => (
   <div>
     <input
       type="range"

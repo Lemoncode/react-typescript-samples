@@ -6,15 +6,15 @@ interface Props {
   onColorUpdated: (color: Color) => void;
 }
 
-const updateColor = (props: Props, colorId: keyof Color) => value => {
+const updateColor = (props: Props, colorId: keyof Color) => (value) => {
   // keyof Color ensures only 'red', 'blue' or 'green' can be passed in.
   props.onColorUpdated({
     ...props.color, // this creates a clone of the current props.color object...
-    [colorId]: value // ... which gets one of its properties (colorId) immediately replaced by a new value.
+    [colorId]: value, // ... which gets one of its properties (colorId) immediately replaced by a new value.
   });
 };
 
-export const ColorPicker = (props: Props) => (
+export const ColorPicker: React.FC<Props> = (props) => (
   <div>
     <ColorSliderComponent
       value={props.color.red}
@@ -40,7 +40,7 @@ interface PropsColorSlider {
   onValueUpdated: (newValue: number) => void;
 }
 
-const ColorSliderComponent = (props: PropsColorSlider) => {
+const ColorSliderComponent: React.FC<PropsColorSlider> = (props) => {
   return (
     <div>
       <input
@@ -48,7 +48,7 @@ const ColorSliderComponent = (props: PropsColorSlider) => {
         min="0"
         max="255"
         value={props.value}
-        onChange={event => props.onValueUpdated(+event.target.value)}
+        onChange={(event) => props.onValueUpdated(+event.target.value)}
       />
       {props.value}
     </div>

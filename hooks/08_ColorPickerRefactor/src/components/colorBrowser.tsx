@@ -5,7 +5,7 @@ interface Props {
   color: Color;
 }
 
-export const ColorBrowser = (props: Props) => {
+export const ColorBrowser: React.FC<Props> = (props) => {
   const divStyle: React.CSSProperties = {
     width: "11rem",
     height: "7rem",

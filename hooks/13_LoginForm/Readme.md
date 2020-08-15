@@ -18,14 +18,14 @@ npm install
 
 - Let's update as well the name of the component.
 
-_./src/pages/loginPage.tsx_
+_./src/pages/login.component.tsx_
 
 ```diff
 import * as React from "react";
 import { Link } from "react-router-dom";
 
 - export const PageA = () => (
-+ export const LoginPage = () => (
++ export const LoginComponent: React.FC<PropsForm> = (props) => {
     <div>
 -     <h2>Hello from page A</h2>
 +     <h2> Hello from login Page</h2>
@@ -43,7 +43,7 @@ _./src/app.tsx_
 import * as React from "react";
 import { HashRouter, Switch, Route } from "react-router-dom";
 - import { PageA } from "./pages/pageA";
-+ import { LoginPage } from "./pages/loginPage";
++ import { LoginComponent } from "./pages/login.component";
 import { PageB } from "./pages/pageB";
 
 export const App = () => {
@@ -53,7 +53,7 @@ export const App = () => {
       <HashRouter>
         <Switch>
 -         <Route exact={true} path="/" component={PageA} />
-+         <Route exact={true} path="/" component={LoginPage} />
++         <Route exact={true} path="/" component={LoginComponent} />
           <Route path="/pageB" component={PageB} />
         </Switch>
       </HashRouter>
@@ -118,7 +118,7 @@ npm install @material-ui/core @material-ui/icons --save
 
 - Now we could create a login form it could look something like:
 
-_./src/pages/loginPage.tsx_
+_./src/pages/login.container.tsx_
 
 ```javascript
 import * as React from "react";
@@ -143,7 +143,7 @@ const useStyles = makeStyles(theme =>
 
 interface Props extends RouteComponentProps {}
 
-const LoginPageInner = (props: Props) => {
+export const LoginContainer: React.FC<Props> = (props) => {
   const classes = useStyles();
 
   return (
@@ -167,8 +167,6 @@ const LoginPageInner = (props: Props) => {
     </Card>
   );
 };
-
-export const LoginPage = withRouter < Props > LoginPageInner;
 ```
 
 - This can be ok, but if we take a deeper look to this component, we could break down into two, one is the card itself the other the form dialog, so it should finally look like:
@@ -186,10 +184,10 @@ export const LoginPage = withRouter < Props > LoginPageInner;
 
 - Let's create the LoginForm component (append it to the loginPage file):
 
-_./src/pages/loginPage.tsx_
+_./src/pages/login.component.tsx_
 
 ```javascript
-const LoginForm = props => {
+export const LoginComponent: React.FC<PropsForm> = (props) => {
   return (
     <div
       style={{
@@ -198,9 +196,19 @@ const LoginForm = props => {
         justifyContent: "center"
       }}
     >
-      <TextField label="Name" margin="normal" />
-      <TextField label="Password" type="password" margin="normal" />
-      <Button variant="contained" color="primary">
+      <TextField
+        label="Name"
+        margin="normal"
+      />
+      <TextField
+        label="Password"
+        type="password"
+        margin="normal"
+      />
+      <Button
+        variant="contained"
+        color="primary"
+      >
         Login
       </Button>
     </div>
@@ -208,16 +216,16 @@ const LoginForm = props => {
 };
 ```
 
-- And let's update the _loginPage.tsx_
+- And let's update the _login.container.tsx_
 
-_./src/pages/loginPage.tsx_
+_./src/pages/login.container.tsx_
 
 ```diff
   return (
     <Card className={classes.card}>
       <CardHeader title="Login" />
       <CardContent>
-+        <LoginForm/>
++        <LoginComponent/>
 -        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
 -          <TextField
 -            label="Name"
@@ -247,7 +255,7 @@ npm start
 
 - First we will expose a method to do that in the loginPage.
 
-_./src/pages/login/loginPage.tsx_
+_./src/pages/login/login.container.tsx_
 
 ```diff
 // ...
@@ -264,7 +272,7 @@ const useStyles = makeStyles(theme =>
 
 interface Props extends RouteComponentProps {}
 
-const LoginPageInner = (props) => {
+export const LoginContainer: React.FC<Props> = (props) => {
   const { classes } = props;
 
 +   const onLogin = () => {
@@ -282,14 +290,13 @@ const LoginPageInner = (props) => {
   )
 }
 
-export const LoginPage = withRouter<Props>(LoginPageInner);
 ```
 
 - Let's add the navigation on button clicked (later on we will check for user and pwd) _form.tsx_.
   In order to do this we have used react-router 4 "withRouter" HoC (High order component), and pass it
   down to the LoginForm component.
 
-_./src/pages/loginPage.tsx_
+_./src/pages/login.component.tsx_
 
 ```diff
 +interface PropsForm {
@@ -351,62 +358,59 @@ _./src/api/login.ts_
 import { LoginEntity } from "../model/login";
 
 // Just a fake loginAPI
-export const isValidLogin = (loginInfo: LoginEntity): boolean =>
-  loginInfo.login === "admin" && loginInfo.password === "test";
+export const isValidLogin = (loginInfo: LoginEntity): Promise<boolean> =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      // mock call
+      resolve(loginInfo.login === "admin" && loginInfo.password === "test");
+    }, 500);
+  });
 ```
 
 - Let's add the _api_ integration, plus navigation on login succeeded:
 
 - First let's create a login state and add the api integration.
 
-_./src/pages/loginPage.tsx_
+_./src/pages/login.container.tsx_
 
 ```diff
 + import { LoginEntity, createEmptyLogin } from '../model/login';
 + import { isValidLogin } from '../api/login';
 ```
 
-_./src/pages/loginPage.tsx_
+_./src/pages/login.container.tsx_
 
 ```diff
 const LoginPageInner = (props: Props) => {
-+  const [loginInfo, setLoginInfo] = React.useState<LoginEntity>(createEmptyLogin());
++  const [loginInfo, setLoginInfo] = React.useState<LoginEntity>(
++   createEmptyLogin()
++  );
   const { classes } = props;
 
-  const onLogin = () => {
-+    if(isValidLogin(loginInfo)) {
-       props.history.push("/pageB");
-+    }
+  const loginSucceeded = (isValid: boolean) => {
+    if (isValid) {
+      history.push("/pageB");
+    } else {
+      setShowAlert(true);
+    }
+  };
+  
+  const handleLogin = (login: LoginEntity) => {
+    isValidLogin(login).then(loginSucceeded);
   };
 
 ```
 
 - Now let's read the data from the textfields components (user and password).
 
-_./src/pages/loginPage.tsx_
+_./src/pages/login.container.tsx_
 
 ```diff
-  const onLogin = () => {
-    if (isValidLogin(loginInfo)) {
-      props.history.push("/pageB");
-    }
-  };
-
-+  const onUpdateLoginField = (name, value) => {
-+    setLoginInfo({
-+      ...loginInfo,
-+      [name]: value,
-+    })
-+  }
-
   return (
     <Card className={classes.card}>
       <CardHeader title="Login" />
       <CardContent>
-        <LoginForm onLogin={onLogin}
-+            onUpdateField={onUpdateLoginField}
-+            loginInfo={loginInfo}
-        />
++        <LoginForm onLogin={handleLogin}/>
       </CardContent>
     </Card>
   );
@@ -414,23 +418,25 @@ _./src/pages/loginPage.tsx_
 
 - And update _LoginForm_ props and textField onChange.
 
-_./src/pages/loginPage.tsx_
+_./src/pages/login.component.tsx_
 
 ```diff
 interface PropsForm {
-  onLogin: () => void;
-+  onUpdateField: (name: string, value: any) => void;
-+  loginInfo : LoginEntity;
++  onLogin: (login: LoginEntity) => void;
 }
 
-const LoginForm = (props: PropsForm) => {
--  const { onLogin } = props;
-+  const { onLogin, onUpdateField, loginInfo } = props;
-
-+  // TODO: Enhacement move this outside the stateless component discuss why is a good idea
+export const LoginComponent: React.FC<PropsForm> = (props) => {
++  const [loginInfo, setLoginInfo] = React.useState<LoginEntity>(
++  const { onLogin } = props;
++    createEmptyLogin()
++  );
++  const classes = useFormStyles();
 +  const onTexFieldChange = (fieldId) => (e) => {
-+    onUpdateField(fieldId, e.target.value);
-+  }
++    setLoginInfo({
++      ...loginInfo,
++      [fieldId]: e.target.value,
++    });
++  };
 
   return (
     <div
@@ -440,15 +446,24 @@ const LoginForm = (props: PropsForm) => {
         justifyContent: "center"
       }}
     >
-      <TextField label="Name" margin="normal"
+      <TextField
+        label="Name"
+        margin="normal"
 +        value={loginInfo.login}
-+        onChange={onTexFieldChange('login')}
++        onChange={onTexFieldChange("login")}
       />
-      <TextField label="Password" type="password" margin="normal"
+      <TextField
+        label="Password"
+        type="password"
+        margin="normal"
 +        value={loginInfo.password}
-+        onChange={onTexFieldChange('password')}
++        onChange={onTexFieldChange("password")}
       />
-      <Button variant="contained" color="primary" onClick={onLogin}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => onLogin(loginInfo)}
+      >
         Login
       </Button>
     </div>
@@ -458,13 +473,11 @@ const LoginForm = (props: PropsForm) => {
 
 - We will add material-ui classes to LoginForm component.
 
-_./src/pages/loginPage.tsx_
+_./src/pages/login.container.tsx_
 
 ```diff
 interface PropsForm {
-  onLogin: () => void;
-  onUpdateField: (name: string, value: any) => void;
-  loginInfo : LoginEntity;
+  onLogin: (login: LoginEntity) => void;
 }
 
 + // https://material-ui.com/styles/api/#makestyles-styles-options-hook
@@ -478,14 +491,8 @@ interface PropsForm {
 +   })
 + );
 
-const LoginForm = (props: PropsForm) => {
+export const LoginComponent: React.FC<PropsForm> = (props) => {
 + const classes = useFormStyles();
-  const { onLogin, onUpdateField, loginInfo } = props;
-
-  // TODO: Enhacement move this outside the stateless component discuss why is a good idea
-  const onTexFieldChange = (fieldId) => (e) => {
-    onUpdateField(fieldId, e.target.value);
-  }
 
   return (
 -   <div
@@ -583,7 +590,7 @@ export * from "./notification";
 
 - Now let's instantiate this in our _loginPage_
 
-_./src/pages/loginPage.tsx_
+_./src/pages/login.container.tsx_
 
 ```diff
 + import { NotificationComponent } from "../common";
@@ -594,7 +601,7 @@ const LoginPageInner = (props: Props) => {
   const [loginInfo, setLoginInfo] = React.useState<LoginEntity>(
     createEmptyLogin()
   );
-+ const [showLoginFailedMsg, setShowLoginFailedMsg] = React.useState(false);
++ const [isShowAlert, setShowAlert] = React.useState(false);
   const classes = useStyles();
 
   const onLogin = () => {
@@ -602,7 +609,7 @@ const LoginPageInner = (props: Props) => {
       props.history.push("/pageB");
 -    }
 +    } else {
-+      setShowLoginFailedMsg(true);
++      setShowAlert(true);
 +    }
   }
 
@@ -625,11 +632,11 @@ const LoginPageInner = (props: Props) => {
         />
       </CardContent>
     </Card>
-+        <NotificationComponent
-+          message="Invalid login or password, please type again"
-+          show={showLoginFailedMsg}
-+          onClose={() => setShowLoginFailedMsg(false)}
-+        />
++     <NotificationComponent
++       message="Invalid login or password, please type again"
++       show={isShowAlert}
++       onClose={() => setShowAlert(false)}
++     />
 +   </>
   );
 };

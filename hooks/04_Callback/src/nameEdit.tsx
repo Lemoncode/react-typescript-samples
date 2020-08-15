@@ -5,7 +5,7 @@ interface Props {
   onNameUpdated: (newName: string) => any;
 }
 
-export const NameEditComponent = (props: Props) => {
+export const NameEditComponent: React.FC<Props> = (props) => {
   const [editingName, setEditingName] = React.useState(props.initialUserName);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
