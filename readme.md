@@ -157,7 +157,7 @@ from a fake api and dumping it into component state.
 
 ### 05 Presentational Components
 
-Breaking the list component into two: list and row compomenent, member row
+Breaking the list component into two: list and row component, member row
 entity passed via props.
 
 ### 06 Handling asynchronous calls
