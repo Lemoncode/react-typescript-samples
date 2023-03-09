@@ -1,6 +1,6 @@
 # React Typescript by sample
 
-git init test !!
+git init test
 
 [🇪🇸 Versión Español](./readme_es.md)
 
