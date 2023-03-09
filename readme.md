@@ -1,5 +1,7 @@
 # React Typescript by sample
 
+git init test !!
+
 [🇪🇸 Versión Español](./readme_es.md)
 
 The goal of this project is to provide a set of simple samples, providing and step by step guide to
@@ -122,7 +124,7 @@ Starting from sample 03,start using React-Router (SPA navigation).
 
 ### [13 Login Form](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/13_LoginForm)
 
-Starting from sample 12, implement a basic login page, that will redirect the user to another page  whenever the login has completed successfully.
+Starting from sample 12, implement a basic login page, that will redirect the user to another page whenever the login has completed successfully.
 
 ### [14 Form Validation](https://github.com/Lemoncode/react-typescript-samples/tree/master/hooks/14_FormValidation)
 
