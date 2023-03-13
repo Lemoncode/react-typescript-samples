@@ -5,6 +5,7 @@ interface Props {
     onNameUpdated: () => any;
     editingName: string;
     onEditingNameUpdated: (newEditingName: string) => any;
+    disabled: boolean;
 }
 
 export const NameEditComponent = (props: Props) => {
@@ -13,7 +14,7 @@ export const NameEditComponent = (props: Props) => {
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         // setEditingName(e.target.value);
-        props.onNameUpdated();
+        props.onEditingNameUpdated(e.target.value);
     }
 
     const onNameSubmit = (event: any): any => {
@@ -29,7 +30,7 @@ export const NameEditComponent = (props: Props) => {
         <>
             <label>Update name:</label>
             <input value={props.editingName} onChange={onChange} />
-            <button onClick={onNameSubmit}>Change</button>
+            <button onClick={onNameSubmit} disabled={props.disabled}>Change</button>
         </>
     )
 }

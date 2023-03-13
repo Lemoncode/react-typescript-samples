@@ -22,7 +22,11 @@ export const App = () => {
     return (
         <>
             <HelloComponent userName={name} />
-            <NameEditComponent initialUserName={name} onNameUpdated={setUsernameState} editingName={editingName} onEditingNameUpdated={setEditingName} />
+            <NameEditComponent initialUserName={name}
+                onNameUpdated={setUsernameState}
+                editingName={editingName}
+                onEditingNameUpdated={setEditingName}
+                disabled={editingName === '' || editingName === name} />
         </>
     );
 };
