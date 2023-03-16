@@ -3,15 +3,15 @@ import * as React from "react";
 const classNames = require("./sidebar.css");
 
 interface Props {
-  isVisible: boolean;
+    isVisible: boolean;
 }
 
 const divStyle = (props: Props): React.CSSProperties => ({
-  width: props.isVisible ? "23rem" : "0rem",
-});
+    width: (props.isVisible) ? '23rem' : '0rem'
+})
 
-export const SidebarComponent: React.StatelessComponent<Props> = (props) => (
-  <div id="mySidenav" className={classNames.sidenav} style={divStyle(props)}>
-    {props.children}
-  </div>
+export const SidebarComponent = (props: Props) => (
+    <div id="mySidenav" className={classNames.sidenav} style={divStyle(props)}>
+        <span>Basic side bar, first steps</span>
+    </div>
 );
