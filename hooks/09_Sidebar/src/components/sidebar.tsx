@@ -4,6 +4,7 @@ const classNames = require("./sidebar.css");
 
 interface Props {
     isVisible: boolean;
+    children: React.ReactNode
 }
 
 const divStyle = (props: Props): React.CSSProperties => ({
