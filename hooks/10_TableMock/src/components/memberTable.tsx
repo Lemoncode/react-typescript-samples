@@ -6,8 +6,10 @@ const useMemberCollection = () => {
     const [memberCollection, setMemberCollection] = React.useState<MemberEntity[]>([])
 
     const loadMemberCollection = () => {
-        getMembersCollection().then(useMemberCollection => setMemberCollection(memberCollection))
-    }
+        getMembersCollection().then(memberCollection =>
+            setMemberCollection(memberCollection)
+        );
+    };
 
     return { memberCollection, loadMemberCollection }
 }
@@ -16,14 +18,31 @@ export const MemberTableComponent = () => {
     const { memberCollection, loadMemberCollection } = useMemberCollection();
 
     React.useEffect(() => {
+        console.log(memberCollection)
         loadMemberCollection()
     }, [])
 
     return (
         <>
-            {memberCollection.map(member => (
-                <h1 key={member.id}>{member.login}</h1>
-            ))}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Avatar</th>
+                        <th>Id</th>
+                        <th>name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {memberCollection.map(member => (
+                        <tr>
+                            <td><img src={member.avatar_url} style={{ maxWidth: '10rem' }} /></td>
+                            <td><span>{member.id}</span></td>
+                            <td>{member.login}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+
         </>
     )
 }
