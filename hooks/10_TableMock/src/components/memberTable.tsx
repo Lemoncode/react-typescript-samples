@@ -14,6 +14,13 @@ const useMemberCollection = () => {
     return { memberCollection, loadMemberCollection }
 }
 
+const MemberRow = ({ member }: { member: MemberEntity }) =>
+    <tr>
+        <td><img src={member.avatar_url} style={{ maxWidth: '10rem' }} /></td>
+        <td><span>{member.id}</span></td>
+        <td>{member.login}</td>
+    </tr>
+
 export const MemberTableComponent = () => {
     const { memberCollection, loadMemberCollection } = useMemberCollection();
 
@@ -34,11 +41,7 @@ export const MemberTableComponent = () => {
                 </thead>
                 <tbody>
                     {memberCollection.map(member => (
-                        <tr>
-                            <td><img src={member.avatar_url} style={{ maxWidth: '10rem' }} /></td>
-                            <td><span>{member.id}</span></td>
-                            <td>{member.login}</td>
-                        </tr>
+                        <MemberRow key={member.id} member={member} />
                     ))}
                 </tbody>
             </table>
