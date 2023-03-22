@@ -1,6 +1,6 @@
 import * as React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { LoginComponent } from "./pages/loginPage";
+import { LoginComponent } from "./pages/login.component";
 import { PageB } from "./pages/pageB";
 
 /**

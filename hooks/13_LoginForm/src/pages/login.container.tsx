@@ -1,7 +1,7 @@
-import { createStyles } from "@mui/material";
+import { Button, Card, CardContent, CardHeader, createStyles, TextField } from "@mui/material";
 import { makeStyles } from "@mui/material/styles";
 import * as React from "react";
-import { RouteComponentProps } from "react-router-dom";
+import { LoginComponent } from "./loginPage";
 
 const useStyles = makeStyles(theme =>
     createStyles({
@@ -12,4 +12,18 @@ const useStyles = makeStyles(theme =>
     })
 )
 
-interface Props extends Route { }
+interface Props { }
+
+export const LoginContainer: React.FC<Props> = (props) => {
+    // const { classes } = props;
+
+    return (
+        <Card>
+            <CardHeader title='login' />
+            <CardContent>
+                <LoginComponent />
+            </CardContent>
+        </Card>
+    );
+};
+
