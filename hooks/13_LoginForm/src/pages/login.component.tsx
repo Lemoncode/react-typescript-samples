@@ -2,7 +2,13 @@ import { Button, TextField } from "@mui/material";
 import * as React from "react";
 import { FormProps } from "react-router-dom";
 
-export const LoginComponent: React.FC<FormProps> = (props) => {
+interface PropsForm {
+    onLogin: () => void;
+}
+
+export const LoginComponent = (props: PropsForm) => {
+    const { onLogin } = props;
+
     return (<div
         style={{
             display: "flex",
@@ -12,6 +18,6 @@ export const LoginComponent: React.FC<FormProps> = (props) => {
     >
         <TextField label="Name" margin="normal" />
         <TextField label="Password" type="password" margin="normal" />
-        <Button variant="contained" color="primary">Login</Button>
+        <Button variant="contained" color="primary" onClick={onLogin}>Login</Button>
     </div>)
 }
