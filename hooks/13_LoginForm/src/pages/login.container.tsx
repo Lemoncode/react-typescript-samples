@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, createStyles, makeStyles } from "@mui/material";
+import { Card, CardContent, CardHeader, createStyles, makeStyles, styled } from "@mui/material";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginComponent } from "./login.component";
@@ -7,6 +7,20 @@ import { isValidLogin } from "../api/login";
 import { NotificationComponent } from "../common";
 
 interface Props { }
+
+// const useStyles = makeStyles(theme =>
+//     createStyles({
+//       card: {
+//         maxWidth: 400,
+//         margin: "0 auto"
+//       }
+//     })
+//   );
+
+const SampleCardStyled = styled(Card)(({ theme }) => ({
+    maxWidth: 400,
+    margin: "0 auto"
+}))
 
 export const LoginContainer: React.FC<Props> = (props) => {
     const [loginInfo, setLoginInfo] = React.useState<LoginEntity>(
@@ -29,15 +43,14 @@ export const LoginContainer: React.FC<Props> = (props) => {
         isValidLogin(login).then(loginSucceeded);
     };
 
-
     return (
         <>
-            <Card>
+            <SampleCardStyled>
                 <CardHeader title='login' />
                 <CardContent>
                     <LoginComponent onLogin={handleLogin} />
                 </CardContent>
-            </Card>
+            </SampleCardStyled>
             <NotificationComponent
                 message="Invalid login or password, please type again"
                 show={isShowAlert}
