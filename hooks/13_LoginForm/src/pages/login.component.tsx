@@ -14,6 +14,13 @@ export const LoginComponent = (props: PropsForm) => {
         createEmptyLogin()
     );
 
+    const onTextFieldChange = (fieldId) => (e) => {
+        setLoginInfo({
+            ...loginInfo,
+            [fieldId]: e.target.value
+        })
+    }
+
     return (<div
         style={{
             display: "flex",
@@ -21,8 +28,8 @@ export const LoginComponent = (props: PropsForm) => {
             justifyContent: "center"
         }}
     >
-        <TextField label="Name" margin="normal" />
-        <TextField label="Password" type="password" margin="normal" />
+        <TextField label="Name" margin="normal" value={loginInfo.login} onChange={onTextFieldChange("login")} />
+        <TextField label="Password" type="password" margin="normal" value={loginInfo.login} onChange={onTextFieldChange("password")} />
         <Button variant="contained" color="primary" onClick={() => onLogin(loginInfo)}>Login</Button>
     </div>)
 }
