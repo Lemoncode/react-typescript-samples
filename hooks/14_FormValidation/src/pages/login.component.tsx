@@ -1,53 +1,46 @@
+import { Button, Divider, TextField } from "@mui/material";
+import { styled } from "@mui/system";
 import * as React from "react";
-import { LoginEntity, createEmptyLogin } from "../model/login";
-import { TextFieldComponent } from "../common";
-import { Form } from "formik";
-import createStyles from "@material-ui/styles/createStyles";
-import makeStyles from "@material-ui/styles/makeStyles";
-import Button from "@material-ui/core/Button";
-import { loginFormValidation } from "./login.validation";
-import { Formik } from "formik";
+import { FormProps } from "react-router-dom";
+import { createEmptyLogin, LoginEntity } from "../model/login";
 
 interface PropsForm {
-  onLogin: (login: LoginEntity) => void;
+    onLogin: (login: LoginEntity) => void;
 }
 
-// https://material-ui.com/styles/api/#makestyles-styles-options-hook
-const useFormStyles = makeStyles((theme) =>
-  createStyles({
-    formContainer: {
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-    },
-  })
-);
+// const useFormStyles = makeStyles(theme =>
+//     createStyles({
+//         formContainer: {
+//             display: "flex",
+//             flexDirection: "column",
+//             justifyContent: "center"
+//         }
+//     })
+// );
 
-export const LoginComponent: React.FC<PropsForm> = (props) => {
-  const classes = useFormStyles();
-  const { onLogin } = props;
+export const LoginComponent = (props: PropsForm) => {
+    const { onLogin } = props;
 
-  return (
-    <Formik
-      onSubmit={onLogin}
-      initialValues={createEmptyLogin()}
-      validate={loginFormValidation.validateForm}
-    >
-      {() => (
-        <Form>
-          <div className={classes.formContainer}>
-            <TextFieldComponent label="Name" name="login" />
-            <TextFieldComponent
-              label="Password"
-              type="password"
-              name="password"
-            />
-            <Button type="submit" variant="contained" color="primary">
-              Login
-            </Button>
-          </div>
-        </Form>
-      )}
-    </Formik>
-  );
-};
+    const [loginInfo, setLoginInfo] = React.useState<LoginEntity>(
+        createEmptyLogin()
+    );
+
+    const onTextFieldChange = (fieldId) => (e) => {
+        setLoginInfo({
+            ...loginInfo,
+            [fieldId]: e.target.value
+        })
+    }
+
+    return (
+        <div style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center"
+        }}>
+            <TextField label="Name" margin="normal" value={loginInfo.login} onChange={onTextFieldChange("login")} />
+            <TextField label="Password" type="password" margin="normal" value={loginInfo.password} onChange={onTextFieldChange("password")} />
+            <Button variant="contained" color="primary" onClick={() => onLogin(loginInfo)}>Login</Button>
+        </div >
+    )
+}
