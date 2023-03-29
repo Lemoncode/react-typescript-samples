@@ -1,2 +1,2 @@
 export * from "./notification";
-export * from "./TextFieldComponent";
+export * from "./textField.component";
