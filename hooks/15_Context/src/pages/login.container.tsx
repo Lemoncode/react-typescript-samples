@@ -31,7 +31,6 @@ export const LoginContainer: React.FC<Props> = (props) => {
     const navigate = useNavigate();
 
     const loginSucceeded = (isValid: boolean) => {
-        console.log(isValid)
         if (isValid) {
             navigate('/pageB')
         } else {
@@ -40,6 +39,7 @@ export const LoginContainer: React.FC<Props> = (props) => {
     }
 
     const handleLogin = (login: LoginEntity) => {
+        console.log(login);
         isValidLogin(login).then(loginSucceeded);
     };
 

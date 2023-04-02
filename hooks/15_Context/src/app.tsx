@@ -15,7 +15,7 @@ export const App = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<SessionProvider />} >
-                        {/* <Route element={<LoginContainer />} /> */}
+                        <Route element={<LoginContainer />} ></Route>
                     </Route>
                     <Route path="/pageB" element={<PageB />} />
                 </Routes>

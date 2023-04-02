@@ -29,6 +29,7 @@ export const LoginComponent = (props: PropsForm) => {
     );
 
     const onTextFieldChange = (fieldId) => (e) => {
+        console.log(e);
         setLoginInfo({
             ...loginInfo,
             [fieldId]: e.target.value
@@ -43,17 +44,19 @@ export const LoginComponent = (props: PropsForm) => {
         >
             {() => (
                 <Form>
-                    // <div style={{
+                    <div style={{
                         display: "flex",
                         flexDirection: "column",
                         justifyContent: "center"
                     }}>
                         <TextFieldComponent
                             label="Name"
-                            name="login" />
+                            name="login"
+                        />
                         <TextFieldComponent
                             label="Password"
-                            name="password" />
+                            name="password"
+                        />
                         <Button variant="contained" color="primary" onClick={() => onLogin(loginInfo)}>Login</Button>
                     </div>
                 </Form>
