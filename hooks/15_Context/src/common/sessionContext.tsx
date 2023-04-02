@@ -1,4 +1,6 @@
 import * as React from "react";
+import { LoginContainer } from "../pages/login.container";
+import { Route, Routes } from "react-router-dom";
 
 export interface SessionContextProps {
     login: string;
@@ -15,7 +17,7 @@ export const createDefaultUser = (): SessionContextProps => ({
 });
 
 export interface Props {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 export const SessionProvider: React.FunctionComponent = (props: Props) => {
@@ -23,7 +25,10 @@ export const SessionProvider: React.FunctionComponent = (props: Props) => {
 
     return (
         <SessionContext.Provider value={{ login, updateLogin: setLogin }}>
-            {props.children}
+            {/* {props.children} */}
+            <Routes>
+                <Route path="/" element={<LoginContainer />} />
+            </Routes>
         </SessionContext.Provider>
     );
 };

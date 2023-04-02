@@ -14,11 +14,12 @@ export const App = () => {
         <>
             <BrowserRouter>
                 <Routes>
-                    {/* <Route path="/" element={<SessionProvider />} /> */}
-                    <Route path="/" element={<LoginContainer />} />
+                    <Route path="/" element={<SessionProvider />} >
+                        {/* <Route element={<LoginContainer />} /> */}
+                    </Route>
                     <Route path="/pageB" element={<PageB />} />
                 </Routes>
-            </BrowserRouter>
+            </BrowserRouter >
         </>
     );
 };
