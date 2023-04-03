@@ -1,29 +1,36 @@
 import * as React from "react";
 
 interface Props {
-  initialUserName: string;
-  editingName: string;
-  onNameUpdated: () => any;
-  onEditingNameUpdated: (newEditingName: string) => any;
-  disabled: boolean;
+    initialUserName: string;
+    onNameUpdated: () => any;
+    editingName: string;
+    onEditingNameUpdated: (newEditingName: string) => any;
+    disabled: boolean;
 }
 
-export const NameEditComponent: React.FC<Props> = (props) => {
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    props.onEditingNameUpdated(e.target.value);
-  };
+export const NameEditComponent = (props: Props) => {
+    // const [editingName, setEditingName] = React.useState(props.initialUserName);
+    const [lastInitialName, setLastInitialName] = React.useState(props.initialUserName);
 
-  const onNameSubmit = (event: any): any => {
-    props.onNameUpdated();
-  };
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        // setEditingName(e.target.value);
+        props.onEditingNameUpdated(e.target.value);
+    }
 
-  return (
-    <>
-      <label>Update name:</label>
-      <input value={props.editingName} onChange={onChange} />
-      <button onClick={onNameSubmit} disabled={props.disabled}>
-        Change
-      </button>
-    </>
-  );
-};
+    const onNameSubmit = (event: any): any => {
+        // props.onNameUpdated(editingName);
+        props.onNameUpdated();
+    }
+
+    // if (props.initialUserName !== lastInitialName) {
+    //     setLastInitialName(props.initialUserName);
+    //     setEditingName(props.initialUserName);
+    // }
+    return (
+        <>
+            <label>Update name:</label>
+            <input value={props.editingName} onChange={onChange} />
+            <button onClick={onNameSubmit} disabled={props.disabled}>Change</button>
+        </>
+    )
+}

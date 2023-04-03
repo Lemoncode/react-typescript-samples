@@ -1,25 +1,26 @@
 import * as React from "react";
 import { useField } from "formik";
-import MuiTextField, { TextFieldProps } from "@material-ui/core/TextField";
+import { TextField, TextFieldProps } from "@mui/material";
 
 export const TextFieldComponent: React.FC<TextFieldProps> = (props) => {
-  const [field, meta] = useField(props.name);
-  const textFieldProps = Boolean(field) ? field : props;
-  const hasError = Boolean(meta && meta.touched && meta.error);
+    const [field, meta] = useField(props.name);
+    const TextFieldProps = Boolean(field) ? field : props;
+    const hasError = Boolean(meta && meta.touched && meta.error);
 
-  return (
-    <>
-      <MuiTextField
-        {...props}
-        name={textFieldProps.name}
-        onChange={textFieldProps.onChange}
-        onBlur={textFieldProps.onBlur}
-        value={textFieldProps.value}
-        error={hasError}
-        helperText={hasError ? meta.error : ""}
-        fullWidth={true}
-        margin="normal"
-      />
-    </>
-  );
-};
+    return (
+        <>
+
+            <TextField
+                {...props}
+                name={TextFieldProps.name}
+                onChange={TextFieldProps.onChange}
+                onBlur={TextFieldProps.onBlur}
+                value={TextFieldProps.value}
+                error={hasError}
+                helperText={hasError ? meta.error : ""}
+                fullWidth={true}
+                margin="normal"
+            />
+        </>
+    );
+}

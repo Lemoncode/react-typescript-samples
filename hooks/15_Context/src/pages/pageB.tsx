@@ -1,16 +1,9 @@
-import * as React from "react";
-import { Link } from "react-router-dom";
-import { SessionContext } from "../common";
+import * as React from "react"
+import { Link } from "react-router-dom"
 
-export const PageB: React.FC = () => {
-  const loginContext = React.useContext(SessionContext);
-
-  return (
+export const PageB = () =>
     <div>
-      <h2>Hello from page B</h2>
-      <h3>User logged in: {loginContext.login}</h3>
-      <br />
-      <Link to="/">Navigate to Login</Link>
+        <h2>Hello from page B</h2>
+        <br />
+        <Link to="/">Navigate to Login</Link>
     </div>
-  );
-};

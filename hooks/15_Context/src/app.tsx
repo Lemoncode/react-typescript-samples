@@ -1,20 +1,25 @@
 import * as React from "react";
-import { HashRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { SessionProvider } from "./common/sessionContext";
+import { LoginComponent } from "./pages/login.component";
 import { LoginContainer } from "./pages/login.container";
 import { PageB } from "./pages/pageB";
-import { SessionProvider } from "./common";
 
+/**
+ * not use Switch (V6)
+ * @returns 
+ */
 export const App = () => {
-  return (
-    <>
-      <SessionProvider>
-        <HashRouter>
-          <Switch>
-            <Route exact={true} path="/" component={LoginContainer} />
-            <Route path="/pageB" component={PageB} />
-          </Switch>
-        </HashRouter>
-      </SessionProvider>
-    </>
-  );
+    return (
+        <>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<SessionProvider />} >
+                        <Route element={<LoginContainer />} ></Route>
+                    </Route>
+                    <Route path="/pageB" element={<PageB />} />
+                </Routes>
+            </BrowserRouter >
+        </>
+    );
 };
